@@ -28,10 +28,9 @@ public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
     
     self.loginManager.login { res in
       if case .success(let user) = res {
-        let am = ActionMangerImpl()
-        let action = ActionLate(sender: user.id, from: "now", value: "1_h")
-        am.sendAction(action, result: { result in
-          dump(result)
+        let um = UserManagerImpl()
+        um.getUserWithId(user.id, result: { result in
+          print(result)
         })
       }
     }

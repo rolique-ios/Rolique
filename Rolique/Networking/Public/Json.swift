@@ -13,6 +13,11 @@ public struct Json: Codable {
 }
 
 public extension Json {
+  func build<M: Codable>() -> M? {
+    guard let data = stringValue.data(using: .utf8) else { return nil }
+    return try? JSONDecoder().decode(M.self, from: data)
+  }
+  
   var error: String? { return string("error") }
   
   func json(_ keyPath: String) -> Json? {
@@ -78,4 +83,5 @@ public extension Json {
       return dict[keyPath]
     }
   }
+  
 }
