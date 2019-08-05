@@ -9,23 +9,22 @@
 import Foundation
 import Model
 
-public protocol LoginViewModel: ViewModel {
+protocol LoginViewModel: ViewModel {
   var onError: ((String) -> Void)? { get set }
   
   func login()
 }
 
-public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
-  
+final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
   private let loginManager: LoginManager
   
-  public init(loginManager: LoginManager) {
+  init(loginManager: LoginManager) {
     self.loginManager = loginManager
   }
   
-  public var onError: ((String) -> Void)?
+  var onError: ((String) -> Void)?
   
-  public func login() {
+  func login() {
     self.loginManager.login { [weak self] res in
       switch res {
       case .success(let user):

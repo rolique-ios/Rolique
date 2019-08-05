@@ -61,6 +61,9 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
+		25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E722F86C68001D1EBD /* BaseTabBarController.swift */; };
+		25A648EA22F86C9C001D1EBD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E922F86C9C001D1EBD /* ProfileViewController.swift */; };
+		25A648EC22F86CA4001D1EBD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */; };
 		25AB468922F825A4005C52AF /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB468722F825A4005C52AF /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25AB468C22F825A4005C52AF /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; };
 		25AB468D22F825A4005C52AF /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -220,6 +223,9 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		25A648E722F86C68001D1EBD /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		25A648E922F86C9C001D1EBD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		25AB468522F825A4005C52AF /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AB468722F825A4005C52AF /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		25AB468822F825A4005C52AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -376,6 +382,7 @@
 		256A4D9B22F814FE00A31427 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				25A648E622F86C4F001D1EBD /* Profile */,
 				256A4D9C22F814FE00A31427 /* UI.h */,
 				256A4D9D22F814FE00A31427 /* Info.plist */,
 				256A4E1422F81C4F00A31427 /* Base */,
@@ -455,6 +462,7 @@
 				256A4DA722F8154C00A31427 /* ViewController.swift */,
 				256A4DA922F8157700A31427 /* ViewModel.swift */,
 				256A4E1A22F81DD300A31427 /* Router.swift */,
+				25A648E722F86C68001D1EBD /* BaseTabBarController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -466,6 +474,15 @@
 				256A4E1822F81C7700A31427 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		25A648E622F86C4F001D1EBD /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				25A648E922F86C9C001D1EBD /* ProfileViewController.swift */,
+				25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		25AB468622F825A4005C52AF /* Model */ = {
@@ -1021,8 +1038,11 @@
 			files = (
 				256A4E1922F81C7700A31427 /* LoginViewModel.swift in Sources */,
 				256A4E1722F81C6C00A31427 /* LoginViewController.swift in Sources */,
+				25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */,
 				256A4E1B22F81DD300A31427 /* Router.swift in Sources */,
+				25A648EA22F86C9C001D1EBD /* ProfileViewController.swift in Sources */,
 				256A4DAA22F8157700A31427 /* ViewModel.swift in Sources */,
+				25A648EC22F86CA4001D1EBD /* ProfileViewModel.swift in Sources */,
 				256A4DA822F8154C00A31427 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

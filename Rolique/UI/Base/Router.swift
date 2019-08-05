@@ -9,8 +9,20 @@
 import Model
 
 public final class Router {
-  public static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
+  static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
     return LoginViewController(viewModel: LoginViewModelImpl(loginManager: LoginManagerImpl()))
+  }
+  
+  static func getProfileViewController() -> ProfileViewController<ProfileViewModelImpl> {
+    return ProfileViewController(viewModel: ProfileViewModelImpl())
+  }
+  
+  static func getTabBarController() -> UITabBarController {
+    let tabbar =  BaseTabBarController()
+    let profile = getProfileViewController()
+    tabbar.viewControllers = [profile]
+    
+    return tabbar
   }
   
   public static func getStartViewController() -> UINavigationController {

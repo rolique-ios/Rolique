@@ -20,12 +20,12 @@ private struct Constants {
   static var logoCenterYOffset: CGFloat { return 64 }
 }
 
-public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
+final class LoginViewController<T: LoginViewModel>: ViewController<T> {
   private lazy var slackButton = UIButton()
   private lazy var logoImageView = UIImageView()
 
   
-  public override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     
     configureConstraints()
@@ -34,7 +34,7 @@ public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
 
   }
   
-  public override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     navigationController?.setNavigationBarHidden(true, animated: false)
