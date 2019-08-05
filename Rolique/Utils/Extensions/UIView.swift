@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     func addSubviewAndDisableMaskTranslate(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)

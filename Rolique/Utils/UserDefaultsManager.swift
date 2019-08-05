@@ -10,6 +10,7 @@ import Foundation
 
 private struct Constants {
   static var openFirstTime: String { return "openFirstTime" }
+  static var userId: String { return "userId" }
 }
 
 public final class UserDefaultsManager {
@@ -21,6 +22,14 @@ public final class UserDefaultsManager {
       return !defaults.bool(forKey: Constants.openFirstTime)
     } set {
       defaults.set(!newValue, forKey: Constants.openFirstTime)
+    }
+  }
+  
+  public var userId: String? {
+    get {
+      return defaults.string(forKey: Constants.userId)
+    } set {
+      defaults.set(newValue, forKey: Constants.userId)
     }
   }
 }

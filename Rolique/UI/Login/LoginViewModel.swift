@@ -8,30 +8,32 @@
 
 import Foundation
 import Model
+import Utils
 
-public protocol LoginViewModel: ViewModel {
-  var onError: (() -> String)? { get set }
+protocol LoginViewModel: ViewModel {
+  var onError: ((String) -> Void)? { get set }
   
   func login()
 }
 
-public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
+final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
   private let loginManager: LoginManager
   
-  public init(loginManager: LoginManager) {
+  init(loginManager: LoginManager) {
     self.loginManager = loginManager
   }
   
-  public var onError: (() -> String)?
+  var onError: ((String) -> Void)?
   
-  public func login() {
-    
-    self.loginManager.login { res in
-      if case .success(let user) = res {
-        let um = UserManagerImpl()
-        um.getUserWithId(user.id, result: { result in
-          print(result)
-        })
+  func login() {
+    self.loginManager.login { [weak self] res in
+      switch res {
+      case .success(let user):
+        print("\(user)")
+        UserDefaultsManager.shared.userId = user.id
+        self?.shouldSet?([Router.getTabBarController()], true)
+      case .failure(let error):
+        self?.onError?(error.localizedDescription)
       }
     }
   }
