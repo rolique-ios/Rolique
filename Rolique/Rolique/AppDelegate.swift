@@ -21,7 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = Router.getStartViewController()
     window?.makeKeyAndVisible()
     
+    
     return true
   }
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    print("app delegate", url.absoluteString)
+    
+    return true
+  }
+
 }
+
 

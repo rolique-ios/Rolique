@@ -13,7 +13,7 @@ public protocol LoginViewModel: ViewModel {
 }
 
 public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
-  
+  public var onError: (() -> String)?
 }
 
 

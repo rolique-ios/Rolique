@@ -67,15 +67,34 @@
 		25AB469A22F825B1005C52AF /* Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB469822F825B1005C52AF /* Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25AB469D22F825B1005C52AF /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
 		25AB469E22F825B1005C52AF /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25AB46AC22F82844005C52AF /* UsersWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB46AA22F82844005C52AF /* UsersWidget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25AB46AF22F82844005C52AF /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
+		25AB46B022F82844005C52AF /* UsersWidget.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25AB46B922F82853005C52AF /* Userable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46B422F82853005C52AF /* Userable.swift */; };
+		25AB46BA22F82853005C52AF /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AB46B622F82853005C52AF /* UserCollectionViewCell.xib */; };
+		25AB46BB22F82853005C52AF /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46B722F82853005C52AF /* UserCollectionViewCell.swift */; };
+		25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46B822F82853005C52AF /* UsersViewController.swift */; };
+		25AB46BF22F82859005C52AF /* Faker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BD22F82859005C52AF /* Faker.swift */; };
+		25AB46C022F82859005C52AF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BE22F82859005C52AF /* ImageCache.swift */; };
 		8783DF8749C8E7828F0C4124 /* libPods-UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 505892CA1A300F6330EFDEAD /* libPods-UI.a */; };
-		B5FFFC0B22F81E4E001DDF2C /* Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = B5FFFC0922F81E4E001DDF2C /* Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5FFFC0E22F81E4E001DDF2C /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FFFC0722F81E4E001DDF2C /* Networking.framework */; };
-		B5FFFC0F22F81E4E001DDF2C /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5FFFC0722F81E4E001DDF2C /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5FFFC1C22F81E9E001DDF2C /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = B5FFFC1A22F81E9E001DDF2C /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5FFFC1F22F81E9E001DDF2C /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FFFC1822F81E9E001DDF2C /* Model.framework */; };
-		B5FFFC2022F81E9E001DDF2C /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5FFFC1822F81E9E001DDF2C /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5FFFC2622F824D8001DDF2C /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2522F824D8001DDF2C /* File.swift */; };
-		B5FFFC2922F824EA001DDF2C /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2822F824EA001DDF2C /* File.swift */; };
+		B5FFFC3822F82F57001DDF2C /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2D22F82F57001DDF2C /* Env.swift */; };
+		B5FFFC3922F82F57001DDF2C /* Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2E22F82F57001DDF2C /* Json.swift */; };
+		B5FFFC3A22F82F57001DDF2C /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2F22F82F57001DDF2C /* Net.swift */; };
+		B5FFFC3B22F82F57001DDF2C /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3222F82F57001DDF2C /* Command.swift */; };
+		B5FFFC3C22F82F57001DDF2C /* Late.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3322F82F57001DDF2C /* Late.swift */; };
+		B5FFFC3D22F82F57001DDF2C /* SlackLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3422F82F57001DDF2C /* SlackLogin.swift */; };
+		B5FFFC3E22F82F57001DDF2C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3522F82F57001DDF2C /* Route.swift */; };
+		B5FFFC3F22F82F57001DDF2C /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3722F82F57001DDF2C /* Transport.swift */; };
+		B5FFFC4F22F82FC6001DDF2C /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */; };
+		B5FFFC5022F82FC6001DDF2C /* ActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */; };
+		B5FFFC5122F82FC6001DDF2C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4722F82FC6001DDF2C /* Model.swift */; };
+		B5FFFC5222F82FC6001DDF2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4822F82FC6001DDF2C /* User.swift */; };
+		B5FFFC5322F82FC6001DDF2C /* ActionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */; };
+		B5FFFC5422F82FC6001DDF2C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4B22F82FC6001DDF2C /* Action.swift */; };
+		B5FFFC5522F82FC6001DDF2C /* ActionLate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */; };
+		B5FFFC5622F82FC6001DDF2C /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4E22F82FC6001DDF2C /* DataProvider.swift */; };
+		B5FFFC5E22F83988001DDF2C /* RoliqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */; };
+		B5FFFC6622F83CDC001DDF2C /* GetUserWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC6522F83CDC001DDF2C /* GetUserWithId.swift */; };
 		CA557E7422380F14A94033BD /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		E17646399375271BE5FDBC1B /* libPods-Utils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7C27B473FCD0EE5794D5A6 /* libPods-Utils.a */; };
 /* End PBXBuildFile section */
@@ -109,6 +128,20 @@
 			remoteGlobalIDString = 25AB469522F825B1005C52AF;
 			remoteInfo = Networking;
 		};
+		25AB46AD22F82844005C52AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB46A722F82844005C52AF;
+			remoteInfo = UsersWidget;
+		};
+		B5FFFC6022F83988001DDF2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 256A4D7F22F8142A00A31427;
+			remoteInfo = Rolique;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,6 +154,7 @@
 				25AB469E22F825B1005C52AF /* Networking.framework in Embed Frameworks */,
 				256A4DB822F8165800A31427 /* Utils.framework in Embed Frameworks */,
 				25AB468D22F825A4005C52AF /* Model.framework in Embed Frameworks */,
+				25AB46B022F82844005C52AF /* UsersWidget.framework in Embed Frameworks */,
 				256A4DA222F814FE00A31427 /* UI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -192,16 +226,41 @@
 		25AB469622F825B1005C52AF /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AB469822F825B1005C52AF /* Networking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networking.h; sourceTree = "<group>"; };
 		25AB469922F825B1005C52AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25AB46A822F82844005C52AF /* UsersWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UsersWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25AB46AA22F82844005C52AF /* UsersWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersWidget.h; sourceTree = "<group>"; };
+		25AB46AB22F82844005C52AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25AB46B422F82853005C52AF /* Userable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Userable.swift; sourceTree = "<group>"; };
+		25AB46B622F82853005C52AF /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
+		25AB46B722F82853005C52AF /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		25AB46B822F82853005C52AF /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		25AB46BD22F82859005C52AF /* Faker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faker.swift; sourceTree = "<group>"; };
+		25AB46BE22F82859005C52AF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
-		B5FFFC0722F81E4E001DDF2C /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5FFFC0922F81E4E001DDF2C /* Networking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networking.h; sourceTree = "<group>"; };
-		B5FFFC0A22F81E4E001DDF2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5FFFC1822F81E9E001DDF2C /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5FFFC1A22F81E9E001DDF2C /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
-		B5FFFC1B22F81E9E001DDF2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5FFFC2522F824D8001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B5FFFC2822F824EA001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		B5FFFC2D22F82F57001DDF2C /* Env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		B5FFFC2E22F82F57001DDF2C /* Json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json.swift; sourceTree = "<group>"; };
+		B5FFFC2F22F82F57001DDF2C /* Net.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Net.swift; sourceTree = "<group>"; };
+		B5FFFC3222F82F57001DDF2C /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		B5FFFC3322F82F57001DDF2C /* Late.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Late.swift; sourceTree = "<group>"; };
+		B5FFFC3422F82F57001DDF2C /* SlackLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackLogin.swift; sourceTree = "<group>"; };
+		B5FFFC3522F82F57001DDF2C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		B5FFFC3722F82F57001DDF2C /* Transport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
+		B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
+		B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
+		B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
+		B5FFFC4722F82FC6001DDF2C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B5FFFC4822F82FC6001DDF2C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionResult.swift; sourceTree = "<group>"; };
+		B5FFFC4B22F82FC6001DDF2C /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionLate.swift; sourceTree = "<group>"; };
+		B5FFFC4E22F82FC6001DDF2C /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoliqueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoliqueTests.swift; sourceTree = "<group>"; };
+		B5FFFC5F22F83988001DDF2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FFFC6522F83CDC001DDF2C /* GetUserWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserWithId.swift; sourceTree = "<group>"; };
 		C14146CF08DBF2E65569E1A1 /* Pods-UI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.debug.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.debug.xcconfig"; sourceTree = "<group>"; };
 		C29D3A2041107CD24F85E1B7 /* Pods-UI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.release.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.release.xcconfig"; sourceTree = "<group>"; };
 		CA7C27B473FCD0EE5794D5A6 /* libPods-Utils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Utils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AB468C22F825A4005C52AF /* Model.framework in Frameworks */,
+				25AB46AF22F82844005C52AF /* UsersWidget.framework in Frameworks */,
 				256A4DB722F8165800A31427 /* Utils.framework in Frameworks */,
 				256A4DA122F814FE00A31427 /* UI.framework in Frameworks */,
 				25AB469D22F825B1005C52AF /* Networking.framework in Frameworks */,
@@ -253,20 +313,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25AB46A522F82844005C52AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5FFFC5822F83988001DDF2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		256A4D7722F8142A00A31427 = {
 			isa = PBXGroup;
 			children = (
+				B5FFFC4022F82F95001DDF2C /* BuildConfig */,
 				256A4D8222F8142A00A31427 /* Rolique */,
 				256A4D9B22F814FE00A31427 /* UI */,
 				256A4DB122F8165800A31427 /* Utils */,
 				25AB468622F825A4005C52AF /* Model */,
 				25AB469722F825B1005C52AF /* Networking */,
+				25AB46A922F82844005C52AF /* UsersWidget */,
+				B5FFFC5C22F83988001DDF2C /* RoliqueTests */,
 				256A4D8122F8142A00A31427 /* Products */,
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
+				25AB46A222F826BE005C52AF /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,6 +356,8 @@
 				256A4DB022F8165800A31427 /* Utils.framework */,
 				25AB468522F825A4005C52AF /* Model.framework */,
 				25AB469622F825B1005C52AF /* Networking.framework */,
+				25AB46A822F82844005C52AF /* UsersWidget.framework */,
+				B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,6 +471,9 @@
 		25AB468622F825A4005C52AF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5FFFC4322F82FC6001DDF2C /* Managers */,
+				B5FFFC4622F82FC6001DDF2C /* Models */,
+				B5FFFC4D22F82FC6001DDF2C /* Provider */,
 				25AB468722F825A4005C52AF /* Model.h */,
 				25AB468822F825A4005C52AF /* Info.plist */,
 			);
@@ -400,17 +483,49 @@
 		25AB469722F825B1005C52AF /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-
+				B5FFFC3622F82F57001DDF2C /* Private */,
+				B5FFFC2C22F82F57001DDF2C /* Public */,
 				25AB469822F825B1005C52AF /* Networking.h */,
 				25AB469922F825B1005C52AF /* Info.plist */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		25AB46A222F826BE005C52AF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC2522F824D8001DDF2C /* File.swift */,
+				B5FFFC2822F824EA001DDF2C /* File.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		25AB46A922F82844005C52AF /* UsersWidget */ = {
+			isa = PBXGroup;
+			children = (
+				25AB46BD22F82859005C52AF /* Faker.swift */,
+				25AB46BE22F82859005C52AF /* ImageCache.swift */,
+				25AB46B422F82853005C52AF /* Userable.swift */,
+				25AB46B522F82853005C52AF /* UserCell */,
+				25AB46B822F82853005C52AF /* UsersViewController.swift */,
+				25AB46AA22F82844005C52AF /* UsersWidget.h */,
+				25AB46AB22F82844005C52AF /* Info.plist */,
+			);
+			path = UsersWidget;
+			sourceTree = "<group>";
+		};
+		25AB46B522F82853005C52AF /* UserCell */ = {
+			isa = PBXGroup;
+			children = (
+				25AB46B622F82853005C52AF /* UserCollectionViewCell.xib */,
+				25AB46B722F82853005C52AF /* UserCollectionViewCell.swift */,
+			);
+			path = UserCell;
+			sourceTree = "<group>";
+		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-
 				F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */,
 				DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */,
 				C14146CF08DBF2E65569E1A1 /* Pods-UI.debug.xcconfig */,
@@ -421,20 +536,98 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		B5FFFC2422F824C7001DDF2C /* Files */ = {
+		B5FFFC2C22F82F57001DDF2C /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				B5FFFC2522F824D8001DDF2C /* File.swift */,
+				B5FFFC2D22F82F57001DDF2C /* Env.swift */,
+				B5FFFC2E22F82F57001DDF2C /* Json.swift */,
+				B5FFFC2F22F82F57001DDF2C /* Net.swift */,
+				B5FFFC3022F82F57001DDF2C /* Routes */,
 			);
-			path = Files;
+			path = Public;
 			sourceTree = "<group>";
 		};
-		B5FFFC2722F824E2001DDF2C /* Files */ = {
+		B5FFFC3022F82F57001DDF2C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
-				B5FFFC2822F824EA001DDF2C /* File.swift */,
+				B5FFFC3122F82F57001DDF2C /* Commands */,
+				B5FFFC3422F82F57001DDF2C /* SlackLogin.swift */,
+				B5FFFC3522F82F57001DDF2C /* Route.swift */,
+				B5FFFC6522F83CDC001DDF2C /* GetUserWithId.swift */,
 			);
-			path = Files;
+			path = Routes;
+			sourceTree = "<group>";
+		};
+		B5FFFC3122F82F57001DDF2C /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC3222F82F57001DDF2C /* Command.swift */,
+				B5FFFC3322F82F57001DDF2C /* Late.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		B5FFFC3622F82F57001DDF2C /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC3722F82F57001DDF2C /* Transport.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		B5FFFC4022F82F95001DDF2C /* BuildConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */,
+				B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */,
+			);
+			path = BuildConfig;
+			sourceTree = "<group>";
+		};
+		B5FFFC4322F82FC6001DDF2C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */,
+				B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		B5FFFC4622F82FC6001DDF2C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC4722F82FC6001DDF2C /* Model.swift */,
+				B5FFFC4822F82FC6001DDF2C /* User.swift */,
+				B5FFFC4922F82FC6001DDF2C /* Actions */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B5FFFC4922F82FC6001DDF2C /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */,
+				B5FFFC4B22F82FC6001DDF2C /* Action.swift */,
+				B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		B5FFFC4D22F82FC6001DDF2C /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC4E22F82FC6001DDF2C /* DataProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		B5FFFC5C22F83988001DDF2C /* RoliqueTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */,
+				B5FFFC5F22F83988001DDF2C /* Info.plist */,
+			);
+			path = RoliqueTests;
 			sourceTree = "<group>";
 		};
 		D6E5BB4FC07D46C0C204BA1C /* Frameworks */ = {
@@ -482,6 +675,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25AB46A322F82844005C52AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25AB46AC22F82844005C52AF /* UsersWidget.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -502,6 +703,7 @@
 				256A4DB622F8165800A31427 /* PBXTargetDependency */,
 				25AB468B22F825A4005C52AF /* PBXTargetDependency */,
 				25AB469C22F825B1005C52AF /* PBXTargetDependency */,
+				25AB46AE22F82844005C52AF /* PBXTargetDependency */,
 			);
 			name = Rolique;
 			productName = Rolique;
@@ -582,6 +784,42 @@
 			productReference = 25AB469622F825B1005C52AF /* Networking.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		25AB46A722F82844005C52AF /* UsersWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25AB46B122F82844005C52AF /* Build configuration list for PBXNativeTarget "UsersWidget" */;
+			buildPhases = (
+				25AB46A322F82844005C52AF /* Headers */,
+				25AB46A422F82844005C52AF /* Sources */,
+				25AB46A522F82844005C52AF /* Frameworks */,
+				25AB46A622F82844005C52AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UsersWidget;
+			productName = UsersWidget;
+			productReference = 25AB46A822F82844005C52AF /* UsersWidget.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B5FFFC5A22F83988001DDF2C /* RoliqueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5FFFC6422F83988001DDF2C /* Build configuration list for PBXNativeTarget "RoliqueTests" */;
+			buildPhases = (
+				B5FFFC5722F83988001DDF2C /* Sources */,
+				B5FFFC5822F83988001DDF2C /* Frameworks */,
+				B5FFFC5922F83988001DDF2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5FFFC6122F83988001DDF2C /* PBXTargetDependency */,
+			);
+			name = RoliqueTests;
+			productName = RoliqueTests;
+			productReference = B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -610,6 +848,14 @@
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
 					};
+					25AB46A722F82844005C52AF = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+					};
+					B5FFFC5A22F83988001DDF2C = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 256A4D7F22F8142A00A31427;
+					};
 				};
 			};
 			buildConfigurationList = 256A4D7B22F8142A00A31427 /* Build configuration list for PBXProject "Rolique" */;
@@ -630,6 +876,8 @@
 				256A4DAF22F8165800A31427 /* Utils */,
 				25AB468422F825A4005C52AF /* Model */,
 				25AB469522F825B1005C52AF /* Networking */,
+				25AB46A722F82844005C52AF /* UsersWidget */,
+				B5FFFC5A22F83988001DDF2C /* RoliqueTests */,
 			);
 		};
 /* End PBXProject section */
@@ -666,6 +914,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		25AB469422F825B1005C52AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB46A622F82844005C52AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25AB46BA22F82853005C52AF /* UserCollectionViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5FFFC5922F83988001DDF2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -815,7 +1078,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5FFFC2622F824D8001DDF2C /* File.swift in Sources */,
+				B5FFFC5222F82FC6001DDF2C /* User.swift in Sources */,
+				B5FFFC5422F82FC6001DDF2C /* Action.swift in Sources */,
+				B5FFFC5622F82FC6001DDF2C /* DataProvider.swift in Sources */,
+				B5FFFC5322F82FC6001DDF2C /* ActionResult.swift in Sources */,
+				B5FFFC5122F82FC6001DDF2C /* Model.swift in Sources */,
+				B5FFFC4F22F82FC6001DDF2C /* LoginManager.swift in Sources */,
+				B5FFFC5022F82FC6001DDF2C /* ActionManager.swift in Sources */,
+				B5FFFC5522F82FC6001DDF2C /* ActionLate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,7 +1093,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5FFFC2922F824EA001DDF2C /* File.swift in Sources */,
+				B5FFFC3D22F82F57001DDF2C /* SlackLogin.swift in Sources */,
+				B5FFFC3822F82F57001DDF2C /* Env.swift in Sources */,
+				B5FFFC3A22F82F57001DDF2C /* Net.swift in Sources */,
+				B5FFFC3922F82F57001DDF2C /* Json.swift in Sources */,
+				B5FFFC3B22F82F57001DDF2C /* Command.swift in Sources */,
+				B5FFFC6622F83CDC001DDF2C /* GetUserWithId.swift in Sources */,
+				B5FFFC3E22F82F57001DDF2C /* Route.swift in Sources */,
+				B5FFFC3C22F82F57001DDF2C /* Late.swift in Sources */,
+				B5FFFC3F22F82F57001DDF2C /* Transport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB46A422F82844005C52AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25AB46C022F82859005C52AF /* ImageCache.swift in Sources */,
+				25AB46B922F82853005C52AF /* Userable.swift in Sources */,
+				25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */,
+				25AB46BB22F82853005C52AF /* UserCollectionViewCell.swift in Sources */,
+				25AB46BF22F82859005C52AF /* Faker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5FFFC5722F83988001DDF2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5FFFC5E22F83988001DDF2C /* RoliqueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +1148,16 @@
 			target = 25AB469522F825B1005C52AF /* Networking */;
 			targetProxy = 25AB469B22F825B1005C52AF /* PBXContainerItemProxy */;
 		};
+		25AB46AE22F82844005C52AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB46A722F82844005C52AF /* UsersWidget */;
+			targetProxy = 25AB46AD22F82844005C52AF /* PBXContainerItemProxy */;
+		};
+		B5FFFC6122F83988001DDF2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 256A4D7F22F8142A00A31427 /* Rolique */;
+			targetProxy = B5FFFC6022F83988001DDF2C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -866,6 +1174,7 @@
 /* Begin XCBuildConfiguration section */
 		256A4D9022F8142B00A31427 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -927,6 +1236,7 @@
 		};
 		256A4D9122F8142B00A31427 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1220,6 +1530,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Networking/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1250,6 +1561,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Networking/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1262,6 +1574,105 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		25AB46B222F82844005C52AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UsersWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UsersWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		25AB46B322F82844005C52AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UsersWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UsersWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B5FFFC6222F83988001DDF2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RoliqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.RoliqueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolique.app/Rolique";
+			};
+			name = Debug;
+		};
+		B5FFFC6322F83988001DDF2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RoliqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.RoliqueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolique.app/Rolique";
 			};
 			name = Release;
 		};
@@ -1318,6 +1729,24 @@
 			buildConfigurations = (
 				25AB46A022F825B1005C52AF /* Debug */,
 				25AB46A122F825B1005C52AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25AB46B122F82844005C52AF /* Build configuration list for PBXNativeTarget "UsersWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25AB46B222F82844005C52AF /* Debug */,
+				25AB46B322F82844005C52AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5FFFC6422F83988001DDF2C /* Build configuration list for PBXNativeTarget "RoliqueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5FFFC6222F83988001DDF2C /* Debug */,
+				B5FFFC6322F83988001DDF2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

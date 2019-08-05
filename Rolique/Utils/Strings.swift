@@ -10,12 +10,12 @@ import Foundation
 
 public struct Strings {
   public struct General {
-    public static var ok: String { "Ok".localized }
-    public static var appName: String { "Rolique".localized }
+    public static var ok: String { return "Ok".localized }
+    public static var appName: String { return "Rolique".localized }
   }
   
   public struct TabBar {
-    public static var profile: String { "profile".localized }
-    public static var stats: String { "stats".localized }
+    public static var profile: String { return "profile".localized }
+    public static var stats: String { return "stats".localized }
   }
 }
