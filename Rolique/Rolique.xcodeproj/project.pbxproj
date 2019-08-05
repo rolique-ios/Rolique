@@ -61,6 +61,12 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
+		25AB468922F825A4005C52AF /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB468722F825A4005C52AF /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25AB468C22F825A4005C52AF /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; };
+		25AB468D22F825A4005C52AF /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25AB469A22F825B1005C52AF /* Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB469822F825B1005C52AF /* Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25AB469D22F825B1005C52AF /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
+		25AB469E22F825B1005C52AF /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8783DF8749C8E7828F0C4124 /* libPods-UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 505892CA1A300F6330EFDEAD /* libPods-UI.a */; };
 		CA557E7422380F14A94033BD /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		E17646399375271BE5FDBC1B /* libPods-Utils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7C27B473FCD0EE5794D5A6 /* libPods-Utils.a */; };
@@ -81,6 +87,20 @@
 			remoteGlobalIDString = 256A4DAF22F8165800A31427;
 			remoteInfo = Utils;
 		};
+		25AB468A22F825A4005C52AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB468422F825A4005C52AF;
+			remoteInfo = Model;
+		};
+		25AB469B22F825B1005C52AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB469522F825B1005C52AF;
+			remoteInfo = Networking;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,7 +110,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				25AB469E22F825B1005C52AF /* Networking.framework in Embed Frameworks */,
 				256A4DB822F8165800A31427 /* Utils.framework in Embed Frameworks */,
+				25AB468D22F825A4005C52AF /* Model.framework in Embed Frameworks */,
 				256A4DA222F814FE00A31427 /* UI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -156,6 +178,12 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		25AB468522F825A4005C52AF /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25AB468722F825A4005C52AF /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		25AB468822F825A4005C52AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25AB469622F825B1005C52AF /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25AB469822F825B1005C52AF /* Networking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networking.h; sourceTree = "<group>"; };
+		25AB469922F825B1005C52AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
 		C14146CF08DBF2E65569E1A1 /* Pods-UI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.debug.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,8 +199,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25AB468C22F825A4005C52AF /* Model.framework in Frameworks */,
 				256A4DB722F8165800A31427 /* Utils.framework in Frameworks */,
 				256A4DA122F814FE00A31427 /* UI.framework in Frameworks */,
+				25AB469D22F825B1005C52AF /* Networking.framework in Frameworks */,
 				CA557E7422380F14A94033BD /* libPods-Rolique.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +223,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25AB468222F825A4005C52AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB469322F825B1005C52AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -202,6 +246,8 @@
 				256A4D8222F8142A00A31427 /* Rolique */,
 				256A4D9B22F814FE00A31427 /* UI */,
 				256A4DB122F8165800A31427 /* Utils */,
+				25AB468622F825A4005C52AF /* Model */,
+				25AB469722F825B1005C52AF /* Networking */,
 				256A4D8122F8142A00A31427 /* Products */,
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
@@ -214,6 +260,8 @@
 				256A4D8022F8142A00A31427 /* Rolique.app */,
 				256A4D9A22F814FE00A31427 /* UI.framework */,
 				256A4DB022F8165800A31427 /* Utils.framework */,
+				25AB468522F825A4005C52AF /* Model.framework */,
+				25AB469622F825B1005C52AF /* Networking.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,6 +372,24 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		25AB468622F825A4005C52AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				25AB468722F825A4005C52AF /* Model.h */,
+				25AB468822F825A4005C52AF /* Info.plist */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25AB469722F825B1005C52AF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				25AB469822F825B1005C52AF /* Networking.h */,
+				25AB469922F825B1005C52AF /* Info.plist */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +432,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25AB468022F825A4005C52AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25AB468922F825A4005C52AF /* Model.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB469122F825B1005C52AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25AB469A22F825B1005C52AF /* Networking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -384,6 +466,8 @@
 			dependencies = (
 				256A4DA022F814FE00A31427 /* PBXTargetDependency */,
 				256A4DB622F8165800A31427 /* PBXTargetDependency */,
+				25AB468B22F825A4005C52AF /* PBXTargetDependency */,
+				25AB469C22F825B1005C52AF /* PBXTargetDependency */,
 			);
 			name = Rolique;
 			productName = Rolique;
@@ -428,6 +512,42 @@
 			productReference = 256A4DB022F8165800A31427 /* Utils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		25AB468422F825A4005C52AF /* Model */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25AB469022F825A4005C52AF /* Build configuration list for PBXNativeTarget "Model" */;
+			buildPhases = (
+				25AB468022F825A4005C52AF /* Headers */,
+				25AB468122F825A4005C52AF /* Sources */,
+				25AB468222F825A4005C52AF /* Frameworks */,
+				25AB468322F825A4005C52AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Model;
+			productName = Model;
+			productReference = 25AB468522F825A4005C52AF /* Model.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		25AB469522F825B1005C52AF /* Networking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25AB469F22F825B1005C52AF /* Build configuration list for PBXNativeTarget "Networking" */;
+			buildPhases = (
+				25AB469122F825B1005C52AF /* Headers */,
+				25AB469222F825B1005C52AF /* Sources */,
+				25AB469322F825B1005C52AF /* Frameworks */,
+				25AB469422F825B1005C52AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Networking;
+			productName = Networking;
+			productReference = 25AB469622F825B1005C52AF /* Networking.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -448,6 +568,12 @@
 					256A4DAF22F8165800A31427 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					25AB468422F825A4005C52AF = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					25AB469522F825B1005C52AF = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 				};
 			};
 			buildConfigurationList = 256A4D7B22F8142A00A31427 /* Build configuration list for PBXProject "Rolique" */;
@@ -466,6 +592,8 @@
 				256A4D7F22F8142A00A31427 /* Rolique */,
 				256A4D9922F814FE00A31427 /* UI */,
 				256A4DAF22F8165800A31427 /* Utils */,
+				25AB468422F825A4005C52AF /* Model */,
+				25AB469522F825B1005C52AF /* Networking */,
 			);
 		};
 /* End PBXProject section */
@@ -488,6 +616,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		256A4DAE22F8165800A31427 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB468322F825A4005C52AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB469422F825B1005C52AF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -633,6 +775,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25AB468122F825A4005C52AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25AB469222F825B1005C52AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -645,6 +801,16 @@
 			isa = PBXTargetDependency;
 			target = 256A4DAF22F8165800A31427 /* Utils */;
 			targetProxy = 256A4DB522F8165800A31427 /* PBXContainerItemProxy */;
+		};
+		25AB468B22F825A4005C52AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB468422F825A4005C52AF /* Model */;
+			targetProxy = 25AB468A22F825A4005C52AF /* PBXContainerItemProxy */;
+		};
+		25AB469C22F825B1005C52AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB469522F825B1005C52AF /* Networking */;
+			targetProxy = 25AB469B22F825B1005C52AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -941,6 +1107,120 @@
 			};
 			name = Release;
 		};
+		25AB468E22F825A4005C52AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Model/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Model;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		25AB468F22F825A4005C52AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Model/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Model;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		25AB46A022F825B1005C52AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Networking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		25AB46A122F825B1005C52AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Networking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -976,6 +1256,24 @@
 			buildConfigurations = (
 				256A4DBA22F8165800A31427 /* Debug */,
 				256A4DBB22F8165800A31427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25AB469022F825A4005C52AF /* Build configuration list for PBXNativeTarget "Model" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25AB468E22F825A4005C52AF /* Debug */,
+				25AB468F22F825A4005C52AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25AB469F22F825B1005C52AF /* Build configuration list for PBXNativeTarget "Networking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25AB46A022F825B1005C52AF /* Debug */,
+				25AB46A122F825B1005C52AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
