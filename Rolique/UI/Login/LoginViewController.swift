@@ -15,15 +15,23 @@ import SafariServices
 private struct Constants {
   static var logoSize: CGSize { return CGSize(width: 150, height: 150) }
   static var edgeInsets: UIEdgeInsets { return UIEdgeInsets(top: 100, left: 8, bottom: 40, right: 8) }
-  static var slackButtonSize: CGSize { return CGSize(width: 200, height: 150) }
+  static var slackButtonSize: CGSize { return CGSize(width: 200, height: 100) }
+  static var slackButtonBottom: CGFloat { return 16 }
+  static var logoCenterYOffset: CGFloat { return 64 }
 }
 
 public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
-  var authSession: SFAuthenticationSession?
+  private lazy var slackButton = UIButton()
+  private lazy var logoImageView = UIImageView()
+
+  
   public override func viewDidLoad() {
     super.viewDidLoad()
     
+    configureConstraints()
     configureUI()
+    configureBinding()
+
   }
   
   public override func viewWillAppear(_ animated: Bool) {
@@ -32,10 +40,9 @@ public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
     navigationController?.setNavigationBarHidden(true, animated: false)
   }
   
-  public override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    self.viewModel.login()
+  // MARK: - Actions
+  @objc func loginTouchUpInside(sender: UIButton) {
+    viewModel.login()
   }
 }
 
@@ -43,5 +50,36 @@ public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
 private extension LoginViewController {
   func configureUI() {
     view.backgroundColor = Colors.Login.backgroundColor
+    
+    slackButton.setImage(Images.Login.slackButton, for: .normal)
+    slackButton.imageView?.contentMode = .scaleAspectFit
+    slackButton.addTarget(self, action: #selector(loginTouchUpInside(sender:)), for: .touchUpInside)
+    
+    logoImageView.contentMode = .scaleAspectFit
+    logoImageView.image = Images.Login.fullLogo
+  }
+  
+  func configureBinding() {
+    self.viewModel.onError = { [weak self] error in
+      guard let self = self else { return }
+      
+      Spitter.showOkAlert(error, title: Strings.General.appName, viewController: self)
+    }
+  }
+  
+  func configureConstraints() {
+    [slackButton, logoImageView].forEach(self.view.addSubviewAndDisableMaskTranslate)
+    
+    slackButton.snp.makeConstraints { maker in
+      maker.size.equalTo(Constants.slackButtonSize)
+      maker.centerX.equalToSuperview()
+      maker.bottom.equalToSuperview().offset(-Constants.slackButtonBottom)
+    }
+    
+    logoImageView.snp.makeConstraints { maker in
+      maker.centerX.equalToSuperview()
+      maker.centerY.equalToSuperview().offset(-Constants.logoCenterYOffset)
+      maker.size.equalTo(Constants.logoSize)
+    }
   }
 }
