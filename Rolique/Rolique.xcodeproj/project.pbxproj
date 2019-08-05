@@ -62,6 +62,14 @@
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
 		25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6193822F873AC00A85C5A /* ShortcutManager.swift */; };
+		25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
+		25A6194322F8780B00A85C5A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* TodayViewController.swift */; };
+		25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6194422F8780B00A85C5A /* MainInterface.storyboard */; };
+		25A6194A22F8780B00A85C5A /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		25A6195422F878A500A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
+		25A6195722F878A500A85C5A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* TodayViewController.swift */; };
+		25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6195822F878A500A85C5A /* MainInterface.storyboard */; };
+		25A6195E22F878A500A85C5A /* VacationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E722F86C68001D1EBD /* BaseTabBarController.swift */; };
 		25A648EA22F86C9C001D1EBD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E922F86C9C001D1EBD /* ProfileViewController.swift */; };
 		25A648EC22F86CA4001D1EBD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */; };
@@ -120,6 +128,20 @@
 			remoteGlobalIDString = 256A4DAF22F8165800A31427;
 			remoteInfo = Utils;
 		};
+		25A6194822F8780B00A85C5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25A6193D22F8780B00A85C5A;
+			remoteInfo = RemoteTodayExtension;
+		};
+		25A6195C22F878A500A85C5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25A6195222F878A500A85C5A;
+			remoteInfo = VacationTodayExtension;
+		};
 		25AB468A22F825A4005C52AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
@@ -164,6 +186,18 @@
 				256A4DA222F814FE00A31427 /* UI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25A6194E22F8780B00A85C5A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				25A6194A22F8780B00A85C5A /* RemoteTodayExtension.appex in Embed App Extensions */,
+				25A6195E22F878A500A85C5A /* VacationTodayExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -227,6 +261,15 @@
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		25A6193822F873AC00A85C5A /* ShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
+		25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RemoteTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		25A6193F22F8780B00A85C5A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		25A6194222F8780B00A85C5A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		25A6194522F8780B00A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		25A6194722F8780B00A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25A6195322F878A500A85C5A /* VacationTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VacationTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		25A6195622F878A500A85C5A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		25A6195922F878A500A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		25A6195B22F878A500A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25A648E722F86C68001D1EBD /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		25A648E922F86C9C001D1EBD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -311,6 +354,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25A6193B22F8780B00A85C5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25A6195022F878A500A85C5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6195422F878A500A85C5A /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		25AB468222F825A4005C52AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -353,6 +412,8 @@
 				25AB469722F825B1005C52AF /* Networking */,
 				25AB46A922F82844005C52AF /* UsersWidget */,
 				B5FFFC5C22F83988001DDF2C /* RoliqueTests */,
+				25A6194122F8780B00A85C5A /* RemoteTodayExtension */,
+				25A6195522F878A500A85C5A /* VacationTodayExtension */,
 				256A4D8122F8142A00A31427 /* Products */,
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
@@ -370,6 +431,8 @@
 				25AB469622F825B1005C52AF /* Networking.framework */,
 				25AB46A822F82844005C52AF /* UsersWidget.framework */,
 				B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */,
+				25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */,
+				25A6195322F878A500A85C5A /* VacationTodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,6 +552,26 @@
 				25A6193822F873AC00A85C5A /* ShortcutManager.swift */,
 			);
 			path = ShortcutManager;
+			sourceTree = "<group>";
+		};
+		25A6194122F8780B00A85C5A /* RemoteTodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				25A6194222F8780B00A85C5A /* TodayViewController.swift */,
+				25A6194422F8780B00A85C5A /* MainInterface.storyboard */,
+				25A6194722F8780B00A85C5A /* Info.plist */,
+			);
+			path = RemoteTodayExtension;
+			sourceTree = "<group>";
+		};
+		25A6195522F878A500A85C5A /* VacationTodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				25A6195622F878A500A85C5A /* TodayViewController.swift */,
+				25A6195822F878A500A85C5A /* MainInterface.storyboard */,
+				25A6195B22F878A500A85C5A /* Info.plist */,
+			);
+			path = VacationTodayExtension;
 			sourceTree = "<group>";
 		};
 		25A648E622F86C4F001D1EBD /* Profile */ = {
@@ -670,6 +753,7 @@
 				F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */,
 				505892CA1A300F6330EFDEAD /* libPods-UI.a */,
 				CA7C27B473FCD0EE5794D5A6 /* libPods-Utils.a */,
+				25A6193F22F8780B00A85C5A /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -729,6 +813,7 @@
 				256A4D7D22F8142A00A31427 /* Frameworks */,
 				256A4D7E22F8142A00A31427 /* Resources */,
 				256A4DA622F814FE00A31427 /* Embed Frameworks */,
+				25A6194E22F8780B00A85C5A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -738,6 +823,8 @@
 				25AB468B22F825A4005C52AF /* PBXTargetDependency */,
 				25AB469C22F825B1005C52AF /* PBXTargetDependency */,
 				25AB46AE22F82844005C52AF /* PBXTargetDependency */,
+				25A6194922F8780B00A85C5A /* PBXTargetDependency */,
+				25A6195D22F878A500A85C5A /* PBXTargetDependency */,
 			);
 			name = Rolique;
 			productName = Rolique;
@@ -781,6 +868,40 @@
 			productName = Utils;
 			productReference = 256A4DB022F8165800A31427 /* Utils.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		25A6193D22F8780B00A85C5A /* RemoteTodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25A6194B22F8780B00A85C5A /* Build configuration list for PBXNativeTarget "RemoteTodayExtension" */;
+			buildPhases = (
+				25A6193A22F8780B00A85C5A /* Sources */,
+				25A6193B22F8780B00A85C5A /* Frameworks */,
+				25A6193C22F8780B00A85C5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemoteTodayExtension;
+			productName = RemoteTodayExtension;
+			productReference = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		25A6195222F878A500A85C5A /* VacationTodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25A6195F22F878A500A85C5A /* Build configuration list for PBXNativeTarget "VacationTodayExtension" */;
+			buildPhases = (
+				25A6194F22F878A500A85C5A /* Sources */,
+				25A6195022F878A500A85C5A /* Frameworks */,
+				25A6195122F878A500A85C5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VacationTodayExtension;
+			productName = VacationTodayExtension;
+			productReference = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		25AB468422F825A4005C52AF /* Model */ = {
 			isa = PBXNativeTarget;
@@ -874,6 +995,12 @@
 					256A4DAF22F8165800A31427 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					25A6193D22F8780B00A85C5A = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					25A6195222F878A500A85C5A = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					25AB468422F825A4005C52AF = {
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
@@ -912,6 +1039,8 @@
 				25AB469522F825B1005C52AF /* Networking */,
 				25AB46A722F82844005C52AF /* UsersWidget */,
 				B5FFFC5A22F83988001DDF2C /* RoliqueTests */,
+				25A6193D22F8780B00A85C5A /* RemoteTodayExtension */,
+				25A6195222F878A500A85C5A /* VacationTodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -937,6 +1066,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25A6193C22F8780B00A85C5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25A6195122F878A500A85C5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1112,6 +1257,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25A6193A22F8780B00A85C5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6194322F8780B00A85C5A /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25A6194F22F878A500A85C5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25A6195722F878A500A85C5A /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		25AB468122F825A4005C52AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1178,6 +1339,16 @@
 			target = 256A4DAF22F8165800A31427 /* Utils */;
 			targetProxy = 256A4DB522F8165800A31427 /* PBXContainerItemProxy */;
 		};
+		25A6194922F8780B00A85C5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25A6193D22F8780B00A85C5A /* RemoteTodayExtension */;
+			targetProxy = 25A6194822F8780B00A85C5A /* PBXContainerItemProxy */;
+		};
+		25A6195D22F878A500A85C5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25A6195222F878A500A85C5A /* VacationTodayExtension */;
+			targetProxy = 25A6195C22F878A500A85C5A /* PBXContainerItemProxy */;
+		};
 		25AB468B22F825A4005C52AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 25AB468422F825A4005C52AF /* Model */;
@@ -1207,6 +1378,22 @@
 				256A4D8D22F8142B00A31427 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		25A6194422F8780B00A85C5A /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25A6194522F8780B00A85C5A /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		25A6195822F878A500A85C5A /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25A6195922F878A500A85C5A /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1495,6 +1682,86 @@
 			};
 			name = Release;
 		};
+		25A6194C22F8780B00A85C5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RemoteTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.RemoteTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		25A6194D22F8780B00A85C5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RemoteTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.RemoteTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		25A6196022F878A500A85C5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.VacationTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		25A6196122F878A500A85C5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.VacationTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		25AB468E22F825A4005C52AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1631,6 +1898,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1661,6 +1929,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1751,6 +2020,24 @@
 			buildConfigurations = (
 				256A4DBA22F8165800A31427 /* Debug */,
 				256A4DBB22F8165800A31427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25A6194B22F8780B00A85C5A /* Build configuration list for PBXNativeTarget "RemoteTodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25A6194C22F8780B00A85C5A /* Debug */,
+				25A6194D22F8780B00A85C5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25A6195F22F878A500A85C5A /* Build configuration list for PBXNativeTarget "VacationTodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25A6196022F878A500A85C5A /* Debug */,
+				25A6196122F878A500A85C5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
