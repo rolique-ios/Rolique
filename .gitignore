@@ -5,7 +5,9 @@
 ## Build generated
 build/
 DerivedData/
-BuildConfig/
+
+Rolique/BuildConfig/
+
 
 ## Various settings
 *.pbxuser
