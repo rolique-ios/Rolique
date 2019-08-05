@@ -9,5 +9,5 @@
 import Foundation
 
 public enum Err: Error {
-  case general(masg: String)
+  case general(msg: String)
 }

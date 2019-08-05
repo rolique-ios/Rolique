@@ -12,10 +12,11 @@ import Networking
 public protocol  UserManager {
   func getAllUsers(result: ((Result<[User], Error>) -> Void)?)
   func getUserWithId(_ userId: String, result: ((Result<User, Error>) -> Void)?)
-  func getTodayUsersForRecordType(recordType: String, result: ((Result<[User], Error>) -> Void)?)
+  func getTodayUsersForRecordType(_ recordType: String, result: ((Result<[User], Error>) -> Void)?)
 }
 
 public final class UserManagerImpl:  UserManager {
+  
   public func getAllUsers(result: ((Result<[User], Error>) -> Void)?) {
     Net.Worker.request(GetAllUsers(), onSuccess: { json in
       DispatchQueue.main.async {
@@ -23,7 +24,7 @@ public final class UserManagerImpl:  UserManager {
         if let array = array {
           result?(.success(array))
         } else {
-          result?(.failure(Err.general(masg: "failed to build users")))
+          result?(.failure(Err.general(msg: "failed to build users")))
         }
       }
     }, onError: { error in
@@ -40,7 +41,7 @@ public final class UserManagerImpl:  UserManager {
         if let user = user {
           result?(.success(user))
         } else {
-          result?(.failure(Err.general(masg: "failed to build user")))
+          result?(.failure(Err.general(msg: "failed to build user")))
         }
       }
     }, onError: { error in
@@ -50,7 +51,7 @@ public final class UserManagerImpl:  UserManager {
     })
   }
   
-  public func getTodayUsersForRecordType(recordType: String, result: ((Result<[User], Error>) -> Void)?) {
+  public func getTodayUsersForRecordType(_ recordType: String, result: ((Result<[User], Error>) -> Void)?) {
     Net.Worker.request(GetTodayUsersForRecordType(recordType: recordType), onSuccess: { json in
       DispatchQueue.main.async {
         DispatchQueue.main.async {
@@ -58,7 +59,7 @@ public final class UserManagerImpl:  UserManager {
           if let array = array {
             result?(.success(array))
           } else {
-            result?(.failure(Err.general(masg: "failed to build users")))
+            result?(.failure(Err.general(msg: "failed to build users")))
           }
         }
       }
