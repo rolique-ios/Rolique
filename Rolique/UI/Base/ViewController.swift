@@ -9,7 +9,7 @@
 import UIKit
 
 /// - warning: Abstract - don't create instance of this class.
-class ViewController<T: ViewModel>: UIViewController {
+public class ViewController<T: ViewModel>: UIViewController {
   private lazy var viewWillAppearWasCalled = false
   private lazy var viewDidAppearWasCalled = false
   
@@ -20,7 +20,7 @@ class ViewController<T: ViewModel>: UIViewController {
     super.init(nibName: nil, bundle: nil)
   }
   
-  override func loadView() {
+  public override func loadView() {
     self.view = UIView(frame: CGRect(origin: .zero, size: UIScreen.main.bounds.size))
   }
   
@@ -30,14 +30,14 @@ class ViewController<T: ViewModel>: UIViewController {
   
   var statusBarStyle: UIStatusBarStyle { return .default }
   
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
     
     self.view.backgroundColor = .white
     self.configureBinding()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
+  public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     defer {
@@ -49,11 +49,11 @@ class ViewController<T: ViewModel>: UIViewController {
     }
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
+  public override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  public override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     defer {
       self.viewDidAppearWasCalled = true
@@ -64,9 +64,9 @@ class ViewController<T: ViewModel>: UIViewController {
     }
   }
   
-  func performOnceInViewWillAppear() {}
+  public func performOnceInViewWillAppear() {}
   
-  func performOnceInViewDidAppear() {}
+  public func performOnceInViewDidAppear() {}
   
   deinit {
     print("☠️ \(self) ☠️")

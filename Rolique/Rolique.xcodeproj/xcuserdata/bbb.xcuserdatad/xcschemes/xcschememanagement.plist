@@ -4,20 +4,30 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Rolique.xcscheme_^#shared#^_</key>
+		<key>Model.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>UI.xcscheme_^#shared#^_</key>
+		<key>Networking.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Rolique.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>Utils.xcscheme_^#shared#^_</key>
+		<key>UI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>Utils.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 	</dict>
 </dict>

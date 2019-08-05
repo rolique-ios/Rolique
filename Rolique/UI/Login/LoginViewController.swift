@@ -6,5 +6,33 @@
 //  Copyright © 2019 Bohdan Savych. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SnapKit
+import Utils
+
+private struct Constants {
+  static var logoSize: CGSize { return CGSize(width: 150, height: 150) }
+  static var edgeInsets: UIEdgeInsets { return UIEdgeInsets(top: 100, left: 8, bottom: 40, right: 8) }
+  static var slackButtonSize: CGSize { return CGSize(width: 200, height: 150) }
+}
+
+public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    configureUI()
+  }
+  
+  public override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+}
+
+// MARK: - Private
+private extension LoginViewController {
+  func configureUI() {
+    view.backgroundColor = Colors.Login.backgroundColor
+  }
+}

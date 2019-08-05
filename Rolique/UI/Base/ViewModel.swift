@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ViewModel {
+public protocol ViewModel {
   var shouldPush: ((_ viewController: UIViewController, _ animated: Bool) -> Void)? { get set }
   var shouldPop: ((_ animated: Bool) -> UIViewController?)? { get set }
   var shouldPopToRoot: ((_ animated: Bool) -> [UIViewController]?)? { get set }
@@ -21,15 +21,15 @@ protocol ViewModel {
   var shouldNavDismmiss: ((Bool, (() -> Void)?) -> Void)? { get set }
 }
 
-class BaseViewModel: ViewModel {
-  var shouldPush: ((UIViewController, Bool) -> Void)?
-  var shouldPop: ((Bool) -> UIViewController?)?
-  var shouldPopToRoot: ((Bool) -> [UIViewController]?)?
-  var shouldSet: (([UIViewController], Bool) -> Void)?
+public class BaseViewModel: ViewModel {
+  public var shouldPush: ((UIViewController, Bool) -> Void)?
+  public var shouldPop: ((Bool) -> UIViewController?)?
+  public var shouldPopToRoot: ((Bool) -> [UIViewController]?)?
+  public var shouldSet: (([UIViewController], Bool) -> Void)?
   
-  var shouldPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)?
-  var shouldDismmiss: ((Bool, (() -> Void)?) -> Void)?
+  public var shouldPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)?
+  public var shouldDismmiss: ((Bool, (() -> Void)?) -> Void)?
   
-  var shouldNavPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)?
-  var shouldNavDismmiss: ((Bool, (() -> Void)?) -> Void)?
+  public var shouldNavPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)?
+  public var shouldNavDismmiss: ((Bool, (() -> Void)?) -> Void)?
 }

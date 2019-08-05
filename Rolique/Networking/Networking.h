@@ -2,8 +2,8 @@
 //  Networking.h
 //  Networking
 //
-//  Created by Andrii on 8/5/19.
-//  Copyright © 2019 Bohdan Savych. All rights reserved.
+//  Created by Bohdan Savych on 8/5/19.
+//  Copyright © 2019 Rolique. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
