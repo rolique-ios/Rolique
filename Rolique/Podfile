@@ -1,0 +1,19 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+def pods 
+	pod 'Dip'
+    	pod 'SnapKit'
+end
+
+target 'Rolique' do
+	
+end
+
+target 'UI' do
+	pods
+end
+
+target 'Utils' do
+
+end
