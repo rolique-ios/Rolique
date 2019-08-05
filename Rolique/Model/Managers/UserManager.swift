@@ -19,11 +19,15 @@ public final class UserManagerImpl:  UserManager {
   public func getAllUsers(result: ((Result<[User], Error>) -> Void)?) {
     Net.Worker.request(GetAllUsers(), onSuccess: { json in
       DispatchQueue.main.async {
-        print(json)
+        let array: [User]? = json.buildArray()
+        if let array = array {
+          result?(.success(array))
+        } else {
+          result?(.failure(Err.general(masg: "failed to build users")))
+        }
       }
     }, onError: { error in
       DispatchQueue.main.async {
-        print(error)
         result?(.failure(error))
       }
     })
@@ -32,11 +36,15 @@ public final class UserManagerImpl:  UserManager {
   public func getUserWithId(_ userId: String, result: ((Result<User, Error>) -> Void)?) {
     Net.Worker.request(GetUserWithId(userId: userId), onSuccess: { json in
       DispatchQueue.main.async {
-        print(json)
+        let user: User? = json.build()
+        if let user = user {
+          result?(.success(user))
+        } else {
+          result?(.failure(Err.general(masg: "failed to build user")))
+        }
       }
     }, onError: { error in
       DispatchQueue.main.async {
-        print(error)
         result?(.failure(error))
       }
     })
@@ -45,7 +53,14 @@ public final class UserManagerImpl:  UserManager {
   public func getTodayUsersForRecordType(recordType: String, result: ((Result<[User], Error>) -> Void)?) {
     Net.Worker.request(GetTodayUsersForRecordType(recordType: recordType), onSuccess: { json in
       DispatchQueue.main.async {
-        print(json)
+        DispatchQueue.main.async {
+          let array: [User]? = json.buildArray()
+          if let array = array {
+            result?(.success(array))
+          } else {
+            result?(.failure(Err.general(masg: "failed to build users")))
+          }
+        }
       }
     }, onError: { error in
       DispatchQueue.main.async {
@@ -57,16 +72,5 @@ public final class UserManagerImpl:  UserManager {
   
   
   public init() {}
-  
-  public func sendAction(_ action: Action, result: ((Result<ActionResult, Error>) -> Void)?) {
-    Net.Worker.request(action.makeCommand(), onSuccess: { json in
-      DispatchQueue.main.async {
-        result?(.success(ActionResult(error: json.string("error"))))
-      }
-    }, onError: { error in
-      DispatchQueue.main.async {
-        result?(.success(ActionResult(error: error.localizedDescription)))
-      }
-    })
-  }
+
 }

@@ -10,12 +10,35 @@ import Foundation
 
 public struct Json: Codable {
   public let stringValue: String
+  public init(stringValue: String) {
+    self.stringValue = stringValue
+  }
 }
 
 public extension Json {
+  
   func build<M: Codable>() -> M? {
-    guard let data = stringValue.data(using: .utf8) else { return nil }
-    return try? JSONDecoder().decode(M.self, from: data)
+    guard let body = self.json("body") else {
+      print("failed to build body")
+      return nil }
+    guard let data = body.stringValue.data(using: .utf8) else {
+      print("failed to build data")
+      return nil }
+    do {
+    return try JSONDecoder().decode(M.self, from: data)
+    } catch let err {
+      print(err)
+      return nil
+    }
+  }
+  
+  func buildArray<M: Codable>() -> [M]? {
+    guard let values = Json.get(json: self, keyPath: "values") as? [[String: Any]] else {
+      print("failed to get values")
+      return nil }
+    let jsones: [Json] = values.compactMap { Json(stringValue: Json.stringify(dict: $0) ?? "bad_json_string") }
+    let coded: [M] = jsones.compactMap { $0.build() }
+    return coded
   }
   
   var error: String? { return string("error") }

@@ -23,12 +23,13 @@ public final class User: Codable {
   
   public let id: String
   public let slackProfile: SlackProfile
-  public let birthday, dateOfJoining: String
-  public let eduPoints, emergencyDays: Int
+  public let birthday: String?
+  public let dateOfJoining: String?
+  public let eduPoints, emergencyDays: Double?
   public let roles: [String]
-  public let vacationData: [String: Double]
+  public let vacationData: [String: Double]?
   
-  init(id: String, slackProfile: SlackProfile, birthday: String, dateOfJoining: String, eduPoints: Int, emergencyDays: Int, roles: [String], vacationData: [String: Double]) {
+  init(id: String, slackProfile: SlackProfile, birthday: String?, dateOfJoining: String?, eduPoints: Double, emergencyDays: Double?, roles: [String], vacationData: [String: Double]?) {
     self.id = id
     self.slackProfile = slackProfile
     self.birthday = birthday
@@ -43,14 +44,16 @@ public final class User: Codable {
 
 // MARK: - SlackProfile
 public final class SlackProfile: Codable {
-  public let avatarHash, displayName, displayNameNormalized, email: String
-  public let firstName: String
-  public let image1024, image192, image24, image32: String
-  public let image48, image512, image72, imageOriginal: String
-  public let isCustomImage: Bool
-  public let lastName, phone, realName, realNameNormalized: String
-  public let skype, statusEmoji: String
-  public  let statusExpiration: Int
+  public let avatarHash, displayName, displayNameNormalized, email: String?
+  public let firstName: String?
+  public let image192, image24, image32, image1024: String?
+  public let image48, image512, image72: String?
+  public let imageOriginal: String?
+  public let isCustomImage: Bool?
+  public let lastName: String?
+  public let phone, realName, realNameNormalized: String
+  public let skype, statusEmoji: String?
+  public let statusExpiration: Int
   public let statusText, statusTextCanonical, team, title: String
   
   enum CodingKeys: String, CodingKey {
@@ -80,7 +83,15 @@ public final class SlackProfile: Codable {
     case team, title
   }
   
-  init(avatarHash: String, displayName: String, displayNameNormalized: String, email: String, firstName: String, image1024: String, image192: String, image24: String, image32: String, image48: String, image512: String, image72: String, imageOriginal: String, isCustomImage: Bool, lastName: String, phone: String, realName: String, realNameNormalized: String, skype: String, statusEmoji: String, statusExpiration: Int, statusText: String, statusTextCanonical: String, team: String, title: String) {
+  init(avatarHash: String, displayName: String, displayNameNormalized: String, email: String,
+       firstName: String?,
+       image1024: String?,
+       image192: String, image24: String, image32: String, image48: String, image512: String,
+       image72: String,
+       imageOriginal: String?,
+       isCustomImage: Bool?,
+       lastName: String?,
+       phone: String, realName: String, realNameNormalized: String, skype: String, statusEmoji: String, statusExpiration: Int, statusText: String, statusTextCanonical: String, team: String, title: String) {
     self.avatarHash = avatarHash
     self.displayName = displayName
     self.displayNameNormalized = displayNameNormalized
