@@ -24,7 +24,6 @@ public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
     super.viewDidLoad()
     
     configureUI()
-    login()
   }
   
   public override func viewWillAppear(_ animated: Bool) {
@@ -32,30 +31,17 @@ public final class LoginViewController<T: LoginViewModel>: ViewController<T> {
     
     navigationController?.setNavigationBarHidden(true, animated: false)
   }
+  
+  public override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    self.viewModel.login()
+  }
 }
 
 // MARK: - Private
 private extension LoginViewController {
   func configureUI() {
     view.backgroundColor = Colors.Login.backgroundColor
-  }
-  
-  func login() {
-    DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1) { [unowned self] in
-      let lm = LoginManagerImpl()
-      guard let url = lm.getLoginURL() else { return }
-      self.authSession = SFAuthenticationSession(url: url, callbackURLScheme: "rolique", completionHandler: { (redirectUrl, error) in
-        if error == nil {
-          guard let redirectUrl = redirectUrl else { print("no redirect url"); return }
-          lm.login(redirectUrl: redirectUrl, result: { result in
-            print(result)
-          })
-        } else {
-          print(error)
-        }
-        
-      })
-      self.authSession?.start()
-    }
   }
 }

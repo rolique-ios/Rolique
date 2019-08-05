@@ -6,9 +6,11 @@
 //  Copyright © 2019 Bohdan Savych. All rights reserved.
 //
 
+import Model
+
 public final class Router {
   public static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
-    return LoginViewController(viewModel: LoginViewModelImpl())
+    return LoginViewController(viewModel: LoginViewModelImpl(loginManager: LoginManagerImpl()))
   }
   
   public static func getStartViewController() -> UINavigationController {

@@ -7,13 +7,28 @@
 //
 
 import Foundation
+import Model
 
 public protocol LoginViewModel: ViewModel {
   var onError: (() -> String)? { get set }
+  
+  func login()
 }
 
 public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
+  private let loginManager: LoginManager
+  
+  public init(loginManager: LoginManager) {
+    self.loginManager = loginManager
+  }
+  
   public var onError: (() -> String)?
+  
+  public func login() {
+    self.loginManager.login { res in
+      
+    }
+  }
 }
 
 

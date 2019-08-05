@@ -11,37 +11,37 @@ import Networking
 import SafariServices
 
 public protocol LoginManager {
-  func getLoginURL() -> URL?
-  func login(redirectUrl: URL, result: ((Result<User, Error>) -> Void)?)
+  func login(result: ((Result<User, Error>) -> Void)?)
 }
 
-//class WindowProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
-//  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-//    return presentationAnchor
-//  }
-//
-//  let presentationAnchor: ASPresentationAnchor
-//
-//  init(presentationAnchor: ASPresentationAnchor) {
-//    self.presentationAnchor = presentationAnchor
-//    super.init()
-//  }
-//}
-
 public final class LoginManagerImpl: LoginManager {
-  
-//  let contextProvider: ASWebAuthenticationPresentationContextProviding
+  private var authSession: SFAuthenticationSession?
   
   public init() {
-//    self.contextProvider = WindowProvider(presentationAnchor: presentationAnchor)
   }
 
-  public func getLoginURL() -> URL? {
+  private func getLoginURL() -> URL? {
     return try? SlackLogin().asRequest().url
   }
   
-  public func login(redirectUrl: URL, result: ((Result<User, Error>) -> Void)?) {
+  public func login(result: ((Result<User, Error>) -> Void)?) {
+    guard let url = getLoginURL() else { return }
+    
+    self.authSession = SFAuthenticationSession(url: url, callbackURLScheme: "rolique", completionHandler: { (redirectUrl, error) in
+      if error == nil {
+        guard let redirectUrl = redirectUrl else { print("no redirect url"); return }
+        self.login(redirectUrl: redirectUrl, result: { res in
+          result?(res)
+        })
+      } else {
+        result?(.failure(error!))
+      }
+    })
+    
+    self.authSession?.start()
+  }
   
+  func login(redirectUrl: URL, result: ((Result<User, Error>) -> Void)?) {
     let query = redirectUrl.query?.components(separatedBy: "=")
     if query![0] == "code" {
       let code = query![1]
@@ -57,7 +57,6 @@ public final class LoginManagerImpl: LoginManager {
         let getUserWithId = GetUserWithId(userId: userSlackId)
         Net.Worker.request(getUserWithId, onSuccess: { userJson in
           print(userJson)
-          //                let user = User(id: id, slackProfile: <#T##SlackProfile#>, birthday: <#T##String#>, dateOfJoining: <#T##String#>, eduPoints: <#T##Int#>, emergencyDays: <#T##Int#>, roles: <#T##[String]#>, vacationData: <#T##[String : Double]#>)
         }, onError: { error in
           print(error)
         })
@@ -67,7 +66,5 @@ public final class LoginManagerImpl: LoginManager {
         }
       })
     }
-    
   }
-  
 }
