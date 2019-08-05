@@ -10,7 +10,7 @@ import Foundation
 
 public final class ActionLate: Action {
   public init(sender: String, from: String, value: String) {
-    super.init(sender: sender, type: "late", props: ["from": from, "value": value])
+    super.init(type: "late", sender: sender, test: "true", props: ["from": from, "value": value])
   }
   
   required init(from decoder: Decoder) throws {

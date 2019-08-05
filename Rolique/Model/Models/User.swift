@@ -21,12 +21,12 @@ public final class User: Codable {
     case vacationData = "vacation_data"
   }
   
-  let id: String
-  let slackProfile: SlackProfile
-  let birthday, dateOfJoining: String
-  let eduPoints, emergencyDays: Int
-  let roles: [String]
-  let vacationData: [String: Double]
+  public let id: String
+  public let slackProfile: SlackProfile
+  public let birthday, dateOfJoining: String
+  public let eduPoints, emergencyDays: Int
+  public let roles: [String]
+  public let vacationData: [String: Double]
   
   init(id: String, slackProfile: SlackProfile, birthday: String, dateOfJoining: String, eduPoints: Int, emergencyDays: Int, roles: [String], vacationData: [String: Double]) {
     self.id = id
@@ -37,40 +37,21 @@ public final class User: Codable {
     self.emergencyDays = emergencyDays
     self.roles = roles
     self.vacationData = vacationData
-    
-//    super.init(map: map)
   }
-  
-//  init(id: String) {
-//    self.id = id
-//    super.init(map: ["id": id])
-//  }
-  
-//  required init(from decoder: Decoder) throws {
-//    let values = try decoder.container(keyedBy: CodingKeys.self)
-//    self.id = try values.decode(String.self, forKey: .id)
-////    try super.init(from: decoder)
-//  }
-//
-//  public override func encode(to encoder: Encoder) throws {
-//    var container = encoder.container(keyedBy: CodingKeys.self)
-//    try container.encode(id, forKey: .id)
-////    try super.encode(to: encoder)
-//  }
-//  
+
 }
 
 // MARK: - SlackProfile
-class SlackProfile: Codable {
-  let avatarHash, displayName, displayNameNormalized, email: String
-  let firstName: String
-  let image1024, image192, image24, image32: String
-  let image48, image512, image72, imageOriginal: String
-  let isCustomImage: Bool
-  let lastName, phone, realName, realNameNormalized: String
-  let skype, statusEmoji: String
-  let statusExpiration: Int
-  let statusText, statusTextCanonical, team, title: String
+public final class SlackProfile: Codable {
+  public let avatarHash, displayName, displayNameNormalized, email: String
+  public let firstName: String
+  public let image1024, image192, image24, image32: String
+  public let image48, image512, image72, imageOriginal: String
+  public let isCustomImage: Bool
+  public let lastName, phone, realName, realNameNormalized: String
+  public let skype, statusEmoji: String
+  public  let statusExpiration: Int
+  public let statusText, statusTextCanonical, team, title: String
   
   enum CodingKeys: String, CodingKey {
     case avatarHash = "avatar_hash"

@@ -9,11 +9,3 @@
 import Foundation
 import Networking
 
-//public struct Fetch<M: ModelType> {}
-//
-//public class FetchArray<A: ModelType> {}
-//
-//public class FetchUsers: FetchArray<User> {}
-
-
-
