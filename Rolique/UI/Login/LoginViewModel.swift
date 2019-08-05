@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+public protocol LoginViewModel: ViewModel {
+  var onError: (() -> String)? { get set }
+}
+
+public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
+  
+}
+
+
