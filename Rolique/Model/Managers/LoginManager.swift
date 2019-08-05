@@ -45,22 +45,41 @@ public final class LoginManagerImpl: LoginManager {
     let query = redirectUrl.query?.components(separatedBy: "=")
     if query![0] == "code" {
       let code = query![1]
-       Net.Worker.request(SlackToken(code: code), onSuccess: { jsonResult in
+      Net.Worker.request(SlackToken(code: code), onSuccess: { jsonResult in
         guard let userSlackId = jsonResult.string("user/id") else {
           DispatchQueue.main.async {
-            let error = NSError(domain: "rolique", code: 777, userInfo: [NSLocalizedDescriptionKey: "failed to get string value by keypath: user/id"])
-            result?(.failure(error))
+            result?(.failure(Err.general(masg: "failed to get string value by keypath: user/id")))
           }
           return
         }
-        print(userSlackId)
+        
         let getUserWithId = GetUserWithId(userId: userSlackId)
         Net.Worker.request(getUserWithId, onSuccess: { userJson in
-          print(userJson)
+          guard let userBody = userJson.json("body") else {
+            DispatchQueue.main.async {
+              result?(.failure(Err.general(masg: "response does not contain body")))
+            }
+            return
+          }
+          guard let data = userBody.stringValue.data(using: .utf8) else {
+            DispatchQueue.main.async {
+              result?(.failure(Err.general(masg: "failed to serialize user body")))
+            }
+            return
+          }
+          guard let user = try? JSONDecoder().decode(User.self, from: data) else {
+            DispatchQueue.main.async {
+              result?(.failure(Err.general(masg: "failed to decode user")))
+            }
+            return
+          }
+          result?(.success(user))
         }, onError: { error in
-          print(error)
+          DispatchQueue.main.async {
+            result?(.failure(error))
+          }
         })
-       }, onError: { error in
+      }, onError: { error in
         DispatchQueue.main.async {
           result?(.failure(error))
         }

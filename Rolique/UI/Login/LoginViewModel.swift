@@ -25,8 +25,15 @@ public final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
   public var onError: (() -> String)?
   
   public func login() {
+    
     self.loginManager.login { res in
-      
+      if case .success(let user) = res {
+        let am = ActionMangerImpl()
+        let action = ActionLate(sender: user.id, from: "now", value: "1_h")
+        am.sendAction(action, result: { result in
+          dump(result)
+        })
+      }
     }
   }
 }

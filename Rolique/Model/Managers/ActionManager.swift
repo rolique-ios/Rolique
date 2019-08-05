@@ -24,11 +24,12 @@ public final class ActionMangerImpl: ActionManger {
   public func sendAction(_ action: Action, result: ((Result<ActionResult, Error>) -> Void)?) {
     Net.Worker.request(action.makeCommand(), onSuccess: { json in
       DispatchQueue.main.async {
-        result?(.success(ActionResult(map: json.dict())))
+        print(json)
+//        result?(.success(ActionResult(map: json.dict())))
       }
     }, onError: { error in
       DispatchQueue.main.async {
-        result?( .success(ActionResult(error: error)))
+//        result?( .success(ActionResult(error: error)))
       }
     })
   }
