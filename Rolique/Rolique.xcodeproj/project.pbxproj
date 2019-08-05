@@ -87,7 +87,6 @@
 		B5FFFC3F22F82F57001DDF2C /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC3722F82F57001DDF2C /* Transport.swift */; };
 		B5FFFC4F22F82FC6001DDF2C /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */; };
 		B5FFFC5022F82FC6001DDF2C /* ActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */; };
-		B5FFFC5122F82FC6001DDF2C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4722F82FC6001DDF2C /* Model.swift */; };
 		B5FFFC5222F82FC6001DDF2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4822F82FC6001DDF2C /* User.swift */; };
 		B5FFFC5322F82FC6001DDF2C /* ActionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */; };
 		B5FFFC5422F82FC6001DDF2C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4B22F82FC6001DDF2C /* Action.swift */; };
@@ -252,7 +251,6 @@
 		B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
-		B5FFFC4722F82FC6001DDF2C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B5FFFC4822F82FC6001DDF2C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionResult.swift; sourceTree = "<group>"; };
 		B5FFFC4B22F82FC6001DDF2C /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -599,7 +597,6 @@
 		B5FFFC4622F82FC6001DDF2C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B5FFFC4722F82FC6001DDF2C /* Model.swift */,
 				B5FFFC4822F82FC6001DDF2C /* User.swift */,
 				B5FFFC4922F82FC6001DDF2C /* Actions */,
 			);
@@ -1085,7 +1082,6 @@
 				B5FFFC5422F82FC6001DDF2C /* Action.swift in Sources */,
 				B5FFFC5622F82FC6001DDF2C /* DataProvider.swift in Sources */,
 				B5FFFC5322F82FC6001DDF2C /* ActionResult.swift in Sources */,
-				B5FFFC5122F82FC6001DDF2C /* Model.swift in Sources */,
 				B5FFFC4F22F82FC6001DDF2C /* LoginManager.swift in Sources */,
 				B5FFFC5022F82FC6001DDF2C /* ActionManager.swift in Sources */,
 				B5FFFC5522F82FC6001DDF2C /* ActionLate.swift in Sources */,

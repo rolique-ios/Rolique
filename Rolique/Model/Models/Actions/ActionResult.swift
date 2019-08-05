@@ -8,21 +8,18 @@
 
 import Foundation
 
-public final class ActionResult: Codable {
+public final class ActionResult: Codable, CustomStringConvertible {
   
-//  public var ok: Bool { return error == nil }
-  public var description: String {
-    return "ActionResult "
+  public let error: String?
+  public let ok: Bool
+
+  init (error: String?) {
+    self.error = error
+    self.ok = error == nil
   }
-//  public override init(map: [String : Any]?) {
-//    super.init(map: map)
-//  }
-//
-//  public init (error: Error) {
-//    super.init(map: ["error": error.localizedDescription])
-//  }
-//
-//  required init(from decoder: Decoder) throws {
-//    try super.init(from: decoder)
-//  }
+  
+  public var description: String {
+    return "ActionResult ok: \(ok), error: \(error ?? "")"
+  }
+
 }
