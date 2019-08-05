@@ -7,6 +7,7 @@
 //
 
 import Model
+import Utils
 
 public final class Router {
   static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
@@ -19,7 +20,8 @@ public final class Router {
   
   static func getTabBarController() -> UITabBarController {
     let tabbar =  BaseTabBarController()
-    let profile = getProfileViewController()
+    let profile = UINavigationController(rootViewController: getProfileViewController())
+    profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 0)
     tabbar.viewControllers = [profile]
     
     return tabbar

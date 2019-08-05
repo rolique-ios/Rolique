@@ -9,5 +9,9 @@
 import Foundation
 
 final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
-  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.setNavigationBarHidden(true, animated: true)
+  }
 }

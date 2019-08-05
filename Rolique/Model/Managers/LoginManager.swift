@@ -31,10 +31,14 @@ public final class LoginManagerImpl: LoginManager {
       if error == nil {
         guard let redirectUrl = redirectUrl else { print("no redirect url"); return }
         self.login(redirectUrl: redirectUrl, result: { res in
-          result?(res)
+          DispatchQueue.main.async {
+            result?(res)
+          }
         })
       } else {
-        result?(.failure(error!))
+        DispatchQueue.main.async {
+          result?(.failure(error!))
+        }
       }
     })
     

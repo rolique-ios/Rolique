@@ -8,6 +8,7 @@
 
 import Foundation
 import Model
+import Utils
 
 protocol LoginViewModel: ViewModel {
   var onError: ((String) -> Void)? { get set }
@@ -28,7 +29,9 @@ final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
     self.loginManager.login { [weak self] res in
       switch res {
       case .success(let user):
-        print(user)
+        print("\(user)")
+        UserDefaultsManager.shared.userId = user.id
+        self?.shouldSet?([Router.getTabBarController()], true)
       case .failure(let error):
         self?.onError?(error.localizedDescription)
       }

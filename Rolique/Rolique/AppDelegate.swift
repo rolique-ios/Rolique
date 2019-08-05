@@ -16,21 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = Router.getStartViewController()
     window?.makeKeyAndVisible()
+    
+    if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+      let _ = ShortcutManager.shared.handle(shortcutItem: shortcutItem)
+    }
     
     
     return true
   }
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    print("app delegate", url.absoluteString)
-    
     return true
   }
-
+  
+  func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+    completionHandler(ShortcutManager.shared.handle(shortcutItem: shortcutItem))
+  }
 }
 
 

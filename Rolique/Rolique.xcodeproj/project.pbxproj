@@ -61,6 +61,7 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
+		25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6193822F873AC00A85C5A /* ShortcutManager.swift */; };
 		25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E722F86C68001D1EBD /* BaseTabBarController.swift */; };
 		25A648EA22F86C9C001D1EBD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E922F86C9C001D1EBD /* ProfileViewController.swift */; };
 		25A648EC22F86CA4001D1EBD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */; };
@@ -225,6 +226,7 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		25A6193822F873AC00A85C5A /* ShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		25A648E722F86C68001D1EBD /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		25A648E922F86C9C001D1EBD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		25A648EB22F86CA3001D1EBD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		256A4D9B22F814FE00A31427 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				25A6193722F873AC00A85C5A /* ShortcutManager */,
 				25A648E622F86C4F001D1EBD /* Profile */,
 				256A4D9C22F814FE00A31427 /* UI.h */,
 				256A4D9D22F814FE00A31427 /* Info.plist */,
@@ -478,6 +481,14 @@
 				256A4E1822F81C7700A31427 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		25A6193722F873AC00A85C5A /* ShortcutManager */ = {
+			isa = PBXGroup;
+			children = (
+				25A6193822F873AC00A85C5A /* ShortcutManager.swift */,
+			);
+			path = ShortcutManager;
 			sourceTree = "<group>";
 		};
 		25A648E622F86C4F001D1EBD /* Profile */ = {
@@ -1043,6 +1054,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				256A4E1922F81C7700A31427 /* LoginViewModel.swift in Sources */,
+				25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */,
 				256A4E1722F81C6C00A31427 /* LoginViewController.swift in Sources */,
 				25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */,
 				256A4E1B22F81DD300A31427 /* Router.swift in Sources */,

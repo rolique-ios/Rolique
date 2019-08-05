@@ -9,7 +9,7 @@
 import Foundation
 
 public class Route {
-
+  
   public enum Method: String {
     case get, post, put, patch, delete
     var value: String { return self.rawValue.uppercased() }
@@ -52,8 +52,8 @@ public class Route {
       urlParams.keys.forEach { url = url.appending($0, value: urlParams[$0]) }
     }
     var request = URLRequest(url: url,
-                      cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy,
-                      timeoutInterval: 30)
+                             cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy,
+                             timeoutInterval: 30)
     request.allHTTPHeaderFields = headers ?? makeAuthHeaders()
     request.httpMethod = method.value
     
@@ -62,12 +62,12 @@ public class Route {
 }
 
 extension URL {
-    func appending(_ queryItem: String, value: String?) -> URL {
-        guard var urlComponents = URLComponents(string: absoluteString) else { return absoluteURL }
-        var queryItems: [URLQueryItem] = urlComponents.queryItems ??  []
-        let queryItem = URLQueryItem(name: queryItem, value: value)
-        queryItems.append(queryItem)
-        urlComponents.queryItems = queryItems
-        return urlComponents.url!
-    }
+  func appending(_ queryItem: String, value: String?) -> URL {
+    guard var urlComponents = URLComponents(string: absoluteString) else { return absoluteURL }
+    var queryItems: [URLQueryItem] = urlComponents.queryItems ??  []
+    let queryItem = URLQueryItem(name: queryItem, value: value)
+    queryItems.append(queryItem)
+    urlComponents.queryItems = queryItems
+    return urlComponents.url!
+  }
 }
