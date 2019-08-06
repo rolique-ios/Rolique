@@ -38,7 +38,7 @@ public final class ActionDoprac: Action {
     if let custom = custom {
       props["custom"] = custom
     }
-    super.init(type: "remote", sender: sender, test: Settings.isTest, props: props)
+    super.init(type: "doprac", sender: sender, test: Settings.isTest, props: props)
   }
   
   required init(from decoder: Decoder) throws {
