@@ -17,7 +17,7 @@ private struct Constants {
 
 open class UsersViewController: UIViewController, NCWidgetProviding {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-  private lazy var users = [Userable]()
+  private lazy var users = [AnyUserable]()
   
   override open func viewDidLoad() {
     super.viewDidLoad()
@@ -28,12 +28,16 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   }
   
   public func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    completionHandler(.noData)
     loadData { [weak self] users in
-      self?.users = users
+      guard let self = self else { return }
       DispatchQueue.main.async {
-        self?.collectionView.reloadData()
-        completionHandler(.newData)
+        if users == self.users {
+          completionHandler(.noData)
+        } else {
+          self.users = users
+          self.collectionView.reloadData()
+          completionHandler(.newData)
+        }
       }
     }
   }
@@ -43,11 +47,11 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   }
   
   // MARK: - Override point
-  open func loadData(usersCompletion: @escaping (([Userable]) -> Void)) {
+  open func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
 
   }
   
-  open func didTap(on user: Userable, at index: Int) {
+  open func didTapOnElement(at index: Int) {
     
   }
 }
@@ -55,8 +59,7 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
 // MARK: - UICollectionViewDelegate
 extension UsersViewController: UICollectionViewDelegate {
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let user = self.users[indexPath.row]
-    didTap(on: user, at: indexPath.row)
+    didTapOnElement(at: indexPath.row)
   }
 }
 
@@ -70,7 +73,7 @@ extension UsersViewController: UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
     let user = users[indexPath.row]
-    cell.configure(url: user.thumnailURL, name: user.name, imageCornerRadius: calculateImageHeight() / 2)
+    cell.configure(url: user.thumbnailURL, name: user.name, imageCornerRadius: calculateImageHeight() / 2)
     return cell
   }
 }
