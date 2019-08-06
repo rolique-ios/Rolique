@@ -88,6 +88,13 @@ public final class ShortcutManager {
           
         }
       }
+    case .dopracNow:
+      if let userId = UserDefaultsManager.shared.userId {
+        let action = ActionDoprac(sender: userId, value: "now")
+        am.sendAction(action) { result in
+          
+        }
+      }
     default:
       break
     }
