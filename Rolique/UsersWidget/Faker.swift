@@ -11,24 +11,25 @@ import Foundation
 final class Faker {
   struct User: Userable {
     let name: String
-    let thumnailURL: URL?
+    let thumbnailURL: URL?
   }
   
   static let shared = Faker()
   private init() {}
   
-  func generateUsers() -> [Userable] {
-    return [User(name: "Bohdan", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Max", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Vladimir", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Franchesko", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Yurii", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Yakiv", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Andrew", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "John", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Misha", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Artur", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
-            User(name: "Vlad", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50"))
-    ]
+  func generateUsers() -> [AnyUserable] {
+    return []
+//      [User(name: "Bohdan", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Max", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Vladimir", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Franchesko", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Yurii", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Yakiv", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Andrew", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "John", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Misha", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Artur", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50")),
+//            User(name: "Vlad", thumnailURL: URL(string: "https://picsum.photos/id/1035/50/50"))
+//    ]
   }
 }

@@ -119,3 +119,15 @@ public final class SlackProfile: Codable {
     self.title = title
   }
 }
+
+extension User: Equatable {
+  static public func ==(lhs: User, rhs: User) -> Bool {
+    return lhs.id == rhs.id
+  }
+}
+
+extension User: Hashable {
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(self.id)
+  }
+}

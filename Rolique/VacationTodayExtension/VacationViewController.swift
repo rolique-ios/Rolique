@@ -18,7 +18,7 @@ extension User: Userable {
     return self.slackProfile.realName
   }
   
-  public var thumnailURL: URL? {
+  public var thumbnailURL: URL? {
     return URL(string: (self.slackProfile.image48 ?? self.slackProfile.image32 ?? ""))
   }
 }
@@ -26,11 +26,11 @@ extension User: Userable {
 class VacationViewController: UsersViewController {
   private let userManager: UserManager = UserManagerImpl()
   
-  override func loadData(usersCompletion: @escaping (([Userable]) -> Void)) {
-    userManager.getTodayUsersForRecordType(.vacation) { result in
-      if let users = result.value {
-        usersCompletion(users)
-      }
+  override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
+    self.userManager.getTodayUsersForRecordType(.vacation) { result in
+      (result.value?
+        .map { AnyUserable($0) })
+        .map(usersCompletion)
     }
   }
 }
