@@ -109,7 +109,7 @@
 		B5FFFC5222F82FC6001DDF2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4822F82FC6001DDF2C /* User.swift */; };
 		B5FFFC5322F82FC6001DDF2C /* ActionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */; };
 		B5FFFC5422F82FC6001DDF2C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4B22F82FC6001DDF2C /* Action.swift */; };
-		B5FFFC5522F82FC6001DDF2C /* ActionLate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */; };
+		B5FFFC5522F82FC6001DDF2C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4C22F82FC6001DDF2C /* Actions.swift */; };
 		B5FFFC5622F82FC6001DDF2C /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC4E22F82FC6001DDF2C /* DataProvider.swift */; };
 		B5FFFC5E22F83988001DDF2C /* RoliqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */; };
 		B5FFFC6622F83CDC001DDF2C /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC6522F83CDC001DDF2C /* Users.swift */; };
@@ -325,7 +325,7 @@
 		B5FFFC4822F82FC6001DDF2C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionResult.swift; sourceTree = "<group>"; };
 		B5FFFC4B22F82FC6001DDF2C /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionLate.swift; sourceTree = "<group>"; };
+		B5FFFC4C22F82FC6001DDF2C /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		B5FFFC4E22F82FC6001DDF2C /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoliqueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoliqueTests.swift; sourceTree = "<group>"; };
@@ -764,7 +764,7 @@
 			children = (
 				B5FFFC4A22F82FC6001DDF2C /* ActionResult.swift */,
 				B5FFFC4B22F82FC6001DDF2C /* Action.swift */,
-				B5FFFC4C22F82FC6001DDF2C /* ActionLate.swift */,
+				B5FFFC4C22F82FC6001DDF2C /* Actions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -1054,6 +1054,11 @@
 				TargetAttributes = {
 					256A4D7F22F8142A00A31427 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					256A4D9922F814FE00A31427 = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -1365,7 +1370,7 @@
 				B5FFFC4F22F82FC6001DDF2C /* LoginManager.swift in Sources */,
 				B5FFFC5022F82FC6001DDF2C /* ActionManager.swift in Sources */,
 				B5FFFC6A22F86AC1001DDF2C /* UserManager.swift in Sources */,
-				B5FFFC5522F82FC6001DDF2C /* ActionLate.swift in Sources */,
+				B5FFFC5522F82FC6001DDF2C /* Actions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

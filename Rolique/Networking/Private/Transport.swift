@@ -16,27 +16,52 @@ protocol TransportProtocol {
 
 extension Transport {
   static func request(_ route: Route, onSuccess: Net.JsonResult?, onError: Net.ErrorResult?) {
-    do {
-      print("\nrequest -> \(try route.asRequest().url?.absoluteString ?? "")\n")
-      URLSession.shared.dataTask(with: try route.asRequest(), completionHandler: { (data, response, error) in
-        guard error == nil else { onError?(error!); return }
-        guard let httpResponse = response as? HTTPURLResponse else {
-          onError?(NSError(domain: "rolique", code: 700, userInfo: [NSLocalizedFailureReasonErrorKey: "no data"]))
-          return }
-        let code = httpResponse.statusCode
-        guard let data = data else { onError?(NSError(domain: "rolique", code: code, userInfo: [NSLocalizedFailureReasonErrorKey: "no data"])) ; return }
-        guard let jsonString = String(data: data, encoding: .utf8) else {
-          do {
-            let json = try JSONDecoder().decode(Json.self, from: data)
-            onSuccess?(json); return
-          } catch let error {
-            onError?(error); return
+    var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+      backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "request on route \((try? route.asRequest().url?.absoluteString) ?? "")", expirationHandler: {
+        UIApplication.shared.endBackgroundTask(backgroundTaskID)
+        backgroundTaskID = .invalid
+        onError?(Err.general(msg: "finish background task"))
+      })
+      
+      do {
+        print("\nrequest -> \(try route.asRequest().url?.absoluteString ?? "")\n")
+        URLSession.shared.dataTask(with: try route.asRequest(), completionHandler: { (data, response, error) in
+          guard error == nil else {
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            backgroundTaskID = .invalid
+            onError?(error!); return }
+          guard let httpResponse = response as? HTTPURLResponse else {
+            onError?(Err.general(msg: "no data"))
+            return }
+          let code = httpResponse.statusCode
+          guard let data = data else {
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            backgroundTaskID = .invalid
+            onError?(Err.general(msg: "no data")) ; return }
+          guard let jsonString = String(data: data, encoding: .utf8) else {
+            do {
+              let json = try JSONDecoder().decode(Json.self, from: data)
+              UIApplication.shared.endBackgroundTask(backgroundTaskID)
+              backgroundTaskID = .invalid
+              onSuccess?(json); return
+            } catch let error {
+              UIApplication.shared.endBackgroundTask(backgroundTaskID)
+              backgroundTaskID = .invalid
+              onError?(error); return
+            }
           }
-        }
-        onSuccess?(Json(stringValue: jsonString))
-      }).resume()
-    } catch {
-      onError?(error)
+          UIApplication.shared.endBackgroundTask(backgroundTaskID)
+          backgroundTaskID = .invalid
+          print("\nresponse -> \(code) \(jsonString)")
+          onSuccess?(Json(stringValue: jsonString))
+        }).resume()
+      } catch {
+        UIApplication.shared.endBackgroundTask(backgroundTaskID)
+        backgroundTaskID = .invalid
+        onError?(error)
+      }
     }
+    
   }
 }

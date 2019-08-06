@@ -28,6 +28,7 @@ public final class ActionMangerImpl: ActionManger {
       }
     }, onError: { error in
       DispatchQueue.main.async {
+        print(error)
         result?(.success(ActionResult(error: error.localizedDescription)))
       }
     })
