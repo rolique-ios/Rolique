@@ -63,13 +63,14 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
+		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
+		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
 		25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6193822F873AC00A85C5A /* ShortcutManager.swift */; };
 		25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
-		25A6194322F8780B00A85C5A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* TodayViewController.swift */; };
 		25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6194422F8780B00A85C5A /* MainInterface.storyboard */; };
 		25A6194A22F8780B00A85C5A /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25A6195422F878A500A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
-		25A6195722F878A500A85C5A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* TodayViewController.swift */; };
+		25A6195722F878A500A85C5A /* VacationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* VacationViewController.swift */; };
 		25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6195822F878A500A85C5A /* MainInterface.storyboard */; };
 		25A6195E22F878A500A85C5A /* VacationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A648E722F86C68001D1EBD /* BaseTabBarController.swift */; };
@@ -90,6 +91,10 @@
 		25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46B822F82853005C52AF /* UsersViewController.swift */; };
 		25AB46BF22F82859005C52AF /* Faker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BD22F82859005C52AF /* Faker.swift */; };
 		25AB46C022F82859005C52AF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BE22F82859005C52AF /* ImageCache.swift */; };
+		25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* RemoteViewController.swift */; };
+		25C6ED6D22F96F5500647AE2 /* Env.h in Headers */ = {isa = PBXBuildFile; fileRef = 25C6ED6B22F96F5500647AE2 /* Env.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25C6ED7022F96F5500647AE2 /* Env.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; };
+		25C6ED7122F96F5500647AE2 /* Env.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8783DF8749C8E7828F0C4124 /* libPods-UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 505892CA1A300F6330EFDEAD /* libPods-UI.a */; };
 		B5FFFC3822F82F57001DDF2C /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2D22F82F57001DDF2C /* Env.swift */; };
 		B5FFFC3922F82F57001DDF2C /* Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2E22F82F57001DDF2C /* Json.swift */; };
@@ -165,6 +170,13 @@
 			remoteGlobalIDString = 25AB46A722F82844005C52AF;
 			remoteInfo = UsersWidget;
 		};
+		25C6ED6E22F96F5500647AE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25C6ED6822F96F5500647AE2;
+			remoteInfo = Env;
+		};
 		B5FFFC6022F83988001DDF2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
@@ -181,6 +193,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				25C6ED7122F96F5500647AE2 /* Env.framework in Embed Frameworks */,
 				25AB469E22F825B1005C52AF /* Networking.framework in Embed Frameworks */,
 				256A4DB822F8165800A31427 /* Utils.framework in Embed Frameworks */,
 				25AB468D22F825A4005C52AF /* Model.framework in Embed Frameworks */,
@@ -262,14 +275,16 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
+		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		25A6193822F873AC00A85C5A /* ShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RemoteTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A6193F22F8780B00A85C5A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		25A6194222F8780B00A85C5A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		25A6194222F8780B00A85C5A /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
 		25A6194522F8780B00A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		25A6194722F8780B00A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25A6195322F878A500A85C5A /* VacationTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VacationTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		25A6195622F878A500A85C5A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		25A6195622F878A500A85C5A /* VacationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationViewController.swift; sourceTree = "<group>"; };
 		25A6195922F878A500A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		25A6195B22F878A500A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25A648E722F86C68001D1EBD /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
@@ -290,6 +305,9 @@
 		25AB46B822F82853005C52AF /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		25AB46BD22F82859005C52AF /* Faker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faker.swift; sourceTree = "<group>"; };
 		25AB46BE22F82859005C52AF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		25C6ED6922F96F5500647AE2 /* Env.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Env.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25C6ED6B22F96F5500647AE2 /* Env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Env.h; sourceTree = "<group>"; };
+		25C6ED6C22F96F5500647AE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
 		B5FFFC2522F824D8001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -302,8 +320,6 @@
 		B5FFFC3422F82F57001DDF2C /* SlackLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackLogin.swift; sourceTree = "<group>"; };
 		B5FFFC3522F82F57001DDF2C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		B5FFFC3722F82F57001DDF2C /* Transport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
-		B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
-		B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		B5FFFC4422F82FC6001DDF2C /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		B5FFFC4522F82FC6001DDF2C /* ActionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
 		B5FFFC4822F82FC6001DDF2C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -332,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AB468C22F825A4005C52AF /* Model.framework in Frameworks */,
+				25C6ED7022F96F5500647AE2 /* Env.framework in Frameworks */,
 				25AB46AF22F82844005C52AF /* UsersWidget.framework in Frameworks */,
 				256A4DB722F8165800A31427 /* Utils.framework in Frameworks */,
 				256A4DA122F814FE00A31427 /* UI.framework in Frameworks */,
@@ -395,6 +412,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25C6ED6622F96F5500647AE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5FFFC5822F83988001DDF2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +442,7 @@
 				B5FFFC5C22F83988001DDF2C /* RoliqueTests */,
 				25A6194122F8780B00A85C5A /* RemoteTodayExtension */,
 				25A6195522F878A500A85C5A /* VacationTodayExtension */,
+				25C6ED6A22F96F5500647AE2 /* Env */,
 				256A4D8122F8142A00A31427 /* Products */,
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
@@ -437,6 +462,7 @@
 				B5FFFC5B22F83988001DDF2C /* RoliqueTests.xctest */,
 				25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */,
 				25A6195322F878A500A85C5A /* VacationTodayExtension.appex */,
+				25C6ED6922F96F5500647AE2 /* Env.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -561,7 +587,7 @@
 		25A6194122F8780B00A85C5A /* RemoteTodayExtension */ = {
 			isa = PBXGroup;
 			children = (
-				25A6194222F8780B00A85C5A /* TodayViewController.swift */,
+				25A6194222F8780B00A85C5A /* RemoteViewController.swift */,
 				25A6194422F8780B00A85C5A /* MainInterface.storyboard */,
 				25A6194722F8780B00A85C5A /* Info.plist */,
 			);
@@ -571,7 +597,7 @@
 		25A6195522F878A500A85C5A /* VacationTodayExtension */ = {
 			isa = PBXGroup;
 			children = (
-				25A6195622F878A500A85C5A /* TodayViewController.swift */,
+				25A6195622F878A500A85C5A /* VacationViewController.swift */,
 				25A6195822F878A500A85C5A /* MainInterface.storyboard */,
 				25A6195B22F878A500A85C5A /* Info.plist */,
 			);
@@ -642,6 +668,15 @@
 			path = UserCell;
 			sourceTree = "<group>";
 		};
+		25C6ED6A22F96F5500647AE2 /* Env */ = {
+			isa = PBXGroup;
+			children = (
+				25C6ED6B22F96F5500647AE2 /* Env.h */,
+				25C6ED6C22F96F5500647AE2 /* Info.plist */,
+			);
+			path = Env;
+			sourceTree = "<group>";
+		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -698,8 +733,8 @@
 		B5FFFC4022F82F95001DDF2C /* BuildConfig */ = {
 			isa = PBXGroup;
 			children = (
-				B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */,
-				B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */,
+				2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */,
+				2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */,
 			);
 			path = BuildConfig;
 			sourceTree = "<group>";
@@ -805,6 +840,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25C6ED6422F96F5500647AE2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25C6ED6D22F96F5500647AE2 /* Env.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -829,6 +872,7 @@
 				25AB46AE22F82844005C52AF /* PBXTargetDependency */,
 				25A6194922F8780B00A85C5A /* PBXTargetDependency */,
 				25A6195D22F878A500A85C5A /* PBXTargetDependency */,
+				25C6ED6F22F96F5500647AE2 /* PBXTargetDependency */,
 			);
 			name = Rolique;
 			productName = Rolique;
@@ -961,6 +1005,24 @@
 			productReference = 25AB46A822F82844005C52AF /* UsersWidget.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		25C6ED6822F96F5500647AE2 /* Env */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25C6ED7222F96F5500647AE2 /* Build configuration list for PBXNativeTarget "Env" */;
+			buildPhases = (
+				25C6ED6422F96F5500647AE2 /* Headers */,
+				25C6ED6522F96F5500647AE2 /* Sources */,
+				25C6ED6622F96F5500647AE2 /* Frameworks */,
+				25C6ED6722F96F5500647AE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Env;
+			productName = Env;
+			productReference = 25C6ED6922F96F5500647AE2 /* Env.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		B5FFFC5A22F83988001DDF2C /* RoliqueTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5FFFC6422F83988001DDF2C /* Build configuration list for PBXNativeTarget "RoliqueTests" */;
@@ -985,6 +1047,7 @@
 		256A4D7822F8142A00A31427 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Rolique;
@@ -1017,6 +1080,9 @@
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
 					};
+					25C6ED6822F96F5500647AE2 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					B5FFFC5A22F83988001DDF2C = {
 						CreatedOnToolsVersion = 10.2.1;
 						TestTargetID = 256A4D7F22F8142A00A31427;
@@ -1045,6 +1111,7 @@
 				B5FFFC5A22F83988001DDF2C /* RoliqueTests */,
 				25A6193D22F8780B00A85C5A /* RemoteTodayExtension */,
 				25A6195222F878A500A85C5A /* VacationTodayExtension */,
+				25C6ED6822F96F5500647AE2 /* Env */,
 			);
 		};
 /* End PBXProject section */
@@ -1054,8 +1121,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */,
 				256A4D8E22F8142B00A31427 /* LaunchScreen.storyboard in Resources */,
 				256A4D8B22F8142B00A31427 /* Assets.xcassets in Resources */,
+				2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1177,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AB46BA22F82853005C52AF /* UserCollectionViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25C6ED6722F96F5500647AE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,7 +1341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25A6194322F8780B00A85C5A /* TodayViewController.swift in Sources */,
+				25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1273,7 +1349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25A6195722F878A500A85C5A /* TodayViewController.swift in Sources */,
+				25A6195722F878A500A85C5A /* VacationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,6 +1395,13 @@
 				25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */,
 				25AB46BB22F82853005C52AF /* UserCollectionViewCell.swift in Sources */,
 				25AB46BF22F82859005C52AF /* Faker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25C6ED6522F96F5500647AE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1451,11 @@
 			target = 25AB46A722F82844005C52AF /* UsersWidget */;
 			targetProxy = 25AB46AD22F82844005C52AF /* PBXContainerItemProxy */;
 		};
+		25C6ED6F22F96F5500647AE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25C6ED6822F96F5500647AE2 /* Env */;
+			targetProxy = 25C6ED6E22F96F5500647AE2 /* PBXContainerItemProxy */;
+		};
 		B5FFFC6122F83988001DDF2C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 256A4D7F22F8142A00A31427 /* Rolique */;
@@ -1405,7 +1493,7 @@
 /* Begin XCBuildConfiguration section */
 		256A4D9022F8142B00A31427 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5FFFC4122F82F95001DDF2C /* debug.rolque.xcconfig */;
+			baseConfigurationReference = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1467,7 +1555,7 @@
 		};
 		256A4D9122F8142B00A31427 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5FFFC4222F82F95001DDF2C /* release.rolique.xcconfig */;
+			baseConfigurationReference = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1902,7 +1990,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1933,13 +2021,71 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UsersWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		25C6ED7322F96F5500647AE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Env/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Env;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		25C6ED7422F96F5500647AE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Env/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Env;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2069,6 +2215,15 @@
 			buildConfigurations = (
 				25AB46B222F82844005C52AF /* Debug */,
 				25AB46B322F82844005C52AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25C6ED7222F96F5500647AE2 /* Build configuration list for PBXNativeTarget "Env" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25C6ED7322F96F5500647AE2 /* Debug */,
+				25C6ED7422F96F5500647AE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

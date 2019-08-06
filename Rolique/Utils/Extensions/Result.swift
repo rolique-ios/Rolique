@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Result {
+public extension Result {
     var value: Success? {
         if case .success(let value) = self {
             return value

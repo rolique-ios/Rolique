@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Who's on remote</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,17 +13,23 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>XPC!</string>
+	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
-	</dict>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+  <key>Secret</key>
+  <dict>
+    <key>ApiToken</key>
+    <string>$(API_TOKEN)</string>
+    <key>ApiUrl</key>
+    <string>$(API_URL)</string>
+    <key>SlackClientId</key>
+    <string>$(SLACK_CLIENT_ID)</string>
+    <key>SlackClientSecret</key>
+    <string>$(SLACK_CLIENT_SECRET)</string>
+    <key>SlackRedirectUri</key>
+    <string>$(SLACK_REDIRECT_URI)</string>
+  </dict>
 </dict>
 </plist>
