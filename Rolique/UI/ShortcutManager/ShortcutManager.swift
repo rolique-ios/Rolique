@@ -74,6 +74,20 @@ public final class ShortcutManager {
           
         }
       }
+    case .remoteToday:
+      if let userId = UserDefaultsManager.shared.userId {
+        let action = ActionRemote(sender: userId, value: "today")
+        am.sendAction(action) { result in
+          
+        }
+      }
+    case .remoteTomorrow:
+      if let userId = UserDefaultsManager.shared.userId {
+        let action = ActionRemote(sender: userId, value: "tomorrow")
+        am.sendAction(action) { result in
+          
+        }
+      }
     default:
       break
     }

@@ -19,8 +19,8 @@ public final class ActionLate: Action {
 }
 
 public final class ActionRemote: Action {
-  public init(sender: String, from: String, value: String) {
-    super.init(type: "remote", sender: sender, test: "true", props: ["from": from, "value": value])
+  public init(sender: String, value: String) {
+    super.init(type: "remote", sender: sender, test: "true", props: ["value": value])
   }
   
   required init(from decoder: Decoder) throws {
