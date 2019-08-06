@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = Router.getStartViewController()
     window?.makeKeyAndVisible()
     
-    if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
-      let _ = ShortcutManager.shared.handle(shortcutItem: shortcutItem)
-    }
-    
+//    if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+//      let _ = ShortcutManager.shared.handle(shortcutItem: shortcutItem)
+//    }
+//    
     
     return true
   }

@@ -27,7 +27,7 @@ final class RemoteViewController: UsersViewController {
   private let userManager: UserManager = UserManagerImpl()
   
   override func loadData(usersCompletion: @escaping (([Userable]) -> Void)) {
-    userManager.getTodayUsersForRecordType(.remote) { result in
+    self.userManager.getTodayUsersForRecordType(.remote) { result in
       if let users = result.value {
         usersCompletion(users)
       }

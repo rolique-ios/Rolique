@@ -17,16 +17,21 @@ protocol TransportProtocol {
 extension Transport {
   static func request(_ route: Route, onSuccess: Net.JsonResult?, onError: Net.ErrorResult?) {
     var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
-    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-      backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "request on route \((try? route.asRequest().url?.absoluteString) ?? "")", expirationHandler: {
-        UIApplication.shared.endBackgroundTask(backgroundTaskID)
-        backgroundTaskID = .invalid
-        onError?(Err.general(msg: "finish background task"))
-      })
+    DispatchQueue.main.async {
+      guard let requst = try? route.asRequest() else {
+        onError?(Err.general(msg: "invalid request"))
+        return
+      }
       
-      do {
-        print("\nrequest -> \(try route.asRequest().url?.absoluteString ?? "")\n")
-        URLSession.shared.dataTask(with: try route.asRequest(), completionHandler: { (data, response, error) in
+      DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+        backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "request on route \(requst.url?.absoluteString ?? "")", expirationHandler: {
+          UIApplication.shared.endBackgroundTask(backgroundTaskID)
+          backgroundTaskID = .invalid
+          onError?(Err.general(msg: "finish background task"))
+        })
+        
+        print("\nrequest -> \(requst.url?.absoluteString ?? "")\n")
+        URLSession.shared.dataTask(with: requst, completionHandler: { (data, response, error) in
           guard error == nil else {
             UIApplication.shared.endBackgroundTask(backgroundTaskID)
             backgroundTaskID = .invalid
@@ -56,12 +61,7 @@ extension Transport {
           print("\nresponse -> \(code) \(jsonString)")
           onSuccess?(Json(stringValue: jsonString))
         }).resume()
-      } catch {
-        UIApplication.shared.endBackgroundTask(backgroundTaskID)
-        backgroundTaskID = .invalid
-        onError?(error)
       }
     }
-    
   }
 }

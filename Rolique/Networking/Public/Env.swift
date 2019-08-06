@@ -18,8 +18,14 @@ public struct Env {
   public static let slackToken = Env.getValueForKey("SlackToken") ?? "no_slack_token"
   
   static func getValueForKey(_ key: String) -> String? {
+    let name = __dispatch_queue_get_label(nil)
+    let queue = String(cString: name, encoding: .utf8)
+
+    print("Bundle-> queue \(queue)")
+    print("Bundle-> bundle \(Bundle(identifier: "io.rolique.Env"))")
     guard let secret = Bundle(identifier: "io.rolique.Env")?.infoDictionary?["Secret"] as? [String: Any] else { return nil }
     guard let value = secret[key] as? String else { return nil }
+    print("Bundle-> value \(value)")
     return value
   }
 }
