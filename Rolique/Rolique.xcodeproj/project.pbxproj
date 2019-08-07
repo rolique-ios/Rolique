@@ -65,6 +65,10 @@
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
 		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
 		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
+		259BF6D422FAB857001B2DB0 /* UIResultNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */; };
+		259BF6D822FAB8BD001B2DB0 /* NotificationReminderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 259BF6D622FAB8BD001B2DB0 /* NotificationReminderView.xib */; };
+		259BF6D922FAB8BD001B2DB0 /* NotificationReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF6D722FAB8BD001B2DB0 /* NotificationReminderView.swift */; };
+		259BF6E022FAC475001B2DB0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF6DF22FAC475001B2DB0 /* UIColor.swift */; };
 		25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6193822F873AC00A85C5A /* ShortcutManager.swift */; };
 		25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
 		25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6194422F8780B00A85C5A /* MainInterface.storyboard */; };
@@ -285,6 +289,10 @@
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
 		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
+		259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResultNotifier.swift; sourceTree = "<group>"; };
+		259BF6D622FAB8BD001B2DB0 /* NotificationReminderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationReminderView.xib; sourceTree = "<group>"; };
+		259BF6D722FAB8BD001B2DB0 /* NotificationReminderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationReminderView.swift; sourceTree = "<group>"; };
+		259BF6DF22FAC475001B2DB0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		25A6193822F873AC00A85C5A /* ShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RemoteTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A6193F22F8780B00A85C5A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -497,12 +505,14 @@
 		256A4D9B22F814FE00A31427 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				259BF6DB22FAB8E8001B2DB0 /* Views */,
+				259BF6DA22FAB8CD001B2DB0 /* PushNotificationManager */,
 				25A6193722F873AC00A85C5A /* ShortcutManager */,
 				25A648E622F86C4F001D1EBD /* Profile */,
-				256A4D9C22F814FE00A31427 /* UI.h */,
-				256A4D9D22F814FE00A31427 /* Info.plist */,
 				256A4E1422F81C4F00A31427 /* Base */,
 				256A4E1522F81C5800A31427 /* Login */,
+				256A4D9C22F814FE00A31427 /* UI.h */,
+				256A4D9D22F814FE00A31427 /* Info.plist */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -558,6 +568,7 @@
 				256A4DE322F816ED00A31427 /* TimeInterval.swift */,
 				256A4DE422F816ED00A31427 /* UINavigationController.swift */,
 				256A4DE522F816ED00A31427 /* UIEdgeInsets.swift */,
+				259BF6DF22FAC475001B2DB0 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -590,6 +601,55 @@
 				256A4E1822F81C7700A31427 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		259BF6D522FAB8BD001B2DB0 /* NotificationReminderView */ = {
+			isa = PBXGroup;
+			children = (
+				259BF6D622FAB8BD001B2DB0 /* NotificationReminderView.xib */,
+				259BF6D722FAB8BD001B2DB0 /* NotificationReminderView.swift */,
+			);
+			path = NotificationReminderView;
+			sourceTree = "<group>";
+		};
+		259BF6DA22FAB8CD001B2DB0 /* PushNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */,
+			);
+			path = PushNotificationManager;
+			sourceTree = "<group>";
+		};
+		259BF6DB22FAB8E8001B2DB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				259BF6DE22FAB91B001B2DB0 /* Custom */,
+				259BF6DD22FAB911001B2DB0 /* Collection */,
+				259BF6DC22FAB90B001B2DB0 /* Table */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		259BF6DC22FAB90B001B2DB0 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		259BF6DD22FAB911001B2DB0 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		259BF6DE22FAB91B001B2DB0 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				259BF6D522FAB8BD001B2DB0 /* NotificationReminderView */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		25A6193722F873AC00A85C5A /* ShortcutManager */ = {
@@ -1154,6 +1214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259BF6D822FAB8BD001B2DB0 /* NotificationReminderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,8 +1361,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259BF6D922FAB8BD001B2DB0 /* NotificationReminderView.swift in Sources */,
 				256A4E1922F81C7700A31427 /* LoginViewModel.swift in Sources */,
 				25A6193922F873AD00A85C5A /* ShortcutManager.swift in Sources */,
+				259BF6D422FAB857001B2DB0 /* UIResultNotifier.swift in Sources */,
 				256A4E1722F81C6C00A31427 /* LoginViewController.swift in Sources */,
 				25A648E822F86C68001D1EBD /* BaseTabBarController.swift in Sources */,
 				256A4E1B22F81DD300A31427 /* Router.swift in Sources */,
@@ -1345,6 +1408,7 @@
 				256A4DF922F816ED00A31427 /* DispatchQueue.swift in Sources */,
 				256A4DF822F816ED00A31427 /* CLLocationCoordinate2D.swift in Sources */,
 				256A4DFF22F816ED00A31427 /* String.swift in Sources */,
+				259BF6E022FAC475001B2DB0 /* UIColor.swift in Sources */,
 				256A4DFE22F816ED00A31427 /* Dictionary.swift in Sources */,
 				256A4E1D22F8213700A31427 /* Colors.swift in Sources */,
 				256A4DED22F816ED00A31427 /* Array.swift in Sources */,

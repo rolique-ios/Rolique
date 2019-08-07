@@ -28,7 +28,10 @@ public final class Router {
   }
   
   public static func getStartViewController() -> UINavigationController {
-    let root = Router.getLoginViewController()
+    let root = UserDefaultsManager.shared.userId == nil
+      ? Router.getLoginViewController()
+      : self.getTabBarController()
+    
     let navigationController = UINavigationController(rootViewController: root)
   
     return navigationController

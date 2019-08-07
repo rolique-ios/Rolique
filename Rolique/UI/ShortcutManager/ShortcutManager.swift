@@ -62,6 +62,11 @@ public final class ShortcutManager {
     return Action.allCases.map { $0.shortcutItem }
   }
   
+  private func handleResult(_ result: Result<ActionResult, Error>) {
+    let text = result.error?.localizedDescription ?? "Successfully sent"
+    UIResultNotifier.shared.showAndHideIfNeeded(text: text)
+  }
+  
   public func handle(shortcutItem: UIApplicationShortcutItem) -> Bool {
     let action = Action(shortcutItem: shortcutItem)
     let am: ActionManger = ActionMangerImpl()
@@ -70,29 +75,29 @@ public final class ShortcutManager {
     case .late1hour:
       if let userId = UserDefaultsManager.shared.userId {
         let action = ActionLate(sender: userId, from: "now", value: "1_h")
-        am.sendAction(action) { result in
-          
+        am.sendAction(action) { [weak self] result in
+          self?.handleResult(result)
         }
       }
     case .remoteToday:
       if let userId = UserDefaultsManager.shared.userId {
         let action = ActionRemote(sender: userId, value: "today")
-        am.sendAction(action) { result in
-          
+        am.sendAction(action) { [weak self] result in
+          self?.handleResult(result)
         }
       }
     case .remoteTomorrow:
       if let userId = UserDefaultsManager.shared.userId {
         let action = ActionRemote(sender: userId, value: "tomorrow")
-        am.sendAction(action) { result in
-          
+        am.sendAction(action) { [weak self] result in
+          self?.handleResult(result)
         }
       }
     case .dopracNow:
       if let userId = UserDefaultsManager.shared.userId {
         let action = ActionDoprac(sender: userId, value: "now")
-        am.sendAction(action) { result in
-          
+        am.sendAction(action) { [weak self] result in
+          self?.handleResult(result)
         }
       }
     default:

@@ -7,6 +7,11 @@
 //
 
 public struct Images {
+  public struct General {
+    public static var logo: UIImage {
+      return UIImage(named: "logo")!
+    }
+  }
   public struct TabBar {
     public static var profile: UIImage {
       return UIImage(named: "profile")!
