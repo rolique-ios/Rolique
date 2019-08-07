@@ -21,6 +21,14 @@ public class Action: Codable {
   }
   
   func makeCommand() -> Command {
-    return Command(trigger: type, sender: sender, params: props ?? [:], isTest: true)
+    var isTest = true
+    // not working
+//    #if DEBUG
+//    isTest = true
+//    #else
+//    isTest = false
+//    #endif
+    
+    return Command(trigger: type, sender: sender, params: props ?? [:], isTest: isTest)
   }
 }

@@ -63,6 +63,26 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
+		2574E1FA22FAF41600846CCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4D8322F8142A00A31427 /* AppDelegate.swift */; };
+		2574E1FC22FAF41600846CCA /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; };
+		2574E1FD22FAF41600846CCA /* Env.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; };
+		2574E1FE22FAF41600846CCA /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
+		2574E1FF22FAF41600846CCA /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; };
+		2574E20022FAF41600846CCA /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4D9A22F814FE00A31427 /* UI.framework */; };
+		2574E20122FAF41600846CCA /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
+		2574E20222FAF41600846CCA /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
+		2574E20422FAF41600846CCA /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
+		2574E20522FAF41600846CCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */; };
+		2574E20622FAF41600846CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8A22F8142B00A31427 /* Assets.xcassets */; };
+		2574E20722FAF41600846CCA /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
+		2574E20922FAF41600846CCA /* Env.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E20A22FAF41600846CCA /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E20B22FAF41600846CCA /* Utils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E20C22FAF41600846CCA /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E20D22FAF41600846CCA /* UsersWidget.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E20E22FAF41600846CCA /* UI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4D9A22F814FE00A31427 /* UI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2574E21022FAF41600846CCA /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2574E21122FAF41600846CCA /* VacationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
 		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
 		259BF6D422FAB857001B2DB0 /* UIResultNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */; };
@@ -108,6 +128,7 @@
 		25C6ED7F22F9879F00647AE2 /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; };
 		25C6ED8022F9879F00647AE2 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
 		25C6ED8222F9879F00647AE2 /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; };
+		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
 		8783DF8749C8E7828F0C4124 /* libPods-UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 505892CA1A300F6330EFDEAD /* libPods-UI.a */; };
 		B5FFFC3922F82F57001DDF2C /* Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2E22F82F57001DDF2C /* Json.swift */; };
 		B5FFFC3A22F82F57001DDF2C /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2F22F82F57001DDF2C /* Net.swift */; };
@@ -146,6 +167,62 @@
 			proxyType = 1;
 			remoteGlobalIDString = 256A4DAF22F8165800A31427;
 			remoteInfo = Utils;
+		};
+		2574E1E922FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 256A4D9922F814FE00A31427;
+			remoteInfo = UI;
+		};
+		2574E1EB22FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 256A4DAF22F8165800A31427;
+			remoteInfo = Utils;
+		};
+		2574E1ED22FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB468422F825A4005C52AF;
+			remoteInfo = Model;
+		};
+		2574E1EF22FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB469522F825B1005C52AF;
+			remoteInfo = Networking;
+		};
+		2574E1F122FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25AB46A722F82844005C52AF;
+			remoteInfo = UsersWidget;
+		};
+		2574E1F322FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25A6193D22F8780B00A85C5A;
+			remoteInfo = RemoteTodayExtension;
+		};
+		2574E1F522FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25A6195222F878A500A85C5A;
+			remoteInfo = VacationTodayExtension;
+		};
+		2574E1F722FAF41600846CCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25C6ED6822F96F5500647AE2;
+			remoteInfo = Env;
 		};
 		25A6194822F8780B00A85C5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -213,6 +290,34 @@
 				256A4DA222F814FE00A31427 /* UI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2574E20822FAF41600846CCA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2574E20922FAF41600846CCA /* Env.framework in Embed Frameworks */,
+				2574E20A22FAF41600846CCA /* Networking.framework in Embed Frameworks */,
+				2574E20B22FAF41600846CCA /* Utils.framework in Embed Frameworks */,
+				2574E20C22FAF41600846CCA /* Model.framework in Embed Frameworks */,
+				2574E20D22FAF41600846CCA /* UsersWidget.framework in Embed Frameworks */,
+				2574E20E22FAF41600846CCA /* UI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2574E20F22FAF41600846CCA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2574E21022FAF41600846CCA /* RemoteTodayExtension.appex in Embed App Extensions */,
+				2574E21122FAF41600846CCA /* VacationTodayExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		25A6194E22F8780B00A85C5A /* Embed App Extensions */ = {
@@ -287,6 +392,8 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		2574E21522FAF41600846CCA /* RoliqueDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoliqueDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2574E21622FAF41600846CCA /* Rolique copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Rolique copy-Info.plist"; path = "/Users/bbb/Documents/dev/Rolique/Rolique/Rolique copy-Info.plist"; sourceTree = "<absolute>"; };
 		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
 		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResultNotifier.swift; sourceTree = "<group>"; };
@@ -325,6 +432,7 @@
 		25C6ED6B22F96F5500647AE2 /* Env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Env.h; sourceTree = "<group>"; };
 		25C6ED6C22F96F5500647AE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25C6ED7722F984B700647AE2 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
 		B5FFFC2522F824D8001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -386,6 +494,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				E17646399375271BE5FDBC1B /* libPods-Utils.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2574E1FB22FAF41600846CCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2574E1FC22FAF41600846CCA /* Model.framework in Frameworks */,
+				2574E1FD22FAF41600846CCA /* Env.framework in Frameworks */,
+				2574E1FE22FAF41600846CCA /* UsersWidget.framework in Frameworks */,
+				2574E1FF22FAF41600846CCA /* Utils.framework in Frameworks */,
+				2574E20022FAF41600846CCA /* UI.framework in Frameworks */,
+				2574E20122FAF41600846CCA /* Networking.framework in Frameworks */,
+				2574E20222FAF41600846CCA /* libPods-Rolique.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +593,7 @@
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
 				25AB46A222F826BE005C52AF /* Recovered References */,
+				2574E21622FAF41600846CCA /* Rolique copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -487,6 +610,7 @@
 				25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */,
 				25A6195322F878A500A85C5A /* VacationTodayExtension.appex */,
 				25C6ED6922F96F5500647AE2 /* Env.framework */,
+				2574E21522FAF41600846CCA /* RoliqueDebug.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -731,6 +855,7 @@
 				25AB46B822F82853005C52AF /* UsersViewController.swift */,
 				25AB46AA22F82844005C52AF /* UsersWidget.h */,
 				25AB46AB22F82844005C52AF /* Info.plist */,
+				25FCC61822FB08D00094E0DA /* UsersStorage.swift */,
 			);
 			path = UsersWidget;
 			sourceTree = "<group>";
@@ -993,6 +1118,34 @@
 			productReference = 256A4DB022F8165800A31427 /* Utils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		2574E1E722FAF41600846CCA /* RoliqueDebug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2574E21222FAF41600846CCA /* Build configuration list for PBXNativeTarget "RoliqueDebug" */;
+			buildPhases = (
+				2574E1F822FAF41600846CCA /* [CP] Check Pods Manifest.lock */,
+				2574E1F922FAF41600846CCA /* Sources */,
+				2574E1FB22FAF41600846CCA /* Frameworks */,
+				2574E20322FAF41600846CCA /* Resources */,
+				2574E20822FAF41600846CCA /* Embed Frameworks */,
+				2574E20F22FAF41600846CCA /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2574E1E822FAF41600846CCA /* PBXTargetDependency */,
+				2574E1EA22FAF41600846CCA /* PBXTargetDependency */,
+				2574E1EC22FAF41600846CCA /* PBXTargetDependency */,
+				2574E1EE22FAF41600846CCA /* PBXTargetDependency */,
+				2574E1F022FAF41600846CCA /* PBXTargetDependency */,
+				2574E1F222FAF41600846CCA /* PBXTargetDependency */,
+				2574E1F422FAF41600846CCA /* PBXTargetDependency */,
+				2574E1F622FAF41600846CCA /* PBXTargetDependency */,
+			);
+			name = RoliqueDebug;
+			productName = Rolique;
+			productReference = 2574E21522FAF41600846CCA /* RoliqueDebug.app */;
+			productType = "com.apple.product-type.application";
+		};
 		25A6193D22F8780B00A85C5A /* RemoteTodayExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25A6194B22F8780B00A85C5A /* Build configuration list for PBXNativeTarget "RemoteTodayExtension" */;
@@ -1185,6 +1338,7 @@
 			projectRoot = "";
 			targets = (
 				256A4D7F22F8142A00A31427 /* Rolique */,
+				2574E1E722FAF41600846CCA /* RoliqueDebug */,
 				256A4D9922F814FE00A31427 /* UI */,
 				256A4DAF22F8165800A31427 /* Utils */,
 				25AB468422F825A4005C52AF /* Model */,
@@ -1222,6 +1376,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2574E20322FAF41600846CCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2574E20422FAF41600846CCA /* debug.rolque.xcconfig in Resources */,
+				2574E20522FAF41600846CCA /* LaunchScreen.storyboard in Resources */,
+				2574E20622FAF41600846CCA /* Assets.xcassets in Resources */,
+				2574E20722FAF41600846CCA /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1296,6 +1461,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2574E1F822FAF41600846CCA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rolique-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1423,6 +1610,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2574E1F922FAF41600846CCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2574E1FA22FAF41600846CCA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		25A6193A22F8780B00A85C5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1480,6 +1675,7 @@
 				25AB46B922F82853005C52AF /* Userable.swift in Sources */,
 				25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */,
 				25AB46BB22F82853005C52AF /* UserCollectionViewCell.swift in Sources */,
+				25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */,
 				25AB46BF22F82859005C52AF /* Faker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1511,6 +1707,46 @@
 			isa = PBXTargetDependency;
 			target = 256A4DAF22F8165800A31427 /* Utils */;
 			targetProxy = 256A4DB522F8165800A31427 /* PBXContainerItemProxy */;
+		};
+		2574E1E822FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 256A4D9922F814FE00A31427 /* UI */;
+			targetProxy = 2574E1E922FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1EA22FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 256A4DAF22F8165800A31427 /* Utils */;
+			targetProxy = 2574E1EB22FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1EC22FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB468422F825A4005C52AF /* Model */;
+			targetProxy = 2574E1ED22FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1EE22FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB469522F825B1005C52AF /* Networking */;
+			targetProxy = 2574E1EF22FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1F022FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25AB46A722F82844005C52AF /* UsersWidget */;
+			targetProxy = 2574E1F122FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1F222FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25A6193D22F8780B00A85C5A /* RemoteTodayExtension */;
+			targetProxy = 2574E1F322FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1F422FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25A6195222F878A500A85C5A /* VacationTodayExtension */;
+			targetProxy = 2574E1F522FAF41600846CCA /* PBXContainerItemProxy */;
+		};
+		2574E1F622FAF41600846CCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25C6ED6822F96F5500647AE2 /* Env */;
+			targetProxy = 2574E1F722FAF41600846CCA /* PBXContainerItemProxy */;
 		};
 		25A6194922F8780B00A85C5A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1709,6 +1945,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1730,6 +1967,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1857,6 +2095,50 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2574E21322FAF41600846CCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = "Rolique copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2574E21422FAF41600846CCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = "Rolique copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2259,6 +2541,15 @@
 			buildConfigurations = (
 				256A4DBA22F8165800A31427 /* Debug */,
 				256A4DBB22F8165800A31427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2574E21222FAF41600846CCA /* Build configuration list for PBXNativeTarget "RoliqueDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2574E21322FAF41600846CCA /* Debug */,
+				2574E21422FAF41600846CCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

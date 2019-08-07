@@ -17,7 +17,10 @@ private struct Constants {
 
 open class UsersViewController: UIViewController, NCWidgetProviding {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-  private lazy var users = [AnyUserable]()
+  private var users: [AnyUserable] {
+    return UsersStorage.shared.users
+  }
+  private lazy var isFetched = false
   
   override open func viewDidLoad() {
     super.viewDidLoad()
@@ -28,16 +31,19 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   }
   
   public func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+    if isFetched { completionHandler(.noData); return; }
     loadData { [weak self] users in
       guard let self = self else { return }
       DispatchQueue.main.async {
         if users == self.users {
           completionHandler(.noData)
         } else {
-          self.users = users
+          UsersStorage.shared.users = users
           self.collectionView.reloadData()
           completionHandler(.newData)
         }
+        
+        self.isFetched = true
       }
     }
   }
@@ -53,6 +59,10 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   
   open func didTapOnElement(at index: Int) {
     
+  }
+  
+  deinit {
+    print("☠️\(String(describing: self))☠️")
   }
 }
 
