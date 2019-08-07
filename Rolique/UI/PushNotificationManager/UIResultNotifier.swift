@@ -10,7 +10,7 @@ import UIKit
 import Utils
 
 private struct Constants {
-  static var viewHeight: CGFloat { return 104 }
+  static var viewHeight: CGFloat { return 90 }
   static var offScreenOrigin: CGPoint {
     return CGPoint(x: 0, y: -20 - Constants.viewHeight)
   }

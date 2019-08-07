@@ -62,7 +62,8 @@ public final class NotificationReminderView: UIView {
     titleLabel.snp.makeConstraints { maker in
       maker.left.equalTo(imageView.snp.right).offset(Constants.defaultOffset)
       maker.right.equalTo(-Constants.defaultOffset)
-      maker.centerY.equalToSuperview()
+      maker.top.equalToSuperview()
+      maker.bottom.equalToSuperview()
     }
   }
   
@@ -83,6 +84,8 @@ public final class NotificationReminderView: UIView {
     
     titleLabel.textColor = UIColor(hexString: "#35394B")
     titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    titleLabel.lineBreakMode = .byWordWrapping
+    titleLabel.numberOfLines = 0
     
     button.backgroundColor = .clear
     button.setTitle("", for: .normal)
