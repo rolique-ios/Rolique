@@ -51,7 +51,7 @@ final class UIResultNotifier {
       self?.hide(completion: nil)
     }
     self.view.alpha = 1
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, animations: {
+    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, animations: {
       self.view.frame.origin = Constants.onScreenOrigin
     }, completion: nil)
   }

@@ -11,8 +11,10 @@ import NotificationCenter
 
 private struct Constants {
   static var widgetRowHeight: CGFloat { return 110 }
-  static var columns: Int { return 5 }
+  static var preferableColumnsCount: Int { return 5 }
+  static var columnsCount = 5
   static var maxRows: Int { return 3 }
+  static var minColumnWidth: CGFloat { return 70 }
 }
 
 open class UsersViewController: UIViewController, NCWidgetProviding {
@@ -91,7 +93,7 @@ extension UsersViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension UsersViewController: UICollectionViewDelegateFlowLayout {
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columns), height: collectionView.bounds.height)
+    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columnsCount), height: collectionView.bounds.height)
   }
   
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -112,6 +114,9 @@ private extension UsersViewController {
   func configureUI() {
     collectionView.backgroundColor = .clear
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    Constants.columnsCount = Constants.minColumnWidth > (UIScreen.main.bounds.width / CGFloat(Constants.preferableColumnsCount))
+      ? Constants.preferableColumnsCount - 1
+      : Constants.preferableColumnsCount
   }
   
   func configureConstraints() {
@@ -131,11 +136,11 @@ private extension UsersViewController {
   }
   
   func maxRows() -> Int {
-    return max(1, min(Constants.maxRows, self.users.count % Constants.columns == 0 ? self.users.count / Constants.columns : ((self.users.count / Constants.columns) + 1)))
+    return max(1, min(Constants.maxRows, self.users.count % Constants.columnsCount == 0 ? self.users.count / Constants.columnsCount : ((self.users.count / Constants.columnsCount) + 1)))
   }
   
   func calculateImageHeight() -> CGFloat {
-    return (collectionView.bounds.width / CGFloat(Constants.columns))
+    return (collectionView.bounds.width / CGFloat(Constants.columnsCount))
       - UserCollectionViewCell.Constants.imageHorizontal
       - UserCollectionViewCell.Constants.imageHorizontal
   }
