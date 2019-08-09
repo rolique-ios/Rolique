@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -86,9 +86,9 @@
 			<key>UIApplicationShortcutItemIconFile</key>
 			<string>Empty</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Today</string>
+			<string></string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Remote</string>
+			<string>Pochav</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>2</string>
 		</dict>

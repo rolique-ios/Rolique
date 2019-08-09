@@ -13,7 +13,7 @@ public final class ShortcutManager {
   public enum Action: Int, CaseIterable {
     case dopracNow,
     late1hour,
-    remoteToday,
+    pochav,
     remoteTomorrow,
     sickToday
     
@@ -21,12 +21,14 @@ public final class ShortcutManager {
       switch self {
       case .dopracNow:
         return "Doprac"
-      case .remoteToday, .remoteTomorrow:
+      case .remoteTomorrow:// .remoteTomorrow:
         return "Remote"
       case .late1hour:
         return "Late"
       case .sickToday:
         return "Sick"
+      case .pochav:
+        return "Pochav"
       }
     }
     
@@ -34,14 +36,16 @@ public final class ShortcutManager {
       switch self {
       case .dopracNow:
         return "Now"
-      case .remoteToday:
-        return "Today"
+//      case .remoteToday:
+//        return "Today"
       case .remoteTomorrow:
         return "Tomorrow"
       case .late1hour:
         return "1 hour"
       case .sickToday:
         return "Today"
+      case .pochav:
+        return ""
       }
     }
     
@@ -79,13 +83,21 @@ public final class ShortcutManager {
           self?.handleResult(result)
         }
       }
-    case .remoteToday:
+    case .pochav:
       if let userId = UserDefaultsManager.shared.userId {
-        let action = ActionRemote(sender: userId, value: "today")
+        let action = ActionPochav(sender: userId)
         am.sendAction(action) { [weak self] result in
           self?.handleResult(result)
         }
       }
+      
+//    case .remoteToday:
+//      if let userId = UserDefaultsManager.shared.userId {
+//        let action = ActionRemote(sender: userId, value: "today")
+//        am.sendAction(action) { [weak self] result in
+//          self?.handleResult(result)
+//        }
+//      }
     case .remoteTomorrow:
       if let userId = UserDefaultsManager.shared.userId {
         let action = ActionRemote(sender: userId, value: "tomorrow")

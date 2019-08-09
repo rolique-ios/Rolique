@@ -10,6 +10,7 @@ import Foundation
 
 struct Settings {
   static let isTest = "true"
+  
 }
 
 public final class ActionLate: Action {
@@ -39,6 +40,16 @@ public final class ActionDoprac: Action {
       props["custom"] = custom
     }
     super.init(type: "doprac", sender: sender, test: Settings.isTest, props: props)
+  }
+  
+  required init(from decoder: Decoder) throws {
+    try super.init(from: decoder)
+  }
+}
+
+public final class ActionPochav: Action {
+  public init(sender: String) {
+    super.init(type: "pochav", sender: sender, test: Settings.isTest, props: [:])
   }
   
   required init(from decoder: Decoder) throws {

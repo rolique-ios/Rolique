@@ -22,8 +22,8 @@ public class Action: Codable {
   }
   
   func makeCommand() -> Command {
-    let isTest = Env.actionTest == "false" ? false : true
+//    let isTest = Env.actionTest == "false" ? false : true
     
-    return Command(trigger: type, sender: sender, params: props ?? [:], isTest: isTest)
+    return Command(trigger: type, sender: sender, params: props ?? [:], isTest: test == "true")
   }
 }
