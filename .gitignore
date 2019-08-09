@@ -50,6 +50,7 @@ playground.xcworkspace
 #
 Pods/
 Rolique/fastlane/Matchfile
+Rolique/fastlane/Matchfile.uu
 Rolique/fastlane/.env.Rolique
 
 # Carthage
@@ -71,4 +72,5 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/Matchfile
+fastlane/Matchfile.uu
 fastlane/.env.Rolique
