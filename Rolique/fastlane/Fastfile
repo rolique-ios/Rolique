@@ -69,13 +69,55 @@ platform :ios do
     clean_build_artifacts
     clear_derived_data
 
+      xcodebuild(
+      scheme: "Env",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
+  xcodebuild(
+      scheme: "UsersWidget",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
+  xcodebuild(
+      scheme: "Networking",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
+  xcodebuild(
+      scheme: "Model",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
+  xcodebuild(
+      scheme: "Utils",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
+  xcodebuild(
+      scheme: "UI",
+      configuration: "Release",
+      clean: true,
+      build: true
+  )
+
     gym(
       workspace: ENV["WORKSPACE_NAME"],
       scheme: ENV["SCHEME"],
       export_method: "ad-hoc",
       export_options: {
         provisioningProfiles: { 
-          ENV['BUNDLE_IDENTIFIER'] => ENV['PROVISION_NAME_ADHOC'] #ENV['PROVISION_NAME_APPSTORE']
+          ENV['BUNDLE_IDENTIFIER'] => ENV['PROVISION_NAME_ADHOC']
         },
         "signingStyle": "manual"
         }
