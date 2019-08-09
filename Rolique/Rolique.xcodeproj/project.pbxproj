@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253F187A22FC4FE0007D94B1 /* Changelog.txt */; };
 		25616E3C22F8A00F00F9CAD1 /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
 		25616E3D22F8A01300F9CAD1 /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
 		256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4D8322F8142A00A31427 /* AppDelegate.swift */; };
@@ -63,26 +64,6 @@
 		256A4E1F22F8232300A31427 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E1E22F8232300A31427 /* Images.swift */; };
 		256A4E2122F8232900A31427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2022F8232900A31427 /* Strings.swift */; };
 		256A4E2322F8238800A31427 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4E2222F8238800A31427 /* UserDefaultsManager.swift */; };
-		2574E1FA22FAF41600846CCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4D8322F8142A00A31427 /* AppDelegate.swift */; };
-		2574E1FC22FAF41600846CCA /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; };
-		2574E1FD22FAF41600846CCA /* Env.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; };
-		2574E1FE22FAF41600846CCA /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
-		2574E1FF22FAF41600846CCA /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; };
-		2574E20022FAF41600846CCA /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4D9A22F814FE00A31427 /* UI.framework */; };
-		2574E20122FAF41600846CCA /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
-		2574E20222FAF41600846CCA /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
-		2574E20422FAF41600846CCA /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
-		2574E20522FAF41600846CCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */; };
-		2574E20622FAF41600846CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8A22F8142B00A31427 /* Assets.xcassets */; };
-		2574E20722FAF41600846CCA /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
-		2574E20922FAF41600846CCA /* Env.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25C6ED6922F96F5500647AE2 /* Env.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E20A22FAF41600846CCA /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E20B22FAF41600846CCA /* Utils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E20C22FAF41600846CCA /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB468522F825A4005C52AF /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E20D22FAF41600846CCA /* UsersWidget.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E20E22FAF41600846CCA /* UI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4D9A22F814FE00A31427 /* UI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2574E21022FAF41600846CCA /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2574E21122FAF41600846CCA /* VacationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
 		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
 		259BF6D422FAB857001B2DB0 /* UIResultNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */; };
@@ -129,6 +110,7 @@
 		25C6ED8022F9879F00647AE2 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB469622F825B1005C52AF /* Networking.framework */; };
 		25C6ED8222F9879F00647AE2 /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256A4DB022F8165800A31427 /* Utils.framework */; };
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
+		5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		8783DF8749C8E7828F0C4124 /* libPods-UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 505892CA1A300F6330EFDEAD /* libPods-UI.a */; };
 		B5FFFC3922F82F57001DDF2C /* Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2E22F82F57001DDF2C /* Json.swift */; };
 		B5FFFC3A22F82F57001DDF2C /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC2F22F82F57001DDF2C /* Net.swift */; };
@@ -167,62 +149,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 256A4DAF22F8165800A31427;
 			remoteInfo = Utils;
-		};
-		2574E1E922FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 256A4D9922F814FE00A31427;
-			remoteInfo = UI;
-		};
-		2574E1EB22FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 256A4DAF22F8165800A31427;
-			remoteInfo = Utils;
-		};
-		2574E1ED22FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25AB468422F825A4005C52AF;
-			remoteInfo = Model;
-		};
-		2574E1EF22FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25AB469522F825B1005C52AF;
-			remoteInfo = Networking;
-		};
-		2574E1F122FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25AB46A722F82844005C52AF;
-			remoteInfo = UsersWidget;
-		};
-		2574E1F322FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25A6193D22F8780B00A85C5A;
-			remoteInfo = RemoteTodayExtension;
-		};
-		2574E1F522FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25A6195222F878A500A85C5A;
-			remoteInfo = VacationTodayExtension;
-		};
-		2574E1F722FAF41600846CCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 256A4D7822F8142A00A31427 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25C6ED6822F96F5500647AE2;
-			remoteInfo = Env;
 		};
 		25A6194822F8780B00A85C5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -292,34 +218,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2574E20822FAF41600846CCA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				2574E20922FAF41600846CCA /* Env.framework in Embed Frameworks */,
-				2574E20A22FAF41600846CCA /* Networking.framework in Embed Frameworks */,
-				2574E20B22FAF41600846CCA /* Utils.framework in Embed Frameworks */,
-				2574E20C22FAF41600846CCA /* Model.framework in Embed Frameworks */,
-				2574E20D22FAF41600846CCA /* UsersWidget.framework in Embed Frameworks */,
-				2574E20E22FAF41600846CCA /* UI.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2574E20F22FAF41600846CCA /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				2574E21022FAF41600846CCA /* RemoteTodayExtension.appex in Embed App Extensions */,
-				2574E21122FAF41600846CCA /* VacationTodayExtension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		25A6194E22F8780B00A85C5A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,6 +234,9 @@
 
 /* Begin PBXFileReference section */
 		01D254430C37F73842021D72 /* Pods-Utils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.release.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.release.xcconfig"; sourceTree = "<group>"; };
+		1AA03B650303A5942ABCF252 /* Pods-UI.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.stagingrelease.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.stagingrelease.xcconfig"; sourceTree = "<group>"; };
+		22CFF320B972D1295B58F8BB /* Pods-Rolique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.debug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.debug.xcconfig"; sourceTree = "<group>"; };
+		253F187A22FC4FE0007D94B1 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Changelog.txt; path = fastlane/Changelog.txt; sourceTree = SOURCE_ROOT; };
 		256A4D8022F8142A00A31427 /* Rolique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rolique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		256A4D8322F8142A00A31427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		256A4D8A22F8142B00A31427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -392,8 +293,6 @@
 		256A4E1E22F8232300A31427 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		256A4E2022F8232900A31427 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		256A4E2222F8238800A31427 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		2574E21522FAF41600846CCA /* RoliqueDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoliqueDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2574E21622FAF41600846CCA /* Rolique copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Rolique copy-Info.plist"; path = "/Users/bbb/Documents/dev/Rolique/Rolique/Rolique copy-Info.plist"; sourceTree = "<absolute>"; };
 		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
 		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		259BF6D222FAB83C001B2DB0 /* UIResultNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResultNotifier.swift; sourceTree = "<group>"; };
@@ -433,7 +332,10 @@
 		25C6ED6C22F96F5500647AE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25C6ED7722F984B700647AE2 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
+		262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingdebug.xcconfig"; sourceTree = "<group>"; };
+		474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6499184C49F68876D5C6BD3B /* Pods-UI.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.stagingdebug.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
 		B5FFFC2522F824D8001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B5FFFC2822F824EA001DDF2C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -460,10 +362,11 @@
 		B5FFFC6B22F86F3C001DDF2C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C14146CF08DBF2E65569E1A1 /* Pods-UI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.debug.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.debug.xcconfig"; sourceTree = "<group>"; };
 		C29D3A2041107CD24F85E1B7 /* Pods-UI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.release.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.release.xcconfig"; sourceTree = "<group>"; };
+		C5AE2F23C4A00E4FC2F6A94A /* Pods-Rolique.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.release.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.release.xcconfig"; sourceTree = "<group>"; };
 		CA7C27B473FCD0EE5794D5A6 /* libPods-Utils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Utils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.release.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.release.xcconfig"; sourceTree = "<group>"; };
-		F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.debug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.debug.xcconfig"; sourceTree = "<group>"; };
+		E6930665545B777C4D1D4B6D /* Pods-Utils.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.stagingrelease.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.stagingrelease.xcconfig"; sourceTree = "<group>"; };
 		F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rolique.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB0948D8EC018DB5CFD1D48E /* Pods-Rolique.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingrelease.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingrelease.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +381,7 @@
 				256A4DA122F814FE00A31427 /* UI.framework in Frameworks */,
 				25AB469D22F825B1005C52AF /* Networking.framework in Frameworks */,
 				CA557E7422380F14A94033BD /* libPods-Rolique.a in Frameworks */,
+				5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,20 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E17646399375271BE5FDBC1B /* libPods-Utils.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2574E1FB22FAF41600846CCA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2574E1FC22FAF41600846CCA /* Model.framework in Frameworks */,
-				2574E1FD22FAF41600846CCA /* Env.framework in Frameworks */,
-				2574E1FE22FAF41600846CCA /* UsersWidget.framework in Frameworks */,
-				2574E1FF22FAF41600846CCA /* Utils.framework in Frameworks */,
-				2574E20022FAF41600846CCA /* UI.framework in Frameworks */,
-				2574E20122FAF41600846CCA /* Networking.framework in Frameworks */,
-				2574E20222FAF41600846CCA /* libPods-Rolique.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +483,6 @@
 				AEA991AD53F5E3CD1C599A90 /* Pods */,
 				D6E5BB4FC07D46C0C204BA1C /* Frameworks */,
 				25AB46A222F826BE005C52AF /* Recovered References */,
-				2574E21622FAF41600846CCA /* Rolique copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -610,7 +499,6 @@
 				25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */,
 				25A6195322F878A500A85C5A /* VacationTodayExtension.appex */,
 				25C6ED6922F96F5500647AE2 /* Env.framework */,
-				2574E21522FAF41600846CCA /* RoliqueDebug.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -618,6 +506,7 @@
 		256A4D8222F8142A00A31427 /* Rolique */ = {
 			isa = PBXGroup;
 			children = (
+				253F187A22FC4FE0007D94B1 /* Changelog.txt */,
 				256A4D8322F8142A00A31427 /* AppDelegate.swift */,
 				256A4D8A22F8142B00A31427 /* Assets.xcassets */,
 				256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */,
@@ -881,12 +770,18 @@
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */,
-				DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */,
 				C14146CF08DBF2E65569E1A1 /* Pods-UI.debug.xcconfig */,
 				C29D3A2041107CD24F85E1B7 /* Pods-UI.release.xcconfig */,
 				A3CD20E5B0C81150A8CE4B91 /* Pods-Utils.debug.xcconfig */,
 				01D254430C37F73842021D72 /* Pods-Utils.release.xcconfig */,
+				22CFF320B972D1295B58F8BB /* Pods-Rolique.debug.xcconfig */,
+				262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */,
+				C5AE2F23C4A00E4FC2F6A94A /* Pods-Rolique.release.xcconfig */,
+				FB0948D8EC018DB5CFD1D48E /* Pods-Rolique.stagingrelease.xcconfig */,
+				6499184C49F68876D5C6BD3B /* Pods-UI.stagingdebug.xcconfig */,
+				1AA03B650303A5942ABCF252 /* Pods-UI.stagingrelease.xcconfig */,
+				474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */,
+				E6930665545B777C4D1D4B6D /* Pods-Utils.stagingrelease.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1062,6 +957,7 @@
 				256A4D7E22F8142A00A31427 /* Resources */,
 				256A4DA622F814FE00A31427 /* Embed Frameworks */,
 				25A6194E22F8780B00A85C5A /* Embed App Extensions */,
+				2502554922FD53B300EEC6BC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1089,6 +985,7 @@
 				256A4D9622F814FE00A31427 /* Sources */,
 				256A4D9722F814FE00A31427 /* Frameworks */,
 				256A4D9822F814FE00A31427 /* Resources */,
+				25366F0422FD699A00795A29 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1117,34 +1014,6 @@
 			productName = Utils;
 			productReference = 256A4DB022F8165800A31427 /* Utils.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		2574E1E722FAF41600846CCA /* RoliqueDebug */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2574E21222FAF41600846CCA /* Build configuration list for PBXNativeTarget "RoliqueDebug" */;
-			buildPhases = (
-				2574E1F822FAF41600846CCA /* [CP] Check Pods Manifest.lock */,
-				2574E1F922FAF41600846CCA /* Sources */,
-				2574E1FB22FAF41600846CCA /* Frameworks */,
-				2574E20322FAF41600846CCA /* Resources */,
-				2574E20822FAF41600846CCA /* Embed Frameworks */,
-				2574E20F22FAF41600846CCA /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2574E1E822FAF41600846CCA /* PBXTargetDependency */,
-				2574E1EA22FAF41600846CCA /* PBXTargetDependency */,
-				2574E1EC22FAF41600846CCA /* PBXTargetDependency */,
-				2574E1EE22FAF41600846CCA /* PBXTargetDependency */,
-				2574E1F022FAF41600846CCA /* PBXTargetDependency */,
-				2574E1F222FAF41600846CCA /* PBXTargetDependency */,
-				2574E1F422FAF41600846CCA /* PBXTargetDependency */,
-				2574E1F622FAF41600846CCA /* PBXTargetDependency */,
-			);
-			name = RoliqueDebug;
-			productName = Rolique;
-			productReference = 2574E21522FAF41600846CCA /* RoliqueDebug.app */;
-			productType = "com.apple.product-type.application";
 		};
 		25A6193D22F8780B00A85C5A /* RemoteTodayExtension */ = {
 			isa = PBXNativeTarget;
@@ -1338,7 +1207,6 @@
 			projectRoot = "";
 			targets = (
 				256A4D7F22F8142A00A31427 /* Rolique */,
-				2574E1E722FAF41600846CCA /* RoliqueDebug */,
 				256A4D9922F814FE00A31427 /* UI */,
 				256A4DAF22F8165800A31427 /* Utils */,
 				25AB468422F825A4005C52AF /* Model */,
@@ -1361,6 +1229,7 @@
 				256A4D8E22F8142B00A31427 /* LaunchScreen.storyboard in Resources */,
 				256A4D8B22F8142B00A31427 /* Assets.xcassets in Resources */,
 				2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */,
+				253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1376,17 +1245,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2574E20322FAF41600846CCA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2574E20422FAF41600846CCA /* debug.rolque.xcconfig in Resources */,
-				2574E20522FAF41600846CCA /* LaunchScreen.storyboard in Resources */,
-				2574E20622FAF41600846CCA /* Assets.xcassets in Resources */,
-				2574E20722FAF41600846CCA /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,7 +1325,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2574E1F822FAF41600846CCA /* [CP] Check Pods Manifest.lock */ = {
+		2502554922FD53B300EEC6BC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 22909fdaa0f026e5f352d0365e3c845a7437eca8 2592b7472b5a416d03d6b9edc4235212cb75de70cb19ad1f71dd6e3b373684e0\n";
+		};
+		25366F0422FD699A00795A29 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1475,19 +1350,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rolique-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "
+";
 		};
 		2919F6CCD5057CEE7B2111FB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1610,14 +1481,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2574E1F922FAF41600846CCA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2574E1FA22FAF41600846CCA /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		25A6193A22F8780B00A85C5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1708,46 +1571,6 @@
 			target = 256A4DAF22F8165800A31427 /* Utils */;
 			targetProxy = 256A4DB522F8165800A31427 /* PBXContainerItemProxy */;
 		};
-		2574E1E822FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 256A4D9922F814FE00A31427 /* UI */;
-			targetProxy = 2574E1E922FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1EA22FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 256A4DAF22F8165800A31427 /* Utils */;
-			targetProxy = 2574E1EB22FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1EC22FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25AB468422F825A4005C52AF /* Model */;
-			targetProxy = 2574E1ED22FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1EE22FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25AB469522F825B1005C52AF /* Networking */;
-			targetProxy = 2574E1EF22FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1F022FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25AB46A722F82844005C52AF /* UsersWidget */;
-			targetProxy = 2574E1F122FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1F222FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25A6193D22F8780B00A85C5A /* RemoteTodayExtension */;
-			targetProxy = 2574E1F322FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1F422FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25A6195222F878A500A85C5A /* VacationTodayExtension */;
-			targetProxy = 2574E1F522FAF41600846CCA /* PBXContainerItemProxy */;
-		};
-		2574E1F622FAF41600846CCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 25C6ED6822F96F5500647AE2 /* Env */;
-			targetProxy = 2574E1F722FAF41600846CCA /* PBXContainerItemProxy */;
-		};
 		25A6194922F8780B00A85C5A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 25A6193D22F8780B00A85C5A /* RemoteTodayExtension */;
@@ -1817,6 +1640,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */;
 			buildSettings = {
+				ACTION_TEST = FALSE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1848,7 +1672,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1865,7 +1689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1879,6 +1703,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */;
 			buildSettings = {
+				ACTION_TEST = FALSE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1921,7 +1746,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1933,12 +1758,19 @@
 		};
 		256A4D9322F8142B00A31427 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */;
+			baseConfigurationReference = 22CFF320B972D1295B58F8BB /* Pods-Rolique.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+				);
 				INFOPLIST_FILE = Rolique/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1955,12 +1787,18 @@
 		};
 		256A4D9422F8142B00A31427 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */;
+			baseConfigurationReference = C5AE2F23C4A00E4FC2F6A94A /* Pods-Rolique.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+				);
 				INFOPLIST_FILE = Rolique/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1983,6 +1821,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2015,6 +1854,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2098,50 +1938,6 @@
 			};
 			name = Release;
 		};
-		2574E21322FAF41600846CCA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0E1C887AD7EDD69BFDF3229 /* Pods-Rolique.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZL58JZZ8KD;
-				INFOPLIST_FILE = "Rolique copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2574E21422FAF41600846CCA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC9927701796217D9DDBACAA /* Pods-Rolique.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZL58JZZ8KD;
-				INFOPLIST_FILE = "Rolique copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		25A6194C22F8780B00A85C5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2194,7 +1990,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.VacationTodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique..VacationTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2214,7 +2010,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.VacationTodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique..VacationTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2466,6 +2262,672 @@
 			};
 			name = Release;
 		};
+		25CB864C22FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */;
+			buildSettings = {
+				ACTION_TEST = TRUE;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = StagingDebug;
+		};
+		25CB864D22FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID = io.rolique.Rolique;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+				);
+				INFOPLIST_FILE = Rolique/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DRELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingDebug;
+		};
+		25CB864E22FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6499184C49F68876D5C6BD3B /* Pods-UI.stagingdebug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB864F22FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Utils/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Utils;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB865022FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Model/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Model;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB865122FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Networking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB865222FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UsersWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UsersWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB865322FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RoliqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.RoliqueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolique.app/Rolique";
+			};
+			name = StagingDebug;
+		};
+		25CB865422FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RemoteTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.RemoteTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingDebug;
+		};
+		25CB865522FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique..VacationTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingDebug;
+		};
+		25CB865622FC001D00F9279F /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Env/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Env;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingDebug;
+		};
+		25CB865722FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */;
+			buildSettings = {
+				ACTION_TEST = TRUE;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = StagingRelease;
+		};
+		25CB865822FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB0948D8EC018DB5CFD1D48E /* Pods-Rolique.stagingrelease.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_ID = io.rolique.Rolique;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+				);
+				INFOPLIST_FILE = Rolique/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Dip/Dip.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.modulemap\" -DRELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingRelease;
+		};
+		25CB865922FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AA03B650303A5942ABCF252 /* Pods-UI.stagingrelease.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
+		25CB865A22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6930665545B777C4D1D4B6D /* Pods-Utils.stagingrelease.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Utils/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Utils;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
+		25CB865B22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Model/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Model;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
+		25CB865C22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Networking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
+		25CB865D22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UsersWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.UsersWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
+		25CB865E22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RoliqueTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.RoliqueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolique.app/Rolique";
+			};
+			name = StagingRelease;
+		};
+		25CB865F22FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = RemoteTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.RemoteTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingRelease;
+		};
+		25CB866022FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique..VacationTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = StagingRelease;
+		};
+		25CB866122FC002800F9279F /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Env/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Env;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = StagingRelease;
+		};
 		B5FFFC6222F83988001DDF2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2513,7 +2975,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				256A4D9022F8142B00A31427 /* Debug */,
+				25CB864C22FC001D00F9279F /* StagingDebug */,
 				256A4D9122F8142B00A31427 /* Release */,
+				25CB865722FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2522,7 +2986,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				256A4D9322F8142B00A31427 /* Debug */,
+				25CB864D22FC001D00F9279F /* StagingDebug */,
 				256A4D9422F8142B00A31427 /* Release */,
+				25CB865822FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2531,7 +2997,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				256A4DA422F814FE00A31427 /* Debug */,
+				25CB864E22FC001D00F9279F /* StagingDebug */,
 				256A4DA522F814FE00A31427 /* Release */,
+				25CB865922FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2540,16 +3008,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				256A4DBA22F8165800A31427 /* Debug */,
+				25CB864F22FC001D00F9279F /* StagingDebug */,
 				256A4DBB22F8165800A31427 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2574E21222FAF41600846CCA /* Build configuration list for PBXNativeTarget "RoliqueDebug" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2574E21322FAF41600846CCA /* Debug */,
-				2574E21422FAF41600846CCA /* Release */,
+				25CB865A22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2558,7 +3019,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25A6194C22F8780B00A85C5A /* Debug */,
+				25CB865422FC001D00F9279F /* StagingDebug */,
 				25A6194D22F8780B00A85C5A /* Release */,
+				25CB865F22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2567,7 +3030,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25A6196022F878A500A85C5A /* Debug */,
+				25CB865522FC001D00F9279F /* StagingDebug */,
 				25A6196122F878A500A85C5A /* Release */,
+				25CB866022FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2576,7 +3041,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25AB468E22F825A4005C52AF /* Debug */,
+				25CB865022FC001D00F9279F /* StagingDebug */,
 				25AB468F22F825A4005C52AF /* Release */,
+				25CB865B22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2585,7 +3052,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25AB46A022F825B1005C52AF /* Debug */,
+				25CB865122FC001D00F9279F /* StagingDebug */,
 				25AB46A122F825B1005C52AF /* Release */,
+				25CB865C22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2594,7 +3063,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25AB46B222F82844005C52AF /* Debug */,
+				25CB865222FC001D00F9279F /* StagingDebug */,
 				25AB46B322F82844005C52AF /* Release */,
+				25CB865D22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2603,7 +3074,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25C6ED7322F96F5500647AE2 /* Debug */,
+				25CB865622FC001D00F9279F /* StagingDebug */,
 				25C6ED7422F96F5500647AE2 /* Release */,
+				25CB866122FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2612,7 +3085,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5FFFC6222F83988001DDF2C /* Debug */,
+				25CB865322FC001D00F9279F /* StagingDebug */,
 				B5FFFC6322F83988001DDF2C /* Release */,
+				25CB865E22FC002800F9279F /* StagingRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

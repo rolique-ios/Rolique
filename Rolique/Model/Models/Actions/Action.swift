@@ -8,6 +8,7 @@
 
 import Foundation
 import Networking
+import Env
 
 public class Action: Codable {
   let type, sender, test: String
@@ -21,13 +22,7 @@ public class Action: Codable {
   }
   
   func makeCommand() -> Command {
-    var isTest = true
-    // not working
-//    #if DEBUG
-//    isTest = true
-//    #else
-//    isTest = false
-//    #endif
+    let isTest = Env.actionTest == "false" ? false : true
     
     return Command(trigger: type, sender: sender, params: props ?? [:], isTest: isTest)
   }

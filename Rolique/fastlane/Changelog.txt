@@ -1,0 +1,2 @@
+• AV-593
+Fixed problem with unnecessary sending a complete task request.

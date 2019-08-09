@@ -13,7 +13,7 @@ public class Command: Route {
     var prms: Route.Params = [
       "type": trigger,
       "sender": sender,
-      "test": isTest ? "true" : "false",
+      "test": "\(isTest)",
     ]
     params.keys.forEach { prms[$0] = params[$0] }
     super.init(endpoint: "command", method: .get, urlParams: prms)
