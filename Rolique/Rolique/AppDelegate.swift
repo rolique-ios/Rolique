@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = Router.getStartViewController()
     window?.makeKeyAndVisible()
     Fabric.with([Crashlytics.self])
-
+    let shortcutItems = ShortcutManager.shared.buildShortcutItems()
+    application.shortcutItems = shortcutItems
     
     
 //    if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
