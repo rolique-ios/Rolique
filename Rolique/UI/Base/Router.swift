@@ -6,7 +6,6 @@
 //  Copyright © 2019 Bohdan Savych. All rights reserved.
 //
 
-import Model
 import Utils
 
 public final class Router {

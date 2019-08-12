@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UI
 import Fabric
 import Crashlytics
 

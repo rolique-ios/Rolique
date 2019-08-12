@@ -6,6 +6,7 @@
 //  Copyright © 2019 Rolique. All rights reserved.
 //
 
+import UIKit
 
 final class BaseTabBarController: UITabBarController {
 }

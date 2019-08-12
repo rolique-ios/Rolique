@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 import Utils
-import Model
 import SafariServices
 
 private struct Constants {

@@ -12,9 +12,28 @@ def pods
 end
 
 target 'Rolique' do
-end
-
-target 'UI' do
   pods
 end
 
+target 'RemoteTodayExtension' do
+  pod 'Utils', :path => '../Modules/Utils'
+  pod 'Networking', :path => '../Modules/Networking'
+
+end
+
+target 'VacationTodayExtension' do
+  pod 'Utils', :path => '../Modules/Utils'
+  pod 'Networking', :path => '../Modules/Networking'
+end
+
+target 'RoliqueTests' do 
+  pod 'Networking', :path => '../Modules/Networking'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+     end
+  end
+end

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Env
 
 public struct Env {
   public static let apiToken = Env.getValueForKey("ApiToken") ?? "no_api_token"
@@ -19,7 +18,7 @@ public struct Env {
   public static let actionTest = Env.getValueForKey("ActionTest") ?? "true"
   
   static func getValueForKey(_ key: String) -> String? {
-    guard let secret = Bundle(identifier: "io.rolique.Env")?.infoDictionary?["Secret"] as? [String: Any] else { return nil }
+    guard let secret = Bundle.main.infoDictionary?["Secret"] as? [String: Any] else { return nil }
     guard let value = secret[key] as? String else { return nil }
     return value
   }

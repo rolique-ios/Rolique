@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UsersWidget
 
 public final class User: Codable {
   
@@ -129,5 +130,17 @@ extension User: Equatable {
 extension User: Hashable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(self.id)
+  }
+}
+
+
+// MARK: - Userable
+extension User: Userable {
+  public var name: String {
+    return self.slackProfile.realName
+  }
+  
+  public var thumbnailURL: URL? {
+    return URL(string: (self.slackProfile.image48 ?? self.slackProfile.image32 ?? ""))
   }
 }
