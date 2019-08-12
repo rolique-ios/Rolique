@@ -41,6 +41,11 @@
 		256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A4D8322F8142A00A31427 /* AppDelegate.swift */; };
 		256A4D8B22F8142B00A31427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8A22F8142B00A31427 /* Assets.xcassets */; };
 		256A4D8E22F8142B00A31427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */; };
+		257C79B223018635007A299D /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
+		257C79B323018636007A299D /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
+		257C79B423018638007A299D /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
+		257C79B523018638007A299D /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
+		257C79B623018EF7007A299D /* VacationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* VacationViewController.swift */; };
 		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
 		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
 		25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
@@ -59,7 +64,6 @@
 		25AB46BF22F82859005C52AF /* Faker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BD22F82859005C52AF /* Faker.swift */; };
 		25AB46C022F82859005C52AF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BE22F82859005C52AF /* ImageCache.swift */; };
 		25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* RemoteViewController.swift */; };
-		25F90BE1230154690004DA7D /* VacationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* VacationViewController.swift */; };
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
 		4EB40EEA651461F61D56892D /* libPods-VacationTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1ABE80DA0A182B9C0DCB8B /* libPods-VacationTodayExtension.a */; };
 		5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
@@ -673,7 +677,7 @@
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -732,7 +736,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257C79B423018638007A299D /* debug.rolque.xcconfig in Resources */,
 				25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */,
+				257C79B223018635007A299D /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,7 +746,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257C79B523018638007A299D /* debug.rolque.xcconfig in Resources */,
 				25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */,
+				257C79B323018636007A299D /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,7 +932,6 @@
 				25535B13230150A100833A5B /* UserManager.swift in Sources */,
 				25535B112301509A00833A5B /* User.swift in Sources */,
 				25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */,
-				25F90BE1230154690004DA7D /* VacationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +941,7 @@
 			files = (
 				25535B14230150A200833A5B /* UserManager.swift in Sources */,
 				25535B122301509B00833A5B /* User.swift in Sources */,
+				257C79B623018EF7007A299D /* VacationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1076,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1124,6 +1133,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1282,11 +1292,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1313,11 +1323,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1394,6 +1404,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1435,11 +1446,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1575,6 +1586,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1616,11 +1628,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = UsersWidget/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

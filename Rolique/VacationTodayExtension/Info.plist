@@ -19,7 +19,20 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>5</string>
+  <key>Secret</key>
+  <dict>
+    <key>ApiToken</key>
+    <string>$(API_TOKEN)</string>
+    <key>ApiUrl</key>
+    <string>$(API_URL)</string>
+    <key>SlackClientId</key>
+    <string>$(SLACK_CLIENT_ID)</string>
+    <key>SlackClientSecret</key>
+    <string>$(SLACK_CLIENT_SECRET)</string>
+    <key>SlackRedirectUri</key>
+    <string>$(SLACK_REDIRECT_URI)</string>
+  </dict>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionMainStoryboard</key>

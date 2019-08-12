@@ -9,19 +9,23 @@
 import Foundation
 
 public extension Result {
-    var value: Success? {
-        if case .success(let value) = self {
-            return value
-        }
-        
-        return nil
+  var value: Success? {
+    if case .success(let value) = self {
+      return value
     }
     
-    var error: Failure? {
-        if case .failure(let error) = self {
-            return error
-        }
-        
-        return nil
+    return nil
+  }
+  
+  var error: Failure? {
+    if case .failure(let error) = self {
+      return error
     }
+    
+    return nil
+  }
+  
+  var isFailure: Bool {
+    return error != nil
+  }
 }

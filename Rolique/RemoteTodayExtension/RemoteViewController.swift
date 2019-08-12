@@ -18,6 +18,7 @@ final class RemoteViewController: UsersViewController {
   
   override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
     self.userManager.getTodayUsersForRecordType(.remote) { result in
+      guard !result.isFailure else { return }
       (result.value?
         .map { AnyUserable($0) })
         .map(usersCompletion)

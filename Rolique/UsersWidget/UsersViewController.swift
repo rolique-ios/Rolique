@@ -13,7 +13,7 @@ private struct Constants {
   static var widgetRowHeight: CGFloat { return 110 }
   static var preferableColumnsCount: Int { return 5 }
   static var columnsCount = 5
-  static var maxRows: Int { return 3 }
+  static var maxRows = 3
   static var minColumnWidth: CGFloat { return 70 }
 }
 
@@ -40,7 +40,12 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
         if users == self.users {
           completionHandler(.noData)
         } else {
-          UsersStorage.shared.users = users
+          if users.count > Constants.preferableColumnsCount * Constants.maxRows {
+            UsersStorage.shared.users = Array(users[0..<Constants.preferableColumnsCount * Constants.maxRows])
+          } else {
+            UsersStorage.shared.users = users
+          }
+          
           self.collectionView.reloadData()
           completionHandler(.newData)
         }
@@ -52,6 +57,7 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   
   public func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     preferredContentSize = activeDisplayMode == .expanded ? CGSize(width: 0.0, height: CGFloat(maxRows()) * Constants.widgetRowHeight) : maxSize
+    collectionView.reloadData()
   }
   
   // MARK: - Override point
@@ -65,6 +71,12 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   
   deinit {
     print("☠️\(String(describing: self))☠️")
+  }
+  
+  open override func didReceiveMemoryWarning() {
+    ImageCacher.shared.cache.removeAllObjects()
+    Constants.maxRows = max(1, Constants.maxRows - 1)
+    collectionView.reloadData()
   }
 }
 
@@ -93,7 +105,7 @@ extension UsersViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension UsersViewController: UICollectionViewDelegateFlowLayout {
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columnsCount), height: collectionView.bounds.height)
+    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columnsCount), height: Constants.widgetRowHeight)
   }
   
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

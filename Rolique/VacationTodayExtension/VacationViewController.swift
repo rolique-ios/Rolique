@@ -17,6 +17,7 @@ class VacationViewController: UsersViewController {
   
   override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
     self.userManager.getTodayUsersForRecordType(.vacation) { result in
+      guard !result.isFailure else { return }
       (result.value?
         .map { AnyUserable($0) })
         .map(usersCompletion)

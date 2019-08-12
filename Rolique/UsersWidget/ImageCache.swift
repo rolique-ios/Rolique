@@ -9,7 +9,7 @@
 import UIKit
 
 final class ImageCacher {
-  private lazy var cache = NSCache<NSURL, UIImage>()
+  lazy var cache = NSCache<NSURL, UIImage>()
   private lazy var observer: NSObjectProtocol = {
     return NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { [weak self] notification in
       self?.cache.removeAllObjects()

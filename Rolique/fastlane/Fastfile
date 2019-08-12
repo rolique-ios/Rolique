@@ -66,8 +66,8 @@ platform :ios do
   end
 
   lane :rebeta do
-    clean_build_artifacts
-    clear_derived_data
+    # clean_build_artifacts
+    # clear_derived_data
 
   xcodebuild(
       scheme: "UsersWidget",
@@ -84,8 +84,8 @@ platform :ios do
       export_options: {
         provisioningProfiles: { 
           ENV['BUNDLE_IDENTIFIER'] => ENV['PROVISION_NAME_ADHOC'],
-          "io.rolique.Rolique.RemoteTodayExtension" => ENV['PROVISION_NAME_ADHOC'],
-          "io.rolique.Rolique.VacationTodayExtension" => ENV['PROVISION_NAME_ADHOC']
+          ENV['REMOTE_BUNDLE_IDENTIFIER'] => ENV['REMOTE_PROVISION_NAME_ADHOC'],
+          ENV['VACATION_BUNDLE_IDENTIFIER'] => ENV['VACATION_PROVISION_NAME_ADHOC']
         },
         "signingStyle": "manual"
         }
