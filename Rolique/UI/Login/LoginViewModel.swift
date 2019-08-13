@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Model
 import Utils
 
 protocol LoginViewModel: ViewModel {

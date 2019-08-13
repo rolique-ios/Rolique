@@ -6,7 +6,6 @@
 //  Copyright © 2019 Bohdan Savych. All rights reserved.
 //
 
-import Model
 import Utils
 
 public final class Router {
@@ -28,7 +27,10 @@ public final class Router {
   }
   
   public static func getStartViewController() -> UINavigationController {
-    let root = Router.getLoginViewController()
+    let root = UserDefaultsManager.shared.userId == nil
+      ? Router.getLoginViewController()
+      : self.getTabBarController()
+    
     let navigationController = UINavigationController(rootViewController: root)
   
     return navigationController

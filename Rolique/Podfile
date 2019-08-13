@@ -2,18 +2,38 @@
 # platform :ios, '9.0'
 
 def pods 
-	pod 'Dip'
-    	pod 'SnapKit'
+  pod 'Dip'
+  pod 'SnapKit'
+  pod 'Fabric', '1.8.2'
+  pod 'Crashlytics', '3.11.1'
+  pod 'IgyToast', '0.0.4'
+  pod 'Networking', :path => '../Modules/Networking'
+  pod 'Utils', :path => '../Modules/Utils'
 end
 
 target 'Rolique' do
-	
+  pods
 end
 
-target 'UI' do
-	pods
+target 'RemoteTodayExtension' do
+  pod 'Utils', :path => '../Modules/Utils'
+  pod 'Networking', :path => '../Modules/Networking'
+
 end
 
-target 'Utils' do
+target 'VacationTodayExtension' do
+  pod 'Utils', :path => '../Modules/Utils'
+  pod 'Networking', :path => '../Modules/Networking'
+end
 
+target 'RoliqueTests' do 
+  pod 'Networking', :path => '../Modules/Networking'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+     end
+  end
 end

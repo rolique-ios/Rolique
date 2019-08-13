@@ -52,7 +52,7 @@ public final class LoginManagerImpl: LoginManager {
       Net.Worker.request(SlackToken(code: code), onSuccess: { jsonResult in
         guard let userSlackId = jsonResult.string("user/id") else {
           DispatchQueue.main.async {
-            result?(.failure(Err.general(masg: "failed to get string value by keypath: user/id")))
+            result?(.failure(Err.general(msg: "failed to get string value by keypath: user/id")))
           }
           return
         }
@@ -61,19 +61,19 @@ public final class LoginManagerImpl: LoginManager {
         Net.Worker.request(getUserWithId, onSuccess: { userJson in
           guard let userBody = userJson.json("body") else {
             DispatchQueue.main.async {
-              result?(.failure(Err.general(masg: "response does not contain body")))
+              result?(.failure(Err.general(msg: "response does not contain body")))
             }
             return
           }
           guard let data = userBody.stringValue.data(using: .utf8) else {
             DispatchQueue.main.async {
-              result?(.failure(Err.general(masg: "failed to serialize user body")))
+              result?(.failure(Err.general(msg: "failed to serialize user body")))
             }
             return
           }
           guard let user = try? JSONDecoder().decode(User.self, from: data) else {
             DispatchQueue.main.async {
-              result?(.failure(Err.general(masg: "failed to decode user")))
+              result?(.failure(Err.general(msg: "failed to decode user")))
             }
             return
           }

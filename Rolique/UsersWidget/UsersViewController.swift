@@ -11,13 +11,18 @@ import NotificationCenter
 
 private struct Constants {
   static var widgetRowHeight: CGFloat { return 110 }
-  static var columns: Int { return 5 }
-  static var maxRows: Int { return 3 }
+  static var preferableColumnsCount: Int { return 5 }
+  static var columnsCount = 5
+  static var maxRows = 3
+  static var minColumnWidth: CGFloat { return 70 }
 }
 
 open class UsersViewController: UIViewController, NCWidgetProviding {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-  private lazy var users = [Userable]()
+  private var users: [AnyUserable] {
+    return UsersStorage.shared.users
+  }
+  private lazy var isFetched = false
   
   override open func viewDidLoad() {
     super.viewDidLoad()
@@ -28,35 +33,57 @@ open class UsersViewController: UIViewController, NCWidgetProviding {
   }
   
   public func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    completionHandler(.noData)
+    if isFetched { completionHandler(.noData); return; }
     loadData { [weak self] users in
-      self?.users = users
+      guard let self = self else { return }
       DispatchQueue.main.async {
-        self?.collectionView.reloadData()
-        completionHandler(.newData)
+        if users == self.users {
+          completionHandler(.noData)
+        } else {
+          if users.count > Constants.preferableColumnsCount * Constants.maxRows {
+            UsersStorage.shared.users = Array(users[0..<Constants.preferableColumnsCount * Constants.maxRows])
+          } else {
+            UsersStorage.shared.users = users
+          }
+          
+          self.collectionView.reloadData()
+          completionHandler(.newData)
+        }
+        
+        self.isFetched = true
       }
     }
   }
   
   public func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     preferredContentSize = activeDisplayMode == .expanded ? CGSize(width: 0.0, height: CGFloat(maxRows()) * Constants.widgetRowHeight) : maxSize
+    collectionView.reloadData()
   }
   
   // MARK: - Override point
-  open func loadData(usersCompletion: @escaping (([Userable]) -> Void)) {
+  open func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
 
   }
   
-  open func didTap(on user: Userable, at index: Int) {
+  open func didTapOnElement(at index: Int) {
     
+  }
+  
+  deinit {
+    print("☠️\(String(describing: self))☠️")
+  }
+  
+  open override func didReceiveMemoryWarning() {
+    ImageCacher.shared.cache.removeAllObjects()
+    Constants.maxRows = max(1, Constants.maxRows - 1)
+    collectionView.reloadData()
   }
 }
 
 // MARK: - UICollectionViewDelegate
 extension UsersViewController: UICollectionViewDelegate {
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let user = self.users[indexPath.row]
-    didTap(on: user, at: indexPath.row)
+    didTapOnElement(at: indexPath.row)
   }
 }
 
@@ -70,7 +97,7 @@ extension UsersViewController: UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: UserCollectionViewCell.self), for: indexPath) as! UserCollectionViewCell
     let user = users[indexPath.row]
-    cell.configure(url: user.thumnailURL, name: user.name, imageCornerRadius: calculateImageHeight() / 2)
+    cell.configure(url: user.thumbnailURL, name: user.name, imageCornerRadius: calculateImageHeight() / 2)
     return cell
   }
 }
@@ -78,7 +105,7 @@ extension UsersViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension UsersViewController: UICollectionViewDelegateFlowLayout {
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columns), height: collectionView.bounds.height)
+    return CGSize(width: collectionView.bounds.width / CGFloat(Constants.columnsCount), height: Constants.widgetRowHeight)
   }
   
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -99,6 +126,9 @@ private extension UsersViewController {
   func configureUI() {
     collectionView.backgroundColor = .clear
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    Constants.columnsCount = Constants.minColumnWidth > (UIScreen.main.bounds.width / CGFloat(Constants.preferableColumnsCount))
+      ? Constants.preferableColumnsCount - 1
+      : Constants.preferableColumnsCount
   }
   
   func configureConstraints() {
@@ -118,11 +148,11 @@ private extension UsersViewController {
   }
   
   func maxRows() -> Int {
-    return max(1, min(Constants.maxRows, self.users.count % Constants.columns == 0 ? self.users.count / Constants.columns : ((self.users.count / Constants.columns) + 1)))
+    return max(1, min(Constants.maxRows, self.users.count % Constants.columnsCount == 0 ? self.users.count / Constants.columnsCount : ((self.users.count / Constants.columnsCount) + 1)))
   }
   
   func calculateImageHeight() -> CGFloat {
-    return (collectionView.bounds.width / CGFloat(Constants.columns))
+    return (collectionView.bounds.width / CGFloat(Constants.columnsCount))
       - UserCollectionViewCell.Constants.imageHorizontal
       - UserCollectionViewCell.Constants.imageHorizontal
   }

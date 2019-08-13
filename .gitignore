@@ -10,6 +10,7 @@ Rolique/BuildConfig/
 
 
 ## Various settings
+*.xcuserdatad
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -48,6 +49,9 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
+Rolique/fastlane/Matchfile
+Rolique/fastlane/Matchfile.uu
+Rolique/fastlane/.env.Rolique
 
 # Carthage
 #
@@ -67,3 +71,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+fastlane/Matchfile
+fastlane/Matchfile.uu
+fastlane/.env.Rolique
