@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G87" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ManagedSlackProfile" representedClassName="ManagedSlackProfile" syncable="YES" codeGenerationType="class">
+        <attribute name="avatarHash" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" attributeType="String" syncable="YES"/>
+        <attribute name="displayNameNormalized" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image24" attributeType="String" syncable="YES"/>
+        <attribute name="image32" attributeType="String" syncable="YES"/>
+        <attribute name="image48" attributeType="String" syncable="YES"/>
+        <attribute name="image72" attributeType="String" syncable="YES"/>
+        <attribute name="image192" attributeType="String" syncable="YES"/>
+        <attribute name="image512" attributeType="String" syncable="YES"/>
+        <attribute name="image1024" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageOriginal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCustomImage" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" attributeType="String" syncable="YES"/>
+        <attribute name="realName" attributeType="String" syncable="YES"/>
+        <attribute name="realNameNormalized" attributeType="String" syncable="YES"/>
+        <attribute name="skype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusEmoji" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusExpiration" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="statusText" attributeType="String" syncable="YES"/>
+        <attribute name="statusTextCanonical" attributeType="String" syncable="YES"/>
+        <attribute name="team" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="slackProfile" inverseEntity="ManagedUser" syncable="YES"/>
+    </entity>
+    <entity name="ManagedUser" representedClassName="ManagedUser" syncable="YES" codeGenerationType="class">
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateOfJoining" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eduPoints" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="emergencyDays" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="roles" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+        <attribute name="vacationData" optional="YES" attributeType="Transformable" customClassName="[String: Double]" syncable="YES"/>
+        <relationship name="slackProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedSlackProfile" inverseName="user" inverseEntity="ManagedSlackProfile" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ManagedSlackProfile" positionX="201.1796875" positionY="-51.06640625" width="128" height="435"/>
+        <element name="ManagedUser" positionX="-63" positionY="-18" width="128" height="163"/>
+    </elements>
+</model>
