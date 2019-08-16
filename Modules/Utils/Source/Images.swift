@@ -30,4 +30,9 @@ public struct Images {
       return UIImage(named: "slackButton")!
     }
   }
+  public struct Colleagues {
+    public static var phone: UIImage {
+      return UIImage(named: "phone")!
+    }
+  }
 }

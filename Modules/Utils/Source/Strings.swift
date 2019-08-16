@@ -18,4 +18,8 @@ public struct Strings {
     public static var profile: String { return "profile".localized }
     public static var stats: String { return "stats".localized }
   }
+  
+  public struct NavigationTitle {
+    public static var colleagues: String { return "Colleagues".localized }
+  }
 }

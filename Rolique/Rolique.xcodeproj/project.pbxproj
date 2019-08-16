@@ -71,6 +71,11 @@
 		2D209D4923034AFC00AC2CA5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */; };
 		3F83A7CC2302FA3B00EA683A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
+		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
+		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
+		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
+		3FF9BEF12305A3D200028513 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEF02305A3D200028513 /* ShadowView.swift */; };
+		3FF9BEF32305AE0800028513 /* ColleaguesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEF22305AE0800028513 /* ColleaguesTableViewCell.swift */; };
 		4EB40EEA651461F61D56892D /* libPods-VacationTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1ABE80DA0A182B9C0DCB8B /* libPods-VacationTodayExtension.a */; };
 		5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		B5FFFC5E22F83988001DDF2C /* RoliqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */; };
@@ -191,6 +196,11 @@
 		3895A80C2D9664AB869C9297 /* Pods-VacationTodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.release.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
+		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
+		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
+		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
+		3FF9BEF02305A3D200028513 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		3FF9BEF22305AE0800028513 /* ColleaguesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesTableViewCell.swift; sourceTree = "<group>"; };
 		474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		553F0B5CFFFBAAEB8578AB2A /* Pods-VacationTodayExtension.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.stagingrelease.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -326,6 +336,7 @@
 				25535AF423014D4F00833A5B /* PushNotificationManager */,
 				25535AF623014D4F00833A5B /* Views */,
 				25535AFA23014D4F00833A5B /* Login */,
+				3FF9BEE923054CBB00028513 /* Colleagues */,
 				25535AFE23014D4F00833A5B /* Base */,
 			);
 			path = UI;
@@ -368,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				25535AF823014D4F00833A5B /* NotificationReminderView */,
+				3FF9BEF02305A3D200028513 /* ShadowView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -503,6 +515,17 @@
 				3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		3FF9BEE923054CBB00028513 /* Colleagues */ = {
+			isa = PBXGroup;
+			children = (
+				3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */,
+				3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */,
+				3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */,
+				3FF9BEF22305AE0800028513 /* ColleaguesTableViewCell.swift */,
+			);
+			path = Colleagues;
 			sourceTree = "<group>";
 		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
@@ -921,13 +944,17 @@
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
+				3FF9BEF12305A3D200028513 /* ShadowView.swift in Sources */,
 				25535B0323014D4F00833A5B /* ShortcutManager.swift in Sources */,
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
+				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
 				25535AEA23014D2C00833A5B /* ActionResult.swift in Sources */,
 				25535AE723014D2C00833A5B /* DataProvider.swift in Sources */,
 				25535B0423014D4F00833A5B /* ProfileViewController.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
+				3FF9BEF32305AE0800028513 /* ColleaguesTableViewCell.swift in Sources */,
+				3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */,
 				25535B0D23014D4F00833A5B /* ViewModel.swift in Sources */,
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataManager.swift in Sources */,
@@ -935,6 +962,7 @@
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
+				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
 				25535B0623014D4F00833A5B /* UIResultNotifier.swift in Sources */,
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,

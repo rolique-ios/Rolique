@@ -17,11 +17,17 @@ public final class Router {
     return ProfileViewController(viewModel: ProfileViewModelImpl())
   }
   
+  static func getColleaguesViewController() -> ColleaguesViewController<ColleaguesViewModelImpl> {
+    return ColleaguesViewController(viewModel: ColleaguesViewModelImpl(userManager: UserManagerImpl()))
+  }
+  
   static func getTabBarController() -> UITabBarController {
-    let tabbar =  BaseTabBarController()
+    let tabbar = BaseTabBarController()
+    let colleagues = UINavigationController(rootViewController: getColleaguesViewController())
+    colleagues.tabBarItem = UITabBarItem(title: "", image: Images.TabBar.stats, tag: 0)
     let profile = UINavigationController(rootViewController: getProfileViewController())
-    profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 0)
-    tabbar.viewControllers = [profile]
+    profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 1)
+    tabbar.viewControllers = [colleagues, profile]
     
     return tabbar
   }

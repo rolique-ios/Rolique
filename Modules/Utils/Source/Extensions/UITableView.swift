@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITableView {
+public extension UITableView {
     @discardableResult
     func update<T>(_ actions: () -> T) -> T {
         self.beginUpdates()
@@ -53,5 +53,12 @@ extension UITableView {
     
     func dequeue<T: UITableViewCell>(type: T.Type, indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: String(describing: type.self), for: indexPath) as! T
+    }
+  
+    func register(_ cells: [UITableViewCell.Type]) {
+        cells.forEach({
+            let cellName = String(describing: $0)
+            register($0, forCellReuseIdentifier: cellName)
+        })
     }
 }
