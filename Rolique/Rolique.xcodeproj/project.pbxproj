@@ -67,9 +67,12 @@
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
 		2D209D4623034A6400AC2CA5 /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		2D209D4723034A6400AC2CA5 /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
-		2D209D4823034AFC00AC2CA5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */; };
-		2D209D4923034AFC00AC2CA5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */; };
-		3F83A7CC2302FA3B00EA683A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */; };
+		2D209D4823034AFC00AC2CA5 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
+		2D209D4923034AFC00AC2CA5 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
+		3F058BEA230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
+		3F058BEB230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
+		3F058BEC230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
+		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
@@ -194,7 +197,8 @@
 		262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		3625D99FD95DD447F481B6F5 /* Pods-RoliqueTests.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoliqueTests.stagingdebug.xcconfig"; path = "Target Support Files/Pods-RoliqueTests/Pods-RoliqueTests.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		3895A80C2D9664AB869C9297 /* Pods-VacationTodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.release.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.release.xcconfig"; sourceTree = "<group>"; };
-		3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3F058BE9230BF13400869336 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 		25535AD623014D2C00833A5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F058BE8230BF0E400869336 /* Services */,
 				25535AD723014D2C00833A5B /* Managers */,
 				25535ADB23014D2C00833A5B /* Provider */,
 				25535ADD23014D2C00833A5B /* Models */,
@@ -508,10 +513,18 @@
 			path = UserCell;
 			sourceTree = "<group>";
 		};
+		3F058BE8230BF0E400869336 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3F058BE9230BF13400869336 /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		3FF3415023044F70008EA243 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3F83A7CB2302FA3B00EA683A /* CoreDataManager.swift */,
+				3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */,
 				3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -953,11 +966,12 @@
 				25535B0423014D4F00833A5B /* ProfileViewController.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
+				3F058BEA230BF13400869336 /* UserService.swift in Sources */,
 				3FF9BEF32305AE0800028513 /* ColleaguesTableViewCell.swift in Sources */,
 				3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */,
 				25535B0D23014D4F00833A5B /* ViewModel.swift in Sources */,
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
-				3F83A7CC2302FA3B00EA683A /* CoreDataManager.swift in Sources */,
+				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
@@ -977,8 +991,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D209D4823034AFC00AC2CA5 /* CoreDataManager.swift in Sources */,
+				2D209D4823034AFC00AC2CA5 /* CoreDataController.swift in Sources */,
 				25535B13230150A100833A5B /* UserManager.swift in Sources */,
+				3F058BEB230BF13400869336 /* UserService.swift in Sources */,
 				2D209D4623034A6400AC2CA5 /* Rolique.xcdatamodeld in Sources */,
 				25535B112301509A00833A5B /* User.swift in Sources */,
 				25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */,
@@ -989,8 +1004,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D209D4923034AFC00AC2CA5 /* CoreDataManager.swift in Sources */,
+				2D209D4923034AFC00AC2CA5 /* CoreDataController.swift in Sources */,
 				25535B14230150A200833A5B /* UserManager.swift in Sources */,
+				3F058BEC230BF13400869336 /* UserService.swift in Sources */,
 				2D209D4723034A6400AC2CA5 /* Rolique.xcdatamodeld in Sources */,
 				25535B122301509B00833A5B /* User.swift in Sources */,
 				257C79B623018EF7007A299D /* VacationViewController.swift in Sources */,

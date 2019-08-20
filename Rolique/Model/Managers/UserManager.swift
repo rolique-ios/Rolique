@@ -11,7 +11,14 @@ import Networking
 
 public enum RecordType: String {
   case vacation,
-  remote
+  remote,
+  sick,
+  dayoff,
+  business_trip,
+  marrige,
+  baby_birth,
+  funeral,
+  birthday
 }
 
 public protocol  UserManager {

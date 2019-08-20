@@ -14,36 +14,46 @@ protocol ColleaguesViewModel: ViewModel {
   
   func all()
   func onRemote()
-  func onSickLeave()
+  func onVacation()
 }
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
-  private let userManager: UserManager
+  private let userService: UserService
   
-  init(userManager: UserManager) {
-    self.userManager = userManager
+  init(userService: UserService) {
+    self.userService = userService
   }
   
   var onSuccess: (() -> Void)?
   var users = [User]()
   
   func all() {
-    userManager.getAllUsers { [weak self] result in
-      switch result {
-      case .success(let users):
-        self?.users = users
-        self?.onSuccess?()
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    }
+    userService.getAllUsers(onLocal: { [weak self] result in
+      self?.handleResult(result)
+    }, onFetch: { [weak self] result in
+      self?.handleResult(result)
+    })
   }
   
   func onRemote() {
-    
+    userService.getTodayUsersForRecordType(.remote) { [weak self] result in
+      self?.handleResult(result)
+    }
   }
   
-  func onSickLeave() {
-    
+  func onVacation() {
+    userService.getTodayUsersForRecordType(.vacation) { [weak self] result in
+      self?.handleResult(result)
+    }
+  }
+  
+  private func handleResult(_ result: Result<[User], Error>) {
+    switch result {
+    case .success(let users):
+      self.users = users
+      self.onSuccess?()
+    case .failure(let error):
+      print(error.localizedDescription)
+    }
   }
 }

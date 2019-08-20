@@ -23,13 +23,13 @@ public final class User: Codable {
     case vacationData = "vacation_data"
   }
   
-  public let id: String
-  public let slackProfile: SlackProfile
-  public let birthday: String?
-  public let dateOfJoining: String?
-  public let eduPoints, emergencyDays: Double?
-  public let roles: [String]
-  public let vacationData: [String: Double]?
+  public var id: String
+  public var slackProfile: SlackProfile
+  public var birthday: String?
+  public var dateOfJoining: String?
+  public var eduPoints, emergencyDays: Double?
+  public var roles: [String]
+  public var vacationData: [String: Double]?
   
   init(id: String, slackProfile: SlackProfile, birthday: String?, dateOfJoining: String?, eduPoints: Double, emergencyDays: Double?, roles: [String], vacationData: [String: Double]?) {
     self.id = id
@@ -42,65 +42,46 @@ public final class User: Codable {
     self.vacationData = vacationData
   }
   
+  init?(_ managedObject: ManagedUser) {
+    guard let id = managedObject.id,
+    let realName = managedObject.slackProfile?.realName,
+    let slackProfile = SlackProfile.getFromCoreData(with: realName) else { return nil }
+    
+    self.id = id
+    self.slackProfile = slackProfile
+    self.birthday = managedObject.birthday
+    self.dateOfJoining = managedObject.dateOfJoining
+    self.eduPoints = managedObject.eduPoints
+    self.emergencyDays = managedObject.emergencyDays
+    self.roles = managedObject.roles ?? []
+    self.vacationData = managedObject.vacationData
+  }
+  
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
-    createOrUpdate(with: context)
-    try? CoreDataManager.shared.saveToCoreData(context: context)
+    let context = context ?? CoreDataController.shared.mainContext()
+    CoreDataManager<User>().saveToCoreData([self], context: context)
   }
-  
-  @discardableResult
-  func createOrUpdate(with context: NSManagedObjectContext? = nil) -> ManagedUser? {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
-    
-    guard let userEntityDescription = NSEntityDescription.entity(forEntityName: "ManagedUser", in: context) else { return nil }
-    
-    let managedUser = CoreDataManager.shared.getManagedObject(predicate: NSPredicate(format: "id == %@", self.id), context: context).first ?? ManagedUser(entity: userEntityDescription, insertInto: context)
-    managedUser.id = self.id
-    managedUser.slackProfile = self.slackProfile.createOrUpdate(with: context)
-    managedUser.birthday = self.birthday
-    managedUser.dateOfJoining = self.dateOfJoining
-    managedUser.eduPoints = self.eduPoints ?? 0
-    managedUser.emergencyDays = self.emergencyDays ?? 0
-    managedUser.roles = self.roles
-    managedUser.vacationData = self.vacationData
-    
-    return managedUser
-  }
-  
+
   static func getFromCoreData(with id: String, context: NSManagedObjectContext? = nil) -> User? {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
+    guard let managedUser = try? CoreDataManager<User>().getManagedObjects(with: NSPredicate(format: "id == %@", id)).first else { return nil }
 
-    guard let managedUser: ManagedUser = CoreDataManager.shared.getManagedObject(predicate: NSPredicate(format: "id == %@", id), context: context).first,
-      let realName = managedUser.slackProfile?.realName,
-      let slackProfile = SlackProfile.getFromCoreData(with: realName, context: context)
-      else { return nil }
-
-    let user = User(id: id,
-                    slackProfile: slackProfile,
-                    birthday: managedUser.birthday,
-                    dateOfJoining: managedUser.dateOfJoining,
-                    eduPoints: managedUser.eduPoints,
-                    emergencyDays: managedUser.emergencyDays,
-                    roles: managedUser.roles ?? [],
-                    vacationData: managedUser.vacationData)
-
-    return user
+    return User(managedUser)
   }
 }
 
 // MARK: - SlackProfile
 public final class SlackProfile: Codable {
-  public let avatarHash, displayName, displayNameNormalized, email: String?
-  public let firstName: String?
-  public let image192, image24, image32, image1024: String?
-  public let image48, image512, image72: String?
-  public let imageOriginal: String?
-  public let isCustomImage: Bool?
-  public let lastName: String?
-  public let phone, realName, realNameNormalized: String
-  public let skype, statusEmoji: String?
-  public let statusExpiration: Int
-  public let statusText, statusTextCanonical, team, title: String
+  public var avatarHash, displayName, displayNameNormalized, email: String?
+  public var firstName: String?
+  public var image192, image24, image32, image1024: String?
+  public var image48, image512, image72: String?
+  public var imageOriginal: String?
+  public var isCustomImage: Bool?
+  public var lastName: String?
+  public var phone, realName, realNameNormalized: String
+  public var skype, statusEmoji: String?
+  public var statusExpiration: Int
+  public var statusText, statusTextCanonical, team, title: String
   
   enum CodingKeys: String, CodingKey {
     case avatarHash = "avatar_hash"
@@ -165,20 +146,124 @@ public final class SlackProfile: Codable {
     self.title = title
   }
   
+  init?(_ managedObject: ManagedSlackProfile) {
+    guard let phone = managedObject.phone,
+      let realName = managedObject.realName,
+      let realNameNormalized = managedObject.realNameNormalized,
+      let skype = managedObject.skype,
+      let statusText = managedObject.statusText,
+      let statusTextCanonical = managedObject.statusTextCanonical,
+      let team = managedObject.team,
+      let title = managedObject.title
+      else { return nil }
+    
+    self.avatarHash = managedObject.avatarHash
+    self.displayName = managedObject.displayName
+    self.displayNameNormalized = managedObject.displayNameNormalized
+    self.email = managedObject.email
+    self.firstName = managedObject.firstName
+    self.image1024 = managedObject.image1024
+    self.image192 = managedObject.image192
+    self.image24 = managedObject.image24
+    self.image32 = managedObject.image32
+    self.image48 = managedObject.image48
+    self.image512 = managedObject.image512
+    self.image72 = managedObject.image72
+    self.imageOriginal = managedObject.imageOriginal
+    self.isCustomImage = managedObject.isCustomImage
+    self.lastName = managedObject.lastName
+    self.phone = phone
+    self.realName = realName
+    self.realNameNormalized = realNameNormalized
+    self.skype = skype
+    self.statusEmoji = managedObject.statusEmoji
+    self.statusExpiration = Int(managedObject.statusExpiration)
+    self.statusText = statusText
+    self.statusTextCanonical = statusTextCanonical
+    self.team = team
+    self.title = title
+  }
+  
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
-    createOrUpdate(with: context)
-    try? CoreDataManager.shared.saveToCoreData(context: context)
+    let context = context ?? CoreDataController.shared.mainContext()
+    CoreDataManager<SlackProfile>().saveToCoreData([self], context: context)
+  }
+  
+  static func getFromCoreData(with realName: String, context: NSManagedObjectContext? = nil) -> SlackProfile? {
+    guard let managedSlackProfile = try? CoreDataManager<SlackProfile>().getManagedObjects(with: NSPredicate(format: "realName == %@", realName)).first else { return nil }
+    
+    return SlackProfile(managedSlackProfile)
+  }
+}
+
+extension User: Equatable {
+  static public func ==(lhs: User, rhs: User) -> Bool {
+    return lhs.id == rhs.id
+  }
+}
+
+extension User: Hashable {
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(self.id)
+  }
+}
+
+
+// MARK: - Userable
+extension User: Userable {
+  public var name: String {
+    return self.slackProfile.realName
+  }
+  
+  public var thumbnailURL: URL? {
+    return URL(string: (self.slackProfile.image48 ?? self.slackProfile.image32 ?? ""))
+  }
+}
+
+// MARK: - Managed
+
+extension User: CoreDataCompatible {
+  typealias ManagedType = ManagedUser
+  
+  func predicateById() -> NSPredicate {
+    return NSPredicate(format: "id == %@", self.id)
   }
   
   @discardableResult
-  func createOrUpdate(with context: NSManagedObjectContext? = nil) -> ManagedSlackProfile? {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
+  func createOrUpdate(with context: NSManagedObjectContext?) -> ManagedUser? {
+    let context = context ?? CoreDataController.shared.mainContext()
+    
+    guard let userEntityDescription = NSEntityDescription.entity(forEntityName: "ManagedUser", in: context),
+      let slackProfile = self.slackProfile.createOrUpdate(with: context) else { return nil }
+    
+    let managedUser = (try? CoreDataManager<User>().getManagedObjects(with: self.predicateById(), context: context).first) ?? ManagedUser(entity: userEntityDescription, insertInto: context)
+    managedUser.id = self.id
+    managedUser.slackProfile = slackProfile
+    managedUser.birthday = self.birthday
+    managedUser.dateOfJoining = self.dateOfJoining
+    managedUser.eduPoints = self.eduPoints ?? 0
+    managedUser.emergencyDays = self.emergencyDays ?? 0
+    managedUser.roles = self.roles
+    managedUser.vacationData = self.vacationData
+    
+    return managedUser
+  }
+}
+
+extension SlackProfile: CoreDataCompatible {
+  typealias ManagedType = ManagedSlackProfile
+  
+  func predicateById() -> NSPredicate {
+    return NSPredicate(format: "realName == %@", self.realName)
+  }
+  
+  @discardableResult
+  func createOrUpdate(with context: NSManagedObjectContext?) -> ManagedSlackProfile? {
+    let context = context ?? CoreDataController.shared.mainContext()
     
     guard let slackProfileEntityRequest = NSEntityDescription.entity(forEntityName: "ManagedSlackProfile", in: context) else { return nil }
     
-    let managedSlackProfile = CoreDataManager.shared.getManagedObject(predicate: NSPredicate(format: "realName == %@", self.realName),
-                                                                      context: context).first ?? ManagedSlackProfile(entity: slackProfileEntityRequest, insertInto: context)
+    let managedSlackProfile = (try? CoreDataManager<SlackProfile>().getManagedObjects(with: self.predicateById(), context: context).first) ?? ManagedSlackProfile(entity: slackProfileEntityRequest, insertInto: context)
     managedSlackProfile.avatarHash = self.avatarHash
     managedSlackProfile.displayName = self.displayName
     managedSlackProfile.displayNameNormalized = self.displayNameNormalized
@@ -206,82 +291,5 @@ public final class SlackProfile: Codable {
     managedSlackProfile.title = self.title
     
     return managedSlackProfile
-  }
-  
-  static func getFromCoreData(with realName: String, context: NSManagedObjectContext? = nil) -> SlackProfile? {
-    let context = context ?? CoreDataManager.shared.persistentContainer.viewContext
-
-    guard let managedSlackProfile: ManagedSlackProfile = CoreDataManager.shared.getManagedObject(predicate: NSPredicate(format: "realName == %@", realName), context: context).first,
-      let avatarHash = managedSlackProfile.avatarHash,
-      let displayName = managedSlackProfile.displayName,
-      let displayNameNormalized = managedSlackProfile.displayNameNormalized,
-      let email = managedSlackProfile.email,
-      let image192 = managedSlackProfile.image192,
-      let image24 = managedSlackProfile.image24,
-      let image32 = managedSlackProfile.image32,
-      let image48 = managedSlackProfile.image48,
-      let image512 = managedSlackProfile.image512,
-      let image72 = managedSlackProfile.image72,
-      let phone = managedSlackProfile.phone,
-      let realNameNormalized = managedSlackProfile.realNameNormalized,
-      let skype = managedSlackProfile.skype,
-      let statusEmoji = managedSlackProfile.statusEmoji,
-      let statusText = managedSlackProfile.statusText,
-      let statusTextCanonical = managedSlackProfile.statusTextCanonical,
-      let team = managedSlackProfile.team,
-      let title = managedSlackProfile.title
-      else { return nil }
-    
-    let slackProfile = SlackProfile(avatarHash: avatarHash,
-                                    displayName: displayName,
-                                    displayNameNormalized: displayNameNormalized,
-                                    email: email,
-                                    firstName: managedSlackProfile.firstName,
-                                    image1024: managedSlackProfile.image1024,
-                                    image192: image192,
-                                    image24: image24,
-                                    image32: image32,
-                                    image48: image48,
-                                    image512: image512,
-                                    image72: image72,
-                                    imageOriginal: managedSlackProfile.imageOriginal,
-                                    isCustomImage: managedSlackProfile.isCustomImage,
-                                    lastName: managedSlackProfile.lastName,
-                                    phone: phone,
-                                    realName: realName,
-                                    realNameNormalized: realNameNormalized,
-                                    skype: skype,
-                                    statusEmoji: statusEmoji,
-                                    statusExpiration: Int(managedSlackProfile.statusExpiration),
-                                    statusText: statusText,
-                                    statusTextCanonical: statusTextCanonical,
-                                    team: team,
-                                    title: title)
-
-    return slackProfile
-  }
-}
-
-extension User: Equatable {
-  static public func ==(lhs: User, rhs: User) -> Bool {
-    return lhs.id == rhs.id
-  }
-}
-
-extension User: Hashable {
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(self.id)
-  }
-}
-
-
-// MARK: - Userable
-extension User: Userable {
-  public var name: String {
-    return self.slackProfile.realName
-  }
-  
-  public var thumbnailURL: URL? {
-    return URL(string: (self.slackProfile.image48 ?? self.slackProfile.image32 ?? ""))
   }
 }
