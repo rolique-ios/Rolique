@@ -19,7 +19,7 @@ public final class Router {
   
   static func getColleaguesViewController() -> ColleaguesViewController<ColleaguesViewModelImpl> {
     let userService = UserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
-    return ColleaguesViewController(viewModel: ColleaguesViewModelImpl(userService: userService))
+    return ColleaguesViewController(viewModel: ColleaguesViewModelImpl(userService: userService, usersStatus: .all))
   }
   
   static func getTabBarController() -> UITabBarController {

@@ -7,9 +7,10 @@
 //
 
 import Networking
+import Utils
 
 public protocol UserService {
-  func getAllUsers(onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?)
+  func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?)
   func getUserWithId(_ userId: String, onLocal: ((Result<User, Error>) -> Void)?, onFetch: ((Result<User, Error>) -> Void)?)
   func getTodayUsersForRecordType(_ recordType: RecordType, onFetch: ((Result<[User], Error>) -> Void)?)
 }
@@ -22,20 +23,24 @@ final class UserServiceImpl: UserService {
     self.coreDataManager = coreDataManager
   }
   
-  func getAllUsers(onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
+  func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
     do {
-      let mos = try coreDataManager.getManagedObjects()
+      let mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors)
       let users = mos.compactMap { User($0) }
       onLocal?(.success(users))
     } catch {
       onLocal?(.failure(error))
     }
     
+    let date = Date()
+    guard date >= UserDefaultsManager.shared.allUsersRequstTimeLimit ?? date else { return }
+    
     userManager.getAllUsers { [weak self] usersResult in
       switch usersResult {
       case .success(let array):
         self?.coreDataManager.clearCoreData()
         self?.coreDataManager.saveToCoreData(array)
+        self?.writeIntoUserDefaults()
         onFetch?(.success(array))
       case .failure(let error):
         onFetch?(.failure(error))
@@ -75,5 +80,13 @@ final class UserServiceImpl: UserService {
         onFetch?(.failure(error))
       }
     }
+  }
+  
+  private func writeIntoUserDefaults() {
+    var calendar = Calendar.current
+    calendar.timeZone = TimeZone(abbreviation: "UTC")!
+    let limit = calendar.date(byAdding: .hour, value: 24, to: Date()) ?? Date()
+    UserDefaultsManager.shared.allUsersRequstTime = Date()
+    UserDefaultsManager.shared.allUsersRequstTimeLimit = limit
   }
 }

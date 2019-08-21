@@ -10,27 +10,26 @@ import UIKit
 import SnapKit
 import Utils
 
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> {
-  private enum Segments: Int {
-    case all, remote, vacation
-    
-    var description: String {
-      switch self {
-      case .all:
-        return "All"
-      case .remote:
-        return "Remote"
-      case .vacation:
-        return "Vacation"
-      }
+enum UsersStatus: Int {
+  case all, remote, vacation
+  
+  var description: String {
+    switch self {
+    case .all:
+      return "All"
+    case .remote:
+      return "Remote"
+    case .vacation:
+      return "Vacation"
     }
   }
-  
+}
+
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> {  
   private lazy var tableView = UITableView()
   private lazy var segmentedControl = UISegmentedControl()
   private lazy var tableViewHeader = UIView()
   private var dataSource: ColleaguesDataSource!
-  private var selectedIndex = Segments.all.rawValue
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,7 +38,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> 
     configureUI()
     configureTableView()
     configureBinding()
-    viewModel.all()
+    viewModel.refreshList()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -75,12 +74,12 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> 
     self.view.backgroundColor = Colors.Colleagues.softWhite
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
-    segmentedControl.insertSegment(withTitle: Segments.all.description, at: Segments.all.rawValue, animated: false)
-    segmentedControl.insertSegment(withTitle: Segments.remote.description, at: Segments.remote.rawValue, animated: false)
-    segmentedControl.insertSegment(withTitle: Segments.vacation.description, at: Segments.vacation.rawValue, animated: false)
+    segmentedControl.insertSegment(withTitle: UsersStatus.all.description, at: UsersStatus.all.rawValue, animated: false)
+    segmentedControl.insertSegment(withTitle: UsersStatus.remote.description, at: UsersStatus.remote.rawValue, animated: false)
+    segmentedControl.insertSegment(withTitle: UsersStatus.vacation.description, at: UsersStatus.vacation.rawValue, animated: false)
     segmentedControl.tintColor = Colors.Login.backgroundColor
-    segmentedControl.selectedSegmentIndex = selectedIndex
-    segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .valueChanged)
+    segmentedControl.selectedSegmentIndex = viewModel.usersStatus.rawValue
+    segmentedControl.addTarget(self, action: #selector(didChangeSegment(_:)), for: .valueChanged)
     tableView.tableHeaderView = tableViewHeader
   }
   
@@ -88,24 +87,16 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> 
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
   }
   
-  @objc func didChangeSegment() {
-    guard selectedIndex != segmentedControl.selectedSegmentIndex,
-      let segment = Segments(rawValue: segmentedControl.selectedSegmentIndex) else { return }
-    
-    switch segment {
-    case .all:
-      viewModel.all()
-    case .remote:
-      viewModel.onRemote()
-    case .vacation:
-      viewModel.onVacation()
+  @objc func didChangeSegment(_ sender: UISegmentedControl) {
+    if sender.selectedSegmentIndex != viewModel.usersStatus.rawValue {
+      guard let usersStatus = UsersStatus(rawValue: sender.selectedSegmentIndex) else { return }
+      viewModel.usersStatus = usersStatus
+      viewModel.refreshList()
     }
-    
-    selectedIndex = segmentedControl.selectedSegmentIndex
   }
   
   private func configureBinding() {
-    viewModel.onSuccess = { [weak self] in
+    viewModel.onRefreshList = { [weak self] in
       guard let self = self else { return }
       self.dataSource.update(dataSource: self.viewModel.users)
     }
