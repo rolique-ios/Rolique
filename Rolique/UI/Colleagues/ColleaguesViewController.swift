@@ -25,20 +25,28 @@ enum UsersStatus: Int {
   }
 }
 
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> {  
-  private lazy var tableView = UITableView()
-  private lazy var segmentedControl = UISegmentedControl()
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UIScrollViewDelegate, UISearchBarDelegate {
+  private lazy var scrollView = UIScrollView()
+  private lazy var segmentedView = SegmentedView()
+  private lazy var tableViews = [UITableView(), UITableView(), UITableView()]
   private lazy var tableViewHeader = UIView()
-  private var dataSource: ColleaguesDataSource!
+  private lazy var searchBar = UISearchBar()
+  private var dataSources = [ColleaguesDataSource]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configureConstraints()
     configureUI()
-    configureTableView()
+    configureTableViews()
     configureBinding()
-    viewModel.refreshList()
+    viewModel.all()
+    viewModel.onRemote()
+    viewModel.onVacation()
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -52,53 +60,177 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T> 
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = UIColor.white
-    let searchController = UISearchController(searchResultsController: nil)
-    navigationItem.searchController = searchController
+  }
+  
+  override func performOnceInViewDidAppear() {
+    self.segmentedView.configure(with: [UsersStatus.all.description,
+                                        UsersStatus.remote.description,
+                                        UsersStatus.vacation.description],
+                                 titleColor: Colors.Colleagues.lightBlue,
+                                 indicatorHeight: 3,
+                                 indicatorColor: Colors.Login.backgroundColor)
+    setupScrollView()
   }
   
   private func configureConstraints() {
-    [tableView].forEach(self.view.addSubviewAndDisableMaskTranslate)
+    [segmentedView, scrollView].forEach(self.view.addSubviewAndDisableMaskTranslate)
     
-    tableView.snp.makeConstraints { maker in
-      maker.edges.equalTo(self.view.safeAreaLayoutGuide)
+    segmentedView.snp.makeConstraints { maker in
+      maker.top.equalTo(self.view.safeAreaLayoutGuide)
+      maker.leading.equalTo(self.view.safeAreaLayoutGuide)
+      maker.trailing.equalTo(self.view.safeAreaLayoutGuide)
+      maker.height.equalTo(40)
     }
     
-    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableView.bounds.width, height: 50))
-    tableViewHeader.addSubview(segmentedControl)
-    segmentedControl.snp.makeConstraints { maker in
-      maker.center.equalTo(tableViewHeader)
+    scrollView.snp.makeConstraints { maker in
+      maker.top.equalTo(self.segmentedView.snp.bottom)
+      maker.leading.equalTo(self.view.safeAreaLayoutGuide)
+      maker.trailing.equalTo(self.view.safeAreaLayoutGuide)
+      maker.bottom.equalTo(self.view.safeAreaLayoutGuide)
+    }
+    
+    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableViews[UsersStatus.all.rawValue].bounds.width, height: 60))
+    tableViewHeader.addSubview(searchBar)
+    searchBar.snp.makeConstraints { maker in
+      maker.edges.equalTo(tableViewHeader)
     }
   }
   
   private func configureUI() {
     self.view.backgroundColor = Colors.Colleagues.softWhite
-    tableView.separatorStyle = .none
-    tableView.backgroundColor = .clear
-    segmentedControl.insertSegment(withTitle: UsersStatus.all.description, at: UsersStatus.all.rawValue, animated: false)
-    segmentedControl.insertSegment(withTitle: UsersStatus.remote.description, at: UsersStatus.remote.rawValue, animated: false)
-    segmentedControl.insertSegment(withTitle: UsersStatus.vacation.description, at: UsersStatus.vacation.rawValue, animated: false)
-    segmentedControl.tintColor = Colors.Login.backgroundColor
-    segmentedControl.selectedSegmentIndex = viewModel.usersStatus.rawValue
-    segmentedControl.addTarget(self, action: #selector(didChangeSegment(_:)), for: .valueChanged)
-    tableView.tableHeaderView = tableViewHeader
-  }
-  
-  private func configureTableView() {
-    dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
-  }
-  
-  @objc func didChangeSegment(_ sender: UISegmentedControl) {
-    if sender.selectedSegmentIndex != viewModel.usersStatus.rawValue {
-      guard let usersStatus = UsersStatus(rawValue: sender.selectedSegmentIndex) else { return }
-      viewModel.usersStatus = usersStatus
-      viewModel.refreshList()
+    
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.isPagingEnabled = true
+    scrollView.bounces = false
+    scrollView.isDirectionalLockEnabled = true
+    
+    searchBar.delegate = self
+    searchBar.returnKeyType = .done
+    searchBar.barTintColor = UIColor.clear
+    searchBar.backgroundColor = UIColor.clear
+    searchBar.isTranslucent = true
+    searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+    if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+      if let backgroundview = textfield.subviews.first {
+        backgroundview.backgroundColor = UIColor.white
+        backgroundview.layer.shadowColor = UIColor.black.cgColor
+        backgroundview.layer.shadowRadius = 4.0
+        backgroundview.layer.shadowOffset = CGSize(width: 0, height: 7)
+        backgroundview.layer.shadowOpacity = 0.1
+        backgroundview.layer.cornerRadius = 10.0;
+      }
     }
+  }
+  
+  private func configureTableViews() {
+    for (index, tableView) in tableViews.enumerated() {
+      tableView.separatorStyle = .none
+      tableView.backgroundColor = .clear
+      
+      guard let status = UsersStatus(rawValue: index) else { return }
+      switch status {
+      case .all:
+        tableView.tableHeaderView = tableViewHeader
+        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.users))
+      case .remote:
+        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.usersOnRemote))
+      case .vacation:
+        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.usersOnVacation))
+      }
+    }
+  }
+  
+  private func setupScrollView() {
+    self.segmentedView.selectedSegmentDidChanged = { [weak self] selectedIndex in
+      guard let strongSelf = self else { return }
+      
+      let scrollViewWidth = strongSelf.scrollView.frame.width
+      let contentOffsetX = scrollViewWidth * CGFloat(selectedIndex)
+      let contentOffsetY = strongSelf.scrollView.contentOffset.y
+      strongSelf.scrollView.setContentOffset(
+        CGPoint(x: contentOffsetX, y: contentOffsetY),
+        animated: true
+      )
+      strongSelf.changeTableViewDelegate(currentPage: selectedIndex)
+    }
+    
+    scrollView.contentSize = CGSize(
+      width: UIScreen.main.bounds.width * CGFloat(tableViews.count),
+      height: scrollView.frame.height
+    )
+    
+    for (index, tableView) in tableViews.enumerated() {
+      tableView.frame = CGRect(
+        x: UIScreen.main.bounds.width * CGFloat(index),
+        y: 0,
+        width: scrollView.frame.width,
+        height: scrollView.frame.height
+      )
+      scrollView.addSubview(tableView)
+    }
+    
+    scrollView.delegate = self
   }
   
   private func configureBinding() {
-    viewModel.onRefreshList = { [weak self] in
+    viewModel.onRefreshList = { [weak self] status in
       guard let self = self else { return }
-      self.dataSource.update(dataSource: self.viewModel.users)
+      switch status {
+      case .all:
+        if self.viewModel.isSearching {
+          self.dataSources[status.rawValue].update(dataSource: self.viewModel.searchedUsers)
+        } else {
+          self.dataSources[status.rawValue].update(dataSource: self.viewModel.users)
+        }
+      case .remote:
+        self.dataSources[status.rawValue].update(dataSource: self.viewModel.usersOnRemote)
+      case .vacation:
+        self.dataSources[status.rawValue].update(dataSource: self.viewModel.usersOnVacation)
+      }
     }
   }
+  
+  private func changeTableViewDelegate(currentPage: Int) {
+    segmentedView.selectedSegmentIndex = currentPage
+  }
+  
+  // MARK: - UIScrollViewDelegate
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    let page = floor(scrollView.contentOffset.x / scrollView.frame.width)
+    changeTableViewDelegate(currentPage: Int(page))
+  }
+  
+  // MARK: - UISearchBarDelegate
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.text = ""
+    viewModel.isSearching = false
+    viewModel.onRefreshList?(.all)
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchBar.text == nil || searchBar.text == "" {
+      viewModel.isSearching = false
+    } else {
+      viewModel.isSearching = true
+    }
+    viewModel.searchUser(with: searchText)
+  }
+  
+  func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    searchBar.setShowsCancelButton(true, animated: true)
+    return true
+  }
+  
+  func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+    searchBar.setShowsCancelButton(false, animated: true)
+    return true
+  }
+  
 }

@@ -18,5 +18,8 @@ public struct Colors {
     public static var softWhite: UIColor {
       return UIColor(red: 252.0 / 255.0, green: 252.0 / 255.0, blue: 252.0 / 255.0, alpha: 1.0)
     }
+    public static var lightBlue: UIColor {
+      return  UIColor(red: 53.0 / 255.0, green: 134.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+    }
   }
 }

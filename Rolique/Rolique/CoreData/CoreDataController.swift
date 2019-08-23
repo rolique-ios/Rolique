@@ -64,7 +64,7 @@ final class CoreDataManager<R: CoreDataCompatible> {
   }
   
   func getManagedObjects(with predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, context: NSManagedObjectContext? = nil) throws -> [R.ManagedType] {
-    let context = CoreDataController.shared.mainContext()
+    let context = context ?? CoreDataController.shared.mainContext()
     let request = NSFetchRequest<R.ManagedType>(entityName: String(describing: R.ManagedType.self))
     request.predicate = predicate
     request.sortDescriptors = sortDescriptors

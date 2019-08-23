@@ -33,13 +33,11 @@ public final class Router {
     return tabbar
   }
   
-  public static func getStartViewController() -> UINavigationController {
-    let root = UserDefaultsManager.shared.userId == nil
-      ? Router.getLoginViewController()
-      : self.getTabBarController()
-    
-    let navigationController = UINavigationController(rootViewController: root)
-  
-    return navigationController
+  public static func getStartViewController() -> UIViewController {
+    if UserDefaultsManager.shared.userId == nil {
+      return UINavigationController(rootViewController: Router.getLoginViewController())
+    } else {
+      return self.getTabBarController()
+    }
   }
 }

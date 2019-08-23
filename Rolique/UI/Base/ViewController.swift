@@ -72,6 +72,10 @@ class ViewController<T: ViewModel>: UIViewController {
     print("☠️ \(self) ☠️")
     NotificationCenter.default.removeObserver(self)
   }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
 }
 
 // MARK: - Private

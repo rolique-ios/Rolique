@@ -24,8 +24,9 @@ final class UserServiceImpl: UserService {
   }
   
   func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
+    let context = CoreDataController.shared.backgroundContext()
     do {
-      let mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors)
+      let mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors, context: context)
       let users = mos.compactMap { User($0) }
       onLocal?(.success(users))
     } catch {
@@ -39,7 +40,7 @@ final class UserServiceImpl: UserService {
       switch usersResult {
       case .success(let array):
         self?.coreDataManager.clearCoreData()
-        self?.coreDataManager.saveToCoreData(array)
+        self?.coreDataManager.saveToCoreData(array, context: context)
         self?.writeIntoUserDefaults()
         onFetch?(.success(array))
       case .failure(let error):

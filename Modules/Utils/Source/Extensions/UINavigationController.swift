@@ -14,4 +14,8 @@ extension UINavigationController {
         navigationBar.setBackgroundImage(translucent ? UIImage() : nil, for: .default)
         navigationBar.isTranslucent = true
     }
+  
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? .default
+    }
 }
