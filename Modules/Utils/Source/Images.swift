@@ -20,6 +20,10 @@ public struct Images {
     public static var stats: UIImage {
       return UIImage(named: "stats")!
     }
+    
+    public static var actions: UIImage {
+      return UIImage(named: "actions")!
+    }
   }
   public struct Login {
     public static var fullLogo: UIImage {

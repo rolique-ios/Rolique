@@ -21,5 +21,6 @@ public struct Strings {
   
   public struct NavigationTitle {
     public static var colleagues: String { return "Colleagues".localized }
+    public static var actions: String { return "Actions".localized }
   }
 }

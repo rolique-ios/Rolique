@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Utils
 
-enum UsersStatus: Int {
+enum Segment: Int {
   case all, remote, vacation
   
   var description: String {
@@ -51,8 +51,20 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    title = Strings.NavigationTitle.colleagues
-    navigationController?.setNavigationBarHidden(false, animated: false)
+    configureNavigationBar()
+  }
+  
+  override func performOnceInViewDidAppear() {
+    self.segmentedView.configure(with: [Segment.all.description,
+                                        Segment.remote.description,
+                                        Segment.vacation.description],
+                                 titleColor: Colors.Colleagues.lightBlue,
+                                 indicatorHeight: 3,
+                                 indicatorColor: Colors.Login.backgroundColor)
+    setupScrollView()
+  }
+  
+  private func configureNavigationBar() {
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.prefersLargeTitles = true
     let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -60,16 +72,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = UIColor.white
-  }
-  
-  override func performOnceInViewDidAppear() {
-    self.segmentedView.configure(with: [UsersStatus.all.description,
-                                        UsersStatus.remote.description,
-                                        UsersStatus.vacation.description],
-                                 titleColor: Colors.Colleagues.lightBlue,
-                                 indicatorHeight: 3,
-                                 indicatorColor: Colors.Login.backgroundColor)
-    setupScrollView()
   }
   
   private func configureConstraints() {
@@ -89,7 +91,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       maker.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
     
-    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableViews[UsersStatus.all.rawValue].bounds.width, height: 60))
+    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableViews[Segment.all.rawValue].bounds.width, height: 60))
     tableViewHeader.addSubview(searchBar)
     searchBar.snp.makeConstraints { maker in
       maker.edges.equalTo(tableViewHeader)
@@ -97,6 +99,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   private func configureUI() {
+    title = Strings.NavigationTitle.colleagues
     self.view.backgroundColor = Colors.Colleagues.softWhite
     
     scrollView.showsHorizontalScrollIndicator = false
@@ -126,9 +129,12 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     for (index, tableView) in tableViews.enumerated() {
       tableView.separatorStyle = .none
       tableView.backgroundColor = .clear
+      let refreshControl = UIRefreshControl()
+      refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+      tableView.refreshControl = refreshControl
       
-      guard let status = UsersStatus(rawValue: index) else { return }
-      switch status {
+      guard let segment = Segment(rawValue: index) else { return }
+      switch segment {
       case .all:
         tableView.tableHeaderView = tableViewHeader
         dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.users))
@@ -173,20 +179,39 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   private func configureBinding() {
-    viewModel.onRefreshList = { [weak self] status in
+    viewModel.onRefreshList = { [weak self] segment in
       guard let self = self else { return }
-      switch status {
+      let dataSource: ColleaguesDataSource = self.dataSources[segment.rawValue]
+      switch segment {
       case .all:
         if self.viewModel.isSearching {
-          self.dataSources[status.rawValue].update(dataSource: self.viewModel.searchedUsers)
+          dataSource.update(dataSource: self.viewModel.searchedUsers)
         } else {
-          self.dataSources[status.rawValue].update(dataSource: self.viewModel.users)
+          dataSource.update(dataSource: self.viewModel.users)
         }
       case .remote:
-        self.dataSources[status.rawValue].update(dataSource: self.viewModel.usersOnRemote)
+        dataSource.update(dataSource: self.viewModel.usersOnRemote)
       case .vacation:
-        self.dataSources[status.rawValue].update(dataSource: self.viewModel.usersOnVacation)
+        dataSource.update(dataSource: self.viewModel.usersOnVacation)
       }
+      dataSource.hideRefreshControl()
+    }
+    viewModel.onError = { [weak self] segment in
+      guard let self = self else { return }
+      let dataSource: ColleaguesDataSource = self.dataSources[segment.rawValue]
+      dataSource.hideRefreshControl()
+    }
+  }
+  
+  @objc func refresh() {
+    guard let segment = Segment(rawValue: segmentedView.selectedSegmentIndex) else { return }
+    switch segment {
+    case .all:
+      viewModel.all()
+    case .remote:
+      viewModel.onRemote()
+    case .vacation:
+      viewModel.onVacation()
     }
   }
   
@@ -232,5 +257,4 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     searchBar.setShowsCancelButton(false, animated: true)
     return true
   }
-  
 }

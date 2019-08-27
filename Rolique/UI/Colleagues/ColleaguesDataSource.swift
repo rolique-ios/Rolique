@@ -29,6 +29,10 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
     self.tableView.reloadData()
   }
   
+  func hideRefreshControl() {
+    self.tableView.refreshControl?.endRefreshing()
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return data.count
   }

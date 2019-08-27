@@ -14,7 +14,7 @@ final class SegmentedView: UIView {
     static let minusWidth: CGFloat = 10.0
   }
   
-  var selectedSegmentIndex = -1 {
+  var selectedSegmentIndex = 0 {
     didSet {
       if selectedSegmentIndex != oldValue {
         changeIndexIndicator(index: selectedSegmentIndex)

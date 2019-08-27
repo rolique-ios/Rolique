@@ -75,6 +75,8 @@
 		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		3F959EE6230EC1D000957307 /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F959EE5230EC1D000957307 /* SegmentedView.swift */; };
+		3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035123155EA100EBCE4E /* ActionsViewController.swift */; };
+		3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -202,6 +204,8 @@
 		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
 		3F959EE5230EC1D000957307 /* SegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
+		3FF1035123155EA100EBCE4E /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
+		3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				25535AF623014D4F00833A5B /* Views */,
 				25535AFA23014D4F00833A5B /* Login */,
 				3FF9BEE923054CBB00028513 /* Colleagues */,
+				3FF1035023155E8700EBCE4E /* Actions */,
 				25535AFE23014D4F00833A5B /* Base */,
 			);
 			path = UI;
@@ -522,6 +527,15 @@
 				3F058BE9230BF13400869336 /* UserService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		3FF1035023155E8700EBCE4E /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				3FF1035123155EA100EBCE4E /* ActionsViewController.swift */,
+				3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */,
+			);
+			path = Actions;
 			sourceTree = "<group>";
 		};
 		3FF3415023044F70008EA243 /* CoreData */ = {
@@ -962,6 +976,7 @@
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
 				3FF9BEF12305A3D200028513 /* ShadowView.swift in Sources */,
 				3F959EE6230EC1D000957307 /* SegmentedView.swift in Sources */,
+				3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */,
 				25535B0323014D4F00833A5B /* ShortcutManager.swift in Sources */,
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
@@ -976,6 +991,7 @@
 				25535B0D23014D4F00833A5B /* ViewModel.swift in Sources */,
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
+				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
