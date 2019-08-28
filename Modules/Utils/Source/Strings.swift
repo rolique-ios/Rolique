@@ -23,4 +23,15 @@ public struct Strings {
     public static var colleagues: String { return "Colleagues".localized }
     public static var actions: String { return "Actions".localized }
   }
+  
+  public struct Actions {
+    public static var confirm: String { return "Confirm".localized }
+    public static var cancel: String { return "Cancel".localized }
+    public static var pochavTitle: String { return "Ready to start working?".localized }
+    public static var dopracTitle: String { return "Available actions:".localized }
+    public static var now: String { return "Now".localized }
+    public static var inAHour: String { return "In a hour".localized }
+    public static var customTime: String { return "Custom time".localized }
+    public static var chooseTime: String { return "Choose time".localized }
+  }
 }

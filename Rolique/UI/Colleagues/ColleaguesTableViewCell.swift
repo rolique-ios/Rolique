@@ -15,6 +15,11 @@ protocol ColleaguesTableViewCellDelegate: class {
 }
 
 class ColleaguesTableViewCell: UITableViewCell {
+  private struct Constants {
+    static var defaultOffset: CGFloat { return 15.0 }
+    static var containerViewInsets: UIEdgeInsets { return UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10) }
+    static var phoneImageSize: CGFloat { return 30.0 }
+  }
   private lazy var containerView = ShadowView()
   private lazy var nameLabel = UILabel()
   private lazy var titleLabel = UILabel()
@@ -83,25 +88,24 @@ class ColleaguesTableViewCell: UITableViewCell {
     containerView.addSubview(phoneImage)
     
     containerView.snp.makeConstraints { maker in
-      maker.edges.equalTo(self).inset(UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10))
+      maker.edges.equalTo(self).inset(Constants.containerViewInsets)
     }
     
     titleLabel.snp.makeConstraints { maker in
-      maker.leading.equalTo(containerView).offset(15)
-      maker.bottom.equalTo(containerView).offset(-15)
+      maker.leading.equalTo(containerView).offset(Constants.defaultOffset)
+      maker.bottom.equalTo(containerView).offset(-Constants.defaultOffset)
     }
     
     nameLabel.snp.makeConstraints { maker in
-      maker.leading.equalTo(containerView).offset(15)
-      maker.top.equalTo(containerView).offset(15)
+      maker.leading.equalTo(containerView).offset(Constants.defaultOffset)
+      maker.top.equalTo(containerView).offset(Constants.defaultOffset)
     }
     
     phoneImage.snp.makeConstraints { maker in
-      maker.trailing.equalTo(containerView).offset(-15)
+      maker.trailing.equalTo(containerView).offset(-Constants.defaultOffset)
       maker.centerY.equalTo(containerView)
       maker.leading.equalTo(nameLabel.snp.trailing)
-      maker.height.equalTo(30)
-      maker.width.equalTo(30)
+      maker.size.equalTo(Constants.phoneImageSize)
     }
   }
   

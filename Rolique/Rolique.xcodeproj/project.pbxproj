@@ -75,8 +75,14 @@
 		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		3F959EE6230EC1D000957307 /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F959EE5230EC1D000957307 /* SegmentedView.swift */; };
+		3FC996102316818800C2554C /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9960F2316818800C2554C /* ConfirmButton.swift */; };
+		3FC996122316819200C2554C /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996112316819200C2554C /* CancelButton.swift */; };
+		3FC996152316843700C2554C /* DopracToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996142316843700C2554C /* DopracToast.swift */; };
 		3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035123155EA100EBCE4E /* ActionsViewController.swift */; };
 		3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */; };
+		3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103552315735900EBCE4E /* ActionsDataSource.swift */; };
+		3FF103582315736C00EBCE4E /* ActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */; };
+		3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035923157D7F00EBCE4E /* PochavToast.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -204,8 +210,14 @@
 		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
 		3F959EE5230EC1D000957307 /* SegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
+		3FC9960F2316818800C2554C /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
+		3FC996112316819200C2554C /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
+		3FC996142316843700C2554C /* DopracToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DopracToast.swift; sourceTree = "<group>"; };
 		3FF1035123155EA100EBCE4E /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
+		3FF103552315735900EBCE4E /* ActionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsDataSource.swift; sourceTree = "<group>"; };
+		3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsTableViewCell.swift; sourceTree = "<group>"; };
+		3FF1035923157D7F00EBCE4E /* PochavToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PochavToast.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -383,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				25535AF723014D4F00833A5B /* Custom */,
+				3FC9960E23167BD700C2554C /* Toasts */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -529,11 +542,32 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		3FC9960E23167BD700C2554C /* Toasts */ = {
+			isa = PBXGroup;
+			children = (
+				3FC99613231683B800C2554C /* DefaultButtons */,
+				3FF1035923157D7F00EBCE4E /* PochavToast.swift */,
+				3FC996142316843700C2554C /* DopracToast.swift */,
+			);
+			path = Toasts;
+			sourceTree = "<group>";
+		};
+		3FC99613231683B800C2554C /* DefaultButtons */ = {
+			isa = PBXGroup;
+			children = (
+				3FC9960F2316818800C2554C /* ConfirmButton.swift */,
+				3FC996112316819200C2554C /* CancelButton.swift */,
+			);
+			path = DefaultButtons;
+			sourceTree = "<group>";
+		};
 		3FF1035023155E8700EBCE4E /* Actions */ = {
 			isa = PBXGroup;
 			children = (
 				3FF1035123155EA100EBCE4E /* ActionsViewController.swift */,
 				3FF1035323155EE300EBCE4E /* ActionsViewModel.swift */,
+				3FF103552315735900EBCE4E /* ActionsDataSource.swift */,
+				3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -970,7 +1004,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC996152316843700C2554C /* DopracToast.swift in Sources */,
 				25535AE423014D2C00833A5B /* UserManager.swift in Sources */,
+				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
@@ -981,11 +1017,14 @@
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
 				25535AEA23014D2C00833A5B /* ActionResult.swift in Sources */,
+				3FC996102316818800C2554C /* ConfirmButton.swift in Sources */,
 				25535AE723014D2C00833A5B /* DataProvider.swift in Sources */,
 				25535B0423014D4F00833A5B /* ProfileViewController.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
+				3FC996122316819200C2554C /* CancelButton.swift in Sources */,
 				3F058BEA230BF13400869336 /* UserService.swift in Sources */,
+				3FF103582315736C00EBCE4E /* ActionsTableViewCell.swift in Sources */,
 				3FF9BEF32305AE0800028513 /* ColleaguesTableViewCell.swift in Sources */,
 				3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */,
 				25535B0D23014D4F00833A5B /* ViewModel.swift in Sources */,
@@ -997,6 +1036,7 @@
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
+				3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */,
 				25535B0623014D4F00833A5B /* UIResultNotifier.swift in Sources */,
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,

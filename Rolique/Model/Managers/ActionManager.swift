@@ -9,8 +9,25 @@
 import Foundation
 import Networking
 
-public enum ActionType {
+public enum ActionType: String, CaseIterable {
+  case late
+  case remote
+  case doprac
+  case pochav
+}
+
+public enum DopracType {
+  case now
+  case hour(Date?)
   
+  var description: String {
+    switch self {
+    case .now:
+      return "now"
+    case .hour:
+      return "hour"
+    }
+  }
 }
 
 public protocol ActionManger {

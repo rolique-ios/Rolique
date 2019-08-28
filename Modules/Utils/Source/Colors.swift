@@ -22,4 +22,9 @@ public struct Colors {
       return  UIColor(red: 53.0 / 255.0, green: 134.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
     }
   }
+  public struct Actions {
+    public static var nicePurple: UIColor {
+      return UIColor(red: 93.0 / 255.0, green: 17.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
+    }
+  }
 }
