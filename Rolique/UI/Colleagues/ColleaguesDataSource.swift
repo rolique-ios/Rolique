@@ -41,6 +41,7 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
     let cell = ColleaguesTableViewCell.dequeued(by: tableView)
     cell.delegate = self
     cell.configure(with: data[indexPath.row].slackProfile.realName,
+                   todayStatus: data[indexPath.row].todayStatus,
                    title: data[indexPath.row].slackProfile.title,
                    isButtonEnabled: !data[indexPath.row].slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                    isMe: data[indexPath.row].id == UserDefaultsManager.shared.userId)

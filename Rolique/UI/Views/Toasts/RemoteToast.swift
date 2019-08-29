@@ -133,7 +133,7 @@ final class RemoteToast: UIView {
     startDateLabel.text = Strings.Actions.startTitle
     endDateLabel.text = Strings.Actions.endTitle
     startDateLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
-    endDateLabel.setContentCompressionResistancePriority(UILayoutPriority(251), for: .horizontal)
+    endDateLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
     
     startDatePicker.datePickerMode = .date
     endDatePicker.datePickerMode = .date

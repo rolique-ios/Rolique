@@ -132,6 +132,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     view.update(data: RecordType.allCases,
                 onSelectRow: { [weak self] recordType in
                   Toast.current.hideToast()
+                  self?.viewModel.recordType = recordType
                   if recordType == .all {
                     self?.viewModel.listType = .all
                     self?.viewModel.all()

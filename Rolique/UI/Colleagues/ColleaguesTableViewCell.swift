@@ -17,12 +17,14 @@ protocol ColleaguesTableViewCellDelegate: class {
 class ColleaguesTableViewCell: UITableViewCell {
   private struct Constants {
     static var defaultOffset: CGFloat { return 15.0 }
+    static var littleOffset: CGFloat { return 5.0 }
     static var containerViewInsets: UIEdgeInsets { return UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10) }
     static var phoneImageSize: CGFloat { return 30.0 }
   }
   private lazy var containerView = ShadowView()
   private lazy var nameLabel = UILabel()
   private lazy var titleLabel = UILabel()
+  private lazy var todayStatusLabel = UILabel()
   private lazy var phoneImage = UIImageView()
   
   weak var delegate: ColleaguesTableViewCellDelegate?
@@ -42,6 +44,10 @@ class ColleaguesTableViewCell: UITableViewCell {
     titleLabel.textColor = UIColor.lightGray
     titleLabel.font = UIFont.italicSystemFont(ofSize: 14.0)
     
+    todayStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+    todayStatusLabel.textColor = .orange
+    todayStatusLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+    
     phoneImage.translatesAutoresizingMaskIntoConstraints = false
   }
   
@@ -49,17 +55,18 @@ class ColleaguesTableViewCell: UITableViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with name: String, title: String, isButtonEnabled: Bool, isMe: Bool) {
+  func configure(with name: String, todayStatus: String?, title: String, isButtonEnabled: Bool, isMe: Bool) {
     configureViews()
     
     nameLabel.text = name
+    todayStatusLabel.text = todayStatus
     
     if !title.isEmpty {
       titleLabel.text = title
     } else {
       titleLabel.removeFromSuperview()
       nameLabel.snp.remakeConstraints { maker in
-        maker.leading.equalTo(containerView).offset(15)
+        maker.leading.equalTo(containerView).offset(Constants.defaultOffset)
         maker.centerY.equalTo(containerView)
       }
     }
@@ -86,6 +93,7 @@ class ColleaguesTableViewCell: UITableViewCell {
     containerView.addSubview(nameLabel)
     containerView.addSubview(titleLabel)
     containerView.addSubview(phoneImage)
+    containerView.addSubview(todayStatusLabel)
     
     containerView.snp.makeConstraints { maker in
       maker.edges.equalTo(self).inset(Constants.containerViewInsets)
@@ -101,10 +109,16 @@ class ColleaguesTableViewCell: UITableViewCell {
       maker.top.equalTo(containerView).offset(Constants.defaultOffset)
     }
     
+    todayStatusLabel.snp.makeConstraints { maker in
+      maker.leading.equalTo(nameLabel.snp.trailing).offset(Constants.littleOffset)
+      maker.leading.equalTo(titleLabel.snp.trailing).offset(Constants.littleOffset)
+      maker.centerY.equalTo(phoneImage)
+      maker.trailing.equalTo(phoneImage.snp.leading).offset(-Constants.defaultOffset)
+    }
+    
     phoneImage.snp.makeConstraints { maker in
       maker.trailing.equalTo(containerView).offset(-Constants.defaultOffset)
       maker.centerY.equalTo(containerView)
-      maker.leading.equalTo(nameLabel.snp.trailing)
       maker.size.equalTo(Constants.phoneImageSize)
     }
   }

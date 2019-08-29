@@ -21,6 +21,7 @@ protocol ColleaguesViewModel: ViewModel {
   var onError: ((ListType) -> Void)? { get set }
   var listType: ListType { get set }
   var isSearching: Bool { get set }
+  var recordType: RecordType? { get set }
   
   func all()
   func sort(_ recordType: RecordType)
@@ -42,7 +43,7 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   var searchedUsers = [User]()
   var listType = ListType.all
   var isSearching = false
-  private var recordType: RecordType?
+  var recordType: RecordType?
   
   func all() {
     userService.getAllUsers(
