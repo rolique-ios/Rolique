@@ -15,6 +15,8 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   private lazy var tableView = UITableView()
   private lazy var pochavToast = constructPochavToast()
   private lazy var dopracToast = constructDopracToast()
+  private lazy var remoteToast = constructRemoteToast()
+  private lazy var lateToast = constructLateToast()
   private var dataSource: ActionsDataSource!
 
   override func viewDidLoad() {
@@ -79,21 +81,53 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     let view = DopracToast()
     view.update(onConfirm: { [weak self] type in
       self?.viewModel.doprac(type: type)
-      }, onCancel: {
+      }, needsLayout: {
+        Toast.current.toastVC?.layoutVertically()
+    }, onCancel: {
         Toast.current.hideToast()
+    })
+    return view
+  }
+  
+  private func constructRemoteToast() -> RemoteToast {
+    let view = RemoteToast()
+    view.update(onConfirm: { [weak self] type in
+      self?.viewModel.remote(type: type)
+      }, needsLayout: {
+        Toast.current.toastVC?.layoutVertically()
+    }, onError: { error in
+      Spitter.showOkAlertOnPVC(error)
+    }, onCancel: {
+      Toast.current.hideToast()
+    })
+    return view
+  }
+  
+  private func constructLateToast() -> LateToast {
+    let view = LateToast()
+    view.update(onConfirm: { [weak self] type in
+      self?.viewModel.late(type: type)
+      }, needsLayout: {
+        Toast.current.toastVC?.layoutVertically()
+    }, onCancel: {
+      Toast.current.hideToast()
     })
     return view
   }
   
   func didSelectCell(action: ActionType) {
     switch action {
+    case .late:
+      lateToast.refreshView()
+      Toast.current.showToast(lateToast)
+    case .remote:
+      remoteToast.refreshView()
+      Toast.current.showToast(remoteToast)
     case .doprac:
       dopracToast.refreshView()
       Toast.current.showToast(dopracToast)
     case .pochav:
       Toast.current.showToast(pochavToast)
-    default:
-      break
     }
   }
 }

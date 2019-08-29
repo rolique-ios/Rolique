@@ -15,10 +15,9 @@ typealias Event = (() -> Void)?
 final class PochavToast: UIView {
   private struct Constants {
     static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
-    static var containerHeight: CGFloat { return 150.0 }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
-    static var buttonWidth: CGFloat { return 100.0 }
+    static var buttonWidth: CGFloat { return 110.0 }
     static var centerOffset: CGFloat { return 60.0 }
   }
   private lazy var containerView = ShadowView()
@@ -49,7 +48,6 @@ final class PochavToast: UIView {
     
     containerView.snp.makeConstraints { maker in
       maker.edges.equalTo(Constants.containerInsets)
-      maker.height.equalTo(Constants.containerHeight)
     }
     titleLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
@@ -66,6 +64,7 @@ final class PochavToast: UIView {
       maker.centerX.equalToSuperview().offset(Constants.centerOffset)
       maker.height.equalTo(Constants.buttonHeight)
       maker.width.equalTo(Constants.buttonWidth)
+      maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
     }
   }
   

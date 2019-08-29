@@ -13,16 +13,15 @@ import SnapKit
 final class DopracToast: UIView {
   private struct Constants {
     static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
-    static var containerHeight: CGFloat { return 370.0 }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
-    static var buttonWidth: CGFloat { return 100.0 }
+    static var buttonWidth: CGFloat { return 110.0 }
     static var customButtonWidth: CGFloat { return 130.0 }
     static var centerOffset: CGFloat { return 60.0 }
     static var maximumHour: Int { return 19 }
     static var animationDuration: TimeInterval { return 0.3 }
-    static var buttonCornerRadius: CGFloat { return 5.0 }
-    static var buttonBorderWidth: CGFloat { return 1.0 }
+    static var cornerRadius: CGFloat { return 5.0 }
+    static var borderWidth: CGFloat { return 2.0 }
   }
   private lazy var containerView = ShadowView()
   private lazy var titleLabel = UILabel()
@@ -32,7 +31,10 @@ final class DopracToast: UIView {
   private lazy var confirmButton = ConfirmButton()
   private lazy var cancelButton = CancelButton()
   private lazy var datePicker = UIDatePicker()
+  private var cancelButtonTopConstraint: Constraint?
+  private var cancelButtonCenterXConstraint: Constraint?
   var onConfirm: ((DopracType) -> Void)?
+  var needsLayout: (() -> Void)?
   var onCancel: (() -> Void)?
   
   override init(frame: CGRect) {
@@ -74,7 +76,6 @@ final class DopracToast: UIView {
     
     containerView.snp.makeConstraints { maker in
       maker.edges.equalTo(Constants.containerInsets)
-      maker.height.equalTo(Constants.containerHeight)
     }
     titleLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
@@ -99,10 +100,11 @@ final class DopracToast: UIView {
       maker.width.equalTo(Constants.customButtonWidth)
     }
     cancelButton.snp.makeConstraints { maker in
-      maker.top.equalTo(customTimeButton.snp.bottom).offset(Constants.defaultOffset)
-      maker.centerX.equalToSuperview()
+      cancelButtonTopConstraint = maker.top.equalTo(customTimeButton.snp.bottom).offset(Constants.defaultOffset).constraint
+      cancelButtonCenterXConstraint = maker.centerX.equalToSuperview().constraint
       maker.height.equalTo(Constants.buttonHeight)
       maker.width.equalTo(Constants.buttonWidth)
+      maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
     }
   }
   
@@ -122,8 +124,8 @@ final class DopracToast: UIView {
     customTimeButton.setTitle(Strings.Actions.customTime, for: .normal)
     [nowButton, inAhourButton, customTimeButton].forEach { button in
       button.setTitleColor(UIColor.black, for: .normal)
-      button.layer.cornerRadius = Constants.buttonCornerRadius
-      button.layer.borderWidth = Constants.buttonBorderWidth
+      button.layer.cornerRadius = Constants.cornerRadius
+      button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor
     }
     
@@ -131,8 +133,10 @@ final class DopracToast: UIView {
   }
   
   func update(onConfirm: ((DopracType) -> Void)?,
+              needsLayout: Event,
               onCancel: Event) {
     self.onConfirm = onConfirm
+    self.needsLayout = needsLayout
     self.onCancel = onCancel
   }
   
@@ -151,11 +155,10 @@ final class DopracToast: UIView {
       maker.top.equalTo(titleLabel.snp.bottom).offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()
     }
-    cancelButton.snp.remakeConstraints { maker in
+    cancelButtonCenterXConstraint?.update(offset: Constants.centerOffset)
+    cancelButtonTopConstraint?.deactivate()
+    cancelButton.snp.makeConstraints { maker in
       maker.top.equalTo(datePicker.snp.bottom).offset(Constants.defaultOffset)
-      maker.centerX.equalToSuperview().offset(Constants.centerOffset)
-      maker.height.equalTo(Constants.buttonHeight)
-      maker.width.equalTo(Constants.buttonWidth)
     }
     confirmButton.snp.makeConstraints { maker in
       maker.top.equalTo(datePicker.snp.bottom).offset(Constants.defaultOffset)
@@ -163,9 +166,12 @@ final class DopracToast: UIView {
       maker.height.equalTo(Constants.buttonHeight)
       maker.width.equalTo(Constants.buttonWidth)
     }
+    
     titleLabel.text = Strings.Actions.chooseTime
-    UIView.animate(withDuration: Constants.animationDuration) {
-      self.layoutIfNeeded()
+    
+    UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
+      self?.layoutIfNeeded()
+      self?.needsLayout?()
     }
   }
   

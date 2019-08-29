@@ -33,15 +33,11 @@ final class UserServiceImpl: UserService {
       onLocal?(.failure(error))
     }
     
-    let date = Date()
-    guard date >= UserDefaultsManager.shared.allUsersRequstTimeLimit ?? date else { return }
-    
     userManager.getAllUsers { [weak self] usersResult in
       switch usersResult {
       case .success(let array):
         self?.coreDataManager.clearCoreData()
         self?.coreDataManager.saveToCoreData(array, context: context)
-        self?.writeIntoUserDefaults()
         onFetch?(.success(array))
       case .failure(let error):
         onFetch?(.failure(error))
@@ -81,13 +77,5 @@ final class UserServiceImpl: UserService {
         onFetch?(.failure(error))
       }
     }
-  }
-  
-  private func writeIntoUserDefaults() {
-    var calendar = Calendar.current
-    calendar.timeZone = TimeZone(abbreviation: "UTC")!
-    let limit = calendar.date(byAdding: .hour, value: 24, to: Date()) ?? Date()
-    UserDefaultsManager.shared.allUsersRequstTime = Date()
-    UserDefaultsManager.shared.allUsersRequstTimeLimit = limit
   }
 }

@@ -6,7 +6,7 @@ def pods
   pod 'SnapKit'
   pod 'Fabric', '1.8.2'
   pod 'Crashlytics', '3.11.1'
-  pod 'IgyToast', '0.0.4'
+  pod 'IgyToast', '0.0.5'
   pod 'Networking', :path => '../Modules/Networking'
   pod 'Utils', :path => '../Modules/Utils'
 end

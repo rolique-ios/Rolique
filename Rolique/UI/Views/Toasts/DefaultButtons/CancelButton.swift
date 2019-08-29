@@ -25,7 +25,7 @@ final class CancelButton: UIButton {
     setTitle(Strings.Actions.cancel, for: .normal)
     setTitleColor(UIColor.red, for: .normal)
     layer.cornerRadius = 5.0
-    layer.borderWidth = 1.0
+    layer.borderWidth = 2.0
     layer.borderColor = UIColor.red.cgColor
   }
 }

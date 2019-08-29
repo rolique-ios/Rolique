@@ -63,21 +63,25 @@ public final class UserManagerImpl:  UserManager {
   }
   
   public func getTodayUsersForRecordType(_ recordType: RecordType, result: ((Result<[User], Error>) -> Void)?) {
-    Net.Worker.request(GetTodayUsersForRecordType(recordType: recordType.rawValue), onSuccess: { json in
-        DispatchQueue.main.async {
-          let array: [User]? = json.buildArray()
-          if let array = array {
-            result?(.success(array))
-          } else {
-            result?(.failure(Err.general(msg: "failed to build users")))
-          }
-        }
-    }, onError: { error in
-      DispatchQueue.main.async {
-        print(error)
-        result?(.failure(error))
-      }
-    })
+//    getAllUsers { result in
+//
+//      result?()
+//    }
+//    Net.Worker.request(GetTodayUsersForRecordType(recordType: recordType.rawValue), onSuccess: { json in
+//        DispatchQueue.main.async {
+//          let array: [User]? = json.buildArray()
+//          if let array = array {
+//            result?(.success(array))
+//          } else {
+//            result?(.failure(Err.general(msg: "failed to build users")))
+//          }
+//        }
+//    }, onError: { error in
+//      DispatchQueue.main.async {
+//        print(error)
+//        result?(.failure(error))
+//      }
+//    })
   }
   
   

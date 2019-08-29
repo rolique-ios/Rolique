@@ -13,6 +13,8 @@ protocol ActionsViewModel: ViewModel {
   var onResponse: ((String) -> Void)? { get set }
   func pochav()
   func doprac(type: DopracType)
+  func remote(type: RemoteType)
+  func late(type: LateType)
 }
 
 final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
@@ -35,10 +37,39 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
       action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
     case .hour(let date):
       if let date = date {
-        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description, custom: dateFormatter.string(from: date))
+        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description, custom: DateFormatters.dopracDateFormatter.string(from: date))
       } else {
         action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
       }
+    }
+    
+    sendRequest(with: action)
+  }
+  
+  func remote(type: RemoteType) {
+    let action: ActionRemote
+    switch type {
+    case .today, .tommorow:
+      action = ActionRemote(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
+    case .custom(let start, let end):
+      action = ActionRemote(sender: UserDefaultsManager.shared.userId ?? "",
+                            value: type.description,
+                            startDate: DateFormatters.remoteDateFormatter.string(from: start),
+                            endDate: DateFormatters.remoteDateFormatter.string(from: end))
+    }
+    
+    sendRequest(with: action)
+  }
+  
+  func late(type: LateType) {
+    let action: ActionLate
+    switch type {
+    case .in30minutes(let from):
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
+    case .in1hour(let from):
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
+    case .choosen(let from, let time):
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
     }
     
     sendRequest(with: action)
@@ -61,11 +92,5 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
       }
     }
   }
-  
-  private var dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-    return dateFormatter
-  }()
 }
 
