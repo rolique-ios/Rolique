@@ -9,29 +9,14 @@
 import UIKit
 import SnapKit
 import Utils
+import IgyToast
 
-enum Segment: Int {
-  case all, remote, vacation
-  
-  var description: String {
-    switch self {
-    case .all:
-      return "All"
-    case .remote:
-      return "Remote"
-    case .vacation:
-      return "Vacation"
-    }
-  }
-}
-
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UIScrollViewDelegate, UISearchBarDelegate {
-  private lazy var scrollView = UIScrollView()
-  private lazy var segmentedView = SegmentedView()
-  private lazy var tableViews = [UITableView(), UITableView(), UITableView()]
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate {
+  private lazy var tableView = UITableView()
   private lazy var tableViewHeader = UIView()
   private lazy var searchBar = UISearchBar()
-  private var dataSources = [ColleaguesDataSource]()
+  private lazy var recordTypeToast = constructRecordTypeToast()
+  private var dataSource: ColleaguesDataSource!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,8 +26,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     configureTableViews()
     configureBinding()
     viewModel.all()
-    viewModel.onRemote()
-    viewModel.onVacation()
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,16 +37,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     configureNavigationBar()
   }
   
-  override func performOnceInViewDidAppear() {
-    self.segmentedView.configure(with: [Segment.all.description,
-                                        Segment.remote.description,
-                                        Segment.vacation.description],
-                                 titleColor: Colors.Colleagues.lightBlue,
-                                 indicatorHeight: 3,
-                                 indicatorColor: Colors.Login.backgroundColor)
-    setupScrollView()
-  }
-  
   private func configureNavigationBar() {
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.prefersLargeTitles = true
@@ -72,40 +45,29 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = UIColor.white
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
   }
   
   private func configureConstraints() {
-    [segmentedView, scrollView].forEach(self.view.addSubviewAndDisableMaskTranslate)
-    
-    segmentedView.snp.makeConstraints { maker in
+    [tableView].forEach(self.view.addSubviewAndDisableMaskTranslate)
+    tableView.snp.makeConstraints { maker in
       maker.top.equalTo(self.view.safeAreaLayoutGuide)
-      maker.leading.equalTo(self.view.safeAreaLayoutGuide)
-      maker.trailing.equalTo(self.view.safeAreaLayoutGuide)
-      maker.height.equalTo(40)
-    }
-    
-    scrollView.snp.makeConstraints { maker in
-      maker.top.equalTo(self.segmentedView.snp.bottom)
       maker.leading.equalTo(self.view.safeAreaLayoutGuide)
       maker.trailing.equalTo(self.view.safeAreaLayoutGuide)
       maker.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
     
-    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableViews[Segment.all.rawValue].bounds.width, height: 60))
+    tableViewHeader.frame = CGRect(center: .zero, size: CGSize(width: tableView.bounds.width, height: 60))
     tableViewHeader.addSubview(searchBar)
     searchBar.snp.makeConstraints { maker in
       maker.edges.equalTo(tableViewHeader)
     }
+    tableView.tableHeaderView = tableViewHeader
   }
   
   private func configureUI() {
     title = Strings.NavigationTitle.colleagues
     self.view.backgroundColor = Colors.Colleagues.softWhite
-    
-    scrollView.showsHorizontalScrollIndicator = false
-    scrollView.isPagingEnabled = true
-    scrollView.bounces = false
-    scrollView.isDirectionalLockEnabled = true
     
     searchBar.delegate = self
     searchBar.returnKeyType = .done
@@ -126,104 +88,59 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   private func configureTableViews() {
-    for (index, tableView) in tableViews.enumerated() {
-      tableView.separatorStyle = .none
-      tableView.backgroundColor = .clear
-      let refreshControl = UIRefreshControl()
-      refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-      tableView.refreshControl = refreshControl
-      
-      guard let segment = Segment(rawValue: index) else { return }
-      switch segment {
-      case .all:
-        tableView.tableHeaderView = tableViewHeader
-        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.users))
-      case .remote:
-        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.usersOnRemote))
-      case .vacation:
-        dataSources.append(ColleaguesDataSource(tableView: tableView, data: viewModel.usersOnVacation))
-      }
-    }
-  }
-  
-  private func setupScrollView() {
-    self.segmentedView.selectedSegmentDidChanged = { [weak self] selectedIndex in
-      guard let strongSelf = self else { return }
-      
-      let scrollViewWidth = strongSelf.scrollView.frame.width
-      let contentOffsetX = scrollViewWidth * CGFloat(selectedIndex)
-      let contentOffsetY = strongSelf.scrollView.contentOffset.y
-      strongSelf.scrollView.setContentOffset(
-        CGPoint(x: contentOffsetX, y: contentOffsetY),
-        animated: true
-      )
-      strongSelf.changeTableViewDelegate(currentPage: selectedIndex)
-    }
-    
-    scrollView.contentSize = CGSize(
-      width: UIScreen.main.bounds.width * CGFloat(tableViews.count),
-      height: scrollView.frame.height
-    )
-    
-    for (index, tableView) in tableViews.enumerated() {
-      tableView.frame = CGRect(
-        x: UIScreen.main.bounds.width * CGFloat(index),
-        y: 0,
-        width: scrollView.frame.width,
-        height: scrollView.frame.height
-      )
-      scrollView.addSubview(tableView)
-    }
-    
-    scrollView.delegate = self
+    tableView.separatorStyle = .none
+    tableView.backgroundColor = .clear
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    tableView.refreshControl = refreshControl
+    dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
   }
   
   private func configureBinding() {
-    viewModel.onRefreshList = { [weak self] segment in
+    viewModel.onRefreshList = { [weak self] listType in
       guard let self = self else { return }
-      let dataSource: ColleaguesDataSource = self.dataSources[segment.rawValue]
-      switch segment {
-      case .all:
-        if self.viewModel.isSearching {
-          dataSource.update(dataSource: self.viewModel.searchedUsers)
-        } else {
-          dataSource.update(dataSource: self.viewModel.users)
+      
+      if self.viewModel.isSearching {
+        self.dataSource.update(dataSource: self.viewModel.searchedUsers)
+      } else {
+        switch listType {
+        case .all:
+          self.dataSource.update(dataSource: self.viewModel.users)
+        case .filtered:
+          self.dataSource.update(dataSource: self.viewModel.filteredUsers)
         }
-      case .remote:
-        dataSource.update(dataSource: self.viewModel.usersOnRemote)
-      case .vacation:
-        dataSource.update(dataSource: self.viewModel.usersOnVacation)
       }
-      dataSource.hideRefreshControl()
+      self.dataSource.hideRefreshControl()
     }
+    
     viewModel.onError = { [weak self] segment in
       guard let self = self else { return }
-      let dataSource: ColleaguesDataSource = self.dataSources[segment.rawValue]
-      dataSource.hideRefreshControl()
+      self.dataSource.hideRefreshControl()
     }
   }
   
   @objc func refresh() {
-    guard let segment = Segment(rawValue: segmentedView.selectedSegmentIndex) else { return }
-    switch segment {
-    case .all:
-      viewModel.all()
-    case .remote:
-      viewModel.onRemote()
-    case .vacation:
-      viewModel.onVacation()
-    }
+    viewModel.refresh()
   }
   
-  private func changeTableViewDelegate(currentPage: Int) {
-    segmentedView.selectedSegmentIndex = currentPage
+  @objc func didSelectSortButton() {
+    Toast.current.showToast(recordTypeToast)
   }
   
-  // MARK: - UIScrollViewDelegate
-  
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let page = floor(scrollView.contentOffset.x / scrollView.frame.width)
-    changeTableViewDelegate(currentPage: Int(page))
+  private func constructRecordTypeToast() -> RecordTypeToast {
+    let view = RecordTypeToast()
+    view.update(data: RecordType.allCases,
+                onSelectRow: { [weak self] recordType in
+                  Toast.current.hideToast()
+                  if recordType == .all {
+                    self?.viewModel.listType = .all
+                    self?.viewModel.all()
+                  } else {
+                    self?.viewModel.listType = .filtered
+                    self?.viewModel.sort(recordType)
+                  }
+    })
+    return view
   }
   
   // MARK: - UISearchBarDelegate
@@ -235,7 +152,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.text = ""
     viewModel.isSearching = false
-    viewModel.onRefreshList?(.all)
+    viewModel.onRefreshList?(viewModel.listType)
     searchBar.resignFirstResponder()
   }
   

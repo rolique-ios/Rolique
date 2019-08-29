@@ -21,6 +21,7 @@ public final class User: Codable {
     case emergencyDays = "emergency_days"
     case roles
     case vacationData = "vacation_data"
+    case todayStatus = "today_status"
   }
   
   public var id: String
@@ -30,8 +31,9 @@ public final class User: Codable {
   public var eduPoints, emergencyDays: Double?
   public var roles: [String]
   public var vacationData: [String: Double]?
+  public var todayStatus: String?
   
-  init(id: String, slackProfile: SlackProfile, birthday: String?, dateOfJoining: String?, eduPoints: Double, emergencyDays: Double?, roles: [String], vacationData: [String: Double]?) {
+  init(id: String, slackProfile: SlackProfile, birthday: String?, dateOfJoining: String?, eduPoints: Double, emergencyDays: Double?, roles: [String], vacationData: [String: Double]?, todayStatus: String?) {
     self.id = id
     self.slackProfile = slackProfile
     self.birthday = birthday
@@ -40,6 +42,7 @@ public final class User: Codable {
     self.emergencyDays = emergencyDays
     self.roles = roles
     self.vacationData = vacationData
+    self.todayStatus = todayStatus
   }
   
   init?(_ managedObject: ManagedUser) {

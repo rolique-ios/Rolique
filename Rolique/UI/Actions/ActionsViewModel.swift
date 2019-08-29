@@ -34,12 +34,12 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
     let action: ActionDoprac
     switch type {
     case .now:
-      action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
+      action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param)
     case .hour(let date):
       if let date = date {
-        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description, custom: DateFormatters.dopracDateFormatter.string(from: date))
+        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param, custom: DateFormatters.dopracDateFormatter.string(from: date))
       } else {
-        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
+        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param)
       }
     }
     
@@ -50,10 +50,10 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
     let action: ActionRemote
     switch type {
     case .today, .tommorow:
-      action = ActionRemote(sender: UserDefaultsManager.shared.userId ?? "", value: type.description)
+      action = ActionRemote(sender: UserDefaultsManager.shared.userId ?? "", value: type.param)
     case .custom(let start, let end):
       action = ActionRemote(sender: UserDefaultsManager.shared.userId ?? "",
-                            value: type.description,
+                            value: type.param,
                             startDate: DateFormatters.remoteDateFormatter.string(from: start),
                             endDate: DateFormatters.remoteDateFormatter.string(from: end))
     }
@@ -65,11 +65,11 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
     let action: ActionLate
     switch type {
     case .in30minutes(let from):
-      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.param)
     case .in1hour(let from):
-      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
-    case .choosen(let from, let time):
-      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.description)
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.param)
+    case .choosen(let from, _):
+      action = ActionLate(sender: UserDefaultsManager.shared.userId ?? "", from: from.param, value: type.param)
     }
     
     sendRequest(with: action)

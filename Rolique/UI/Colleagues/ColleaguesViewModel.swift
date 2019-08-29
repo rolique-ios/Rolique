@@ -8,20 +8,24 @@
 
 import Foundation
 
+enum ListType {
+  case all
+  case filtered
+}
+
 protocol ColleaguesViewModel: ViewModel {
   var users: [User] { get }
-  var usersOnRemote: [User] { get }
-  var usersOnVacation: [User] { get }
+  var filteredUsers: [User] { get }
   var searchedUsers: [User] { get }
-  var onRefreshList: ((Segment) -> Void)? { get set }
-  var onError: ((Segment) -> Void)? { get set }
-  var segment: Segment { get set }
+  var onRefreshList: ((ListType) -> Void)? { get set }
+  var onError: ((ListType) -> Void)? { get set }
+  var listType: ListType { get set }
   var isSearching: Bool { get set }
   
   func all()
-  func onRemote()
-  func onVacation()
+  func sort(_ recordType: RecordType)
   func searchUser(with text: String)
+  func refresh()
 }
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
@@ -31,14 +35,14 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
     self.userService = userService
   }
   
-  var onRefreshList: ((Segment) -> Void)?
-  var onError: ((Segment) -> Void)?
+  var onRefreshList: ((ListType) -> Void)?
+  var onError: ((ListType) -> Void)?
   var users = [User]()
-  var usersOnRemote = [User]()
-  var usersOnVacation = [User]()
+  var filteredUsers = [User]()
   var searchedUsers = [User]()
-  var segment: Segment = .all
+  var listType = ListType.all
   var isSearching = false
+  private var recordType: RecordType?
   
   func all() {
     userService.getAllUsers(
@@ -50,44 +54,56 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
     })
   }
   
-  func onRemote() {
-    userService.getTodayUsersForRecordType(.remote) { [weak self] result in
-      self?.handleResult(.remote, result: result)
-    }
-  }
-  
-  func onVacation() {
-    userService.getTodayUsersForRecordType(.vacation) { [weak self] result in
-      self?.handleResult(.vacation, result: result)
+  func sort(_ recordType: RecordType) {
+    userService.getTodayUsersForRecordType(recordType) { [weak self] result in
+      self?.handleResult(.filtered, result: result)
     }
   }
   
   func searchUser(with text: String) {
     var searchedUsers = [User]()
-    users.forEach { user in
-      if user.slackProfile.realName.contains(text) {
-        searchedUsers.append(user)
+    switch listType {
+    case .all:
+      users.forEach { user in
+        if user.slackProfile.realName.contains(text) {
+          searchedUsers.append(user)
+        }
+      }
+    case .filtered:
+      filteredUsers.forEach { user in
+        if user.slackProfile.realName.contains(text) {
+          searchedUsers.append(user)
+        }
       }
     }
     self.searchedUsers = searchedUsers
-    onRefreshList?(.all)
+    onRefreshList?(listType)
   }
   
-  private func handleResult(_ segment: Segment, result: Result<[User], Error>) {
+  func refresh() {
+    switch listType {
+    case .all:
+      all()
+    case .filtered:
+      if let recordType = recordType {
+        sort(recordType)
+      }
+    }
+  }
+  
+  private func handleResult(_ listType: ListType, result: Result<[User], Error>) {
     switch result {
     case .success(let users):
       let users = users.sorted(by: {$0.slackProfile.realName < $1.slackProfile.realName})
-      switch segment {
+      switch listType {
       case .all:
         self.users = users
-      case .remote:
-        self.usersOnRemote = users
-      case .vacation:
-        self.usersOnVacation = users
+      case .filtered:
+        self.filteredUsers = users
       }
-      self.onRefreshList?(segment)
+      self.onRefreshList?(listType)
     case .failure(let error):
-      self.onError?(segment)
+      self.onError?(listType)
       print(error.localizedDescription)
     }
   }

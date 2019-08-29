@@ -9,8 +9,9 @@
 import Foundation
 import Networking
 
-public enum RecordType: String {
-  case vacation,
+public enum RecordType: String, CaseIterable {
+  case all,
+  vacation,
   remote,
   sick,
   dayoff,
@@ -19,6 +20,31 @@ public enum RecordType: String {
   baby_birth,
   funeral,
   birthday
+  
+  var desctiption: String {
+    switch self {
+    case .vacation:
+      return "Vacation"
+    case .remote:
+      return "Remote"
+    case .sick:
+      return "Sick"
+    case .dayoff:
+      return "Day off"
+    case .business_trip:
+      return "Business trip"
+    case .marrige:
+      return "Marrige"
+    case .baby_birth:
+      return "Baby birth"
+    case .funeral:
+      return "Funeral"
+    case .birthday:
+      return "Birthday"
+    case .all:
+      return "All"
+    }
+  }
 }
 
 public protocol  UserManager {
@@ -63,25 +89,15 @@ public final class UserManagerImpl:  UserManager {
   }
   
   public func getTodayUsersForRecordType(_ recordType: RecordType, result: ((Result<[User], Error>) -> Void)?) {
-//    getAllUsers { result in
-//
-//      result?()
-//    }
-//    Net.Worker.request(GetTodayUsersForRecordType(recordType: recordType.rawValue), onSuccess: { json in
-//        DispatchQueue.main.async {
-//          let array: [User]? = json.buildArray()
-//          if let array = array {
-//            result?(.success(array))
-//          } else {
-//            result?(.failure(Err.general(msg: "failed to build users")))
-//          }
-//        }
-//    }, onError: { error in
-//      DispatchQueue.main.async {
-//        print(error)
-//        result?(.failure(error))
-//      }
-//    })
+    getAllUsers { allUsersResult in
+      switch allUsersResult {
+      case .success(let array):
+        let filteredArray = array.filter { $0.todayStatus == recordType.rawValue }
+        result?(.success(filteredArray))
+      case .failure(let error):
+        result?(.failure(error))
+      }
+    }
   }
   
   

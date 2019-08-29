@@ -19,7 +19,7 @@ public enum DopracType {
   case now
   case hour(Date?)
   
-  var description: String {
+  var param: String {
     switch self {
     case .now:
       return "now"
@@ -34,7 +34,7 @@ public enum RemoteType {
   case tommorow
   case custom(start: Date, end: Date)
   
-  var description: String {
+  var param: String {
     switch self {
     case .today:
       return "today"
@@ -65,7 +65,7 @@ public enum LateType {
   case in1hour(from: From)
   case choosen(from: From, time: String)
   
-  var description: String {
+  var param: String {
     switch self {
     case .in30minutes:
       return "30_m"
