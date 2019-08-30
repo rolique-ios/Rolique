@@ -37,7 +37,11 @@ public final class LoginManagerImpl: LoginManager {
         })
       } else {
         DispatchQueue.main.async {
-          result?(.failure(error!))
+          if (error as NSError?)?.code == 1 {
+            result?(.failure(Err.general(msg: "this app is only connecting to Rolique slack workspace")))
+          } else {
+            result?(.failure(error!))
+          }
         }
       }
     })

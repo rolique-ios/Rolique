@@ -49,6 +49,8 @@
 	<true/>
 	<key>Secret</key>
 	<dict>
+		<key>SlackTeamId</key>
+		<string>$(SLACK_TEAM_ID)</string>
 		<key>ApiToken</key>
 		<string>$(API_TOKEN)</string>
 		<key>ApiUrl</key>

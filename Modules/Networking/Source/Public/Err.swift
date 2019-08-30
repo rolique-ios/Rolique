@@ -9,5 +9,12 @@
 import Foundation
 
 public enum Err: Error {
+
   case general(msg: String)
+  
+  var localizedDescription: String {
+    if case .general(let msg) = self {
+      return msg
+    } else { return "unknown error" }
+  }
 }

@@ -16,6 +16,7 @@ public struct Env {
   public static let slackRedirectUri = "https://" + (Env.getValueForKey("SlackRedirectUri") ?? "no_slack_redirect_uri")
   public static let slackToken = Env.getValueForKey("SlackToken") ?? "no_slack_token"
   public static let actionTest = Env.getValueForKey("ActionTest") ?? "true"
+  public static let slackTeamId = Env.getValueForKey("SlackTeamId") ?? "no_slack_team_id"
   
   static func getValueForKey(_ key: String) -> String? {
     guard let secret = Bundle.main.infoDictionary?["Secret"] as? [String: Any] else { return nil }

@@ -40,11 +40,11 @@ public final class Router {
     return tabbar
   }
   
+  static func getLoginController() -> UIViewController {
+    return UINavigationController(rootViewController: Router.getLoginViewController())
+  }
+  
   public static func getStartViewController() -> UIViewController {
-    if UserDefaultsManager.shared.userId == nil {
-      return UINavigationController(rootViewController: Router.getLoginViewController())
-    } else {
-      return self.getTabBarController()
-    }
+    return UserDefaultsManager.shared.userId == nil ? getLoginController() : getTabBarController()
   }
 }

@@ -46,6 +46,9 @@ class ColleaguesTableViewCell: UITableViewCell {
     
     todayStatusLabel.translatesAutoresizingMaskIntoConstraints = false
     todayStatusLabel.textColor = .orange
+    todayStatusLabel.layer.borderWidth = 1.0
+     todayStatusLabel.layer.borderColor = UIColor.orange.cgColor
+    todayStatusLabel.layer.cornerRadius = 4
     todayStatusLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
     
     phoneImage.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +62,13 @@ class ColleaguesTableViewCell: UITableViewCell {
     configureViews()
     
     nameLabel.text = name
-    todayStatusLabel.text = todayStatus
+    if let todayStatus = todayStatus, !todayStatus.isEmpty {
+      todayStatusLabel.isHidden = false
+      todayStatusLabel.text = " " + todayStatus + " "
+    } else {
+      todayStatusLabel.isHidden = true
+      todayStatusLabel.text = nil
+    }
     
     if !title.isEmpty {
       titleLabel.text = title
@@ -113,7 +122,8 @@ class ColleaguesTableViewCell: UITableViewCell {
       maker.leading.equalTo(nameLabel.snp.trailing).offset(Constants.littleOffset)
       maker.leading.equalTo(titleLabel.snp.trailing).offset(Constants.littleOffset)
       maker.centerY.equalTo(phoneImage)
-      maker.trailing.equalTo(phoneImage.snp.leading).offset(-Constants.defaultOffset)
+      maker.trailing.equalTo(phoneImage.snp.leading).offset(-Constants.littleOffset)
+      
     }
     
     phoneImage.snp.makeConstraints { maker in

@@ -79,7 +79,6 @@ public enum LateType {
 
 struct Settings {
   static let isTest = "false"
-  
 }
 
 public final class ActionLate: Action {

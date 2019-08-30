@@ -54,7 +54,7 @@ final class RecordTypeToast: UIView {
   }
   
   private func configureUI() {
-    titleLabel.text = "Sort by"
+    titleLabel.text = "show options"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
     
     tableView.separatorInset = Constants.tableViewSeparatorInset

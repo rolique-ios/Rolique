@@ -16,7 +16,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   private lazy var userNameLabel = UILabel()
   private lazy var titleLabel = UILabel()
   private lazy var logOutButton = UIButton()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -31,7 +31,6 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   }
   
   private func configureNavigationBar() {
-    navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.prefersLargeTitles = true
     let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     navigationController?.navigationBar.titleTextAttributes = attributes
@@ -100,7 +99,19 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
       
       self.userNameLabel.text = user.name
       self.titleLabel.text = user.slackProfile.title
-//      self.profileImage.image = user.slackProfile.
+      
+      if let biggestImage = user.biggestImage, let url = URL(string: biggestImage) {
+        DispatchQueue.global(qos: .userInteractive).async {
+          URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            if let data = data, let image = UIImage(data: data) {
+              DispatchQueue.main.async { [weak self] in
+                self?.profileImage.image = image
+              }
+            }
+          }).resume()
+        }
+      }
+      
       self.containerView.isHidden = false
     }
     
@@ -109,17 +120,20 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     }
     
     viewModel.onLogOut = {
-      
+      let window = (UIApplication.shared.delegate as? AppDelegate)?.window
+      window?.rootViewController = Router.getStartViewController()
+      window?.makeKeyAndVisible()
     }
   }
-  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     Toast.current.layoutVertically()
   }
   
   @objc func buttonTap(_ button: UIButton) {
-    viewModel.logOut()
+    Spitter.showConfirmation("Log out?", message: "you sure?", owner: self) {[weak self] in
+      self?.viewModel.logOut()
+    }
   }
 }
 

@@ -38,14 +38,13 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   private func configureNavigationBar() {
-    navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.prefersLargeTitles = true
     let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     navigationController?.navigationBar.titleTextAttributes = attributes
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = UIColor.white
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🌀", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
   }
   
   private func configureConstraints() {
@@ -90,9 +89,9 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   private func configureTableViews() {
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
-    let refreshControl = UIRefreshControl()
-    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-    tableView.refreshControl = refreshControl
+//    let refreshControl = UIRefreshControl()
+//    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+//    tableView.refreshControl = refreshControl
     tableView.keyboardDismissMode = .interactive
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
   }

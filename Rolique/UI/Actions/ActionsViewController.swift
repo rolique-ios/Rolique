@@ -42,7 +42,6 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   }
   
   private func configureNavigationBar() {
-    navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.prefersLargeTitles = true
     let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     navigationController?.navigationBar.titleTextAttributes = attributes
