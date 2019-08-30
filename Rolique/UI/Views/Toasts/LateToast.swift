@@ -23,7 +23,7 @@ final class LateToast: UIView {
     static var borderWidth: CGFloat { return 2.0 }
     static var textFieldHeight: CGFloat { return 35.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var lateLabel = UILabel()
   private lazy var fromNowButton = UIButton()
   private lazy var fromTenOclockButton = UIButton()
@@ -192,10 +192,7 @@ final class LateToast: UIView {
       maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
     }
     
-    UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-      self?.layoutIfNeeded()
-      self?.needsLayout?()
-    }
+    needsLayout?()
   }
   
   @objc func doneButton() {

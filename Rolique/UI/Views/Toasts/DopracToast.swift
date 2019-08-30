@@ -23,7 +23,7 @@ final class DopracToast: UIView {
     static var cornerRadius: CGFloat { return 5.0 }
     static var borderWidth: CGFloat { return 2.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var nowButton = UIButton()
   private lazy var inAhourButton = UIButton()
@@ -168,11 +168,7 @@ final class DopracToast: UIView {
     }
     
     titleLabel.text = Strings.Actions.chooseTime
-    
-    UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-      self?.layoutIfNeeded()
-      self?.needsLayout?()
-    }
+    needsLayout?()
   }
   
   @objc func didSelectConfirmButton() {

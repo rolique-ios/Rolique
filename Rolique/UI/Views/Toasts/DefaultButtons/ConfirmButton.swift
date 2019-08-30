@@ -23,7 +23,7 @@ final class ConfirmButton: UIButton {
   
   private func commonInit() {
     setTitle(Strings.Actions.confirm, for: .normal)
-    backgroundColor = Colors.Actions.nicePurple
+    backgroundColor = Colors.Actions.darkGray
     layer.cornerRadius = 5.0
   }
 }

@@ -13,10 +13,10 @@ import IgyToast
 
 final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, ActionsDelegate {
   private var tableView = UITableView()
-  private var pochavToast: PochavToast?// = constructPochavToast()
-  private var dopracToast: DopracToast?// = constructDopracToast()
-  private var remoteToast: RemoteToast?// = constructRemoteToast()
-  private var lateToast: LateToast?// = constructLateToast()
+  private var pochavToast: PochavToast?
+  private var dopracToast: DopracToast?
+  private var remoteToast: RemoteToast?
+  private var lateToast: LateToast?
   private var dataSource: ActionsDataSource!
 
   override func viewDidLoad() {
@@ -26,6 +26,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     configureUI()
     configureBinding()
     dataSource = ActionsDataSource(tableView: tableView, data: ActionType.allCases, delegate: self)
+    loadToasts()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +124,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   }
   
   func didSelectCell(action: ActionType) {
+    print("did select action \(action)")
     switch action {
     case .late:
       lateToast?.refreshView()
@@ -140,5 +142,6 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
       guard let toast = pochavToast else { return }
       Toast.current.show(toast)
     }
+    print("action called")
   }
 }

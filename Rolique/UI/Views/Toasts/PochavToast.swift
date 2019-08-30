@@ -20,7 +20,7 @@ final class PochavToast: UIView {
     static var buttonWidth: CGFloat { return 110.0 }
     static var centerOffset: CGFloat { return 60.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var confirmButton = ConfirmButton()
   private lazy var cancelButton = CancelButton()

@@ -21,7 +21,7 @@ class ColleaguesTableViewCell: UITableViewCell {
     static var containerViewInsets: UIEdgeInsets { return UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10) }
     static var phoneImageSize: CGFloat { return 30.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var nameLabel = UILabel()
   private lazy var titleLabel = UILabel()
   private lazy var todayStatusLabel = UILabel()

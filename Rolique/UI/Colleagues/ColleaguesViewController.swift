@@ -93,6 +93,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     tableView.refreshControl = refreshControl
+    tableView.keyboardDismissMode = .interactive
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
   }
   
@@ -124,14 +125,14 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   @objc func didSelectSortButton() {
-    Toast.current.showToast(recordTypeToast)
+    Toast.current.show(recordTypeToast)
   }
   
   private func constructRecordTypeToast() -> RecordTypeToast {
     let view = RecordTypeToast()
     view.update(data: RecordType.allCases,
                 onSelectRow: { [weak self] recordType in
-                  Toast.current.hideToast()
+                  Toast.current.hide()
                   self?.viewModel.recordType = recordType
                   if recordType == .all {
                     self?.viewModel.listType = .all

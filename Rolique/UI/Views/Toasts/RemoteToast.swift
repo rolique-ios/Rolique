@@ -23,7 +23,7 @@ final class RemoteToast: UIView {
     static var borderWidth: CGFloat { return 2.0 }
     static var textFieldHeight: CGFloat { return 35.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var todayButton = UIButton()
   private lazy var tomorrowButton = UIButton()
@@ -138,7 +138,9 @@ final class RemoteToast: UIView {
     startDatePicker.datePickerMode = .date
     endDatePicker.datePickerMode = .date
     startDatePicker.minimumDate = Date()
+    startDatePicker.maximumDate = Date().addingTimeInterval(60 * 60 * 24 * 7 * 4)
     endDatePicker.minimumDate = Date()
+    endDatePicker.maximumDate = Date().addingTimeInterval(60 * 60 * 24 * 7 * 4)
     startDatePicker.addTarget(self, action: #selector(handleStartDatePicker(_:)), for: .valueChanged)
     endDatePicker.addTarget(self, action: #selector(handleEndDatePicker(_:)), for: .valueChanged)
     
@@ -221,11 +223,7 @@ final class RemoteToast: UIView {
     }
     
     titleLabel.text = Strings.Actions.remoteDates
-    
-    UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-      self?.layoutIfNeeded()
-      self?.needsLayout?()
-    }
+    needsLayout?()
   }
   
   @objc func handleStartDatePicker(_ datePicker: UIDatePicker) {

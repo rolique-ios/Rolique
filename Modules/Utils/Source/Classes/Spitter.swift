@@ -1,4 +1,5 @@
 import UIKit
+import AudioToolbox.AudioServices
 
 public typealias ErrorClosure = (String?, String?) -> Void
 public typealias Handler = () -> Void
@@ -271,6 +272,77 @@ public class Spitter {
   }
   public static func spit(error: NSError, errorClosure: (_ title: String?, _ message: String?) -> Void) {
     produceErrorClosure(error: error, errorClosure: errorClosure)
+  }
+  
+  public enum TapticEngineSupportLevel: Int {
+    case vibroOnly = 0
+    case tapticFirst = 1
+    case tapticSecond = 2
+  }
+  
+  public enum TapticType {
+    case success, fail, peek, pop, cancel, tryAgain, vibro
+  }
+  
+  public static let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
+    return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
+  }()
+  
+  public static func tap(_ type: Spitter.TapticType) {
+    let level = (Spitter.TapticEngineSupportLevel(rawValue: (UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int) ?? 0)) ?? .vibroOnly
+    switch type {
+    case .vibro:
+      let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+      AudioServicesPlaySystemSound(vibrate)
+    case .peek:
+      if case .tapticSecond = level {
+        feedbackGenerator.impact.light.prepare()
+        feedbackGenerator.impact.light.impactOccurred()
+      } else if case .tapticFirst = level {
+        let peek = SystemSoundID(1519)
+        AudioServicesPlaySystemSound(peek)
+      }
+    case .pop:
+      if case .tapticSecond = level {
+        feedbackGenerator.impact.medium.prepare()
+        feedbackGenerator.impact.medium.impactOccurred()
+      } else if case .tapticFirst = level {
+        let pop = SystemSoundID(1520)
+        AudioServicesPlaySystemSound(pop)
+      }
+    case .cancel:
+      if case .tapticSecond = level {
+        feedbackGenerator.notification.prepare()
+        feedbackGenerator.notification.notificationOccurred(.error)
+      } else if case .tapticFirst = level {
+        let cancelled = SystemSoundID(1521)
+        AudioServicesPlaySystemSound(cancelled)
+      }
+    case .tryAgain:
+      if case .tapticSecond = level {
+        feedbackGenerator.notification.prepare()
+        feedbackGenerator.notification.notificationOccurred(.warning)
+      } else if case .tapticFirst = level {
+        let tryAgain = SystemSoundID(1102)
+        AudioServicesPlaySystemSound(tryAgain)
+      }
+    case .fail:
+      if case .tapticSecond = level {
+        feedbackGenerator.impact.heavy.prepare()
+        feedbackGenerator.impact.heavy.impactOccurred()
+      } else if case .tapticFirst = level {
+        let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+        AudioServicesPlaySystemSound(vibrate)
+      }
+    case .success:
+      if case .tapticSecond = level {
+        feedbackGenerator.notification.prepare()
+        feedbackGenerator.notification.notificationOccurred(.success)
+      } else if case .tapticFirst = level {
+        let pop = SystemSoundID(1520)
+        AudioServicesPlaySystemSound(pop)
+      }
+    }
   }
 }
 

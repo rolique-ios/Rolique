@@ -78,7 +78,7 @@ public enum LateType {
 }
 
 struct Settings {
-  static let isTest = "true"
+  static let isTest = "false"
   
 }
 

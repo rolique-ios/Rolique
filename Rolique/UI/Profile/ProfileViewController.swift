@@ -115,7 +115,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    Toast.current.toastVC?.layoutVertically()
+    Toast.current.layoutVertically()
   }
   
   @objc func buttonTap(_ button: UIButton) {

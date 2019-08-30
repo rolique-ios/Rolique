@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Utils
 
 protocol ActionsDelegate: class {
   func didSelectCell(action: ActionType)
@@ -49,6 +50,7 @@ final class ActionsDataSource: NSObject, UITableViewDelegate, UITableViewDataSou
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     delegate?.didSelectCell(action: data[indexPath.row])
+    Spitter.tap(.pop)
     tableView.deselectRow(at: indexPath, animated: true)
   }
 }

@@ -66,13 +66,13 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
     switch listType {
     case .all:
       users.forEach { user in
-        if user.slackProfile.realName.contains(text) {
+        if user.slackProfile.realName.lowercased().contains(text.lowercased()) {
           searchedUsers.append(user)
         }
       }
     case .filtered:
       filteredUsers.forEach { user in
-        if user.slackProfile.realName.contains(text) {
+        if user.slackProfile.realName.lowercased().contains(text.lowercased()) {
           searchedUsers.append(user)
         }
       }
