@@ -12,11 +12,11 @@ import SnapKit
 import IgyToast
 
 final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, ActionsDelegate {
-  private lazy var tableView = UITableView()
-  private lazy var pochavToast = constructPochavToast()
-  private lazy var dopracToast = constructDopracToast()
-  private lazy var remoteToast = constructRemoteToast()
-  private lazy var lateToast = constructLateToast()
+  private var tableView = UITableView()
+  private var pochavToast: PochavToast?// = constructPochavToast()
+  private var dopracToast: DopracToast?// = constructDopracToast()
+  private var remoteToast: RemoteToast?// = constructRemoteToast()
+  private var lateToast: LateToast?// = constructLateToast()
   private var dataSource: ActionsDataSource!
 
   override func viewDidLoad() {
@@ -31,6 +31,13 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
+  }
+  
+  private func loadToasts() {
+    pochavToast = constructPochavToast()
+    dopracToast = constructDopracToast()
+    remoteToast = constructRemoteToast()
+    lateToast = constructLateToast()
   }
   
   private func configureNavigationBar() {
@@ -61,7 +68,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   private func configureBinding() {
     viewModel.onResponse = { [weak self] text in
       guard let self = self else { return }
-      Toast.current.hideToast({
+      Toast.current.hide({
         Spitter.showOkAlert(text, viewController: self)
       })
     }
@@ -72,7 +79,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     view.update(onConfirm: { [weak self] in
       self?.viewModel.pochav()
       }, onCancel: {
-        Toast.current.hideToast()
+        Toast.current.hide()
     })
     return view
   }
@@ -82,9 +89,9 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     view.update(onConfirm: { [weak self] type in
       self?.viewModel.doprac(type: type)
       }, needsLayout: {
-        Toast.current.toastVC?.layoutVertically()
+        Toast.current.layoutVertically()
     }, onCancel: {
-        Toast.current.hideToast()
+        Toast.current.hide()
     })
     return view
   }
@@ -94,11 +101,11 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     view.update(onConfirm: { [weak self] type in
       self?.viewModel.remote(type: type)
       }, needsLayout: {
-        Toast.current.toastVC?.layoutVertically()
+        Toast.current.layoutVertically()
     }, onError: { error in
       Spitter.showOkAlertOnPVC(error)
     }, onCancel: {
-      Toast.current.hideToast()
+      Toast.current.hide()
     })
     return view
   }
@@ -108,9 +115,9 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     view.update(onConfirm: { [weak self] type in
       self?.viewModel.late(type: type)
       }, needsLayout: {
-        Toast.current.toastVC?.layoutVertically()
+        Toast.current.layoutVertically()
     }, onCancel: {
-      Toast.current.hideToast()
+      Toast.current.hide()
     })
     return view
   }
@@ -118,16 +125,20 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   func didSelectCell(action: ActionType) {
     switch action {
     case .late:
-      lateToast.refreshView()
-      Toast.current.showToast(lateToast)
+      lateToast?.refreshView()
+      guard let toast = lateToast else { return }
+      Toast.current.show(toast)
     case .remote:
-      remoteToast.refreshView()
-      Toast.current.showToast(remoteToast)
+      remoteToast?.refreshView()
+      guard let toast = remoteToast else { return }
+      Toast.current.show(toast)
     case .doprac:
-      dopracToast.refreshView()
-      Toast.current.showToast(dopracToast)
+      dopracToast?.refreshView()
+      guard let toast = dopracToast else { return }
+      Toast.current.show(toast)
     case .pochav:
-      Toast.current.showToast(pochavToast)
+      guard let toast = pochavToast else { return }
+      Toast.current.show(toast)
     }
   }
 }
