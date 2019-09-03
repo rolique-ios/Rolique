@@ -11,6 +11,13 @@ import Utils
 import IgyToast
 
 final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
+  private struct Constants {
+    static var defaultOffset: CGFloat { return 20.0 }
+    static var littleOffset: CGFloat { return 10.0 }
+    static var phoneImageSize: CGFloat { return 100.0 }
+    static var logOutButtonWidth: CGFloat { return 110.0 }
+    static var logOutButtonHeight: CGFloat { return 50.0 }
+  }
   private lazy var containerView = ShadowView()
   private lazy var profileImage = UIImageView()
   private lazy var userNameLabel = UILabel()
@@ -44,48 +51,54 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     [profileImage, userNameLabel, titleLabel, logOutButton ].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
     containerView.snp.makeConstraints { maker in
       maker.centerY.equalToSuperview()
-      maker.leading.equalToSuperview().offset(20)
-      maker.trailing.equalToSuperview().offset(-20)
+      maker.leading.equalToSuperview().offset(Constants.defaultOffset)
+      maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
     profileImage.snp.makeConstraints { maker in
       maker.centerX.equalToSuperview()
-      maker.top.equalToSuperview().offset(20)
-      maker.height.equalTo(60)
-      maker.width.equalTo(60)
+      maker.top.equalToSuperview().offset(Constants.defaultOffset)
+      maker.size.equalTo(Constants.phoneImageSize)
     }
     userNameLabel.snp.makeConstraints { maker in
-      maker.top.equalTo(profileImage.snp.bottom).offset(20)
-      maker.leading.equalToSuperview().offset(20)
-      maker.trailing.equalToSuperview().offset(-20)
+      maker.top.equalTo(profileImage.snp.bottom).offset(Constants.defaultOffset)
+      maker.leading.equalToSuperview().offset(Constants.defaultOffset)
+      maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
     titleLabel.snp.makeConstraints { maker in
-      maker.top.equalTo(userNameLabel.snp.bottom).offset(10)
-      maker.leading.equalToSuperview().offset(20)
-      maker.trailing.equalToSuperview().offset(-20)
+      maker.top.equalTo(userNameLabel.snp.bottom).offset(Constants.littleOffset)
+      maker.leading.equalToSuperview().offset(Constants.defaultOffset)
+      maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
     logOutButton.snp.makeConstraints { maker in
       maker.centerX.equalToSuperview()
-      maker.top.equalTo(titleLabel.snp.bottom).offset(20)
-      maker.width.equalTo(110)
-      maker.height.equalTo(50)
-      maker.bottom.equalToSuperview().offset(-20)
+      maker.top.equalTo(titleLabel.snp.bottom).offset(Constants.defaultOffset)
+      maker.width.equalTo(Constants.logOutButtonWidth)
+      maker.height.equalTo(Constants.logOutButtonHeight)
+      maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
     }
   }
   
   private func configureUI() {
     title = Strings.TabBar.profile
+    
     self.view.backgroundColor = Colors.Colleagues.softWhite
+    
     containerView.backgroundColor = .white
     containerView.isHidden = true
+    
     userNameLabel.textAlignment = .center
+    
     titleLabel.textAlignment = .center
     titleLabel.textColor = UIColor.lightGray
     titleLabel.font = UIFont.italicSystemFont(ofSize: 14.0)
+    
+    profileImage.layer.cornerRadius = Constants.phoneImageSize / 2
+    profileImage.clipsToBounds = true
     configureButton()
   }
   
   private func configureButton() {
-    logOutButton.setTitle("Log out", for: UIControl.State.normal)
+    logOutButton.setTitle(Strings.Profile.logOutTitle, for: UIControl.State.normal)
     logOutButton.setTitleColor(UIColor.red, for: .normal)
     logOutButton.layer.cornerRadius = 5.0
     logOutButton.layer.borderWidth = 2.0
@@ -101,22 +114,15 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
       self.titleLabel.text = user.slackProfile.title
       
       if let biggestImage = user.biggestImage, let url = URL(string: biggestImage) {
-        DispatchQueue.global(qos: .userInteractive).async {
-          URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
-              DispatchQueue.main.async { [weak self] in
-                self?.profileImage.image = image
-              }
-            }
-          }).resume()
-        }
+        self.profileImage.setImage(with: url)
       }
       
       self.containerView.isHidden = false
     }
     
-    viewModel.onError = { error in
-      
+    viewModel.onError = { [weak self] error in
+      guard let self = self else { return }
+      Spitter.showOkAlert(error, viewController: self)
     }
     
     viewModel.onLogOut = {
@@ -131,7 +137,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   }
   
   @objc func buttonTap(_ button: UIButton) {
-    Spitter.showConfirmation("Log out?", message: "you sure?", owner: self) {[weak self] in
+    Spitter.showConfirmation(Strings.Profile.logOutTitle + "?", message: Strings.Profile.logOutMessage, owner: self) {[weak self] in
       self?.viewModel.logOut()
     }
   }

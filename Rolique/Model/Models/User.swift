@@ -37,6 +37,10 @@ public final class User: Codable {
     return slackProfile.imageOriginal ?? slackProfile.image1024 ?? slackProfile.image512 ?? slackProfile.image192
   }
   
+  var optimalImage: String? {
+    return slackProfile.image192 ?? slackProfile.image512 ?? slackProfile.image1024 ?? slackProfile.imageOriginal
+  }
+  
   init(id: String, slackProfile: SlackProfile, birthday: String?, dateOfJoining: String?, eduPoints: Double, emergencyDays: Double?, roles: [String], vacationData: [String: Double]?, todayStatus: String?) {
     self.id = id
     self.slackProfile = slackProfile

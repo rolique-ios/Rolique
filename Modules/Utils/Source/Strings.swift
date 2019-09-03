@@ -55,4 +55,9 @@ public struct Strings {
     public static var in1hour: String { return "in 1 hour" }
     public static var orChooseTime: String { return "..or choose time" }
   }
+  
+  public struct Profile {
+    public static var logOutTitle: String { return "Log out" }
+    public static var logOutMessage: String { return "Are you sure?" }
+  }
 }
