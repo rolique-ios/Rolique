@@ -112,7 +112,7 @@ final class RemoteToast: UIView {
   private func configureUI() {
     containerView.backgroundColor = .white
     
-    titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    titleLabel.font = .preferredFont(forTextStyle: .title2)
     
     todayButton.addTarget(self, action: #selector(didSelectTodayButton), for: .touchUpInside)
     tomorrowButton.addTarget(self, action: #selector(didSelectInAHourButton), for: .touchUpInside)
@@ -124,7 +124,7 @@ final class RemoteToast: UIView {
     tomorrowButton.setTitle(Strings.Actions.tomorrow, for: .normal)
     customDatesButton.setTitle(Strings.Actions.customDates, for: .normal)
     [todayButton, tomorrowButton, customDatesButton].forEach { button in
-      button.setTitleColor(UIColor.black, for: .normal)
+      button.setTitleColor(.black, for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor

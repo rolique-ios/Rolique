@@ -14,14 +14,16 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   private struct Constants {
     static var defaultOffset: CGFloat { return 20.0 }
     static var littleOffset: CGFloat { return 10.0 }
-    static var phoneImageSize: CGFloat { return 100.0 }
+    static var profileImageSize: CGFloat { return 100.0 }
     static var logOutButtonWidth: CGFloat { return 110.0 }
     static var logOutButtonHeight: CGFloat { return 50.0 }
+    static var clearCacheButtonHeight: CGFloat { return 50.0 }
   }
   private lazy var containerView = ShadowView()
-  private lazy var profileImage = UIImageView()
+  private lazy var profileImageView = UIImageView()
   private lazy var userNameLabel = UILabel()
   private lazy var titleLabel = UILabel()
+  private lazy var clearCacheButton = UIButton()
   private lazy var logOutButton = UIButton()
   
   override func viewDidLoad() {
@@ -32,9 +34,11 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     configureBinding()
     viewModel.getUser()
   }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
+    updateClearCacheButtonTitle()
   }
   
   private func configureNavigationBar() {
@@ -43,24 +47,24 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     navigationController?.navigationBar.titleTextAttributes = attributes
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
-    navigationController?.navigationBar.tintColor = UIColor.white
+    navigationController?.navigationBar.tintColor = .white
   }
   
   private func configureConstraints() {
     [containerView].forEach(self.view.addSubviewAndDisableMaskTranslate)
-    [profileImage, userNameLabel, titleLabel, logOutButton ].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+    [profileImageView, userNameLabel, titleLabel, logOutButton, clearCacheButton].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
     containerView.snp.makeConstraints { maker in
       maker.centerY.equalToSuperview()
       maker.leading.equalToSuperview().offset(Constants.defaultOffset)
       maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
-    profileImage.snp.makeConstraints { maker in
+    profileImageView.snp.makeConstraints { maker in
       maker.centerX.equalToSuperview()
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
-      maker.size.equalTo(Constants.phoneImageSize)
+      maker.size.equalTo(Constants.profileImageSize)
     }
     userNameLabel.snp.makeConstraints { maker in
-      maker.top.equalTo(profileImage.snp.bottom).offset(Constants.defaultOffset)
+      maker.top.equalTo(profileImageView.snp.bottom).offset(Constants.defaultOffset)
       maker.leading.equalToSuperview().offset(Constants.defaultOffset)
       maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
@@ -69,9 +73,14 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
       maker.leading.equalToSuperview().offset(Constants.defaultOffset)
       maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
     }
-    logOutButton.snp.makeConstraints { maker in
+    clearCacheButton.snp.makeConstraints { maker in
       maker.centerX.equalToSuperview()
       maker.top.equalTo(titleLabel.snp.bottom).offset(Constants.defaultOffset)
+      maker.height.equalTo(Constants.logOutButtonHeight)
+    }
+    logOutButton.snp.makeConstraints { maker in
+      maker.centerX.equalToSuperview()
+      maker.top.equalTo(clearCacheButton.snp.bottom).offset(Constants.defaultOffset)
       maker.width.equalTo(Constants.logOutButtonWidth)
       maker.height.equalTo(Constants.logOutButtonHeight)
       maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
@@ -89,21 +98,27 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     userNameLabel.textAlignment = .center
     
     titleLabel.textAlignment = .center
-    titleLabel.textColor = UIColor.lightGray
-    titleLabel.font = UIFont.italicSystemFont(ofSize: 14.0)
+    titleLabel.textColor = .lightGray
+    titleLabel.font = .italicSystemFont(ofSize: 14.0)
     
-    profileImage.layer.cornerRadius = Constants.phoneImageSize / 2
-    profileImage.clipsToBounds = true
-    configureButton()
+    profileImageView.roundCorner(radius: Constants.profileImageSize / 2)
+    configureLogOutButton()
+    configureCacheButton()
   }
   
-  private func configureButton() {
+  private func configureLogOutButton() {
     logOutButton.setTitle(Strings.Profile.logOutTitle, for: UIControl.State.normal)
-    logOutButton.setTitleColor(UIColor.red, for: .normal)
+    logOutButton.setTitleColor(.red, for: .normal)
     logOutButton.layer.cornerRadius = 5.0
     logOutButton.layer.borderWidth = 2.0
     logOutButton.layer.borderColor = UIColor.red.cgColor
-    logOutButton.addTarget(self, action: #selector(buttonTap(_:)), for: UIControl.Event.touchUpInside)
+    logOutButton.addTarget(self, action: #selector(logOutButtonTap(_:)), for: UIControl.Event.touchUpInside)
+  }
+  
+  private func configureCacheButton() {
+    clearCacheButton.backgroundColor = Colors.Actions.darkGray
+    clearCacheButton.layer.cornerRadius = 5.0
+    clearCacheButton.addTarget(self, action: #selector(clearCacheButtonTap(_:)), for: UIControl.Event.touchUpInside)
   }
   
   private func configureBinding() {
@@ -113,9 +128,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
       self.userNameLabel.text = user.name
       self.titleLabel.text = user.slackProfile.title
       
-      if let biggestImage = user.biggestImage, let url = URL(string: biggestImage) {
-        self.profileImage.setImage(with: url)
-      }
+      URL(string: user.biggestImage.orEmpty).map(self.profileImageView.setImage(with: ))
       
       self.containerView.isHidden = false
     }
@@ -136,10 +149,19 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
     Toast.current.layoutVertically()
   }
   
-  @objc func buttonTap(_ button: UIButton) {
-    Spitter.showConfirmation(Strings.Profile.logOutTitle + "?", message: Strings.Profile.logOutMessage, owner: self) {[weak self] in
+  @objc func logOutButtonTap(_ button: UIButton) {
+    Spitter.showConfirmation(Strings.Profile.logOutQuestion, message: Strings.Profile.logOutMessage, owner: self) {[weak self] in
       self?.viewModel.logOut()
     }
+  }
+  
+  @objc func clearCacheButtonTap(_ button: UIButton) {
+    ImageManager.shared.clearImagesFolder()
+    updateClearCacheButtonTitle()
+  }
+  
+  private func updateClearCacheButtonTitle() {
+    clearCacheButton.setTitle(" " + Strings.Profile.clearCache + "(\(ByteCountFormatters.fileSizeFormatter.string(fromByteCount: Int64(ImageManager.shared.findImagesDirectorySize()))))" + " ", for: UIControl.State.normal)
   }
 }
 

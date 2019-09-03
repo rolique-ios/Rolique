@@ -84,6 +84,7 @@
 		3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103552315735900EBCE4E /* ActionsDataSource.swift */; };
 		3FF103582315736C00EBCE4E /* ActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */; };
 		3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035923157D7F00EBCE4E /* PochavToast.swift */; };
+		3FF2D685231E9E8B00EE324F /* ByteCountFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -224,6 +225,7 @@
 		3FF103552315735900EBCE4E /* ActionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsDataSource.swift; sourceTree = "<group>"; };
 		3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsTableViewCell.swift; sourceTree = "<group>"; };
 		3FF1035923157D7F00EBCE4E /* PochavToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PochavToast.swift; sourceTree = "<group>"; };
+		3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteCountFormatters.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 			children = (
 				2DE7FA7223186A9100914EE8 /* DateFormatters.swift */,
 				3FFE6C7E231D425400757738 /* ImageManager.swift */,
+				3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
+				3FF2D685231E9E8B00EE324F /* ByteCountFormatters.swift in Sources */,
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,

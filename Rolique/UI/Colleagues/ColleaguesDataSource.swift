@@ -40,7 +40,13 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = ColleaguesTableViewCell.dequeued(by: tableView)
     cell.delegate = self
-    cell.configure(with: data[indexPath.row])
+    let user = data[indexPath.row]
+    cell.configure(with: user.slackProfile.realName,
+                   userImage: user.optimalImage,
+                   todayStatus: user.todayStatus,
+                   title: user.slackProfile.title,
+                   isButtonEnabled: !user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                   isMe: user.id == UserDefaultsManager.shared.userId)
     return cell
   }
   

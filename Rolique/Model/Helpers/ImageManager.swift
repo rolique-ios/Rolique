@@ -8,80 +8,77 @@
 
 import UIKit
 import Foundation
+import Utils
 
 final class ImageManager {
-  private lazy var observer: NSObjectProtocol = {
-    return NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { [weak self] notification in
-      self?.clearImagesFolder()
-    }
-  }()
-  
   static let shared = ImageManager()
-  
   private init() {}
   
-  deinit {
-    NotificationCenter.default.removeObserver(self.observer)
-  }
-  
   private let fileManager = FileManager.default
-  private func documentDirectoryURL() throws -> URL {
-    return try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+  private var documentDirectoryURL: URL {
+    return try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
   }
-  private func imagesDirectoryURL() throws -> URL {
-    return URL(fileURLWithPath: try documentDirectoryURL().path + "/Images")
+  private var imagesDirectoryURL: URL {
+    return URL(fileURLWithPath: documentDirectoryURL.path + "/Images")
   }
   
   func getImage(with url: URL) -> UIImage? {
-    do {
-      let imagesDirectory = try imagesDirectoryURL()
-      if let data = fileManager.contents(atPath: imagePath(imagesDirectoryURL: imagesDirectory, imageURL: url)) {
-        return UIImage(data: data, scale: UIScreen.main.scale)
-      }
-    } catch let error as NSError {
-      print("Could not get image: \(error.debugDescription), for url: \(url)")
+    createDirectoryIfNeeded(with: imagesDirectoryURL)
+    
+    if let data = fileManager.contents(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url)) {
+      return UIImage(data: data, scale: UIScreen.main.scale)
+    } else {
+      return nil
     }
-    return nil
   }
   
   func saveImage(data: Data, forURL url: URL) {
-    do {
-      let imagesDirectory = try imagesDirectoryURL()
-      checkDirectoryExists(with: imagesDirectory)
-      fileManager.createFile(atPath: imagePath(imagesDirectoryURL: imagesDirectory, imageURL: url),
-                             contents: data,
-                             attributes: nil)
-    } catch let error as NSError {
-      print("Could not save image: \(error.debugDescription), for url: \(url)")
+    createDirectoryIfNeeded(with: imagesDirectoryURL)
+    
+    fileManager.createFile(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url),
+                           contents: data,
+                           attributes: nil)
+  }
+  
+  func findImagesDirectorySize() -> UInt64 {
+    return findDirectorySize(path: imagesDirectoryURL.path)
+  }
+  
+  func clearImagesFolder() {
+    guard let filePaths = try? fileManager.contentsOfDirectory(atPath: imagesDirectoryURL.path) else {
+      return
     }
+    
+    filePaths
+      .map { imagesDirectoryURL.path + "/" + $0 }
+      .forEach(fileManager.safeRemove(atPath:))
+  }
+  
+  private func findDirectorySize(path: String) -> UInt64 {
+    guard let files = try? fileManager.subpathsOfDirectory(atPath: path) else { return 0 }
+    var accumulator: UInt64 = 0
+    
+    for file in files {
+      let filePath = path + "/" + file
+      guard let attributes = try? fileManager.attributesOfItem(atPath: filePath) else { continue }
+      
+      let size = (attributes[FileAttributeKey.size] as? NSNumber)?.uint64Value ?? 0
+      
+      accumulator += size
+    }
+    
+    return accumulator
   }
   
   private func imagePath(imagesDirectoryURL: URL, imageURL: URL) -> String {
     return imagesDirectoryURL.path + "/" + "\(imageURL.lastPathComponent.hashValue)"
   }
   
-  private func checkDirectoryExists(with url: URL) {
+  private func createDirectoryIfNeeded(with url: URL) {
     if !fileManager.fileExists(atPath: url.path) {
-      do {
-        try fileManager.createDirectory(at: url,
-                                         withIntermediateDirectories: true,
-                                         attributes: nil)
-      } catch let error as NSError {
-        print("Could not create images folder: \(error.debugDescription)")
-      }
-    }
-  }
-  
-  private func clearImagesFolder() {
-    do {
-      let imagesDirectory = try imagesDirectoryURL()
-      checkDirectoryExists(with: imagesDirectory)
-      let filePaths = try fileManager.contentsOfDirectory(atPath: imagesDirectory.path)
-      for filePath in filePaths {
-        try fileManager.removeItem(atPath: imagesDirectory.path + "/" + filePath)
-      }
-    } catch let error as NSError {
-      print("Could not clear images folder: \(error.debugDescription)")
+      try! fileManager.createDirectory(at: url,
+                                       withIntermediateDirectories: true,
+                                       attributes: nil)
     }
   }
 }
@@ -106,9 +103,7 @@ extension UIImageView {
     self.image = nil
   }
   
-  func setImage(with url: URL?) {
-    guard let url = url else { return }
-    
+  func setImage(with url: URL) {
     if let cachedImage = ImageManager.shared.getImage(with: url) {
       self.image = cachedImage
       return

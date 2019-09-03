@@ -95,7 +95,7 @@ final class LateToast: UIView {
   private func configureUI() {
     containerView.backgroundColor = .white
     
-    lateLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    lateLabel.font = .preferredFont(forTextStyle: .title2)
     lateLabel.text = Strings.Actions.lateTitle
     
     fromNowButton.addTarget(self, action: #selector(didSelectFromNowButton), for: .touchUpInside)
@@ -110,7 +110,7 @@ final class LateToast: UIView {
     in30minutesButton.setTitle(Strings.Actions.in30minutes, for: .normal)
     in1hourButton.setTitle(Strings.Actions.in1hour, for: .normal)
     [fromNowButton, fromTenOclockButton, in30minutesButton, in1hourButton].forEach { button in
-      button.setTitleColor(UIColor.black, for: .normal)
+      button.setTitleColor(.black, for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor

@@ -47,7 +47,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     navigationController?.navigationBar.titleTextAttributes = attributes
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
-    navigationController?.navigationBar.tintColor = UIColor.white
+    navigationController?.navigationBar.tintColor = .white
   }
   
   private func configureConstraints() {

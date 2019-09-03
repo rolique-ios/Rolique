@@ -43,7 +43,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.navigationBar.titleTextAttributes = attributes
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
-    navigationController?.navigationBar.tintColor = UIColor.white
+    navigationController?.navigationBar.tintColor = .white
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🌀", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
   }
   
@@ -70,13 +70,13 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     
     searchBar.delegate = self
     searchBar.returnKeyType = .done
-    searchBar.barTintColor = UIColor.clear
-    searchBar.backgroundColor = UIColor.clear
+    searchBar.barTintColor = .clear
+    searchBar.backgroundColor = .clear
     searchBar.isTranslucent = true
     searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
     if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
       if let backgroundview = textfield.subviews.first {
-        backgroundview.backgroundColor = UIColor.white
+        backgroundview.backgroundColor = .white
         backgroundview.layer.shadowColor = UIColor.black.cgColor
         backgroundview.layer.shadowRadius = 4.0
         backgroundview.layer.shadowOffset = CGSize(width: 0, height: 7)

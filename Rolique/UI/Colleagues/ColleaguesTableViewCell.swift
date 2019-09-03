@@ -40,20 +40,19 @@ class ColleaguesTableViewCell: UITableViewCell {
     containerView.backgroundColor = .white
     
     userImageView.translatesAutoresizingMaskIntoConstraints = false
-    userImageView.layer.cornerRadius = Constants.userImageSize / 2
-    userImageView.clipsToBounds = true
+    userImageView.roundCorner(radius: Constants.userImageSize / 2)
     
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
-    nameLabel.textColor = UIColor.black
+    nameLabel.textColor = .black
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.textColor = UIColor.lightGray
-    titleLabel.font = UIFont.italicSystemFont(ofSize: 14.0)
+    titleLabel.textColor = .lightGray
+    titleLabel.font = .italicSystemFont(ofSize: 14.0)
     
     todayStatusLabel.translatesAutoresizingMaskIntoConstraints = false
     todayStatusLabel.textColor = .orange
     todayStatusLabel.layer.borderWidth = 1.0
-     todayStatusLabel.layer.borderColor = UIColor.orange.cgColor
+    todayStatusLabel.layer.borderColor = UIColor.orange.cgColor
     todayStatusLabel.layer.cornerRadius = 4
     todayStatusLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
     
@@ -64,24 +63,18 @@ class ColleaguesTableViewCell: UITableViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with user: User) {
+  func configure(with name: String, userImage: String?, todayStatus: String?, title: String, isButtonEnabled: Bool, isMe: Bool) {
     configureViews()
     
-    if let optimalImage = user.optimalImage, let url = URL(string: optimalImage) {
-      self.userImageView.setImage(with: url)
-    }
+    URL(string: userImage.orEmpty).map(self.userImageView.setImage(with: ))
     
-    nameLabel.text = user.slackProfile.realName
-    if let todayStatus = user.todayStatus, !todayStatus.isEmpty {
-      todayStatusLabel.isHidden = false
-      todayStatusLabel.text = " " + todayStatus + " "
-    } else {
-      todayStatusLabel.isHidden = true
-      todayStatusLabel.text = nil
-    }
+    nameLabel.text = name
+    let todayStatusIsHidden = todayStatus.orEmpty.isEmpty
+    todayStatusLabel.isHidden = todayStatusIsHidden
+    todayStatusLabel.text = todayStatusIsHidden ? nil : " " + todayStatus.orEmpty + " "
     
-    if !user.slackProfile.title.isEmpty {
-      titleLabel.text = user.slackProfile.title
+    if !title.isEmpty {
+      titleLabel.text = title
     } else {
       titleLabel.removeFromSuperview()
       nameLabel.snp.remakeConstraints { maker in
@@ -90,14 +83,13 @@ class ColleaguesTableViewCell: UITableViewCell {
       }
     }
     
-    if user.id == UserDefaultsManager.shared.userId {
+    if isMe {
       phoneImageView.isHidden = true
     } else {
       phoneImageView.isHidden = false
       let image = Images.Colleagues.phone
       
-      let isPhoneAbsent = user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-      if isPhoneAbsent {
+      if !isButtonEnabled {
         phoneImageView.image = image.withRenderingMode(.alwaysTemplate)
         phoneImageView.tintColor = .lightGray
       } else {
