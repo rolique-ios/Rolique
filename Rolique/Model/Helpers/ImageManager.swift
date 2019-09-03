@@ -25,11 +25,9 @@ final class ImageManager {
   func getImage(with url: URL) -> UIImage? {
     createDirectoryIfNeeded(with: imagesDirectoryURL)
     
-    if let data = fileManager.contents(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url)) {
-      return UIImage(data: data, scale: UIScreen.main.scale)
-    } else {
-      return nil
-    }
+    return fileManager
+      .contents(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url))
+      .flatMap { UIImage(data: $0, scale: UIScreen.main.scale) }
   }
   
   func saveImage(data: Data, forURL url: URL) {
@@ -56,18 +54,10 @@ final class ImageManager {
   
   private func findDirectorySize(path: String) -> UInt64 {
     guard let files = try? fileManager.subpathsOfDirectory(atPath: path) else { return 0 }
-    var accumulator: UInt64 = 0
     
-    for file in files {
-      let filePath = path + "/" + file
-      guard let attributes = try? fileManager.attributesOfItem(atPath: filePath) else { continue }
-      
-      let size = (attributes[FileAttributeKey.size] as? NSNumber)?.uint64Value ?? 0
-      
-      accumulator += size
-    }
-    
-    return accumulator
+    return files
+      .map { (try? fileManager.attributesOfItem(atPath: path + "/" + $0)[FileAttributeKey.size] as? NSNumber)?.uint64Value ?? 0 }
+      .reduce(0, { $0 + $1 })
   }
   
   private func imagePath(imagesDirectoryURL: URL, imageURL: URL) -> String {

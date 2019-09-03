@@ -38,7 +38,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
-    updateClearCacheButtonTitle()
+    clearCacheButton.setTitle(viewModel.getClearCacheTitle(), for: .normal)
   }
   
   private func configureNavigationBar() {
@@ -117,7 +117,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   
   private func configureCacheButton() {
     clearCacheButton.backgroundColor = Colors.Actions.darkGray
-    clearCacheButton.layer.cornerRadius = 5.0
+    clearCacheButton.roundCorner(radius: 5.0)
     clearCacheButton.addTarget(self, action: #selector(clearCacheButtonTap(_:)), for: UIControl.Event.touchUpInside)
   }
   
@@ -143,6 +143,10 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
       window?.rootViewController = Router.getStartViewController()
       window?.makeKeyAndVisible()
     }
+    
+    viewModel.onClearCache = { [weak self] title in
+      self?.clearCacheButton.setTitle(title, for: .normal)
+    }
   }
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
@@ -156,12 +160,7 @@ final class ProfileViewController<T: ProfileViewModel>: ViewController<T> {
   }
   
   @objc func clearCacheButtonTap(_ button: UIButton) {
-    ImageManager.shared.clearImagesFolder()
-    updateClearCacheButtonTitle()
-  }
-  
-  private func updateClearCacheButtonTitle() {
-    clearCacheButton.setTitle(" " + Strings.Profile.clearCache + "(\(ByteCountFormatters.fileSizeFormatter.string(fromByteCount: Int64(ImageManager.shared.findImagesDirectorySize()))))" + " ", for: UIControl.State.normal)
+    viewModel.clearCache()
   }
 }
 

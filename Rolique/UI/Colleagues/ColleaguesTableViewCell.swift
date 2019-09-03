@@ -69,9 +69,9 @@ class ColleaguesTableViewCell: UITableViewCell {
     URL(string: userImage.orEmpty).map(self.userImageView.setImage(with: ))
     
     nameLabel.text = name
-    let todayStatusIsHidden = todayStatus.orEmpty.isEmpty
-    todayStatusLabel.isHidden = todayStatusIsHidden
-    todayStatusLabel.text = todayStatusIsHidden ? nil : " " + todayStatus.orEmpty + " "
+    let todayStatusIsEmpty = todayStatus.orEmpty.isEmpty
+    todayStatusLabel.isHidden = todayStatusIsEmpty
+    todayStatusLabel.text = todayStatusIsEmpty ? nil : " " + todayStatus.orEmpty + " "
     
     if !title.isEmpty {
       titleLabel.text = title
