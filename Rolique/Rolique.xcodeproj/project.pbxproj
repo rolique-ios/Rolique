@@ -84,6 +84,7 @@
 		3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103552315735900EBCE4E /* ActionsDataSource.swift */; };
 		3FF103582315736C00EBCE4E /* ActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */; };
 		3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1035923157D7F00EBCE4E /* PochavToast.swift */; };
+		3FF2D685231E9E8B00EE324F /* ByteCountFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -92,6 +93,7 @@
 		3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD38802317D284006D5479 /* RemoteToast.swift */; };
 		3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD3885231807B0006D5479 /* PickerTextField.swift */; };
 		3FFD388B23180D67006D5479 /* LateToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD388A23180D67006D5479 /* LateToast.swift */; };
+		3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE6C7E231D425400757738 /* ImageManager.swift */; };
 		4EB40EEA651461F61D56892D /* libPods-VacationTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1ABE80DA0A182B9C0DCB8B /* libPods-VacationTodayExtension.a */; };
 		5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		B5FFFC5E22F83988001DDF2C /* RoliqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFFC5D22F83988001DDF2C /* RoliqueTests.swift */; };
@@ -223,6 +225,7 @@
 		3FF103552315735900EBCE4E /* ActionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsDataSource.swift; sourceTree = "<group>"; };
 		3FF103572315736C00EBCE4E /* ActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsTableViewCell.swift; sourceTree = "<group>"; };
 		3FF1035923157D7F00EBCE4E /* PochavToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PochavToast.swift; sourceTree = "<group>"; };
+		3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteCountFormatters.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 		3FFD38802317D284006D5479 /* RemoteToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteToast.swift; sourceTree = "<group>"; };
 		3FFD3885231807B0006D5479 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		3FFD388A23180D67006D5479 /* LateToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateToast.swift; sourceTree = "<group>"; };
+		3FFE6C7E231D425400757738 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		553F0B5CFFFBAAEB8578AB2A /* Pods-VacationTodayExtension.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.stagingrelease.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -547,6 +551,8 @@
 			isa = PBXGroup;
 			children = (
 				2DE7FA7223186A9100914EE8 /* DateFormatters.swift */,
+				3FFE6C7E231D425400757738 /* ImageManager.swift */,
+				3FF2D684231E9E8B00EE324F /* ByteCountFormatters.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1045,6 +1051,7 @@
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
 				3FC996122316819200C2554C /* CancelButton.swift in Sources */,
+				3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */,
 				3F058BEA230BF13400869336 /* UserService.swift in Sources */,
 				3FF103582315736C00EBCE4E /* ActionsTableViewCell.swift in Sources */,
 				3FF9BEF32305AE0800028513 /* ColleaguesTableViewCell.swift in Sources */,
@@ -1055,6 +1062,7 @@
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
+				3FF2D685231E9E8B00EE324F /* ByteCountFormatters.swift in Sources */,
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,

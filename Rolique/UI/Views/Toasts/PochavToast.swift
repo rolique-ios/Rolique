@@ -71,7 +71,7 @@ final class PochavToast: UIView {
   private func configureUI() {
     containerView.backgroundColor = .white
     titleLabel.text = Strings.Actions.pochavTitle
-    titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    titleLabel.font = .preferredFont(forTextStyle: .title2)
     confirmButton.addTarget(self, action: #selector(didSelectConfirmButton), for: .touchUpInside)
     cancelButton.addTarget(self, action: #selector(didSelectCancelButton), for: .touchUpInside)
   }

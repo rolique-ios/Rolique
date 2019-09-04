@@ -111,7 +111,7 @@ final class DopracToast: UIView {
   private func configureUI() {
     containerView.backgroundColor = .white
     
-    titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    titleLabel.font = .preferredFont(forTextStyle: .title2)
     
     nowButton.addTarget(self, action: #selector(didSelectNowButton), for: .touchUpInside)
     inAhourButton.addTarget(self, action: #selector(didSelectInAHourButton), for: .touchUpInside)
@@ -123,7 +123,7 @@ final class DopracToast: UIView {
     inAhourButton.setTitle(Strings.Actions.inAHour, for: .normal)
     customTimeButton.setTitle(Strings.Actions.customTime, for: .normal)
     [nowButton, inAhourButton, customTimeButton].forEach { button in
-      button.setTitleColor(UIColor.black, for: .normal)
+      button.setTitleColor(.black, for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor

@@ -24,6 +24,10 @@ public struct Strings {
     public static var actions: String { return "Actions".localized }
   }
   
+  public struct Collegues {
+    public static var showOptions: String { return "Show options".localized }
+  }
+  
   public struct Actions {
     public static var confirm: String { return "Confirm".localized }
     public static var cancel: String { return "Cancel".localized }
@@ -38,21 +42,28 @@ public struct Strings {
     public static var tomorrow: String { return "Tomorrow".localized }
     public static var customDates: String { return "Custom dates".localized }
     public static var remoteDates: String { return "Your remote dates".localized }
-    public static var startTitle: String { return "Start: " }
-    public static var endTitle: String { return "End: " }
-    public static var doneTitle: String { return "Done" }
-    public static var nextTitle: String { return "Next" }
+    public static var startTitle: String { return "Start: ".localized }
+    public static var endTitle: String { return "End: ".localized }
+    public static var doneTitle: String { return "Done".localized }
+    public static var nextTitle: String { return "Next".localized }
     public static var dateFormatterPlaceholder: String { return "YYYY-MM-DD" }
     public struct Error {
-      public static var chooseStart: String { return "Choose start date" }
-      public static var chooseEnd: String { return "Choose end date" }
-      public static var startLargerEnd: String { return "Start date should be less than end date" }
+      public static var chooseStart: String { return "Choose start date".localized }
+      public static var chooseEnd: String { return "Choose end date".localized }
+      public static var startLargerEnd: String { return "Start date should be less than end date".localized }
     }
-    public static var lateTitle: String { return "So you are late.. When to expect you?" }
-    public static var fromNow: String { return "From now" }
-    public static var from10Oclock: String { return "From 10:00" }
-    public static var in30minutes: String { return "in 30 minutes" }
-    public static var in1hour: String { return "in 1 hour" }
-    public static var orChooseTime: String { return "..or choose time" }
+    public static var lateTitle: String { return "So you are late.. When to expect you?".localized }
+    public static var fromNow: String { return "From now".localized }
+    public static var from10Oclock: String { return "From 10:00".localized }
+    public static var in30minutes: String { return "in 30 minutes".localized }
+    public static var in1hour: String { return "in 1 hour".localized }
+    public static var orChooseTime: String { return "..or choose time".localized }
+  }
+  
+  public struct Profile {
+    public static var logOutTitle: String { return "Log out".localized }
+    public static var logOutQuestion: String { return "Log out?".localized }
+    public static var logOutMessage: String { return "Are you sure?".localized }
+    public static var clearCache: String { return "Clear cache".localized }
   }
 }

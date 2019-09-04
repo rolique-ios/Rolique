@@ -54,8 +54,8 @@ final class RecordTypeToast: UIView {
   }
   
   private func configureUI() {
-    titleLabel.text = "show options"
-    titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    titleLabel.text = Strings.Collegues.showOptions
+    titleLabel.font = .preferredFont(forTextStyle: .title2)
     
     tableView.separatorInset = Constants.tableViewSeparatorInset
     tableView.delegate = self

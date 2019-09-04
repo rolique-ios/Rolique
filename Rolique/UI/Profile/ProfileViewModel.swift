@@ -13,9 +13,12 @@ protocol ProfileViewModel: ViewModel {
   var onUserSuccess: ((User) -> Void)? { get set }
   var onLogOut: (() -> Void)? { get set }
   var onError: ((String) -> Void)? { get set }
+  var onClearCache: ((String) -> Void)? { get set }
   
   func getUser()
   func logOut()
+  func clearCache()
+  func getClearCacheTitle() -> String
 }
 
 final class ProfileViewModelImpl: BaseViewModel, ProfileViewModel {
@@ -28,6 +31,7 @@ final class ProfileViewModelImpl: BaseViewModel, ProfileViewModel {
   var onUserSuccess: ((User) -> Void)?
   var onLogOut: (() -> Void)?
   var onError: ((String) -> Void)?
+  var onClearCache: ((String) -> Void)?
   
   func getUser() {
     userService.getUserWithId(UserDefaultsManager.shared.userId ?? "",
@@ -51,5 +55,17 @@ final class ProfileViewModelImpl: BaseViewModel, ProfileViewModel {
   func logOut() {
     UserDefaultsManager.shared.userId = nil
     onLogOut?()
+  }
+  
+  func clearCache() {
+    ImageManager.shared.clearImagesFolder()
+    onClearCache?(getClearCacheTitle())
+  }
+  
+  func getClearCacheTitle() -> String {
+    return " "
+      + Strings.Profile.clearCache
+      + "(\(ByteCountFormatters.fileSizeFormatter.string(fromByteCount: Int64(ImageManager.shared.findImagesDirectorySize()))))"
+      + " "
   }
 }
