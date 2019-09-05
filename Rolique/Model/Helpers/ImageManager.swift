@@ -61,7 +61,7 @@ final class ImageManager {
   }
   
   private func imagePath(imagesDirectoryURL: URL, imageURL: URL) -> String {
-    return imagesDirectoryURL.path + "/" + "\(imageURL.lastPathComponent.hashValue)"
+    return imagesDirectoryURL.path + "/" + "\(imageURL.lastPathComponent)"
   }
   
   private func createDirectoryIfNeeded(with url: URL) {

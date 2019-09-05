@@ -94,6 +94,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
 //    tableView.refreshControl = refreshControl
     tableView.keyboardDismissMode = .interactive
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
+    dataSource.onUserTap = onUserSelect
   }
   
   private func configureBinding() {
@@ -125,6 +126,11 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   @objc func didSelectSortButton() {
     Toast.current.show(recordTypeToast)
+  }
+  
+  func onUserSelect(_ user: User) {
+    Spitter.tap(.pop)
+    viewModel.openSlackForUser(user.id)
   }
   
   private func constructRecordTypeToast() -> RecordTypeToast {

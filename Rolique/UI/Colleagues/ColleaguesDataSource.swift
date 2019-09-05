@@ -14,6 +14,8 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
   private let tableView: UITableView
   private var data: [User]
   
+  var onUserTap: ((User) -> Void)?
+  
   init(tableView: UITableView, data: [User]) {
     self.tableView = tableView
     self.data = data
@@ -42,7 +44,7 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
     cell.delegate = self
     let user = data[indexPath.row]
     cell.configure(with: user.slackProfile.realName,
-                   userImage: user.optimalImage,
+                   userImage: user.biggestImage,
                    todayStatus: user.todayStatus,
                    title: user.slackProfile.title,
                    isButtonEnabled: !user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
@@ -52,6 +54,11 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    onUserTap?(data[indexPath.row])
   }
 }
 

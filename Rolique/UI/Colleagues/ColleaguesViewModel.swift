@@ -6,7 +6,8 @@
 //  Copyright © 2019 Rolique. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Networking
 
 enum ListType {
   case all
@@ -27,6 +28,7 @@ protocol ColleaguesViewModel: ViewModel {
   func sort(_ recordType: RecordType)
   func searchUser(with text: String)
   func refresh()
+  func openSlackForUser(_ userID: String)
 }
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
@@ -107,5 +109,11 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       self.onError?(listType)
       print(error.localizedDescription)
     }
+  }
+  
+  func openSlackForUser(_ userID: String) {
+    let urlString = "slack://user?team=\(Env.slackTeamId)&id=\(userID)"
+    guard let url = URL(string: urlString) ,UIApplication.shared.canOpenURL(url) else { return }
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
 }
