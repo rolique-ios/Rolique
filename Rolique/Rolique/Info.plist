@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>6</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -49,8 +49,6 @@
 	<true/>
 	<key>Secret</key>
 	<dict>
-		<key>SlackTeamId</key>
-		<string>$(SLACK_TEAM_ID)</string>
 		<key>ApiToken</key>
 		<string>$(API_TOKEN)</string>
 		<key>ApiUrl</key>
@@ -61,6 +59,8 @@
 		<string>$(SLACK_CLIENT_SECRET)</string>
 		<key>SlackRedirectUri</key>
 		<string>$(SLACK_REDIRECT_URI)</string>
+		<key>SlackTeamId</key>
+		<string>$(SLACK_TEAM_ID)</string>
 	</dict>
 	<key>UIApplicationShortcutItems</key>
 	<array>
