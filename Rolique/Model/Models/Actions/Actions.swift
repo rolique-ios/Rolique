@@ -13,6 +13,7 @@ public enum ActionType: String, CaseIterable {
   case remote
   case doprac
   case pochav
+  case other
 }
 
 public enum DopracType {

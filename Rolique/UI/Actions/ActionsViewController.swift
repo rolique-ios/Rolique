@@ -140,6 +140,8 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     case .pochav:
       guard let toast = pochavToast else { return }
       Toast.current.show(toast)
+    case .other:
+      viewModel.openSlackForBot()
     }
     print("action called")
   }

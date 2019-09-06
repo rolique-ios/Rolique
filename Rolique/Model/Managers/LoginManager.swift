@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Utils
 import Networking
 import SafariServices
 
@@ -81,7 +82,25 @@ public final class LoginManagerImpl: LoginManager {
             }
             return
           }
-          result?(.success(user))
+
+          Net.Worker.request(GetBot(), onSuccess: { botJson in
+            DispatchQueue.main.async {
+              let bot: Bot? = botJson.build()
+              if let bot = bot {
+                UserDefaultsManager.shared.botId = bot.userID
+                UserDefaultsManager.shared.teamId = bot.teamID
+                UserDefaultsManager.shared.teamName = bot.teamName
+                result?(.success(user))
+              } else {
+                result?(.failure(Err.general(msg: "failed to build bot")))
+              }
+            }
+          }, onError: { error in
+            DispatchQueue.main.async {
+              result?(.failure(error))
+            }
+          })
+
         }, onError: { error in
           DispatchQueue.main.async {
             result?(.failure(error))

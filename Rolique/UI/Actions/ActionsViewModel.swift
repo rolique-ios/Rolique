@@ -15,6 +15,7 @@ protocol ActionsViewModel: ViewModel {
   func doprac(type: DopracType)
   func remote(type: RemoteType)
   func late(type: LateType)
+  func openSlackForBot()
 }
 
 final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
@@ -91,6 +92,12 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
         self.onResponse?(error.localizedDescription)
       }
     }
+  }
+  
+  func openSlackForBot() {
+    let urlString = "slack://user?team=\(UserDefaultsManager.shared.teamId ?? "no-team-id")&id=\(UserDefaultsManager.shared.botId ?? "no-bot-id")"
+    guard let url = URL(string: urlString) ,UIApplication.shared.canOpenURL(url) else { return }
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
 }
 

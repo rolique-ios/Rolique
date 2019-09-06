@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Networking
+import Utils
 
 enum ListType {
   case all
@@ -112,7 +112,7 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   }
   
   func openSlackForUser(_ userID: String) {
-    let urlString = "slack://user?team=\(Env.slackTeamId)&id=\(userID)"
+    let urlString = "slack://user?team=\(UserDefaultsManager.shared.teamId ?? "no-team-id")&id=\(userID)"
     guard let url = URL(string: urlString) ,UIApplication.shared.canOpenURL(url) else { return }
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }

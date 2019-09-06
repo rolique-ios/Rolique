@@ -15,7 +15,7 @@ public struct Json: Codable {
   }
 }
 
-public extension Json {
+public extension Json { 
   
   func build<M: Codable>() -> M? {
     guard let body = self.json("body") else {
