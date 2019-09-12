@@ -66,8 +66,8 @@ public final class ShortcutManager {
   }
   
   private func handleResult(_ result: Result<ActionResult, Error>) {
-    let text = result.error?.localizedDescription ?? "Successfully sent"
-    UIResultNotifier.shared.showAndHideIfNeeded(text: text)
+    let text = result.value?.error ?? "Successfully sent"
+    UIResultNotifier.shared.showAndHideAfterTime(text: text)
   }
   
   public func handle(shortcutItem: UIApplicationShortcutItem) -> Bool {

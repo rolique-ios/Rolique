@@ -13,13 +13,13 @@ import SnapKit
 final class RecordTypeToast: UIView {
   private struct Constants {
     static var defaultOffset: CGFloat { return 20.0 }
-    static var tableViewHeight: CGFloat { return 250 }
     static var tableViewSeparatorInset: UIEdgeInsets { return UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15) }
     static var tableViewRowHeight: CGFloat { return 50 }
   }
-  private lazy var titleLabel = UILabel()
   private lazy var tableView = UITableView()
   private var data = [RecordType]()
+  private var selectedIndex = 0
+  private var tableViewHeightConstraint: Constraint?
   var onSelectRow: ((RecordType) -> Void)?
   
   override init(frame: CGRect) {
@@ -38,25 +38,18 @@ final class RecordTypeToast: UIView {
   }
   
   private func configureConstraints() {
-    [titleLabel, tableView].forEach(self.addSubviewAndDisableMaskTranslate)
+    [tableView].forEach(self.addSubviewAndDisableMaskTranslate)
     
-    titleLabel.snp.makeConstraints { maker in
-      maker.top.equalToSuperview().offset(Constants.defaultOffset)
-      maker.centerX.equalToSuperview()
-    }
     tableView.snp.makeConstraints { maker in
-      maker.top.equalTo(titleLabel.snp.bottom).offset(Constants.defaultOffset)
+      maker.top.equalTo(self.safeAreaLayoutGuide).offset(Constants.defaultOffset)
       maker.bottom.equalTo(self.safeAreaLayoutGuide).offset(-Constants.defaultOffset)
       maker.leading.equalTo(self.safeAreaLayoutGuide).offset(Constants.defaultOffset)
       maker.trailing.equalTo(self.safeAreaLayoutGuide).offset(-Constants.defaultOffset)
-      maker.height.equalTo(Constants.tableViewHeight)
+      tableViewHeightConstraint = maker.height.equalTo(0).constraint
     }
   }
   
   private func configureUI() {
-    titleLabel.text = Strings.Collegues.showOptions
-    titleLabel.font = .preferredFont(forTextStyle: .title2)
-    
     tableView.separatorInset = Constants.tableViewSeparatorInset
     tableView.delegate = self
     tableView.dataSource = self
@@ -66,6 +59,7 @@ final class RecordTypeToast: UIView {
               onSelectRow: ((RecordType) -> Void)?) {
     self.onSelectRow = onSelectRow
     self.data = data
+    tableViewHeightConstraint?.update(offset: CGFloat(data.count) * Constants.tableViewRowHeight)
   }
 }
 
@@ -76,6 +70,10 @@ extension RecordTypeToast: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
+    if selectedIndex == indexPath.row {
+      cell.accessoryType = .checkmark
+    }
+    cell.selectionStyle = .none
     cell.textLabel?.text = data[indexPath.row].desctiption
     return cell
   }
@@ -83,8 +81,16 @@ extension RecordTypeToast: UITableViewDataSource {
 
 extension RecordTypeToast: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let cell = tableView.cellForRow(at: indexPath) {
+      cell.accessoryType = .checkmark
+    }
+    if selectedIndex != indexPath.row, let cell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) {
+      cell.accessoryType = .none
+    }
+    selectedIndex = indexPath.row
     onSelectRow?(data[indexPath.row])
   }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return Constants.tableViewRowHeight
   }
