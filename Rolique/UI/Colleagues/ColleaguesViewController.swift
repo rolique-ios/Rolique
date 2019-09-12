@@ -11,11 +11,16 @@ import SnapKit
 import Utils
 import IgyToast
 
+private struct Constants {
+  static var headerHeight: CGFloat { return 50.0 }
+}
+
 final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate {
   private lazy var tableView = UITableView()
   private lazy var tableViewHeader = UIView()
   private lazy var searchBar = UISearchBar()
   private lazy var recordTypeToast = constructRecordTypeToast()
+  private lazy var recordTypeToastHeader = constructRecordTypeToastHeader()
   private var dataSource: ColleaguesDataSource!
   
   override func viewDidLoad() {
@@ -35,6 +40,12 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    Toast.current.layoutVertically()
   }
   
   private func configureNavigationBar() {
@@ -125,12 +136,30 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   @objc func didSelectSortButton() {
-    Toast.current.show(recordTypeToast)
+    Toast.current.show(recordTypeToast, header: recordTypeToastHeader)
   }
   
   func onUserSelect(_ user: User) {
     Spitter.tap(.pop)
     viewModel.openSlackForUser(user.id)
+  }
+  
+  private func constructRecordTypeToastHeader() -> UIView {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.snp.makeConstraints { maker in
+      maker.height.equalTo(Constants.headerHeight)
+    }
+    
+    let label = UILabel()
+    view.addSubview(label)
+    label.text = Strings.Collegues.showOptions
+    label.font = .preferredFont(forTextStyle: .title2)
+    label.textAlignment = .center
+    label.snp.makeConstraints { maker in
+      maker.edges.equalToSuperview()
+    }
+    return view
   }
   
   private func constructRecordTypeToast() -> RecordTypeToast {
