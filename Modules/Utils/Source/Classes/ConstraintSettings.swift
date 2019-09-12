@@ -8,34 +8,83 @@
 
 import UIKit
 
-final class ConstraintsSettings {
-    private(set) var left: CGFloat?
-    private(set) var right: CGFloat?
-    private(set) var top: CGFloat?
-    private(set) var bottom: CGFloat?
-    private(set) var centerX: CGFloat?
-    private(set) var centerY: CGFloat?
-    private(set) var width: CGFloat?
-    private(set) var height: CGFloat?
+final public class ConstraintsSettings {
+  fileprivate(set) var left: CGFloat?
+  fileprivate(set) var right: CGFloat?
+  fileprivate(set) var top: CGFloat?
+  fileprivate(set) var bottom: CGFloat?
+  fileprivate(set) var centerX: CGFloat?
+  fileprivate(set) var centerY: CGFloat?
+  fileprivate(set) var width: CGFloat?
+  fileprivate(set) var height: CGFloat?
+  
+  public static var zero: ConstraintsSettings { return ConstraintsSettings(edgeInsets: .zero) }
+  
+  public init(left: CGFloat? = nil, right: CGFloat? = nil, top: CGFloat? = nil, bottom: CGFloat? = nil, centerX: CGFloat? = nil, centerY: CGFloat? = nil, width: CGFloat? = nil, height: CGFloat? = nil) {
+    self.left = left
+    self.right = right
+    self.centerX = centerX
+    self.centerY = centerY
+    self.top = top
+    self.bottom = bottom
+    self.width = width
+    self.height = height
+  }
+  
+  public init(left: CGFloat = 0, right: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0) {
+    self.left = left
+    self.right = right
+    self.top = top
+    self.bottom = bottom
+  }
+  
+  public init(edgeInsets: UIEdgeInsets = .zero) {
+    self.left = edgeInsets.left
+    self.right = edgeInsets.right
+    self.top = edgeInsets.top
+    self.bottom = edgeInsets.bottom
+  }
+  
+  public init(centerX: CGFloat, centerY: CGFloat, width: CGFloat?, height: CGFloat?) {
+    self.centerX = centerX
+    self.centerY = centerY
+    self.width = width
+    self.height = height
+  }
+  
+  public init(centerX: CGFloat, top: CGFloat?, bottom: CGFloat?, width: CGFloat?) {
+    self.centerX = centerX
+    self.top = top
+    self.bottom = bottom
+    self.width = width
+  }
+  
+  public init(centerX: CGFloat, top: CGFloat?, left: CGFloat?, right: CGFloat?, height: CGFloat?) {
+    self.centerX = centerX
+    self.top = top
+    self.left = left
+    self.right = right
+    self.height = height
+  }
+  
+  public init(centerY: CGFloat, left: CGFloat?, right: CGFloat?, height: CGFloat?) {
+    self.centerY = centerY
+    self.left = left
+    self.right = right
+    self.height = height
+  }
+  
+  public init(width: CGFloat?, height: CGFloat?, left: CGFloat?, right: CGFloat?, top: CGFloat?, bottom: CGFloat?) {
+    //    assert(left == nil || right == nil || width == nil, "ambigious constraints")
+    //    assert(top == nil || bottom == nil || height == nil, "ambigious constraints")
     
-    convenience init(edgeInsets: UIEdgeInsets = .zero) {
-        self.init(left: edgeInsets.left, right: edgeInsets.right, top: edgeInsets.top, bottom: edgeInsets.bottom)
-    }
-    
-    init(width: CGFloat? = nil, height: CGFloat? = nil, left: CGFloat? = nil, right: CGFloat? = nil, top: CGFloat? = nil, bottom: CGFloat? = nil, centerX: CGFloat? = nil, centerY: CGFloat? = nil) {
-        self.left = left
-        self.right = right
-        self.top = top
-        self.bottom = bottom
-        self.width = width
-        self.height = height
-        self.centerX = centerX
-        self.centerY = centerY
-    }
-    
-    static var zero: ConstraintsSettings {
-        return ConstraintsSettings(edgeInsets: .zero)
-    }
+    self.left = left
+    self.right = right
+    self.top = top
+    self.bottom = bottom
+    self.width = width
+    self.height = height
+  }
 }
 
 extension UIView {

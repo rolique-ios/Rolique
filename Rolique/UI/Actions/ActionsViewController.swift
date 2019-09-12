@@ -68,16 +68,19 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   private func configureBinding() {
     viewModel.onResponse = { [weak self] text in
       guard let self = self else { return }
-      Toast.current.hide({
-        Spitter.showOkAlert(text, viewController: self)
-      })
+      self.hideSpinner()
+      UIResultNotifier.shared.showAndHideAfterTime(text: text)
     }
   }
   
   private func constructPochavToast() -> PochavToast {
     let view = PochavToast()
-    view.update(onConfirm: { [weak self] in
-      self?.viewModel.pochav()
+    view.update(onConfirm: {
+      Toast.current.hide({ [weak self] in
+        guard let self = self else { return }
+        self.viewModel.pochav()
+        self.showSpinner(shouldBlockUI: true)
+      })
       }, onCancel: {
         Toast.current.hide()
     })
@@ -86,8 +89,12 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   
   private func constructDopracToast() -> DopracToast {
     let view = DopracToast()
-    view.update(onConfirm: { [weak self] type in
-      self?.viewModel.doprac(type: type)
+    view.update(onConfirm: { type in
+      Toast.current.hide({ [weak self] in
+        guard let self = self else { return }
+        self.viewModel.doprac(type: type)
+        self.showSpinner(shouldBlockUI: true)
+      })
       }, needsLayout: {
         Toast.current.layoutVertically()
     }, onCancel: {
@@ -98,8 +105,12 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   
   private func constructRemoteToast() -> RemoteToast {
     let view = RemoteToast()
-    view.update(onConfirm: { [weak self] type in
-      self?.viewModel.remote(type: type)
+    view.update(onConfirm: { type in
+      Toast.current.hide({ [weak self] in
+        guard let self = self else { return }
+        self.viewModel.remote(type: type)
+        self.showSpinner(shouldBlockUI: true)
+      })
       }, needsLayout: {
         Toast.current.layoutVertically()
     }, onError: { error in
@@ -112,8 +123,12 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   
   private func constructLateToast() -> LateToast {
     let view = LateToast()
-    view.update(onConfirm: { [weak self] type in
-      self?.viewModel.late(type: type)
+    view.update(onConfirm: { type in
+      Toast.current.hide({ [weak self] in
+        guard let self = self else { return }
+        self.viewModel.late(type: type)
+        self.showSpinner(shouldBlockUI: true)
+      })
       }, needsLayout: {
         Toast.current.layoutVertically()
     }, onCancel: {
