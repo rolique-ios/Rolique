@@ -66,8 +66,8 @@ platform :ios do
   end
 
   lane :rebeta do
-    # clean_build_artifacts
-    # clear_derived_data
+    clean_build_artifacts
+    clear_derived_data
 
   xcodebuild(
       scheme: "UsersWidget",

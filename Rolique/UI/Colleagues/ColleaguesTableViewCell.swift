@@ -55,6 +55,7 @@ class ColleaguesTableViewCell: UITableViewCell {
     todayStatusLabel.layer.borderColor = UIColor.orange.cgColor
     todayStatusLabel.layer.cornerRadius = 4
     todayStatusLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+    todayStatusLabel.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
     
     phoneImageView.translatesAutoresizingMaskIntoConstraints = false
   }
