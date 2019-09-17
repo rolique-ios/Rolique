@@ -11,6 +11,7 @@ import Networking
 
 public enum RecordType: String, CaseIterable {
   case all,
+  away,
   vacation,
   remote,
   sick,
@@ -43,6 +44,7 @@ public enum RecordType: String, CaseIterable {
       return "Birthday"
     case .all:
       return "All"
+    case .away: return "Away"
     }
   }
 }

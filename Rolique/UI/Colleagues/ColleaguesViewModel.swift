@@ -25,6 +25,7 @@ protocol ColleaguesViewModel: ViewModel {
   var recordType: RecordType? { get set }
   
   func all()
+  func away()
   func sort(_ recordType: RecordType)
   func searchUser(with text: String)
   func refresh()
@@ -55,6 +56,12 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       }, onFetch: { [weak self] result in
         self?.handleResult(.all, result: result)
     })
+  }
+  
+  func away() {
+    userService.getAwayUsers { [weak self] result in
+      self?.handleResult(.filtered, result: result)
+    }
   }
   
   func sort(_ recordType: RecordType) {
@@ -89,7 +96,11 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       all()
     case .filtered:
       if let recordType = recordType {
-        sort(recordType)
+        if case .away = recordType {
+          away()
+        } else {
+          sort(recordType)
+        }
       }
     }
   }

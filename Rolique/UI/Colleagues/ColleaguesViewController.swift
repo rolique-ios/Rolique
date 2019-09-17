@@ -164,13 +164,17 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   private func constructRecordTypeToast() -> RecordTypeToast {
     let view = RecordTypeToast()
-    view.update(data: RecordType.allCases,
+    view.update(data:
+      RecordType.allCases,
                 onSelectRow: { [weak self] recordType in
                   Toast.current.hide()
                   self?.viewModel.recordType = recordType
                   if recordType == .all {
                     self?.viewModel.listType = .all
                     self?.viewModel.all()
+                  } else if recordType == .away {
+                    self?.viewModel.listType = .filtered
+                    self?.viewModel.away()
                   } else {
                     self?.viewModel.listType = .filtered
                     self?.viewModel.sort(recordType)

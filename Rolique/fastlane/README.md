@@ -21,9 +21,9 @@ or alternatively using `brew cask install fastlane`
 fastlane ios createIPA
 ```
 Releasing targets apps to the Apstore
-### ios register
+### ios device
 ```
-fastlane ios register
+fastlane ios device
 ```
 
 ### ios refresh

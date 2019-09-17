@@ -143,18 +143,28 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     case .late:
       lateToast?.refreshView()
       guard let toast = lateToast else { return }
-      Toast.current.show(toast)
+      Toast.current.hide {
+        Toast.current.show(toast)
+      }
     case .remote:
       remoteToast?.refreshView()
       guard let toast = remoteToast else { return }
-      Toast.current.show(toast)
+      Toast.current.hide {
+        Toast.current.show(toast)
+      }
+      
     case .doprac:
       dopracToast?.refreshView()
       guard let toast = dopracToast else { return }
-      Toast.current.show(toast)
+      Toast.current.hide {
+        Toast.current.show(toast)
+      }
+      
     case .pochav:
       guard let toast = pochavToast else { return }
-      Toast.current.show(toast)
+      Toast.current.hide {
+        Toast.current.show(toast)
+      }
     case .other:
       viewModel.openSlackForBot()
     }

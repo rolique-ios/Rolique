@@ -30,17 +30,23 @@ platform :ios do
 	)
   end
 
-  lane :register do
+  lane :device do
     device_name = prompt(text: "Enter the device name: ")
     device_udid = prompt(text: "Enter the device UDID: ")
     device_hash = {}
     device_hash[device_name] = device_udid
     register_devices(devices: device_hash)
+    refresh
     match(force: true)
   end
 
   lane :refresh do 
-    match(type: "adhoc", force_for_new_devices: true, app_identifier: ENV["ALL_BUNDLE_IDENTIFIERS"])
+     # => ENV['PROVISION_NAME_ADHOC'],
+     #      ENV['REMOTE_BUNDLE_IDENTIFIER'] => ENV['REMOTE_PROVISION_NAME_ADHOC'],
+     #      ENV['VACATION_BUNDLE_IDENTIFIER']
+    match(type: "adhoc", force_for_new_devices: true, app_identifier: ENV['BUNDLE_IDENTIFIER'])
+    match(type: "adhoc", force_for_new_devices: true, app_identifier: ENV['REMOTE_BUNDLE_IDENTIFIER'])
+    match(type: "adhoc", force_for_new_devices: true, app_identifier: ENV['VACATION_BUNDLE_IDENTIFIER'])
   end
 
   lane :release do
