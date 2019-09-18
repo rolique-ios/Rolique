@@ -5,52 +5,42 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.006648">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.00804">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: increment_build_number" time="1.179018">
+      <testcase classname="fastlane.lanes" name="1: clean_build_artifacts" time="0.002892">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to ios rebeta lane" time="0.002831">
+      <testcase classname="fastlane.lanes" name="2: clear_derived_data" time="0.920281">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: clean_build_artifacts" time="0.002996">
+      <testcase classname="fastlane.lanes" name="3: xcodebuild" time="34.581904">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: clear_derived_data" time="1.237479">
+      <testcase classname="fastlane.lanes" name="4: gym" time="140.738801">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: xcodebuild" time="6.817794">
+      <testcase classname="fastlane.lanes" name="5: crashlytics" time="7.514561">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: gym" time="129.896321">
+      <testcase classname="fastlane.lanes" name="6: get_build_number" time="0.619166">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: crashlytics" time="4.876435">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="8: get_build_number" time="0.360863">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="9: slack" time="1.331733">
+      <testcase classname="fastlane.lanes" name="7: slack" time="1.132978">
         
       </testcase>
     
