@@ -7,6 +7,7 @@
 //
 
 import Utils
+import Hero
 
 public final class Router {
   static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
@@ -31,6 +32,8 @@ public final class Router {
     let tabbar = BaseTabBarController()
     let colleagues = UINavigationController(rootViewController: getColleaguesViewController())
     colleagues.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.colleagues, image: Images.TabBar.stats, tag: 0)
+    colleagues.hero.isEnabled = true
+    Hero.shared.containerColor = Colors.Colleagues.softWhite
     let actions = UINavigationController(rootViewController: getActionsViewController())
     actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: Images.TabBar.actions, tag: 1)
     let profile = UINavigationController(rootViewController: getProfileViewController())
@@ -46,5 +49,9 @@ public final class Router {
   
   public static func getStartViewController() -> UIViewController {
     return UserDefaultsManager.shared.userId == nil ? getLoginController() : getTabBarController()
+  }
+  
+  static func getColleaguesDetailViewController(user: User) -> ColleaguesDetailViewController<ColleaguesDetailViewModelImpl> {
+    return ColleaguesDetailViewController(viewModel: ColleaguesDetailViewModelImpl(user: user))
   }
 }

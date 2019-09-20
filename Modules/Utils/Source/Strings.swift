@@ -65,5 +65,17 @@ public struct Strings {
     public static var logOutQuestion: String { return "Log out?".localized }
     public static var logOutMessage: String { return "Are you sure?".localized }
     public static var clearCache: String { return "Clear cache".localized }
+    public static func vacationDays(args: CVarArg...) -> String {
+        return "On %@ you have %.1f days".localizeWithFormat(arguments: args)
+    }
+    public static var phoneNumber: String { return "Phone number".localized }
+    public static var email: String { return "Email".localized }
+    public static var skype: String { return "Skype".localized }
+    public static var vacationDays: String { return "Vacation days".localized }
+    public static var eduPoints: String { return "Education points".localized }
+    public static var dateOfJoining: String { return "Date of joining".localized }
+    public static var emergencyDays: String { return "Emergency days".localized }
+    public static var birthday: String { return "Date of birth".localized }
+    public static var roles: String { return "Roles".localized }
   }
 }
