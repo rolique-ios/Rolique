@@ -12,11 +12,10 @@ import Utils
 
 private struct Constants {
   static var kTableHeaderHeight: CGFloat { return 300.0 }
-  static var defaultOffset: CGFloat { return 20.0 }
+  static var defaultOffset: CGFloat { return 10.0 }
   static var tableViewContentInset: UIEdgeInsets { return UIEdgeInsets(top: Constants.kTableHeaderHeight, left: 0, bottom: 0, right: 0) }
   static var tableViewContentOffset: CGPoint { return CGPoint(x: 0, y: -Constants.kTableHeaderHeight) }
-  static var slackButtonSize: CGFloat { return 60.0 }
-  static var slackButtonOffset: CGFloat { return 30.0 }
+  static var slackButtonSize: CGFloat { return 50.0 }
   static var slackButtonImageInset: UIEdgeInsets { return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8) }
 }
 
@@ -25,9 +24,6 @@ final class ColleaguesDetailViewController<T: ColleaguesDetailViewModel>: ViewCo
   private var dataSource: ColleaguesDetailDataSource!
   private var panGR: UIPanGestureRecognizer!
   private lazy var headerView = configureHeaderView()
-  private lazy var userImageView = UIImageView()
-  private lazy var statusLabel = UILabel()
-  private lazy var slackButton = UIButton()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,19 +45,13 @@ final class ColleaguesDetailViewController<T: ColleaguesDetailViewModel>: ViewCo
   }
   
   private func configureConstraints() {
-    [tableView, slackButton].forEach(self.view.addSubviewAndDisableMaskTranslate)
+    [tableView].forEach(self.view.addSubviewAndDisableMaskTranslate)
     
     tableView.snp.makeConstraints { maker in
       maker.top.equalTo(self.view.safeAreaLayoutGuide)
       maker.leading.equalTo(self.view.safeAreaLayoutGuide)
       maker.trailing.equalTo(self.view.safeAreaLayoutGuide)
       maker.bottom.equalTo(self.view.safeAreaLayoutGuide)
-    }
-    
-    slackButton.snp.makeConstraints { maker in
-      maker.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-Constants.slackButtonOffset)
-      maker.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-Constants.slackButtonOffset)
-      maker.size.equalTo(Constants.slackButtonSize)
     }
   }
   
@@ -82,21 +72,14 @@ final class ColleaguesDetailViewController<T: ColleaguesDetailViewModel>: ViewCo
   private func configureUI() {
     title = viewModel.user.name
     view.backgroundColor = Colors.Colleagues.softWhite
-    
-    slackButton.setImage(Images.Profile.slackLogo, for: .normal)
-    slackButton.imageEdgeInsets = Constants.slackButtonImageInset
-    slackButton.backgroundColor = .white
-    slackButton.layer.cornerRadius = Constants.slackButtonSize / 2
-    slackButton.layer.shadowColor = UIColor.black.cgColor
-    slackButton.layer.shadowRadius = 6.0
-    slackButton.layer.shadowOffset = CGSize(width: 0, height: 7)
-    slackButton.layer.shadowOpacity = 0.1
-    slackButton.addTarget(self, action: #selector(didSelectSlackButton(sender:)), for: .touchUpInside)
   }
   
   private func configureHeaderView() -> UIView {
     let view = UIView(frame: CGRect(x: 0, y: -Constants.kTableHeaderHeight, width: tableView.bounds.width, height: Constants.kTableHeaderHeight))
     view.clipsToBounds = true
+    var userImageView = UIImageView()
+    let statusLabel = UILabel()
+    let slackButton = UIButton()
     
     userImageView.contentMode = .scaleAspectFill
     userImageView.hero.id = viewModel.user.biggestImage.orEmpty
@@ -116,19 +99,34 @@ final class ColleaguesDetailViewController<T: ColleaguesDetailViewModel>: ViewCo
     blurView.layer.cornerRadius = 4
     blurView.clipsToBounds = true
     
-    userImageView.addSubview(blurView)
-    userImageView.addSubview(statusLabel)
+    slackButton.setImage(Images.Profile.slackLogo, for: .normal)
+    slackButton.imageEdgeInsets = Constants.slackButtonImageInset
+    slackButton.backgroundColor = .white
+    slackButton.layer.cornerRadius = Constants.slackButtonSize / 2
+    slackButton.layer.shadowColor = UIColor.black.cgColor
+    slackButton.layer.shadowRadius = 6.0
+    slackButton.layer.shadowOffset = CGSize(width: 0, height: 7)
+    slackButton.layer.shadowOpacity = 0.1
+    slackButton.addTarget(self, action: #selector(ColleaguesDetailViewController.didSelectSlackButton), for: .touchUpInside)
+    
+    [blurView, statusLabel, slackButton].forEach(userImageView.addSubviewAndDisableMaskTranslate)
     
     userImageView.snp.makeConstraints { maker in
       maker.edges.equalToSuperview()
     }
-    statusLabel.snp.makeConstraints { maker in
-      maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
+    slackButton.snp.makeConstraints { maker in
       maker.bottom.equalToSuperview().offset(-Constants.defaultOffset)
+      maker.trailing.equalToSuperview().offset(-Constants.defaultOffset)
+      maker.size.equalTo(Constants.slackButtonSize)
     }
     blurView.snp.makeConstraints { maker in
       maker.edges.equalTo(statusLabel)
     }
+    statusLabel.snp.makeConstraints { maker in
+      maker.centerY.equalTo(slackButton)
+      maker.leading.equalToSuperview().offset(Constants.defaultOffset)
+    }
+    
     return view
   }
   

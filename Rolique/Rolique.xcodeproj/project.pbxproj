@@ -69,6 +69,8 @@
 		2D209D4923034AFC00AC2CA5 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE7FA6F23184A9B00914EE8 /* RecordTypeToast.swift */; };
 		2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE7FA7223186A9100914EE8 /* DateFormatters.swift */; };
+		2DF142FA23379A920042D3BC /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF142F923379A920042D3BC /* CopyableLabel.swift */; };
+		2DF142FC23379D150042D3BC /* MajorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF142FB23379D150042D3BC /* MajorTableViewCell.swift */; };
 		3F058BEA230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F058BEB230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F058BEC230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
@@ -216,6 +218,8 @@
 		262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		2DE7FA6F23184A9B00914EE8 /* RecordTypeToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTypeToast.swift; sourceTree = "<group>"; };
 		2DE7FA7223186A9100914EE8 /* DateFormatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateFormatters.swift; path = ../../../Modules/Utils/Source/DateFormatters.swift; sourceTree = "<group>"; };
+		2DF142F923379A920042D3BC /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
+		2DF142FB23379D150042D3BC /* MajorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorTableViewCell.swift; sourceTree = "<group>"; };
 		3625D99FD95DD447F481B6F5 /* Pods-RoliqueTests.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoliqueTests.stagingdebug.xcconfig"; path = "Target Support Files/Pods-RoliqueTests/Pods-RoliqueTests.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		3895A80C2D9664AB869C9297 /* Pods-VacationTodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.release.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		3F058BE9230BF13400869336 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 				3FF9BEF02305A3D200028513 /* ShadowView.swift */,
 				3FFD3885231807B0006D5479 /* PickerTextField.swift */,
 				B5D6C3012321449100929BFF /* InteractiveImageView.swift */,
+				2DF142F923379A920042D3BC /* CopyableLabel.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 				3FF45C8923326BE500840444 /* ColleaguesDetailViewController.swift */,
 				3FF45C8B23326C0200840444 /* ColleaguesDetailViewModel.swift */,
 				3FFB28132333A23C0021A4BD /* ColleaguesDetailDataSource.swift */,
+				2DF142FB23379D150042D3BC /* MajorTableViewCell.swift */,
 				3FEE1FDC2334C5FF0075DF32 /* TitledSectionTableViewCell.swift */,
 				3FEE1FDE2334C7480075DF32 /* InfoTableViewCell.swift */,
 			);
@@ -1078,6 +1084,8 @@
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
 				3FC996122316819200C2554C /* CancelButton.swift in Sources */,
+				2DF142FA23379A920042D3BC /* CopyableLabel.swift in Sources */,
+				2DF142FC23379D150042D3BC /* MajorTableViewCell.swift in Sources */,
 				3FF45C8A23326BE500840444 /* ColleaguesDetailViewController.swift in Sources */,
 				3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */,
 				3F058BEA230BF13400869336 /* UserService.swift in Sources */,
