@@ -1,4 +1,3 @@
-• aadded devices:
-
-Dima H
-Pavlo S
+Add Hero for transition and colleagues detail vc
+Change the look of the colleagues detail view
+Add interaction with 3D touch, change profile screen
