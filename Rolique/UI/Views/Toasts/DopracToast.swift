@@ -145,7 +145,7 @@ final class DopracToast: UIView {
   }
   
   @objc func didSelectInAHourButton() {
-    onConfirm?(.hour(nil))
+    onConfirm?(.hour)
   }
   
   @objc func didSelectCustomTimeButton() {
@@ -172,7 +172,7 @@ final class DopracToast: UIView {
   }
   
   @objc func didSelectConfirmButton() {
-    onConfirm?(.hour(datePicker.date))
+    onConfirm?(.custom(datePicker.date))
   }
   
   @objc func didSelectCancelButton() {

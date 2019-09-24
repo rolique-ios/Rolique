@@ -7,6 +7,7 @@
 //
 
 import Utils
+import Hero
 
 public final class Router {
   static func getLoginViewController() -> LoginViewController<LoginViewModelImpl> {
@@ -31,11 +32,16 @@ public final class Router {
     let tabbar = BaseTabBarController()
     let colleagues = UINavigationController(rootViewController: getColleaguesViewController())
     colleagues.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.colleagues, image: Images.TabBar.stats, tag: 0)
+    colleagues.hero.isEnabled = true
+    Hero.shared.containerColor = Colors.Colleagues.softWhite
     let actions = UINavigationController(rootViewController: getActionsViewController())
     actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: Images.TabBar.actions, tag: 1)
-    let profile = UINavigationController(rootViewController: getProfileViewController())
-    profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 2)
-    tabbar.viewControllers = [colleagues, actions, profile]
+    tabbar.viewControllers = [colleagues, actions]
+    if let userId = UserDefaultsManager.shared.userId, let user = User.getFromCoreData(with: userId) {
+      let profile = UINavigationController(rootViewController: getProfileDetailViewController(user: user))
+      profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 2)
+      tabbar.viewControllers?.append(profile)
+    }
     
     return tabbar
   }
@@ -46,5 +52,9 @@ public final class Router {
   
   public static func getStartViewController() -> UIViewController {
     return UserDefaultsManager.shared.userId == nil ? getLoginController() : getTabBarController()
+  }
+  
+  static func getProfileDetailViewController(user: User) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {
+    return ProfileDetailViewController(viewModel: ProfileDetailViewModelImpl(user: user))
   }
 }

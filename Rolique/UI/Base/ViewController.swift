@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias Completion = () -> Void
+
 /// - warning: Abstract - don't create instance of this class.
 class ViewController<T: ViewModel>: UIViewController {
   private lazy var viewWillAppearWasCalled = false

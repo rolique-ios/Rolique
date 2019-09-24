@@ -40,4 +40,15 @@ public struct Images {
       return UIImage(named: "phone")!
     }
   }
+  public struct Profile {
+    public static var slackLogo: UIImage {
+      return UIImage(named: "logo slack")!
+    }
+    public static var skype: UIImage {
+      return UIImage(named: "skype")!
+    }
+    public static var email: UIImage {
+      return UIImage(named: "email")!
+    }
+  }
 }

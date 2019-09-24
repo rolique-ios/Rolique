@@ -10,12 +10,13 @@ import UIKit
 import SnapKit
 import Utils
 import IgyToast
+import Hero
 
 private struct Constants {
   static var headerHeight: CGFloat { return 50.0 }
 }
 
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate {
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate, UINavigationControllerDelegate, UIViewControllerPreviewingDelegate, ProfileDetailViewControllerDelegate, Mailable {
   private lazy var tableView = UITableView()
   private lazy var tableViewHeader = UIView()
   private lazy var searchBar = UISearchBar()
@@ -25,6 +26,10 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if traitCollection.forceTouchCapability == .available {
+      registerForPreviewing(with: self, sourceView: tableView)
+    }
     
     configureConstraints()
     configureUI()
@@ -42,6 +47,11 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     configureNavigationBar()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.hero.navigationAnimationType = .pageIn(direction: .left)
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
@@ -55,6 +65,9 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = .white
+    let barButton = UIBarButtonItem()
+    barButton.title = ""
+    navigationItem.backBarButtonItem = barButton
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🌀", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
   }
   
@@ -100,9 +113,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   private func configureTableViews() {
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
-//    let refreshControl = UIRefreshControl()
-//    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-//    tableView.refreshControl = refreshControl
     tableView.keyboardDismissMode = .interactive
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
     dataSource.onUserTap = onUserSelect
@@ -141,7 +151,8 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   func onUserSelect(_ user: User) {
     Spitter.tap(.pop)
-    viewModel.openSlackForUser(user.id)
+    view.endEditing(true)
+    navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
   }
   
   private func constructRecordTypeToastHeader() -> UIView {
@@ -164,8 +175,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   private func constructRecordTypeToast() -> RecordTypeToast {
     let view = RecordTypeToast()
-    view.update(data:
-      RecordType.allCases,
+    view.update(data: RecordType.allCases,
                 onSelectRow: { [weak self] recordType in
                   Toast.current.hide()
                   self?.viewModel.recordType = recordType
@@ -213,5 +223,24 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
     searchBar.setShowsCancelButton(false, animated: true)
     return true
+  }
+  
+  // MARK: - UIViewControllerPreviewingDelegate
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
+    let popVC = Router.getProfileDetailViewController(user: viewModel.users[indexPath.row])
+    popVC.delegate = self
+    return popVC
+  }
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    show(viewControllerToCommit, sender: self)
+  }
+  
+  // MARK: - ProfileDetailViewControllerDelegate
+  
+  func sendEmail(_ emails: [String]) {
+    self.sendEmail(to: emails)
   }
 }

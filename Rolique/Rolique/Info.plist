@@ -48,6 +48,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>slack</string>
+		<string>skype</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

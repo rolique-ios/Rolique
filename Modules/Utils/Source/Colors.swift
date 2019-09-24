@@ -30,4 +30,9 @@ public struct Colors {
       return .black
     }
   }
+  public struct Profile {
+    public static var separatorColor: UIColor {
+      return UIColor(red: 233.0 / 255.0, green: 233.0 / 255.0, blue: 234.0 / 255.0, alpha: 1.0)
+    }
+  }
 }

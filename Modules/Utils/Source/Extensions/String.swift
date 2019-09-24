@@ -13,6 +13,10 @@ extension String {
         return NSLocalizedString(self, comment: "localized version of \(self)")
     }
     
+    public func localizeWithFormat(arguments: CVarArg...) -> String{
+        return String(format: self.localized, arguments: arguments)
+    }
+    
     func nsRange(from range: Range<Index>) -> NSRange {
         return .init(range, in: self)
     }
