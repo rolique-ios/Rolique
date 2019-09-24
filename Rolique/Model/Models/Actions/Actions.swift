@@ -18,7 +18,8 @@ public enum ActionType: String, CaseIterable {
 
 public enum DopracType {
   case now
-  case hour(Date?)
+  case hour
+  case custom(Date)
   
   var param: String {
     switch self {
@@ -26,6 +27,8 @@ public enum DopracType {
       return "now"
     case .hour:
       return "hour"
+    case .custom:
+      return "custom"
     }
   }
 }

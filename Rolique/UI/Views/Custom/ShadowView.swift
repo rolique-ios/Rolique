@@ -25,10 +25,7 @@ class ShadowView: UIView {
     layer.shouldRasterize = true
     layer.cornerRadius = 5.0
     layer.masksToBounds = false
-    layer.shadowColor = UIColor.black.cgColor
-    layer.shadowRadius = 6.0
-    layer.shadowOffset = CGSize(width: 0, height: 7)
-    layer.shadowOpacity = 0.1
+    addShadow()
   }
 }
 

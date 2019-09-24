@@ -16,7 +16,7 @@ private struct Constants {
   static var headerHeight: CGFloat { return 50.0 }
 }
 
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate, UINavigationControllerDelegate {
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate, UINavigationControllerDelegate, UIViewControllerPreviewingDelegate, ProfileDetailViewControllerDelegate, Mailable {
   private lazy var tableView = UITableView()
   private lazy var tableViewHeader = UIView()
   private lazy var searchBar = UISearchBar()
@@ -26,6 +26,10 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if traitCollection.forceTouchCapability == .available {
+      registerForPreviewing(with: self, sourceView: tableView)
+    }
     
     configureConstraints()
     configureUI()
@@ -148,7 +152,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   func onUserSelect(_ user: User) {
     Spitter.tap(.pop)
     view.endEditing(true)
-    navigationController?.pushViewController(Router.getColleaguesDetailViewController(user: user), animated: true)
+    navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
   }
   
   private func constructRecordTypeToastHeader() -> UIView {
@@ -219,5 +223,24 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
     searchBar.setShowsCancelButton(false, animated: true)
     return true
+  }
+  
+  // MARK: - UIViewControllerPreviewingDelegate
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
+    let popVC = Router.getProfileDetailViewController(user: viewModel.users[indexPath.row])
+    popVC.delegate = self
+    return popVC
+  }
+  
+  func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    show(viewControllerToCommit, sender: self)
+  }
+  
+  // MARK: - ProfileDetailViewControllerDelegate
+  
+  func sendEmail(_ emails: [String]) {
+    self.sendEmail(to: emails)
   }
 }

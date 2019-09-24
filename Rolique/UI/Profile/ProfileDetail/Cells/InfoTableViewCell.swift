@@ -17,12 +17,13 @@ private struct Constants {
 
 final class InfoTableViewCell: UITableViewCell {
   private lazy var containerView = UIView()
-  private lazy var titleLabel = CopyableLabel()
-  private var interactiveView: UIView?
+  private lazy var titleLabel = UILabel()
+  private lazy var iconImageView = UIImageView()
   private var titleTrailingConstraint: Constraint?
   private var containerBottomConstraint: Constraint?
   
-  weak var delegate: ColleaguesTableViewCellDelegate?
+  var onLongTap: Completion?
+  var onTap: Completion?
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,28 +35,34 @@ final class InfoTableViewCell: UITableViewCell {
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.font = .systemFont(ofSize: 16)
+    
+    iconImageView.contentMode = .scaleAspectFit
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InfoTableViewCell.normalTap(sender:)))
+    tapGesture.numberOfTapsRequired = 1
+    self.addGestureRecognizer(tapGesture)
+    
+    let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(InfoTableViewCell.longTap(sender:)))
+    self.addGestureRecognizer(longGesture)
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
-  func configure(with title: String?, interactiveView: UIView? = nil, target: Any? = nil, action: Selector? = nil, isLast: Bool) {
+  func configure(with title: String?, icon: UIImage? = nil, onLongTap: Completion? = nil, onTap: Completion? = nil, isLast: Bool) {
     configureViews()
     
     titleLabel.text = title
     
-    if let interactiveView = interactiveView {
-      self.interactiveView = interactiveView
-      let gesture = UITapGestureRecognizer(target: target, action: action)
-      interactiveView.addGestureRecognizer(gesture)
-      interactiveView.isUserInteractionEnabled = true
-      interactiveView.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
-      interactiveView.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
+    if let icon = icon {
+      iconImageView.image = icon
+      iconImageView.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+      iconImageView.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
       
-      [interactiveView].forEach(self.addSubviewAndDisableMaskTranslate)
+      [iconImageView].forEach(self.addSubviewAndDisableMaskTranslate)
       
-      interactiveView.snp.makeConstraints { maker in
+      iconImageView.snp.makeConstraints { maker in
         maker.trailing.equalTo(containerView).offset(-Constants.defaultOffset)
         maker.size.equalTo(Constants.interactiveViewSize)
         maker.centerY.equalTo(titleLabel)
@@ -63,29 +70,27 @@ final class InfoTableViewCell: UITableViewCell {
       
       titleTrailingConstraint?.deactivate()
       titleLabel.snp.makeConstraints { maker in
-        maker.trailing.equalTo(interactiveView.snp.leading).offset(-Constants.littleOffset)
+        maker.trailing.equalTo(iconImageView.snp.leading).offset(-Constants.littleOffset)
       }
     }
     
+    self.onLongTap = onLongTap
+    self.onTap = onTap
+    
     if isLast {
       containerView.layer.cornerRadius = 20
-      containerView.layer.shadowColor = UIColor.black.cgColor
-      containerView.layer.shadowRadius = 6.0
-      containerView.layer.shadowOffset = CGSize(width: 0, height: 7)
-      containerView.layer.shadowOpacity = 0.1
+      containerView.addShadow()
       containerBottomConstraint?.update(offset: -10)
     } else {
       containerView.layer.cornerRadius = 0
-      containerView.layer.shadowColor = nil
-      containerView.layer.shadowRadius = 0
-      containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
-      containerView.layer.shadowOpacity = 0
+      containerView.removeShadow()
       containerBottomConstraint?.update(offset: 0)
     }
   }
   
   private func configureViews() {
-    [containerView, titleLabel].forEach(self.addSubviewAndDisableMaskTranslate)
+    [containerView].forEach(self.addSubviewAndDisableMaskTranslate)
+    [titleLabel].forEach(self.containerView.addSubviewAndDisableMaskTranslate(_:))
     
     containerView.snp.makeConstraints { maker in
       maker.top.equalToSuperview()
@@ -94,9 +99,9 @@ final class InfoTableViewCell: UITableViewCell {
       containerBottomConstraint = maker.bottom.equalToSuperview().constraint
     }
     titleLabel.snp.makeConstraints { maker in
-      maker.leading.equalTo(containerView).offset(Constants.defaultOffset)
+      maker.leading.equalToSuperview().offset(Constants.defaultOffset)
       titleTrailingConstraint = maker.trailing.equalTo(containerView).offset(Constants.defaultOffset).constraint
-      maker.top.equalTo(containerView).offset(4)
+      maker.top.equalToSuperview().offset(4)
     }
   }
   
@@ -105,6 +110,14 @@ final class InfoTableViewCell: UITableViewCell {
     
     containerView.removeFromSuperview()
     titleLabel.removeFromSuperview()
-    interactiveView?.removeFromSuperview()
+  }
+  
+  @objc func normalTap(sender: UITapGestureRecognizer) {
+    onTap?()
+  }
+  
+  @objc func longTap(sender: UILongPressGestureRecognizer) {
+    sender.isEnabled.toggle()
+    onLongTap?()
   }
 }

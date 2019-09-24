@@ -1,5 +1,5 @@
 //
-//  ColleaguesDetailDataSource.swift
+//  ProfileDetailDataSource.swift
 //  Rolique
 //
 //  Created by Maksym Ivanyk on 9/19/19.
@@ -14,9 +14,11 @@ private struct Constants {
   static var titleCellHeight: CGFloat { return 46 }
   static var infoCellHeight: CGFloat { return 30 }
   static var lastCellHeight: CGFloat { return 46 }
+  static var clearCacheCellHeight: CGFloat { return 46 }
+  static var logOutCellHeight: CGFloat { return 60 }
 }
 
-final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
   enum Section: Int, CaseIterable {
     case title,
     phone,
@@ -29,7 +31,9 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
     emergencyDays,
     birthday,
     achievements,
-    additionalInfo
+    additionalInfo,
+    clearCache,
+    logOut
     
     var description: String {
       switch self {
@@ -60,7 +64,15 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
   private let tableView: UITableView
   private var user: User
   private var lastIndexPath = IndexPath(row: 0, section: 0)
+  private lazy var clearCacheButton = configureCacheButton()
+  private lazy var logOutButton = configureLogOutButton()
   var onScroll: (() -> Void)?
+  var copyString: ((String) -> Void)?
+  var call: ((String) -> Void)?
+  var sendEmail: (([String]) -> Void)?
+  var openSkype: Completion?
+  var clearCache: Completion?
+  var logOut: Completion?
   
   private(set) var sections = Section.allCases
   
@@ -71,7 +83,11 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
     super.init()
     
     self.tableView.setDelegateAndDataSource(self)
-    self.tableView.register([MajorTableViewCell.self, TitledSectionTableViewCell.self, InfoTableViewCell.self])
+    self.tableView.register([MajorTableViewCell.self,
+                             TitledSectionTableViewCell.self,
+                             InfoTableViewCell.self,
+                             AdditionalInfoTableViewCell.self,
+                             InteractiveTableViewCell.self])
     self.findLastIndexPath()
   }
   
@@ -96,11 +112,15 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
         return setTitledCell(section: section)
       }
       
+      let phone = user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines)
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
-      infoCell.configure(with: user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines),
-                         interactiveView: UIImageView(image: Images.Colleagues.phone),
-                         target: self,
-                         action: #selector(touchPhoneIcon),
+      infoCell.configure(with: phone,
+                         icon: Images.Colleagues.phone,
+                         onLongTap: { [unowned self] in
+                          self.copyString?(phone)
+        }, onTap: { [unowned self] in
+          self.call?(phone.replacingOccurrences(of: " ", with: ""))
+        },
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
     case .email:
@@ -108,13 +128,15 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
         return setTitledCell(section: section)
       }
       
-      let imageView = UIImageView(image: Images.Profile.email)
-      imageView.contentMode = .scaleAspectFit
+      let email = self.user.slackProfile.email.orEmpty
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
       infoCell.configure(with: user.slackProfile.email,
-                         interactiveView: imageView,
-                         target: self,
-                         action: #selector(touchEmailIcon),
+                         icon: Images.Profile.email,
+                         onLongTap: { [unowned self] in
+                          self.copyString?(email)
+        }, onTap: { [unowned self] in
+          self.sendEmail?([email])
+        },
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
     case .skype:
@@ -122,11 +144,15 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
         return setTitledCell(section: section)
       }
       
+      let skype = user.slackProfile.skype.orEmpty
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
       infoCell.configure(with: user.slackProfile.skype,
-                         interactiveView: UIImageView(image: Images.Profile.skype),
-                         target: self,
-                         action: #selector(touchSkypeIcon),
+                         icon: Images.Profile.skype,
+                         onLongTap: { [unowned self] in
+                          self.copyString?(skype)
+        }, onTap: { [unowned self] in
+          self.openSkype?()
+        },
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
     case .vacationData:
@@ -185,6 +211,14 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
       infoCell.configure(with: user.birthday,
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
+    case .clearCache:
+      let interactiveCell = InteractiveTableViewCell.dequeued(by: tableView)
+      interactiveCell.configure(with: configureCacheButton(), isLast: lastCell(indexPath: indexPath), showSeparator: true)
+      return interactiveCell
+    case .logOut:
+      let interactiveCell = InteractiveTableViewCell.dequeued(by: tableView)
+      interactiveCell.configure(with: configureLogOutButton(), isLast: lastCell(indexPath: indexPath))
+      return interactiveCell
     default:
       return UITableViewCell()
     }
@@ -194,8 +228,12 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
     let section = sections[indexPath.section]
     if section == .title {
       return Constants.titleCellHeight
+    } else if section == .clearCache {
+      return Constants.clearCacheCellHeight
+    } else if section == .logOut {
+      return Constants.logOutCellHeight
     } else if lastCell(indexPath: indexPath) {
-      return 46
+      return Constants.lastCellHeight
     } else {
       return Constants.infoCellHeight
     }
@@ -203,18 +241,6 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     onScroll?()
-  }
-  
-  @objc func touchPhoneIcon() {
-    print("phone")
-  }
-  
-  @objc func touchEmailIcon() {
-    print("email")
-  }
-  
-  @objc func touchSkypeIcon() {
-    print("skype")
   }
   
   private func setTitledCell(section: Section) -> UITableViewCell {
@@ -242,6 +268,8 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
       return (!isMe || user.roles.isEmpty) ? 0 : user.roles.count + 1
     case .achievements, .additionalInfo:
       return 0
+    case .clearCache, .logOut:
+      return !isMe ? 0 : 1
     default:
       return !isMe ? 0 : 2
     }
@@ -259,5 +287,45 @@ final class ColleaguesDetailDataSource: NSObject, UITableViewDelegate, UITableVi
   
   private func lastCell(indexPath: IndexPath) -> Bool {
     return lastIndexPath.section == indexPath.section && lastIndexPath.row == indexPath.row
+  }
+  
+  private func configureCacheButton() -> UIButton {
+    let clearCacheButton = UIButton()
+    clearCacheButton.setTitle(getClearCacheTitle(), for: .normal)
+    clearCacheButton.backgroundColor = Colors.Actions.darkGray
+    clearCacheButton.roundCorner(radius: 5.0)
+    clearCacheButton.addTarget(self, action: #selector(clearCacheButtonTap(_:)), for: UIControl.Event.touchUpInside)
+    return clearCacheButton
+  }
+  
+  private func configureLogOutButton() -> UIButton {
+    let logOutButton = UIButton()
+    logOutButton.setTitle(" " + Strings.Profile.logOutTitle + " ", for: UIControl.State.normal)
+    logOutButton.setTitleColor(.red, for: .normal)
+    logOutButton.layer.cornerRadius = 5.0
+    logOutButton.layer.borderWidth = 2.0
+    logOutButton.layer.borderColor = UIColor.red.cgColor
+    logOutButton.addTarget(self, action: #selector(logOutButtonTap(_:)), for: UIControl.Event.touchUpInside)
+    return logOutButton
+  }
+  
+  func updateClearCacheButtonTitle() {
+    guard rowsCount(for: .clearCache) != 0 else { return }
+    tableView.reloadRows(at: [IndexPath(row: 0, section: Section.clearCache.rawValue)], with: .none)
+  }
+  
+  @objc func logOutButtonTap(_ button: UIButton) {
+    logOut?()
+  }
+  
+  @objc func clearCacheButtonTap(_ button: UIButton) {
+    clearCache?()
+  }
+  
+  private func getClearCacheTitle() -> String {
+    return " "
+      + Strings.Profile.clearCache
+      + "(\(ByteCountFormatters.fileSizeFormatter.string(fromByteCount: Int64(ImageManager.shared.findImagesDirectorySize()))))"
+      + " "
   }
 }

@@ -34,14 +34,10 @@ final class ActionsViewModelImpl: BaseViewModel, ActionsViewModel {
   func doprac(type: DopracType) {
     let action: ActionDoprac
     switch type {
-    case .now:
+    case .now, .hour:
       action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param)
-    case .hour(let date):
-      if let date = date {
-        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param, custom: DateFormatters.dopracDateFormatter.string(from: date))
-      } else {
-        action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param)
-      }
+    case .custom(let date):
+      action = ActionDoprac(sender: UserDefaultsManager.shared.userId ?? "", value: type.param, custom: DateFormatters.dopracDateFormatter.string(from: date))
     }
     
     sendRequest(with: action)

@@ -36,9 +36,12 @@ public final class Router {
     Hero.shared.containerColor = Colors.Colleagues.softWhite
     let actions = UINavigationController(rootViewController: getActionsViewController())
     actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: Images.TabBar.actions, tag: 1)
-    let profile = UINavigationController(rootViewController: getProfileViewController())
-    profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 2)
-    tabbar.viewControllers = [colleagues, actions, profile]
+    tabbar.viewControllers = [colleagues, actions]
+    if let userId = UserDefaultsManager.shared.userId, let user = User.getFromCoreData(with: userId) {
+      let profile = UINavigationController(rootViewController: getProfileDetailViewController(user: user))
+      profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 2)
+      tabbar.viewControllers?.append(profile)
+    }
     
     return tabbar
   }
@@ -51,7 +54,7 @@ public final class Router {
     return UserDefaultsManager.shared.userId == nil ? getLoginController() : getTabBarController()
   }
   
-  static func getColleaguesDetailViewController(user: User) -> ColleaguesDetailViewController<ColleaguesDetailViewModelImpl> {
-    return ColleaguesDetailViewController(viewModel: ColleaguesDetailViewModelImpl(user: user))
+  static func getProfileDetailViewController(user: User) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {
+    return ProfileDetailViewController(viewModel: ProfileDetailViewModelImpl(user: user))
   }
 }
