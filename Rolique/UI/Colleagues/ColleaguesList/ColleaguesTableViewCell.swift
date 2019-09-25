@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 import Utils
-import Hero
 
 protocol ColleaguesTableViewCellDelegate: class {
   func touchPhone(_ cell: ColleaguesTableViewCell)
@@ -69,7 +68,6 @@ final class ColleaguesTableViewCell: UITableViewCell {
     configureViews()
     
     URL(string: userImage.orEmpty).map(self.userImageView.setImage(with: ))
-    userImageView.hero.id = userImage.orEmpty
     
     nameLabel.text = name
     let todayStatusIsEmpty = todayStatus.orEmpty.isEmpty

@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import Utils
 import IgyToast
-import Hero
 
 private struct Constants {
   static var headerHeight: CGFloat { return 50.0 }
@@ -45,11 +44,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    navigationController?.hero.navigationAnimationType = .pageIn(direction: .left)
   }
   
   override func viewDidLayoutSubviews() {
