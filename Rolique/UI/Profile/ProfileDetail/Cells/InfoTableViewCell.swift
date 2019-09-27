@@ -29,10 +29,11 @@ final class InfoTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .white
+    containerView.backgroundColor = .secondaryBackgroundColor()
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
+    titleLabel.textColor = .mainTextColor()
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.font = .systemFont(ofSize: 16)
     
@@ -79,7 +80,7 @@ final class InfoTableViewCell: UITableViewCell {
     
     if isLast {
       containerView.layer.cornerRadius = 20
-      containerView.addShadow()
+      containerView.setShadow()
       containerBottomConstraint?.update(offset: -10)
     } else {
       containerView.layer.cornerRadius = 0

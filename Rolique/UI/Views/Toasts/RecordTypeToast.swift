@@ -50,9 +50,11 @@ final class RecordTypeToast: UIView {
   }
   
   private func configureUI() {
+    self.backgroundColor = .secondaryBackgroundColor()
     tableView.separatorInset = Constants.tableViewSeparatorInset
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.backgroundColor = .clear
   }
   
   func update(data: [RecordType],
@@ -70,6 +72,7 @@ extension RecordTypeToast: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
+    cell.backgroundColor = .clear
     if selectedIndex == indexPath.row {
       cell.accessoryType = .checkmark
     }

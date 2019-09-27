@@ -27,7 +27,7 @@ final class AdditionalInfoTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .white
+    containerView.backgroundColor = .secondaryBackgroundColor()
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
@@ -48,13 +48,13 @@ final class AdditionalInfoTableViewCell: UITableViewCell {
     
     if let text = text {
       textView.text = text
-      textView.textColor = .black
+      textView.textColor = .mainTextColor()
     }
     textView.isUserInteractionEnabled = isEditable
     
     if isLast {
       containerView.layer.cornerRadius = Constants.containerViewCornerRadius
-      containerView.addShadow()
+      containerView.setShadow()
       containerBottomConstraint?.update(offset: -Constants.containerViewBottomOffset)
     } else {
       containerView.layer.cornerRadius = 0
@@ -92,7 +92,7 @@ extension AdditionalInfoTableViewCell: UITextViewDelegate {
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.textColor == .lightGray {
       textView.text = nil
-      textView.textColor = .black
+      textView.textColor = .mainTextColor()
     }
   }
   

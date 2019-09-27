@@ -12,7 +12,6 @@ import SnapKit
 
 final class LateToast: UIView {
   private struct Constants {
-    static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
     static var buttonWidth: CGFloat { return 110.0 }
@@ -23,7 +22,6 @@ final class LateToast: UIView {
     static var borderWidth: CGFloat { return 2.0 }
     static var textFieldHeight: CGFloat { return 35.0 }
   }
-  private lazy var containerView = UIView()
   private lazy var lateLabel = UILabel()
   private lazy var fromNowButton = UIButton()
   private lazy var fromTenOclockButton = UIButton()
@@ -55,7 +53,7 @@ final class LateToast: UIView {
   }
   
   func refreshView() {
-    [containerView, lateLabel, fromNowButton, fromTenOclockButton, in30minutesButton, in1hourButton, confirmButton, cancelButton, timePickerTextField].forEach {
+    [lateLabel, fromNowButton, fromTenOclockButton, in30minutesButton, in1hourButton, confirmButton, cancelButton, timePickerTextField].forEach {
       $0.snp.removeConstraints()
       $0.removeFromSuperview()
     }
@@ -66,13 +64,9 @@ final class LateToast: UIView {
   }
   
   private func configureConstraints() {
-    [containerView].forEach(self.addSubviewAndDisableMaskTranslate)
     [lateLabel, fromNowButton, fromTenOclockButton]
-      .forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+      .forEach(self.addSubviewAndDisableMaskTranslate)
     
-    containerView.snp.makeConstraints { maker in
-      maker.edges.equalTo(Constants.containerInsets)
-    }
     lateLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()
@@ -93,7 +87,7 @@ final class LateToast: UIView {
   }
   
   private func configureUI() {
-    containerView.backgroundColor = .white
+    self.backgroundColor = .secondaryBackgroundColor()
     
     lateLabel.font = .preferredFont(forTextStyle: .title2)
     lateLabel.text = Strings.Actions.lateTitle
@@ -110,7 +104,7 @@ final class LateToast: UIView {
     in30minutesButton.setTitle(Strings.Actions.in30minutes, for: .normal)
     in1hourButton.setTitle(Strings.Actions.in1hour, for: .normal)
     [fromNowButton, fromTenOclockButton, in30minutesButton, in1hourButton].forEach { button in
-      button.setTitleColor(.black, for: .normal)
+      button.setTitleColor(.mainTextColor(), for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor
@@ -159,7 +153,7 @@ final class LateToast: UIView {
   
   private func redrawView() {
     [fromNowButton, fromTenOclockButton].forEach{ $0.removeFromSuperview() }
-    [in30minutesButton, in1hourButton, timePickerTextField, confirmButton, cancelButton].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+    [in30minutesButton, in1hourButton, timePickerTextField, confirmButton, cancelButton].forEach(self.addSubviewAndDisableMaskTranslate)
     in30minutesButton.snp.makeConstraints { maker in
       maker.top.equalTo(lateLabel.snp.bottom).offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()

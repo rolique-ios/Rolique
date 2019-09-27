@@ -21,9 +21,10 @@ final class MajorTableViewCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.backgroundColor = .secondaryBackgroundColor()
     self.selectionStyle = .none
     
-    titleLabel.textColor = .black
+    titleLabel.textColor = .mainTextColor()
     titleLabel.font = .boldSystemFont(ofSize: 30.0)
     titleLabel.adjustsFontSizeToFitWidth = true
   }

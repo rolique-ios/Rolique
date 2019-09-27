@@ -13,11 +13,6 @@ public final class Router {
     return LoginViewController(viewModel: LoginViewModelImpl(loginManager: LoginManagerImpl()))
   }
   
-  static func getProfileViewController() -> ProfileViewController<ProfileViewModelImpl> {
-    let userService = UserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
-    return ProfileViewController(viewModel: ProfileViewModelImpl(userService: userService))
-  }
-  
   static func getColleaguesViewController() -> ColleaguesViewController<ColleaguesViewModelImpl> {
     let userService = UserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
     return ColleaguesViewController(viewModel: ColleaguesViewModelImpl(userService: userService))

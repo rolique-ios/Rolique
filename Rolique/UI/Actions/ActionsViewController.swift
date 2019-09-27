@@ -34,6 +34,10 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     configureNavigationBar()
   }
   
+  override func updateColors() {
+    tableView.reloadData()
+  }
+  
   private func loadToasts() {
     pochavToast = constructPochavToast()
     dopracToast = constructDopracToast()
@@ -48,6 +52,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = .white
+    navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
   
   private func configureConstraints() {
@@ -60,7 +65,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   
   private func configureUI() {
     title = Strings.NavigationTitle.actions
-    self.view.backgroundColor = Colors.Colleagues.softWhite
+    self.view.backgroundColor = .mainBackgroundColor()
     tableView.backgroundColor = .clear
     tableView.separatorStyle = .none
   }

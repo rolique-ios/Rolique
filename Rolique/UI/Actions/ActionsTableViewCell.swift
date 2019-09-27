@@ -12,7 +12,7 @@ class ActionsTableViewCell: UITableViewCell {
   private struct Constants {
     static var containerViewInsets: UIEdgeInsets { return UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10) }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -21,7 +21,8 @@ class ActionsTableViewCell: UITableViewCell {
     self.selectionStyle = .none
     
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    containerView.backgroundColor = .white
+    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.layer.cornerRadius = 5.0
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
   }
@@ -32,6 +33,8 @@ class ActionsTableViewCell: UITableViewCell {
   
   func configure(with action: ActionType) {
     configureViews()
+    
+    containerView.setShadow()
     
     titleLabel.text = action.rawValue.capitalized
   }
@@ -53,6 +56,7 @@ class ActionsTableViewCell: UITableViewCell {
     super.prepareForReuse()
     
     containerView.removeFromSuperview()
+    containerView.removeShadow()
     titleLabel.removeFromSuperview()
   }
 }

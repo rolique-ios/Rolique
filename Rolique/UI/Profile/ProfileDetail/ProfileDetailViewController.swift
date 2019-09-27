@@ -25,6 +25,7 @@ protocol ProfileDetailViewControllerDelegate: class {
 final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewController<T> {
   private lazy var tableView = UITableView()
   private lazy var headerView = configureHeaderView()
+  private lazy var userImageView = UIImageView()
   private var dataSource: ProfileDetailDataSource?
   weak var delegate: ProfileDetailViewControllerDelegate?
   
@@ -35,14 +36,8 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     configureUI()
     configureTableView()
     configureViewModelBindings()
-    if viewModel.user == nil {
-      viewModel.getUser()
-    } else {
-      configureDataSourceBindings()
-    }
-    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    configureDataSourceBindings()
+    viewModel.viewDidLoad()
   }
   
   deinit {
@@ -52,12 +47,24 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
+    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
     dataSource?.updateClearCacheButtonTitle()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     view.endEditing(true)
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  override func updateColors() {
+    tableView.reloadData()
   }
   
   private func configureNavigationBar() {
@@ -67,6 +74,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = .white
+    navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
   
   override var previewActionItems: [UIPreviewActionItem] {
@@ -75,7 +83,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
       self.openSlack(with: id)
     })
     var actions = [slackAction]
-    let phone = viewModel.user?.slackProfile.phone.replacingOccurrences(of: " ", with: "")
+    let phone = viewModel.user?.slackProfile.phone
     if let phone = phone, !phone.isEmpty {
       let callAction = UIPreviewAction(title: Strings.Profile.call, style: .default, handler: { [weak self] (action, controller) in
         guard let self = self else { return }
@@ -115,32 +123,30 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   
   private func configureTableView() {
     tableView.separatorStyle = .none
-    tableView.backgroundColor = .clear
     tableView.keyboardDismissMode = .interactive
+    tableView.contentInset = Constants.tableViewContentInset
+    tableView.contentOffset = Constants.tableViewContentOffset
     
     if let user = viewModel.user {
       dataSource = ProfileDetailDataSource(tableView: tableView, user: user)
       tableView.addSubview(headerView)
-      tableView.contentInset = Constants.tableViewContentInset
-      tableView.contentOffset = Constants.tableViewContentOffset
     }
   }
   
   private func configureUI() {
     navigationItem.title = viewModel.user?.name
-    view.backgroundColor = Colors.Colleagues.softWhite
+    view.backgroundColor = .mainBackgroundColor()
   }
   
   private func configureViewModelBindings() {
     viewModel.onSuccess = { [weak self] in
       guard let self = self, let user = self.viewModel.user else { return }
       self.navigationItem.title = user.name
-      self.dataSource = ProfileDetailDataSource(tableView: self.tableView, user: user)
       self.tableView.addSubview(self.headerView)
-      self.tableView.contentInset = Constants.tableViewContentInset
-      self.tableView.contentOffset = Constants.tableViewContentOffset
-      self.tableView.reloadData()
+      URL(string: user.biggestImage.orEmpty).map(self.userImageView.setImage(with: ))
+      self.dataSource = ProfileDetailDataSource(tableView: self.tableView, user: user)
       self.configureDataSourceBindings()
+      self.tableView.reloadData()
     }
     
     viewModel.onError = { [weak self] error in
@@ -188,7 +194,6 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   private func configureHeaderView() -> UIView {
     let view = UIView(frame: CGRect(x: 0, y: -Constants.kTableHeaderHeight, width: self.view.bounds.width, height: Constants.kTableHeaderHeight))
     view.clipsToBounds = true
-    let userImageView = UIImageView()
     
     userImageView.isUserInteractionEnabled = true
     userImageView.contentMode = .scaleAspectFill
@@ -205,7 +210,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     statusLabel.layer.cornerRadius = 4
     let statusIsEmpty = viewModel.user?.todayStatus.orEmpty.isEmpty
     statusLabel.isHidden = statusIsEmpty ?? true
-    statusLabel.text = (statusIsEmpty ?? true) ? nil : " " + String(describing: viewModel.user?.todayStatus.orEmpty) + " "
+    statusLabel.text = (statusIsEmpty ?? true) ? nil : " " + (viewModel.user?.todayStatus.orEmpty ?? "") + " "
     
     let blur = UIBlurEffect(style: .extraLight)
     let blurView = UIVisualEffectView(effect: blur)
@@ -217,7 +222,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     slackButton.imageEdgeInsets = Constants.slackButtonImageInset
     slackButton.backgroundColor = .white
     slackButton.layer.cornerRadius = Constants.slackButtonSize / 2
-    slackButton.addShadow()
+    slackButton.setShadow()
     slackButton.addTarget(self, action: #selector(ProfileDetailViewController.didSelectSlackButton(sender:)), for: .touchUpInside)
     
     [blurView, statusLabel, slackButton].forEach(userImageView.addSubviewAndDisableMaskTranslate)
@@ -268,7 +273,6 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
       tableView.scrollToRow(at: IndexPath(row: 0, section: ProfileDetailDataSource.Section.additionalInfo.rawValue), at: .bottom, animated: true)
     }
   }
-  
   @objc func keyboardWillHide(_ notification:Notification) {
     if ((notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue) != nil {
       let insets = UIEdgeInsets(top: Constants.kTableHeaderHeight, left: 0, bottom: 0, right: 0)

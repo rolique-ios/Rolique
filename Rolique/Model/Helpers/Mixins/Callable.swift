@@ -15,7 +15,7 @@ protocol Callable {
 
 extension Callable where Self: UIViewController {
   func call(to phone: String) {
-    if let url = URL(string: "telprompt:\(phone)"), UIApplication.shared.canOpenURL(url) {
+    if let url = URL(string: "telprompt:\(phone.replacingOccurrences(of: " ", with: ""))"), UIApplication.shared.canOpenURL(url) {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     } else {
       Spitter.showOkAlert("Phone not valid", viewController: self)

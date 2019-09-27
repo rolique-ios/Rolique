@@ -22,7 +22,7 @@ final class ColleaguesTableViewCell: UITableViewCell {
     static var phoneImageSize: CGFloat { return 30.0 }
     static var userImageSize: CGFloat { return 60.0 }
   }
-  private lazy var containerView = ShadowView()
+  private lazy var containerView = UIView()
   private lazy var userImageView = InteractiveImageView()
   private lazy var nameLabel = UILabel()
   private lazy var titleLabel = UILabel()
@@ -37,13 +37,14 @@ final class ColleaguesTableViewCell: UITableViewCell {
     self.selectionStyle = .none
     
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    containerView.backgroundColor = .white
+    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.layer.cornerRadius = 5.0
     
     userImageView.translatesAutoresizingMaskIntoConstraints = false
     userImageView.roundCorner(radius: Constants.userImageSize / 2)
     
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
-    nameLabel.textColor = .black
+    nameLabel.textColor = .mainTextColor()
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.textColor = .lightGray
@@ -66,6 +67,8 @@ final class ColleaguesTableViewCell: UITableViewCell {
   
   func configure(with name: String, userImage: String?, todayStatus: String?, title: String, isButtonEnabled: Bool, isMe: Bool) {
     configureViews()
+    
+    containerView.setShadow()
     
     URL(string: userImage.orEmpty).map(self.userImageView.setImage(with: ))
     
@@ -148,6 +151,7 @@ final class ColleaguesTableViewCell: UITableViewCell {
     super.prepareForReuse()
     
     containerView.removeFromSuperview()
+    containerView.removeShadow()
     userImageView.cancelLoad()
     userImageView.removeFromSuperview()
     nameLabel.removeFromSuperview()

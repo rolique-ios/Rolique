@@ -13,28 +13,31 @@ import IgyToast
 
 private struct Constants {
   static var headerHeight: CGFloat { return 50.0 }
+  static var delay: DispatchTime { return .now() + 0.4 }
 }
 
-final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate, UINavigationControllerDelegate, UIViewControllerPreviewingDelegate, ProfileDetailViewControllerDelegate, Mailable {
+final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>, UISearchBarDelegate, UINavigationControllerDelegate, UIViewControllerPreviewingDelegate, ProfileDetailViewControllerDelegate {
   private lazy var tableView = UITableView()
   private lazy var tableViewHeader = UIView()
   private lazy var searchBar = UISearchBar()
   private lazy var recordTypeToast = constructRecordTypeToast()
   private lazy var recordTypeToastHeader = constructRecordTypeToastHeader()
   private var dataSource: ColleaguesDataSource!
+  private lazy var contextMenuConfigHandler = UIContextMenuConfigurationHandler()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    if traitCollection.forceTouchCapability == .available {
-      registerForPreviewing(with: self, sourceView: tableView)
-    }
     
     configureConstraints()
     configureUI()
     configureTableViews()
     configureBinding()
-    viewModel.all()
+    viewModel.viewDidLoad()
+    
+    if traitCollection.forceTouchCapability == .available {
+      registerForPreviewing(with: self, sourceView: tableView)
+    }
+    self.navigationController?.addCustomTransitioning()
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -52,6 +55,14 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     Toast.current.layoutVertically()
   }
   
+  override func updateColors() {
+    if let textfield = searchBar.value(forKey: "searchField") as? UITextField,
+      let backgroundview = textfield.subviews.first {
+      setShadow(to: backgroundview)
+    }
+    tableView.reloadData()
+  }
+  
   private func configureNavigationBar() {
     navigationController?.navigationBar.prefersLargeTitles = true
     let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -63,6 +74,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     barButton.title = ""
     navigationItem.backBarButtonItem = barButton
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🌀", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
+    navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
   
   private func configureConstraints() {
@@ -84,7 +96,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   private func configureUI() {
     title = Strings.NavigationTitle.colleagues
-    self.view.backgroundColor = Colors.Colleagues.softWhite
+    self.view.backgroundColor = .mainBackgroundColor()
     
     searchBar.delegate = self
     searchBar.returnKeyType = .done
@@ -92,15 +104,15 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     searchBar.backgroundColor = .clear
     searchBar.isTranslucent = true
     searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-    if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
-      if let backgroundview = textfield.subviews.first {
-        backgroundview.backgroundColor = .white
-        backgroundview.layer.shadowColor = UIColor.black.cgColor
-        backgroundview.layer.shadowRadius = 4.0
-        backgroundview.layer.shadowOffset = CGSize(width: 0, height: 7)
-        backgroundview.layer.shadowOpacity = 0.1
-        backgroundview.layer.cornerRadius = 10.0;
+    if let textfield = searchBar.value(forKey: "searchField") as? UITextField,
+      let backgroundview = textfield.subviews.first {
+      if #available(iOS 13.0, *) {
+        searchBar.searchTextField.backgroundColor = .secondaryBackgroundColor()
+      } else {
+        backgroundview.backgroundColor = .secondaryBackgroundColor()
       }
+      backgroundview.layer.cornerRadius = 10.0
+      setShadow(to: backgroundview)
     }
   }
   
@@ -108,30 +120,75 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
     tableView.keyboardDismissMode = .interactive
-    dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users)
+    dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users, contextMenuConfigHandler: contextMenuConfigHandler)
     dataSource.onUserTap = onUserSelect
+    dataSource.onPhoneTap = onPhoneSelect
   }
   
   private func configureBinding() {
-    viewModel.onRefreshList = { [weak self] listType in
+    viewModel.onRefreshList = { [weak self] users in
       guard let self = self else { return }
       
-      if self.viewModel.isSearching {
-        self.dataSource.update(dataSource: self.viewModel.searchedUsers)
-      } else {
-        switch listType {
-        case .all:
-          self.dataSource.update(dataSource: self.viewModel.users)
-        case .filtered:
-          self.dataSource.update(dataSource: self.viewModel.filteredUsers)
-        }
-      }
+      self.dataSource.update(dataSource: users)
       self.dataSource.hideRefreshControl()
     }
     
     viewModel.onError = { [weak self] segment in
       guard let self = self else { return }
       self.dataSource.hideRefreshControl()
+    }
+    
+    contextMenuConfigHandler.previewProvider = { [weak self] (indexPath, location) in
+      guard let self = self,
+        let indexPath = indexPath else { return nil }
+      let contextMenuContentPreviewProvider = { () -> ProfileDetailViewController<ProfileDetailViewModelImpl> in
+        return self.previewVC(user: self.viewModel.users[indexPath.row])
+      }
+      return contextMenuContentPreviewProvider
+    }
+    
+    contextMenuConfigHandler.provideMenu = { [weak self] indexPath in
+      var actions = [MenuAction]()
+      if let self = self, let indexPath = indexPath {
+        let slackId = self.viewModel.users[indexPath.row].id
+        let slackAction = MenuAction(title: Strings.Profile.openSlack, image: nil, handler: {
+          DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
+            self?.openSlack(with: slackId)
+          }
+        })
+        actions.append(slackAction)
+        let phone = self.viewModel.users[indexPath.row].slackProfile.phone
+        if !phone.isEmpty {
+          let callAction = MenuAction(title: Strings.Profile.call, image: nil, handler: { 
+            DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
+              self?.call(to: phone)
+            }
+          })
+          actions.append(callAction)
+        }
+        let email = self.viewModel.users[indexPath.row].slackProfile.email.orEmpty
+        if !email.isEmpty {
+          let emailAction = MenuAction(title: Strings.Profile.sendEmail, image: nil, handler: { [weak self] in
+            self?.sendEmail(to: [email])
+          })
+          actions.append(emailAction)
+        }
+        let skype = self.viewModel.users[indexPath.row].slackProfile.skype.orEmpty
+        if !skype.isEmpty {
+          let skypeAction = MenuAction(title: Strings.Profile.openSkype, image: nil, handler: {
+            DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
+              self?.openSkype()
+            }
+          })
+          actions.append(skypeAction)
+        }
+      }
+      return Menu(title: "", actions: actions)
+    }
+    
+    contextMenuConfigHandler.willEndDisplayContextMenu = { [weak self] previewVC in
+      guard let self = self, let previewVC = previewVC else { return }
+      self.navigationController?.pushViewController(previewVC, animated: true)
     }
   }
   
@@ -149,18 +206,24 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
   }
   
+  func onPhoneSelect(_ phoneNumer: String) {
+    self.call(to: phoneNumer)
+  }
+  
   private func constructRecordTypeToastHeader() -> UIView {
     let view = UIView()
+    view.backgroundColor = .secondaryBackgroundColor()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.snp.makeConstraints { maker in
       maker.height.equalTo(Constants.headerHeight)
     }
     
     let label = UILabel()
-    view.addSubview(label)
+    label.textColor = .mainTextColor()
     label.text = Strings.Collegues.showOptions
     label.font = .preferredFont(forTextStyle: .title2)
     label.textAlignment = .center
+    view.addSubview(label)
     label.snp.makeConstraints { maker in
       maker.edges.equalToSuperview()
     }
@@ -172,19 +235,22 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     view.update(data: RecordType.allCases,
                 onSelectRow: { [weak self] recordType in
                   Toast.current.hide()
-                  self?.viewModel.recordType = recordType
-                  if recordType == .all {
-                    self?.viewModel.listType = .all
-                    self?.viewModel.all()
-                  } else if recordType == .away {
-                    self?.viewModel.listType = .filtered
-                    self?.viewModel.away()
-                  } else {
-                    self?.viewModel.listType = .filtered
-                    self?.viewModel.sort(recordType)
-                  }
+                  self?.viewModel.updateRecordType(recordType)
     })
     return view
+  }
+  
+  private func setShadow(to view: UIView) {
+    view.layer.shadowColor = UIColor.shadowColor()
+    view.layer.shadowRadius = 4.0
+    view.layer.shadowOffset = CGSize(width: 0, height: 7)
+    view.layer.shadowOpacity = 0.1
+  }
+  
+  private func previewVC(user: User) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {
+    let popVC = Router.getProfileDetailViewController(user: user)
+    popVC.delegate = self
+    return popVC
   }
   
   // MARK: - UISearchBarDelegate
@@ -195,18 +261,16 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.text = ""
-    viewModel.isSearching = false
-    viewModel.onRefreshList?(viewModel.listType)
+    viewModel.cancelSearch()
     searchBar.resignFirstResponder()
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text == nil || searchBar.text == "" {
-      viewModel.isSearching = false
+      viewModel.cancelSearch()
     } else {
-      viewModel.isSearching = true
+      viewModel.searchUser(with: searchText)
     }
-    viewModel.searchUser(with: searchText)
   }
   
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -223,6 +287,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
     guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
+    previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
     let popVC = Router.getProfileDetailViewController(user: viewModel.users[indexPath.row])
     popVC.delegate = self
     return popVC
@@ -233,8 +298,12 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   // MARK: - ProfileDetailViewControllerDelegate
-  
+   
   func sendEmail(_ emails: [String]) {
     self.sendEmail(to: emails)
   }
 }
+
+// MARK: - Mixins
+
+extension ColleaguesViewController: Mailable, Slackable, Callable, Skypable { }

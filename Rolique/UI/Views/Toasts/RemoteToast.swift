@@ -12,7 +12,6 @@ import SnapKit
 
 final class RemoteToast: UIView {
   private struct Constants {
-    static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
     static var buttonWidth: CGFloat { return 110.0 }
@@ -23,7 +22,6 @@ final class RemoteToast: UIView {
     static var borderWidth: CGFloat { return 2.0 }
     static var textFieldHeight: CGFloat { return 35.0 }
   }
-  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var todayButton = UIButton()
   private lazy var tomorrowButton = UIButton()
@@ -59,7 +57,7 @@ final class RemoteToast: UIView {
   }
   
   func refreshView() {
-    [containerView, titleLabel, todayButton, tomorrowButton, customDatesButton, confirmButton, cancelButton, startDateLabel, endDateLabel, startDateTextField, endDateTextField].forEach {
+    [titleLabel, todayButton, tomorrowButton, customDatesButton, confirmButton, cancelButton, startDateLabel, endDateLabel, startDateTextField, endDateTextField].forEach {
       $0.snp.removeConstraints()
       $0.removeFromSuperview()
     }
@@ -71,13 +69,9 @@ final class RemoteToast: UIView {
   }
   
   private func configureConstraints() {
-    [containerView].forEach(self.addSubviewAndDisableMaskTranslate)
     [titleLabel, todayButton, tomorrowButton, customDatesButton, cancelButton]
-      .forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+      .forEach(self.addSubviewAndDisableMaskTranslate)
     
-    containerView.snp.makeConstraints { maker in
-      maker.edges.equalTo(Constants.containerInsets)
-    }
     titleLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()
@@ -110,7 +104,7 @@ final class RemoteToast: UIView {
   }
   
   private func configureUI() {
-    containerView.backgroundColor = .white
+    self.backgroundColor = .secondaryBackgroundColor()
     
     titleLabel.font = .preferredFont(forTextStyle: .title2)
     
@@ -124,7 +118,7 @@ final class RemoteToast: UIView {
     tomorrowButton.setTitle(Strings.Actions.tomorrow, for: .normal)
     customDatesButton.setTitle(Strings.Actions.customDates, for: .normal)
     [todayButton, tomorrowButton, customDatesButton].forEach { button in
-      button.setTitleColor(.black, for: .normal)
+      button.setTitleColor(.mainTextColor(), for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor
@@ -189,7 +183,7 @@ final class RemoteToast: UIView {
   
   @objc func didSelectCustomTimeButton() {
     [todayButton, tomorrowButton, customDatesButton].forEach{ $0.removeFromSuperview() }
-    [startDateLabel, endDateLabel, startDateTextField, endDateTextField, confirmButton].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+    [startDateLabel, endDateLabel, startDateTextField, endDateTextField, confirmButton].forEach(self.addSubviewAndDisableMaskTranslate)
     startDateLabel.snp.makeConstraints { maker in
       maker.centerY.equalTo(startDateTextField)
       maker.leading.equalToSuperview().offset(Constants.defaultOffset)

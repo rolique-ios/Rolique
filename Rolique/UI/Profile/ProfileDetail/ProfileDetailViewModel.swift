@@ -35,6 +35,12 @@ final class ProfileDetailViewModelImpl: BaseViewModel, ProfileDetailViewModel {
   var onLogOut: Completion?
   var onClearCache: Completion?
   
+  override func viewDidLoad() {
+    if user == nil {
+      getUser()
+    }
+  }
+  
   func getUser() {
     userService.getUserWithId(UserDefaultsManager.shared.userId ?? "",
                               onLocal: { [weak self] result in

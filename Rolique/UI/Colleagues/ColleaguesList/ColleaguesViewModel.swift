@@ -18,10 +18,9 @@ protocol ColleaguesViewModel: ViewModel {
   var users: [User] { get }
   var filteredUsers: [User] { get }
   var searchedUsers: [User] { get }
-  var onRefreshList: ((ListType) -> Void)? { get set }
+  var onRefreshList: (([User]) -> Void)? { get set }
   var onError: ((ListType) -> Void)? { get set }
   var listType: ListType { get set }
-  var isSearching: Bool { get set }
   var recordType: RecordType? { get set }
   
   func all()
@@ -29,6 +28,8 @@ protocol ColleaguesViewModel: ViewModel {
   func sort(_ recordType: RecordType)
   func searchUser(with text: String)
   func refresh()
+  func updateRecordType(_ recordType: RecordType)
+  func cancelSearch()
 }
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
@@ -38,14 +39,17 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
     self.userService = userService
   }
   
-  var onRefreshList: ((ListType) -> Void)?
+  var onRefreshList: (([User]) -> Void)?
   var onError: ((ListType) -> Void)?
   var users = [User]()
   var filteredUsers = [User]()
   var searchedUsers = [User]()
   var listType = ListType.all
-  var isSearching = false
   var recordType: RecordType?
+  
+  override func viewDidLoad() {
+    all()
+  }
   
   func all() {
     userService.getAllUsers(
@@ -86,7 +90,7 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       }
     }
     self.searchedUsers = searchedUsers
-    onRefreshList?(listType)
+    onRefreshList?(searchedUsers)
   }
   
   func refresh() {
@@ -104,6 +108,29 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
     }
   }
   
+  func updateRecordType(_ recordType: RecordType) {
+    self.recordType = recordType
+    if recordType == .all {
+      self.listType = .all
+      self.all()
+    } else if recordType == .away {
+      self.listType = .filtered
+      self.away()
+    } else {
+      self.listType = .filtered
+      self.sort(recordType)
+    }
+  }
+  
+  func cancelSearch() {
+    switch listType {
+    case .all:
+      onRefreshList?(users)
+    case .filtered:
+      onRefreshList?(filteredUsers)
+    }
+  }
+  
   private func handleResult(_ listType: ListType, result: Result<[User], Error>) {
     switch result {
     case .success(let users):
@@ -114,7 +141,7 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       case .filtered:
         self.filteredUsers = users
       }
-      self.onRefreshList?(listType)
+      self.onRefreshList?(users)
     case .failure(let error):
       self.onError?(listType)
       print(error.localizedDescription)
