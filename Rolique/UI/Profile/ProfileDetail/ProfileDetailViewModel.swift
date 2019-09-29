@@ -43,12 +43,8 @@ final class ProfileDetailViewModelImpl: BaseViewModel, ProfileDetailViewModel {
   
   func getUser() {
     userService.getUserWithId(UserDefaultsManager.shared.userId ?? "",
-                              onLocal: { [weak self] result in
-                                self?.handleUserResponse(result: result)
-      },
-                              onFetch: { [weak self] result in
-                                self?.handleUserResponse(result: result)
-    })
+                              onLocal: handleUserResponse(result:),
+                              onFetch: handleUserResponse(result:))
   }
   
   private func handleUserResponse(result: Result<User, Error>) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Utils
 
 private struct Constants {
   static var defaultOffset: CGFloat { return 20.0 }
@@ -29,11 +30,11 @@ final class InfoTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
-    titleLabel.textColor = .mainTextColor()
+    titleLabel.textColor = Colors.mainTextColor
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.font = .systemFont(ofSize: 16)
     

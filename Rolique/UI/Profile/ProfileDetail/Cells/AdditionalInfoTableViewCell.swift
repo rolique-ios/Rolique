@@ -27,7 +27,7 @@ final class AdditionalInfoTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
@@ -48,7 +48,7 @@ final class AdditionalInfoTableViewCell: UITableViewCell {
     
     if let text = text {
       textView.text = text
-      textView.textColor = .mainTextColor()
+      textView.textColor = Colors.mainTextColor
     }
     textView.isUserInteractionEnabled = isEditable
     
@@ -92,7 +92,7 @@ extension AdditionalInfoTableViewCell: UITextViewDelegate {
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.textColor == .lightGray {
       textView.text = nil
-      textView.textColor = .mainTextColor()
+      textView.textColor = Colors.mainTextColor
     }
   }
   

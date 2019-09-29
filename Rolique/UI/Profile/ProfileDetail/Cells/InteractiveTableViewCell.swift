@@ -28,11 +28,11 @@ final class InteractiveTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
-    separator.backgroundColor = .separatorColor()
+    separator.backgroundColor = Colors.separatorColor
   }
   
   required init?(coder aDecoder: NSCoder) {

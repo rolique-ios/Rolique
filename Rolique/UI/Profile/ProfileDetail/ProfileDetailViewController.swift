@@ -37,7 +37,6 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     configureTableView()
     configureViewModelBindings()
     configureDataSourceBindings()
-    viewModel.viewDidLoad()
   }
   
   deinit {
@@ -135,7 +134,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   
   private func configureUI() {
     navigationItem.title = viewModel.user?.name
-    view.backgroundColor = .mainBackgroundColor()
+    view.backgroundColor = Colors.mainBackgroundColor
   }
   
   private func configureViewModelBindings() {
@@ -256,8 +255,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   }
   
   @objc func didSelectSlackButton(sender: UIButton) {
-    guard let id = viewModel.user?.id else { return }
-    self.openSlack(with: id)
+    _ = viewModel.user?.id.map({ self.openSlack(with: String($0)) })
   }
   
   private func copyString(_ str: String) {

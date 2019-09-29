@@ -37,14 +37,14 @@ final class ColleaguesTableViewCell: UITableViewCell {
     self.selectionStyle = .none
     
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.cornerRadius = 5.0
     
     userImageView.translatesAutoresizingMaskIntoConstraints = false
     userImageView.roundCorner(radius: Constants.userImageSize / 2)
     
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
-    nameLabel.textColor = .mainTextColor()
+    nameLabel.textColor = Colors.mainTextColor
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.textColor = .lightGray

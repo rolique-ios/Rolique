@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Utils
 
 class ActionsTableViewCell: UITableViewCell {
   private struct Constants {
@@ -21,7 +22,7 @@ class ActionsTableViewCell: UITableViewCell {
     self.selectionStyle = .none
     
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    containerView.backgroundColor = .secondaryBackgroundColor()
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.cornerRadius = 5.0
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false

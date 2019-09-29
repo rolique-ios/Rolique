@@ -50,7 +50,7 @@ final class RecordTypeToast: UIView {
   }
   
   private func configureUI() {
-    self.backgroundColor = .secondaryBackgroundColor()
+    backgroundColor = Colors.secondaryBackgroundColor
     tableView.separatorInset = Constants.tableViewSeparatorInset
     tableView.delegate = self
     tableView.dataSource = self

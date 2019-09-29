@@ -84,7 +84,6 @@
 		3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */; };
 		3FEE0E41233B8DDD004CD5C3 /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */; };
 		3FEE0E43233B8DFE004CD5C3 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E42233B8DFE004CD5C3 /* TransitionAnimator.swift */; };
-		3FEE0E45233BBA8F004CD5C3 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E44233BBA8F004CD5C3 /* UIColorExtension.swift */; };
 		3FEE1FDD2334C5FF0075DF32 /* TitledSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE1FDC2334C5FF0075DF32 /* TitledSectionTableViewCell.swift */; };
 		3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE1FDE2334C7480075DF32 /* InfoTableViewCell.swift */; };
 		3FEE1FE123351A270075DF32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE1FE023351A270075DF32 /* Assets.xcassets */; };
@@ -241,7 +240,6 @@
 		3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
 		3FEE0E42233B8DFE004CD5C3 /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
-		3FEE0E44233BBA8F004CD5C3 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3FEE1FDC2334C5FF0075DF32 /* TitledSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionTableViewCell.swift; sourceTree = "<group>"; };
 		3FEE1FDE2334C7480075DF32 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		3FEE1FE023351A270075DF32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -646,7 +644,6 @@
 			isa = PBXGroup;
 			children = (
 				3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */,
-				3FEE0E44233BBA8F004CD5C3 /* UIColorExtension.swift */,
 				3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */,
 			);
 			path = Extensions;
@@ -1176,7 +1173,6 @@
 				3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,
 				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
-				3FEE0E45233BBA8F004CD5C3 /* UIColorExtension.swift in Sources */,
 				3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */,
 				25535B0623014D4F00833A5B /* UIResultNotifier.swift in Sources */,
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,

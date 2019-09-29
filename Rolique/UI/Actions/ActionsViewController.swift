@@ -65,7 +65,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
   
   private func configureUI() {
     title = Strings.NavigationTitle.actions
-    self.view.backgroundColor = .mainBackgroundColor()
+    view.backgroundColor = Colors.mainBackgroundColor
     tableView.backgroundColor = .clear
     tableView.separatorStyle = .none
   }

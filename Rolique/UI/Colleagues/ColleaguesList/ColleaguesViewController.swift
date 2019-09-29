@@ -32,7 +32,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     configureUI()
     configureTableViews()
     configureBinding()
-    viewModel.viewDidLoad()
     
     if traitCollection.forceTouchCapability == .available {
       registerForPreviewing(with: self, sourceView: tableView)
@@ -96,7 +95,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   private func configureUI() {
     title = Strings.NavigationTitle.colleagues
-    self.view.backgroundColor = .mainBackgroundColor()
+    self.view.backgroundColor = Colors.mainBackgroundColor
     
     searchBar.delegate = self
     searchBar.returnKeyType = .done
@@ -107,9 +106,9 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     if let textfield = searchBar.value(forKey: "searchField") as? UITextField,
       let backgroundview = textfield.subviews.first {
       if #available(iOS 13.0, *) {
-        searchBar.searchTextField.backgroundColor = .secondaryBackgroundColor()
+        searchBar.searchTextField.backgroundColor = Colors.secondaryBackgroundColor
       } else {
-        backgroundview.backgroundColor = .secondaryBackgroundColor()
+        backgroundview.backgroundColor = Colors.secondaryBackgroundColor
       }
       backgroundview.layer.cornerRadius = 10.0
       setShadow(to: backgroundview)
@@ -212,14 +211,14 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   
   private func constructRecordTypeToastHeader() -> UIView {
     let view = UIView()
-    view.backgroundColor = .secondaryBackgroundColor()
+    view.backgroundColor = Colors.secondaryBackgroundColor
     view.translatesAutoresizingMaskIntoConstraints = false
     view.snp.makeConstraints { maker in
       maker.height.equalTo(Constants.headerHeight)
     }
     
     let label = UILabel()
-    label.textColor = .mainTextColor()
+    label.textColor = Colors.mainTextColor
     label.text = Strings.Collegues.showOptions
     label.font = .preferredFont(forTextStyle: .title2)
     label.textAlignment = .center
@@ -241,7 +240,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   private func setShadow(to view: UIView) {
-    view.layer.shadowColor = UIColor.shadowColor()
+    view.layer.shadowColor = Colors.shadowColor
     view.layer.shadowRadius = 4.0
     view.layer.shadowOffset = CGSize(width: 0, height: 7)
     view.layer.shadowOpacity = 0.1

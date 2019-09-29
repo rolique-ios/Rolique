@@ -37,6 +37,7 @@ class ViewController<T: ViewModel>: UIViewController {
     
     self.view.backgroundColor = .white
     self.configureBinding()
+    viewModel.viewDidLoad()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -49,10 +50,7 @@ class ViewController<T: ViewModel>: UIViewController {
     if !self.viewWillAppearWasCalled {
       self.performOnceInViewWillAppear()
     }
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
+    viewModel.viewWillAppear()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +62,27 @@ class ViewController<T: ViewModel>: UIViewController {
     if !self.viewDidAppearWasCalled {
       self.performOnceInViewDidAppear()
     }
+    viewModel.viewDidAppear()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    viewModel.viewWillDisappear()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    viewModel.viewDidDisappear()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    viewModel.viewWillLayoutSubviews()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    viewModel.viewDidLayoutSubviews()
   }
   
   func performOnceInViewWillAppear() {}
