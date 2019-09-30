@@ -28,11 +28,11 @@ final class InteractiveTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
     
-    containerView.backgroundColor = .white
+    containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     containerView.layer.masksToBounds = false
     
-    separator.backgroundColor = Colors.Profile.separatorColor
+    separator.backgroundColor = Colors.separatorColor
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -45,7 +45,7 @@ final class InteractiveTableViewCell: UITableViewCell {
     
     if isLast {
       containerView.layer.cornerRadius = Constants.containerViewCornerRadius
-      containerView.addShadow()
+      containerView.setShadow()
       containerBottomConstraint?.update(offset: -Constants.containerViewBottomOffset)
     } else {
       containerView.layer.cornerRadius = 0
@@ -87,6 +87,7 @@ final class InteractiveTableViewCell: UITableViewCell {
     super.prepareForReuse()
     
     containerView.removeFromSuperview()
+    containerView.removeShadow()
     separator.removeFromSuperview()
     button?.removeFromSuperview()
   }

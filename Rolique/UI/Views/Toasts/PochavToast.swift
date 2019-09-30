@@ -14,13 +14,11 @@ typealias Event = (() -> Void)?
 
 final class PochavToast: UIView {
   private struct Constants {
-    static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
     static var buttonWidth: CGFloat { return 110.0 }
     static var centerOffset: CGFloat { return 60.0 }
   }
-  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var confirmButton = ConfirmButton()
   private lazy var cancelButton = CancelButton()
@@ -43,12 +41,8 @@ final class PochavToast: UIView {
   }
   
   private func configureConstraints() {
-    [containerView].forEach(self.addSubviewAndDisableMaskTranslate)
-    [titleLabel, confirmButton, cancelButton].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+    [titleLabel, confirmButton, cancelButton].forEach(self.addSubviewAndDisableMaskTranslate)
     
-    containerView.snp.makeConstraints { maker in
-      maker.edges.equalTo(Constants.containerInsets)
-    }
     titleLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()
@@ -69,9 +63,10 @@ final class PochavToast: UIView {
   }
   
   private func configureUI() {
-    containerView.backgroundColor = .white
+    backgroundColor = Colors.secondaryBackgroundColor
     titleLabel.text = Strings.Actions.pochavTitle
     titleLabel.font = .preferredFont(forTextStyle: .title2)
+    titleLabel.textColor = Colors.mainTextColor
     confirmButton.addTarget(self, action: #selector(didSelectConfirmButton), for: .touchUpInside)
     cancelButton.addTarget(self, action: #selector(didSelectCancelButton), for: .touchUpInside)
   }

@@ -35,4 +35,59 @@ public struct Colors {
       return UIColor(red: 233.0 / 255.0, green: 233.0 / 255.0, blue: 234.0 / 255.0, alpha: 1.0)
     }
   }
+  
+  public static var shadowColor: CGColor {
+    if #available(iOS 13.0, *) {
+      let color = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        if traitCollection.userInterfaceStyle == .dark {
+          return .white
+        } else {
+          return .black
+        }
+      }
+      return color.cgColor
+    } else {
+      return UIColor.black.cgColor
+    }
+  }
+  
+  public static var mainBackgroundColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .systemBackground
+    } else {
+      return Colors.Colleagues.softWhite
+    }
+  }
+  
+  public static var secondaryBackgroundColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .tertiarySystemBackground
+    } else {
+      return .white
+    }
+  }
+  
+  public static var separatorColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .separator
+    } else {
+      return Colors.Profile.separatorColor
+    }
+  }
+  
+  public static var mainTextColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .label
+    } else {
+      return .black
+    }
+  }
+  
+  public static var secondaryTextColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .secondaryLabel
+    } else {
+      return .darkGray
+    }
+  }
 }

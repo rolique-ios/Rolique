@@ -19,9 +19,20 @@ protocol ViewModel {
   
   var shouldNavPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)? { get set }
   var shouldNavDismmiss: ((Bool, (() -> Void)?) -> Void)? { get set }
+  
+  // MARK: - Lifecycle
+  func viewDidLoad()
+  func viewWillAppear()
+  func viewDidAppear()
+  func viewWillDisappear()
+  func viewDidDisappear()
+  func viewWillLayoutSubviews()
+  func viewDidLayoutSubviews()
+  func didReceiveMemoryWarning()
 }
 
 class BaseViewModel: ViewModel {
+  
   var shouldPush: ((UIViewController, Bool) -> Void)?
   var shouldPop: ((Bool) -> UIViewController?)?
   var shouldPopToRoot: ((Bool) -> [UIViewController]?)?
@@ -32,4 +43,14 @@ class BaseViewModel: ViewModel {
   
   var shouldNavPresent: ((UIViewController, Bool, (() -> Void)?) -> Void)?
   var shouldNavDismmiss: ((Bool, (() -> Void)?) -> Void)?
+  
+  // MARK: - Lifecycle
+  func viewDidLoad() {}
+  func viewWillAppear() {}
+  func viewDidAppear() {}
+  func viewWillDisappear() {}
+  func viewDidDisappear() {}
+  func viewWillLayoutSubviews() {}
+  func viewDidLayoutSubviews() {}
+  func didReceiveMemoryWarning() {}
 }

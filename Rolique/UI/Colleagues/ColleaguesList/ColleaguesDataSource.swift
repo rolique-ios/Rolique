@@ -15,8 +15,10 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
   private var data: [User]
   
   var onUserTap: ((User) -> Void)?
+  var onPhoneTap: ((String) -> Void)?
+  var contextMenuConfigHandler: UIContextMenuConfigurationHandler?
   
-  init(tableView: UITableView, data: [User]) {
+  init(tableView: UITableView, data: [User], contextMenuConfigHandler: UIContextMenuConfigurationHandler?) {
     self.tableView = tableView
     self.data = data
     
@@ -24,6 +26,7 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
     
     self.tableView.setDelegateAndDataSource(self)
     self.tableView.register([ColleaguesTableViewCell.self])
+    self.contextMenuConfigHandler = contextMenuConfigHandler
   }
   
   func update(dataSource: [User]) {
@@ -60,13 +63,26 @@ final class ColleaguesDataSource: NSObject, UITableViewDelegate, UITableViewData
     tableView.deselectRow(at: indexPath, animated: true)
     onUserTap?(data[indexPath.row])
   }
+  
+  @available(iOS 13.0, *)
+  func tableView(_ tableView: UITableView,
+                 contextMenuConfigurationForRowAt indexPath: IndexPath,
+                 point: CGPoint) -> UIContextMenuConfiguration? {
+    return contextMenuConfigHandler?.getContextMenuConfiguration(indexPath: indexPath, location: point)
+  }
+  
+  @available(iOS 13.0, *)
+  func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+    contextMenuConfigHandler?.performAnimation(with: configuration, animator: animator)
+  }
 }
+
+// MARK: - ColleaguesTableViewCellDelegate
 
 extension ColleaguesDataSource: ColleaguesTableViewCellDelegate {
   func touchPhone(_ cell: ColleaguesTableViewCell) {
     guard let indexPath = tableView.indexPath(for: cell) else { return }
-    let phone = data[indexPath.row].slackProfile.phone.replacingOccurrences(of: " ", with: "")
-    guard let url = URL(string: "tel://\(phone)") else { return }
-    UIApplication.shared.open(url)
+    let phone = data[indexPath.row].slackProfile.phone
+    onPhoneTap?(phone)
   }
 }

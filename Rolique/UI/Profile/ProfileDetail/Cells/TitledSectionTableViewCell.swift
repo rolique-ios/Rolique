@@ -22,14 +22,15 @@ final class TitledSectionTableViewCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.backgroundColor = Colors.secondaryBackgroundColor
     self.selectionStyle = .none
     
-    titleLabel.textColor = .darkGray
+    titleLabel.textColor = Colors.secondaryTextColor
     titleLabel.alpha = 0.5
     titleLabel.font = .italicSystemFont(ofSize: 14.0)
     titleLabel.adjustsFontSizeToFitWidth = true
     
-    separator.backgroundColor = Colors.Profile.separatorColor
+    separator.backgroundColor = Colors.separatorColor
   }
   
   required init?(coder aDecoder: NSCoder) {

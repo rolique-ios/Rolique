@@ -119,7 +119,7 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
                          onLongTap: { [unowned self] in
                           self.copyString?(phone)
         }, onTap: { [unowned self] in
-          self.call?(phone.replacingOccurrences(of: " ", with: ""))
+          self.call?(phone)
         },
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
@@ -292,7 +292,7 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
   private func configureCacheButton() -> UIButton {
     let clearCacheButton = UIButton()
     clearCacheButton.setTitle(getClearCacheTitle(), for: .normal)
-    clearCacheButton.backgroundColor = Colors.Actions.darkGray
+    clearCacheButton.backgroundColor = .black
     clearCacheButton.roundCorner(radius: 5.0)
     clearCacheButton.addTarget(self, action: #selector(clearCacheButtonTap(_:)), for: UIControl.Event.touchUpInside)
     return clearCacheButton

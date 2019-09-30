@@ -12,7 +12,6 @@ import SnapKit
 
 final class DopracToast: UIView {
   private struct Constants {
-    static var containerInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 15) }
     static var defaultOffset: CGFloat { return 20.0 }
     static var buttonHeight: CGFloat { return 50.0 }
     static var buttonWidth: CGFloat { return 110.0 }
@@ -23,7 +22,6 @@ final class DopracToast: UIView {
     static var cornerRadius: CGFloat { return 5.0 }
     static var borderWidth: CGFloat { return 2.0 }
   }
-  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
   private lazy var nowButton = UIButton()
   private lazy var inAhourButton = UIButton()
@@ -53,7 +51,7 @@ final class DopracToast: UIView {
   }
   
   func refreshView() {
-    [containerView, titleLabel, nowButton, inAhourButton, customTimeButton, confirmButton, cancelButton, datePicker].forEach {
+    [titleLabel, nowButton, inAhourButton, customTimeButton, confirmButton, cancelButton, datePicker].forEach {
       $0.snp.removeConstraints()
       $0.removeFromSuperview()
     }
@@ -70,13 +68,9 @@ final class DopracToast: UIView {
   }
   
   private func configureConstraints() {
-    [containerView].forEach(self.addSubviewAndDisableMaskTranslate)
     [titleLabel, nowButton, inAhourButton, customTimeButton, cancelButton]
-      .forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+      .forEach(self.addSubviewAndDisableMaskTranslate)
     
-    containerView.snp.makeConstraints { maker in
-      maker.edges.equalTo(Constants.containerInsets)
-    }
     titleLabel.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()
@@ -109,7 +103,7 @@ final class DopracToast: UIView {
   }
   
   private func configureUI() {
-    containerView.backgroundColor = .white
+    backgroundColor = Colors.secondaryBackgroundColor
     
     titleLabel.font = .preferredFont(forTextStyle: .title2)
     
@@ -123,7 +117,7 @@ final class DopracToast: UIView {
     inAhourButton.setTitle(Strings.Actions.inAHour, for: .normal)
     customTimeButton.setTitle(Strings.Actions.customTime, for: .normal)
     [nowButton, inAhourButton, customTimeButton].forEach { button in
-      button.setTitleColor(.black, for: .normal)
+      button.setTitleColor(Colors.mainTextColor, for: .normal)
       button.layer.cornerRadius = Constants.cornerRadius
       button.layer.borderWidth = Constants.borderWidth
       button.layer.borderColor = UIColor.black.cgColor
@@ -150,7 +144,7 @@ final class DopracToast: UIView {
   
   @objc func didSelectCustomTimeButton() {
     [nowButton, inAhourButton, customTimeButton].forEach{ $0.removeFromSuperview() }
-    [datePicker, confirmButton].forEach(self.containerView.addSubviewAndDisableMaskTranslate)
+    [datePicker, confirmButton].forEach(self.addSubviewAndDisableMaskTranslate)
     datePicker.snp.makeConstraints { maker in
       maker.top.equalTo(titleLabel.snp.bottom).offset(Constants.defaultOffset)
       maker.centerX.equalToSuperview()

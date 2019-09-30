@@ -7,6 +7,8 @@
 //  Copyright © 2019 Bohdan Savych. All rights reserved.
 //
 
+import UIKit
+
 public struct Images {
   public struct General {
     public static var logo: UIImage {
