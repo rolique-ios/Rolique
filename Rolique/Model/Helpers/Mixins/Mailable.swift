@@ -14,11 +14,15 @@ protocol Mailable: class {
   func sendEmail(to: [String], body: String)
   func openMailApp()
   var from: UIViewController? { get }
+  func onPresent()
+  func onDismiss()
 }
 
 extension UIViewController: MFMailComposeViewControllerDelegate {
   public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-    controller.dismiss(animated: true)
+    controller.dismiss(animated: true, completion: { [weak self] in
+      (self as? Mailable)?.onDismiss()
+    })
   }
 }
 
@@ -35,6 +39,7 @@ extension Mailable where Self: UIViewController {
     mail.setToRecipients(recipients)
     mail.setMessageBody(body, isHTML: true)
     
+    onPresent()
     from?.present(mail, animated: true)
   }
   
@@ -43,4 +48,7 @@ extension Mailable where Self: UIViewController {
       UIApplication.shared.open(url)
     }
   }
+  
+  func onPresent() {}
+  func onDismiss() {}
 }

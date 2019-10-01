@@ -305,4 +305,4 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
 
 // MARK: - Mixins
 
-extension ColleaguesViewController: Mailable, Slackable, Callable, Skypable { }
+extension ColleaguesViewController: Mailable, Slackable, Callable, Skypable {}
