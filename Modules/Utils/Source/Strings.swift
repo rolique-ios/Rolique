@@ -66,7 +66,10 @@ public struct Strings {
     public static var logOutMessage: String { return "Are you sure?".localized }
     public static var clearCache: String { return "Clear cache".localized }
     public static func vacationDays(args: CVarArg...) -> String {
-      return String(format: "On %@ you have %.2f days".localized, arguments: args)
+      return String(format: "%.2f days left".localized, arguments: args)
+    }
+    public static func vacationDaysFromPreviousYear(args: CVarArg...) -> String {
+      return String(format: "Also %.2f from previous year".localized, arguments: args)
     }
     public static var phoneNumber: String { return "Phone number".localized }
     public static var email: String { return "Email".localized }

@@ -161,9 +161,15 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
       }
       
       guard let vacationData = user.vacationData else { return UITableViewCell() }
-      let dateArray = vacationData.compactMap { $0.key }.sorted()
+      let dateArray = vacationData.compactMap { $0.key }.sorted(by: >)
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
-      infoCell.configure(with: Strings.Profile.vacationDays(args: dateArray[indexPath.row - 1], vacationData[dateArray[indexPath.row - 1]].orZero),
+      var title: String
+      if indexPath.row == 1 {
+        title = Strings.Profile.vacationDays(args: vacationData[dateArray[indexPath.row - 1]].orZero)
+      } else {
+        title = Strings.Profile.vacationDaysFromPreviousYear(args: vacationData[dateArray[indexPath.row - 1]].orZero)
+      }
+      infoCell.configure(with: title,
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
     case .roles:
@@ -261,7 +267,15 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
     case .skype:
       return user.slackProfile.skype.orEmpty.isEmpty ? 0 : 2
     case .vacationData:
-      return (!isMe || (user.vacationData ?? [:]).isEmpty) ? 0 : user.vacationData!.count + 1
+      let vacationData = user.vacationData ?? [:]
+      if (!isMe || vacationData.isEmpty) {
+        return 0
+      } else {
+        let dateComponent = Calendar.current.dateComponents([.year], from: Date())
+        let previousYears = vacationData.filter({ $0.key != "\(dateComponent.year.orZero)" })
+        let filtered = previousYears.filter({ $0.value != 0 })
+        return 1 + filtered.count + 1
+      }
     case .dateOfJoining:
       return (!isMe || user.dateOfJoining.orEmpty.isEmpty) ? 0 : 2
     case .roles:
