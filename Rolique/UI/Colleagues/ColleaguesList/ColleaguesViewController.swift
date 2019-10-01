@@ -30,7 +30,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     
     configureConstraints()
     configureUI()
-    configureTableViews()
+    configureTableView()
     configureBinding()
     
     if traitCollection.forceTouchCapability == .available {
@@ -115,7 +115,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     }
   }
   
-  private func configureTableViews() {
+  private func configureTableView() {
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
     tableView.keyboardDismissMode = .interactive
@@ -141,7 +141,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       guard let self = self,
         let indexPath = indexPath else { return nil }
       let contextMenuContentPreviewProvider = { () -> ProfileDetailViewController<ProfileDetailViewModelImpl> in
-        return self.previewVC(user: self.viewModel.users[indexPath.row])
+        return self.previewVC(user: self.viewModel.getUsersByCurrentListType()[indexPath.row])
       }
       return contextMenuContentPreviewProvider
     }
@@ -149,14 +149,15 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     contextMenuConfigHandler.provideMenu = { [weak self] indexPath in
       var actions = [MenuAction]()
       if let self = self, let indexPath = indexPath {
-        let slackId = self.viewModel.users[indexPath.row].id
+        let user = self.viewModel.getUsersByCurrentListType()[indexPath.row]
+        let slackId = user.id
         let slackAction = MenuAction(title: Strings.Profile.openSlack, image: nil, handler: {
           DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
             self?.openSlack(with: slackId)
           }
         })
         actions.append(slackAction)
-        let phone = self.viewModel.users[indexPath.row].slackProfile.phone
+        let phone = user.slackProfile.phone
         if !phone.isEmpty {
           let callAction = MenuAction(title: Strings.Profile.call, image: nil, handler: { 
             DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
@@ -165,14 +166,14 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
           })
           actions.append(callAction)
         }
-        let email = self.viewModel.users[indexPath.row].slackProfile.email.orEmpty
+        let email = user.slackProfile.email.orEmpty
         if !email.isEmpty {
           let emailAction = MenuAction(title: Strings.Profile.sendEmail, image: nil, handler: { [weak self] in
             self?.sendEmail(to: [email])
           })
           actions.append(emailAction)
         }
-        let skype = self.viewModel.users[indexPath.row].slackProfile.skype.orEmpty
+        let skype = user.slackProfile.skype.orEmpty
         if !skype.isEmpty {
           let skypeAction = MenuAction(title: Strings.Profile.openSkype, image: nil, handler: {
             DispatchQueue.main.asyncAfter(deadline: Constants.delay) { [weak self] in
@@ -287,7 +288,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
     guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
     previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-    let popVC = Router.getProfileDetailViewController(user: viewModel.users[indexPath.row])
+    let popVC = Router.getProfileDetailViewController(user: viewModel.getUsersByCurrentListType()[indexPath.row])
     popVC.delegate = self
     return popVC
   }

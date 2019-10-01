@@ -6,8 +6,8 @@
 //  Copyright © 2019 Rolique. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-final class ClaendarViewController<T: CalendarViewModel>: ViewController<T> {
-  
+final class CalendarViewController<T: CalendarViewModel>: ViewController<T>, UIScrollViewDelegate {
+  private lazy var scrollView = UIScrollView()
 }
