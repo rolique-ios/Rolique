@@ -78,6 +78,9 @@
 		3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */; };
 		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
+		3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3C0D3234366E900165B06 /* CalendarViewController.swift */; };
+		3FA3C0D6234366FF00165B06 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3C0D5234366FF00165B06 /* CalendarViewModel.swift */; };
+		3FA3C0D82343786C00165B06 /* ModalPresentationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3C0D72343786C00165B06 /* ModalPresentationHandler.swift */; };
 		3FC996102316818800C2554C /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9960F2316818800C2554C /* ConfirmButton.swift */; };
 		3FC996122316819200C2554C /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996112316819200C2554C /* CancelButton.swift */; };
 		3FC996152316843700C2554C /* DopracToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996142316843700C2554C /* DopracToast.swift */; };
@@ -234,6 +237,9 @@
 		3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContextMenuConfigurationHandler.swift; sourceTree = "<group>"; };
 		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
+		3FA3C0D3234366E900165B06 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		3FA3C0D5234366FF00165B06 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		3FA3C0D72343786C00165B06 /* ModalPresentationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresentationHandler.swift; sourceTree = "<group>"; };
 		3FC9960F2316818800C2554C /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		3FC996112316819200C2554C /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		3FC996142316843700C2554C /* DopracToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DopracToast.swift; sourceTree = "<group>"; };
@@ -396,6 +402,7 @@
 				25535AF623014D4F00833A5B /* Views */,
 				25535AFA23014D4F00833A5B /* Login */,
 				3FF9BEE923054CBB00028513 /* Colleagues */,
+				3FA3C0D22343666200165B06 /* Calendar */,
 				3FF1035023155E8700EBCE4E /* Actions */,
 				25535AFE23014D4F00833A5B /* Base */,
 			);
@@ -605,8 +612,18 @@
 			isa = PBXGroup;
 			children = (
 				3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */,
+				3FA3C0D72343786C00165B06 /* ModalPresentationHandler.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3FA3C0D22343666200165B06 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3C0D3234366E900165B06 /* CalendarViewController.swift */,
+				3FA3C0D5234366FF00165B06 /* CalendarViewModel.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		3FC9960E23167BD700C2554C /* Toasts */ = {
@@ -1129,12 +1146,15 @@
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
+				3FA3C0D6234366FF00165B06 /* CalendarViewModel.swift in Sources */,
 				2D40DF2A233959DA001D647D /* Slackable.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
+				3FA3C0D82343786C00165B06 /* ModalPresentationHandler.swift in Sources */,
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
 				3FFD388B23180D67006D5479 /* LateToast.swift in Sources */,
 				3FF320A0233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift in Sources */,
 				2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */,
+				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
 				B5D6C3092321905400929BFF /* Bot.swift in Sources */,
 				3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */,

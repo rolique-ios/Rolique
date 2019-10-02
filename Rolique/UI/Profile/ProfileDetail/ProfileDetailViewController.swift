@@ -46,8 +46,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
-    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    addKeyboardObservers()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -263,6 +262,11 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     UIPasteboard.general.string = str
   }
   
+  private func addKeyboardObservers() {
+    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+  
   @objc func keyboardWillShow(_ notification:Notification) {
     if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
       let insets = UIEdgeInsets(top: Constants.kTableHeaderHeight, left: 0, bottom: keyboardSize.height, right: 0)
@@ -282,4 +286,12 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
 
 // MARK: - Mixins
 
-extension ProfileDetailViewController: Callable, Mailable, Slackable, Skypable {}
+extension ProfileDetailViewController: Callable, Mailable, Slackable, Skypable {
+  func onPresent() {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  func onDismiss() {
+    addKeyboardObservers()
+  }
+}

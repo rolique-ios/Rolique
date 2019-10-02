@@ -30,6 +30,7 @@ protocol ColleaguesViewModel: ViewModel {
   func refresh()
   func updateRecordType(_ recordType: RecordType)
   func cancelSearch()
+  func getUsersByCurrentListType() -> [User]
 }
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
@@ -46,6 +47,8 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   var searchedUsers = [User]()
   var listType = ListType.all
   var recordType: RecordType?
+  
+  private lazy var isSearching = false
   
   override func viewDidLoad() {
     all()
@@ -90,7 +93,8 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
       }
     }
     self.searchedUsers = searchedUsers
-    onRefreshList?(searchedUsers)
+    isSearching = true
+    onRefreshList?(getUsersByCurrentListType())
   }
   
   func refresh() {
@@ -123,11 +127,20 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   }
   
   func cancelSearch() {
-    switch listType {
-    case .all:
-      onRefreshList?(users)
-    case .filtered:
-      onRefreshList?(filteredUsers)
+    isSearching = false
+    onRefreshList?(getUsersByCurrentListType())
+  }
+  
+  func getUsersByCurrentListType() -> [User] {
+    if isSearching {
+      return searchedUsers
+    } else {
+      switch listType {
+      case .all:
+        return users
+      case .filtered:
+        return filteredUsers
+      }
     }
   }
   
