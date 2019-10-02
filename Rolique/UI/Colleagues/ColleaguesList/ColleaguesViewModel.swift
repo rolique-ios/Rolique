@@ -48,7 +48,7 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   var listType = ListType.all
   var recordType: RecordType?
   
-  private var isSearching = false
+  private lazy var isSearching = false
   
   override func viewDidLoad() {
     all()

@@ -163,12 +163,10 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
       guard let vacationData = user.vacationData else { return UITableViewCell() }
       let dateArray = vacationData.compactMap { $0.key }.sorted(by: >)
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
-      var title: String
-      if indexPath.row == 1 {
-        title = Strings.Profile.vacationDays(args: vacationData[dateArray[indexPath.row - 1]].orZero)
-      } else {
-        title = Strings.Profile.vacationDaysFromPreviousYear(args: vacationData[dateArray[indexPath.row - 1]].orZero)
-      }
+      let args = vacationData[dateArray[indexPath.row - 1]].orZero
+      let title = indexPath.row == 1
+        ? Strings.Profile.vacationDays(args: args)
+        : Strings.Profile.vacationDaysFromPreviousYear(args: args)
       infoCell.configure(with: title,
                          isLast: lastCell(indexPath: indexPath))
       return infoCell
@@ -272,8 +270,8 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
         return 0
       } else {
         let dateComponent = Calendar.current.dateComponents([.year], from: Date())
-        let previousYears = vacationData.filter({ $0.key != "\(dateComponent.year.orZero)" })
-        let filtered = previousYears.filter({ $0.value != 0 })
+        let previousYears = vacationData.filter { $0.key != "\(dateComponent.year.orZero)" }
+        let filtered = previousYears.filter { $0.value != 0 }
         return 1 + filtered.count + 1
       }
     case .dateOfJoining:
