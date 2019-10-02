@@ -1,3 +1,3 @@
-Change 'Hero' to custom transition
-Add support of dark theme
-Add support of context menu interaction instead of 3D touch for devices with ios 13
+Fix crash related with keyboard observers
+Fix problem with setting context menu/previewing view the wrong user
+Change vacation data presention
