@@ -11,8 +11,24 @@ import Foundation
 import Utils
 
 final class ImageManager {
+  private lazy var cache: NSCache<NSURL, UIImage> = {
+    let cache = NSCache<NSURL, UIImage>()
+    cache.countLimit = 1000 // arbitrary count
+    return cache
+  }()
+  private var lock = NSLock()
+  private lazy var observer: NSObjectProtocol = {
+    return NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { [weak self] notification in
+      self?.cache.removeAllObjects()
+    }
+  }()
+  
   static let shared = ImageManager()
   private init() {}
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self.observer)
+  }
   
   private let fileManager = FileManager.default
   private var documentDirectoryURL: URL {
@@ -22,20 +38,39 @@ final class ImageManager {
     return URL(fileURLWithPath: documentDirectoryURL.path + "/Images")
   }
   
-  func getImage(with url: URL) -> UIImage? {
-    createDirectoryIfNeeded(with: imagesDirectoryURL)
-    
-    return fileManager
-      .contents(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url))
-      .flatMap { UIImage(data: $0, scale: UIScreen.main.scale) }
+  func getImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
+      if let image = self.lock.do({ [weak self] in self?.dataInCache(forKey: url) }) {
+        DispatchQueue.main.async {
+          completion(image)
+        }
+        
+        return
+      }
+      
+      self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
+      self.fileManager
+        .contents(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url)).flatMap { [weak self] data in
+          let image = self?.convertDataIntoImage(data: data)
+          self?.lock.do { [weak self] in self?.saveInCache(image: image, forKey: url) }
+          DispatchQueue.main.async {
+            completion(image)
+          }
+      }
+    }
   }
   
   func saveImage(data: Data, forURL url: URL) {
-    createDirectoryIfNeeded(with: imagesDirectoryURL)
-    
-    fileManager.createFile(atPath: imagePath(imagesDirectoryURL: imagesDirectoryURL, imageURL: url),
-                           contents: data,
-                           attributes: nil)
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
+      self.lock.do({ [weak self] in self?.saveInCache(image: self?.convertDataIntoImage(data: data), forKey: url) })
+      
+      self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
+      self.fileManager.createFile(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url),
+                                  contents: data,
+                                  attributes: nil)
+    }
   }
   
   func findImagesDirectorySize() -> UInt64 {
@@ -71,6 +106,18 @@ final class ImageManager {
                                        attributes: nil)
     }
   }
+  
+  private func dataInCache(forKey key: URL) -> UIImage? {
+    return self.cache.object(forKey: key as NSURL)
+  }
+  
+  private func saveInCache(image: UIImage?, forKey key: URL) {
+    image.map({ self.cache.setObject($0, forKey: key as NSURL) })
+  }
+  
+  private func convertDataIntoImage(data: Data) -> UIImage? {
+    return UIImage(data: data, scale: UIScreen.main.scale)
+  }
 }
 
 extension UIImageView {
@@ -94,9 +141,11 @@ extension UIImageView {
   }
   
   func setImage(with url: URL) {
-    if let cachedImage = ImageManager.shared.getImage(with: url) {
-      self.image = cachedImage
-      return
+    ImageManager.shared.getImage(with: url) { [weak self] image in
+      if let cachedImage = image {
+        self?.image = cachedImage
+        return
+      }
     }
     
     self.currentURL = url

@@ -37,32 +37,25 @@ final class ColleaguesTableViewCell: UITableViewCell {
     self.backgroundColor = .clear
     self.selectionStyle = .none
     
-    containerView.translatesAutoresizingMaskIntoConstraints = false
     containerView.backgroundColor = Colors.secondaryBackgroundColor
     containerView.layer.cornerRadius = 5.0
     
-    userImageView.translatesAutoresizingMaskIntoConstraints = false
     userImageView.roundCorner(radius: Constants.userImageSize / 2)
     
-    nameLabel.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.textColor = Colors.mainTextColor
     
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.textColor = .lightGray
     titleLabel.font = .italicSystemFont(ofSize: 14.0)
     
     stackView.axis = .vertical
     stackView.spacing = 5.0
     
-    todayStatusLabel.translatesAutoresizingMaskIntoConstraints = false
     todayStatusLabel.textColor = .orange
     todayStatusLabel.layer.borderWidth = 1.0
     todayStatusLabel.layer.borderColor = UIColor.orange.cgColor
     todayStatusLabel.layer.cornerRadius = 4
     todayStatusLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
     todayStatusLabel.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
-    
-    phoneImageView.translatesAutoresizingMaskIntoConstraints = false
     
     configureViews()
   }
@@ -77,25 +70,26 @@ final class ColleaguesTableViewCell: UITableViewCell {
     URL(string: userImage.orEmpty).map(self.userImageView.setImage(with: ))
     
     nameLabel.text = name
-    
+
     titleLabel.text = title
     titleLabel.isHidden = title.isEmpty
-    
+
     let todayStatusIsEmpty = todayStatus.orEmpty.isEmpty
     todayStatusLabel.isHidden = todayStatusIsEmpty
     todayStatusLabel.text = todayStatusIsEmpty ? nil : " " + todayStatus.orEmpty + " "
-    
+
     if isMe {
       phoneImageView.isHidden = true
     } else {
       phoneImageView.isHidden = false
       let image = Images.Colleagues.phone
       
+      let gesture = UITapGestureRecognizer(target: self, action: #selector(touchEvent))
       if !isButtonEnabled {
+        phoneImageView.removeGestureRecognizer(gesture)
         phoneImageView.image = image.withRenderingMode(.alwaysTemplate)
         phoneImageView.tintColor = .lightGray
       } else {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(touchEvent))
         phoneImageView.addGestureRecognizer(gesture)
         phoneImageView.isUserInteractionEnabled = true
         phoneImageView.image = image
@@ -141,10 +135,7 @@ final class ColleaguesTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    userImageView.image = nil
-    nameLabel.text = nil
-    titleLabel.text = nil
-    todayStatusLabel.text = nil
+    userImageView.cancelLoad()
   }
   
   @objc func touchEvent() {
