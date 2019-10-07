@@ -10,13 +10,17 @@ import UIKit
 import Foundation
 import Utils
 
+private struct Constants {
+  static var cacheCountLimit: Int { return 1000 } // arbitrary count
+}
+
 final class ImageManager {
   private lazy var cache: NSCache<NSURL, UIImage> = {
     let cache = NSCache<NSURL, UIImage>()
-    cache.countLimit = 1000 // arbitrary count
+    cache.countLimit = Constants.cacheCountLimit
     return cache
   }()
-  private var lock = NSLock()
+  private let lock = NSLock()
   private lazy var observer: NSObjectProtocol = {
     return NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { [weak self] notification in
       self?.cache.removeAllObjects()
@@ -112,7 +116,7 @@ final class ImageManager {
   }
   
   private func saveInCache(image: UIImage?, forKey key: URL) {
-    image.map({ self.cache.setObject($0, forKey: key as NSURL) })
+    image.map { self.cache.setObject($0, forKey: key as NSURL) }
   }
   
   private func convertDataIntoImage(data: Data) -> UIImage? {

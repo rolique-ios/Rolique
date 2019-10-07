@@ -23,7 +23,7 @@ final class ColleaguesTableViewCell: UITableViewCell {
     static var userImageSize: CGFloat { return 60.0 }
   }
   private lazy var containerView = UIView()
-  private lazy var userImageView = InteractiveImageView()
+  private lazy var userImageView = UIImageView()
   private lazy var stackView = UIStackView()
   private lazy var nameLabel = UILabel()
   private lazy var titleLabel = UILabel()

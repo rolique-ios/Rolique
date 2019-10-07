@@ -254,7 +254,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   }
   
   @objc func didSelectSlackButton(sender: UIButton) {
-    viewModel.user.do({ self.openSlack(with: $0.id) })
+    viewModel.user.do { self.openSlack(with: $0.id) }
   }
   
   private func copyString(_ str: String) {
