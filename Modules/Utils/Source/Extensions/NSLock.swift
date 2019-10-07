@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSLocking {
+public extension NSLocking {
     func `do`<Result>(_ action: () -> Result) -> Result {
         self.lock()
         defer { self.unlock() }
