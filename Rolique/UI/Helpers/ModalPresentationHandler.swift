@@ -9,21 +9,17 @@
 import UIKit
 
 final class ModalPresentationHandler: NSObject, UIAdaptivePresentationControllerDelegate {
-  var willPresentVC: Completion?
-  var willDismissVC: Completion?
-  var didDismissVC: Completion?
+  private var willPresentVC: Completion?
+  private var willDismissVC: Completion?
+  private var didDismissVC: Completion?
   private let shouldDissmiss: Bool
   
-  init(presentNVC: UINavigationController?, shouldDissmiss: Bool = true) {
+  init(shouldDissmiss: Bool = true, willPresentVC: Completion? = nil, willDismissVC: Completion? = nil, didDismissVC: Completion? = nil) {
     self.shouldDissmiss = shouldDissmiss
     super.init()
-    presentNVC?.presentationController?.delegate = self
-  }
-  
-  init(presentVC: UIViewController?, shouldDissmiss: Bool = true) {
-    self.shouldDissmiss = shouldDissmiss
-    super.init()
-    presentVC?.presentationController?.delegate = self
+    self.willPresentVC = willPresentVC
+    self.willDismissVC = willDismissVC
+    self.didDismissVC = didDismissVC
   }
   
   func presentationController(_ presentationController: UIPresentationController, willPresentWithAdaptiveStyle style: UIModalPresentationStyle, transitionCoordinator: UIViewControllerTransitionCoordinator?) {
