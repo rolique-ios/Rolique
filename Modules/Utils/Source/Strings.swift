@@ -17,6 +17,7 @@ public struct Strings {
   public struct TabBar {
     public static var profile: String { return "Profile".localized }
     public static var stats: String { return "stats".localized }
+    public static var calendar: String { return "Calendar".localized }
   }
   
   public struct NavigationTitle {
