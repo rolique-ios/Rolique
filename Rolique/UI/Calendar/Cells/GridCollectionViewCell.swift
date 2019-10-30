@@ -19,16 +19,17 @@ final class GridCollectionViewCell: UICollectionViewCell {
   private lazy var leftSeparator = UIView()
   private lazy var rightSeparator = UIView()
   private lazy var bottomSeparator = UIView()
-  private lazy var statusLabel = UILabel()
+  private lazy var stackView = UIStackView()
+  private var leftSeparatorHeightConstraint: Constraint?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     self.backgroundColor = Colors.secondaryBackgroundColor
     
-    statusLabel.textColor = Colors.mainTextColor
-    statusLabel.adjustsFontSizeToFitWidth = true
-    statusLabel.textAlignment = .center
+    stackView.axis = .vertical
+    stackView.distribution = .equalSpacing
+    stackView.spacing = 2.0
     
     topSeparator.backgroundColor = Colors.separatorColor
     leftSeparator.backgroundColor = Colors.separatorColor
@@ -42,11 +43,28 @@ final class GridCollectionViewCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with status: String, isTop: Bool, isRight: Bool) {
-    statusLabel.text = status
+  func configure(with recordTypes: [RecordType]?, isTop: Bool, isRight: Bool) {
+    for recordType in recordTypes ?? [] {
+      let label = UILabel()
+      label.textColor = .orange
+      label.layer.borderWidth = 1.0
+      label.layer.borderColor = UIColor.orange.cgColor
+      label.layer.cornerRadius = 4
+      
+      label.text = " " + recordType.desctiption + " "
+      label.textAlignment = .left
+      label.numberOfLines = 0
+      label.font = .systemFont(ofSize: 16.0)
+      label.adjustsFontSizeToFitWidth = true
+      label.minimumScaleFactor = 8.0 / 16.0
+      stackView.addArrangedSubview(label)
+    }
     
     if isTop {
       configureTopSeparator()
+      leftSeparatorHeightConstraint?.update(offset: 400)
+    } else {
+      leftSeparatorHeightConstraint?.update(offset: 0)
     }
     
     if isRight {
@@ -73,14 +91,15 @@ final class GridCollectionViewCell: UICollectionViewCell {
   }
   
   private func configureViews() {
-    [statusLabel, leftSeparator, bottomSeparator].forEach(self.addSubviewAndDisableMaskTranslate)
+    [stackView, leftSeparator, bottomSeparator].forEach(self.addSubviewAndDisableMaskTranslate)
     
-    statusLabel.snp.makeConstraints { maker in
+    stackView.snp.makeConstraints { maker in
       maker.edges.equalToSuperview()
     }
     
     leftSeparator.snp.makeConstraints { maker in
-      maker.top.left.bottom.equalToSuperview()
+      leftSeparatorHeightConstraint = maker.height.equalToSuperview().constraint
+      maker.left.bottom.equalToSuperview()
       maker.width.equalTo(Constants.separatorHeightWidth)
     }
     
@@ -93,7 +112,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    statusLabel.text = nil
+    stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     topSeparator.removeFromSuperview()
     rightSeparator.removeFromSuperview()
   }

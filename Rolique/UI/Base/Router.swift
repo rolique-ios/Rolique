@@ -32,7 +32,7 @@ public final class Router {
     actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: Images.TabBar.actions, tag: 1)
     
     let calendar = UINavigationController(rootViewController: getCalendarViewController())
-    calendar.tabBarItem = UITabBarItem(title: Strings.TabBar.calendar, image: nil, tag: 2)
+    calendar.tabBarItem = UITabBarItem(title: Strings.TabBar.calendar, image: Images.TabBar.calendar, tag: 2)
     
     let profile = UINavigationController(rootViewController: getProfileDetailViewController(user: User.getFromCoreData(with: UserDefaultsManager.shared.userId ?? "")))
     profile.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: Images.TabBar.profile, tag: 3)
@@ -56,6 +56,8 @@ public final class Router {
   }
   
   static func getCalendarViewController() -> CalendarViewController<CalendarViewModelImpl> {
-    return CalendarViewController(viewModel: CalendarViewModelImpl())
+    let userService = UserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
+    let attendanceManager = AttendanceManagerImpl()
+    return CalendarViewController(viewModel: CalendarViewModelImpl(userService: userService, attendanceManager: attendanceManager))
   }
 }

@@ -27,6 +27,10 @@ public struct Images {
     public static var actions: UIImage {
       return UIImage(named: "actions")!
     }
+    
+    public static var calendar: UIImage {
+      return UIImage(named: "calendar")!
+    }
   }
   public struct Login {
     public static var fullLogo: UIImage {
@@ -51,6 +55,11 @@ public struct Images {
     }
     public static var email: UIImage {
       return UIImage(named: "email")!
+    }
+  }
+  public struct Calendar {
+    public static var calendarToday: UIImage {
+      return UIImage(named: "calendar-today")!
     }
   }
 }

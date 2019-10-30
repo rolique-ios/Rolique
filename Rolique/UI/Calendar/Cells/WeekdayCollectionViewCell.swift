@@ -21,6 +21,7 @@ final class WeekdayCollectionViewCell: UICollectionViewCell {
     weekdayLabel.textColor = Colors.mainTextColor
     weekdayLabel.adjustsFontSizeToFitWidth = true
     weekdayLabel.textAlignment = .center
+    weekdayLabel.font = .systemFont(ofSize: 14.0)
     
     configureViews()
   }

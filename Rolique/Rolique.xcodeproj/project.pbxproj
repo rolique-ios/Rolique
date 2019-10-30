@@ -90,6 +90,8 @@
 		3FC996122316819200C2554C /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996112316819200C2554C /* CancelButton.swift */; };
 		3FC996152316843700C2554C /* DopracToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996142316843700C2554C /* DopracToast.swift */; };
 		3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */; };
+		3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC8C5E2368748200D0754F /* AttendanceManager.swift */; };
+		3FEC8C61236875A400D0754F /* AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC8C60236875A400D0754F /* AttendanceRecord.swift */; };
 		3FEE0E41233B8DDD004CD5C3 /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */; };
 		3FEE0E43233B8DFE004CD5C3 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E42233B8DFE004CD5C3 /* TransitionAnimator.swift */; };
 		3FEE1FDD2334C5FF0075DF32 /* TitledSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE1FDC2334C5FF0075DF32 /* TitledSectionTableViewCell.swift */; };
@@ -115,6 +117,7 @@
 		3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD3885231807B0006D5479 /* PickerTextField.swift */; };
 		3FFD388B23180D67006D5479 /* LateToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD388A23180D67006D5479 /* LateToast.swift */; };
 		3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE6C7E231D425400757738 /* ImageManager.swift */; };
+		3FFF920C23619FEF00DAFDC8 /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF920B23619FEF00DAFDC8 /* CalendarDataSource.swift */; };
 		4EB40EEA651461F61D56892D /* libPods-VacationTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1ABE80DA0A182B9C0DCB8B /* libPods-VacationTodayExtension.a */; };
 		5D851EDD017821A440591557 /* libPods-Rolique.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A779A0A0D7DD594D321D1B /* libPods-Rolique.a */; };
 		B5D6C3022321449100929BFF /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6C3012321449100929BFF /* InteractiveImageView.swift */; };
@@ -254,6 +257,8 @@
 		3FC996112316819200C2554C /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		3FC996142316843700C2554C /* DopracToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DopracToast.swift; sourceTree = "<group>"; };
 		3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		3FEC8C5E2368748200D0754F /* AttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceManager.swift; sourceTree = "<group>"; };
+		3FEC8C60236875A400D0754F /* AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRecord.swift; sourceTree = "<group>"; };
 		3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
 		3FEE0E42233B8DFE004CD5C3 /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		3FEE1FDC2334C5FF0075DF32 /* TitledSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -279,6 +284,7 @@
 		3FFD3885231807B0006D5479 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		3FFD388A23180D67006D5479 /* LateToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateToast.swift; sourceTree = "<group>"; };
 		3FFE6C7E231D425400757738 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		3FFF920B23619FEF00DAFDC8 /* CalendarDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataSource.swift; sourceTree = "<group>"; };
 		474109BC49232293051563BE /* Pods-Utils.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		505892CA1A300F6330EFDEAD /* libPods-UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		553F0B5CFFFBAAEB8578AB2A /* Pods-VacationTodayExtension.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.stagingrelease.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -377,6 +383,7 @@
 				25535AD823014D2C00833A5B /* UserManager.swift */,
 				25535AD923014D2C00833A5B /* LoginManager.swift */,
 				25535ADA23014D2C00833A5B /* ActionManager.swift */,
+				3FEC8C5E2368748200D0754F /* AttendanceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -388,6 +395,7 @@
 				25535ADF23014D2C00833A5B /* User.swift */,
 				B5D6C3082321905400929BFF /* Bot.swift */,
 				25535AE023014D2C00833A5B /* Actions */,
+				3FEC8C60236875A400D0754F /* AttendanceRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -644,6 +652,7 @@
 				3FA3C0D3234366E900165B06 /* CalendarViewController.swift */,
 				3FA3C0D5234366FF00165B06 /* CalendarViewModel.swift */,
 				2D7628F9235F192700E1E846 /* CalendarCollectionViewFlowLayout.swift */,
+				3FFF920B23619FEF00DAFDC8 /* CalendarDataSource.swift */,
 				2D7628FB235F19C400E1E846 /* Cells */,
 			);
 			path = Calendar;
@@ -1173,6 +1182,7 @@
 				2D7628FD235F1B7300E1E846 /* WeekdayCollectionViewCell.swift in Sources */,
 				2D40DF2A233959DA001D647D /* Slackable.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
+				3FFF920C23619FEF00DAFDC8 /* CalendarDataSource.swift in Sources */,
 				3FA3C0D82343786C00165B06 /* ModalPresentationHandler.swift in Sources */,
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
 				3FFD388B23180D67006D5479 /* LateToast.swift in Sources */,
@@ -1189,6 +1199,7 @@
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
 				2D1450762338D6CC00358BD0 /* Callable.swift in Sources */,
 				3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */,
+				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
 				3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */,
@@ -1228,6 +1239,7 @@
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,
 				2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */,
 				25535B0923014D4F00833A5B /* LoginViewController.swift in Sources */,
+				3FEC8C61236875A400D0754F /* AttendanceRecord.swift in Sources */,
 				B5D6C3022321449100929BFF /* InteractiveImageView.swift in Sources */,
 				2D7628FF235F1B8400E1E846 /* DayCollectionViewCell.swift in Sources */,
 				25535AE623014D2C00833A5B /* ActionManager.swift in Sources */,
@@ -1570,6 +1582,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1580,6 +1593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique.VacationTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1593,6 +1607,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = VacationTodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

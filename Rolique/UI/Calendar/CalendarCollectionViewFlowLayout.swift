@@ -8,6 +8,13 @@
 
 import UIKit
 
+private struct Constants {
+  static var rectInsert: CGFloat { return 128.0 }
+  static var weekdayCellHeigth: CGFloat { return 20.0 }
+  static var dayCellHeigth: CGFloat { return 40.0 }
+  static var stickyRowWidth: CGFloat { return 60.0 }
+}
+
 final class CalendarCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   private var stickySectionsCount = 0
@@ -18,29 +25,30 @@ final class CalendarCollectionViewFlowLayout: UICollectionViewFlowLayout {
   private var currentIndex = 0
   private var previousContentOffset = CGPoint.zero
   
-  func configure(with stickySectionsCount: Int, stickyRowsCount: Int, defaultItemWidth: CGFloat, defaultItemHeight: CGFloat) {
+  func configure(stickySectionsCount: Int, stickyRowsCount: Int, defaultItemWidth: CGFloat, defaultItemHeight: CGFloat) {
     self.stickySectionsCount = stickySectionsCount
     self.stickyRowsCount = stickyRowsCount
     
     itemWidth = defaultItemWidth
     itemHeight = defaultItemHeight
     
+    self.minimumLineSpacing = 0.0
+    self.minimumInteritemSpacing = 0.0
+    
     invalidateLayout()
   }
   
   func updateItemWidth(width: CGFloat) {
     itemWidth = width
+    
     invalidateLayout()
   }
   
   func updateItemHeight(height: CGFloat) {
     itemHeight = height
+    
     invalidateLayout()
   }
-  
-  let weekdayItemHeight: CGFloat = 25.0
-  let stickySectionHeight: CGFloat = 40.0
-  let stickyRowWidth: CGFloat = 60.0
 
   // MARK: - Collection view flow layout methods
   
@@ -49,61 +57,68 @@ final class CalendarCollectionViewFlowLayout: UICollectionViewFlowLayout {
   }
 
   override var collectionViewContentSize: CGSize {
-    let contentWidth = CGFloat(rowsCount(in: 0) - stickyRowsCount) * itemWidth + CGFloat(stickyRowsCount) * stickyRowWidth
-    let contentHeight = CGFloat(sectionsCount - stickySectionsCount) * itemHeight + CGFloat(stickySectionsCount) * stickySectionHeight
+    let contentWidth = CGFloat(rowsCount(in: 0) - stickyRowsCount) * itemWidth + CGFloat(stickyRowsCount) * Constants.stickyRowWidth
+    let contentHeight = CGFloat(sectionsCount - stickySectionsCount) * itemHeight + Constants.weekdayCellHeigth + Constants.dayCellHeigth
     return CGSize(width: contentWidth, height: contentHeight)
   }
 
   override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-    let insertByDx: CGFloat = previousContentOffset.x != collectionView!.contentOffset.x ? -512 : 0
-    let insertByDy: CGFloat = previousContentOffset.y != collectionView!.contentOffset.y ? -512 : 0
-    previousContentOffset = collectionView!.contentOffset
+    let biggerRect = rect.insetBy(dx: -Constants.rectInsert, dy: -Constants.rectInsert)
     
-    let biggerRect = rect.insetBy(dx: insertByDx, dy: insertByDy)
-    
-    let withoutStickySectionsOriginY = biggerRect.origin.y - (CGFloat(stickySectionsCount) * stickySectionHeight)
+    let withoutStickySectionsOriginY = biggerRect.origin.y - (Constants.weekdayCellHeigth + Constants.dayCellHeigth)
     var startIndexY = Int(withoutStickySectionsOriginY / itemHeight)
     startIndexY = startIndexY > 0 ? startIndexY + stickySectionsCount : 0
     
-    let withoutStickyRowsOriginX = biggerRect.origin.x - (CGFloat(stickyRowsCount) * stickyRowWidth)
+    let withoutStickyRowsOriginX = biggerRect.origin.x - (CGFloat(stickyRowsCount) * Constants.stickyRowWidth)
     var startIndexX = Int(withoutStickyRowsOriginX / itemWidth)
     startIndexX = startIndexX > 0 ? startIndexX + stickyRowsCount : 0
     
-    let withoutStickySectionsHeight = biggerRect.height - (CGFloat(stickySectionsCount) * stickySectionHeight)
-    let numberOfVisibleCellsInRectY = Int((withoutStickySectionsHeight / itemHeight + CGFloat(stickySectionsCount)).rounded(.up)) + startIndexY
-    let withoutStickyRowsWidth = biggerRect.width - (CGFloat(stickyRowsCount) * stickyRowWidth)
-    let numberOfVisibleCellsInRectX = Int((withoutStickyRowsWidth / itemWidth + CGFloat(stickyRowsCount)).rounded(.up)) + startIndexX
+    let withoutStickySectionsHeight = biggerRect.height - (Constants.weekdayCellHeigth + Constants.dayCellHeigth)
+    var numberOfVisibleCellsInRectY = Int((withoutStickySectionsHeight / itemHeight + CGFloat(stickySectionsCount)).rounded(.up)) + startIndexY
+    
+    let withoutStickyRowsWidth = biggerRect.width - (CGFloat(stickyRowsCount) * Constants.stickyRowWidth)
+    var numberOfVisibleCellsInRectX = Int((withoutStickyRowsWidth / itemWidth + CGFloat(stickyRowsCount)).rounded(.up)) + startIndexX
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
     
-    for section in startIndexY..<numberOfVisibleCellsInRectY where section >= 0 && section < sectionsCount {
-      for item in startIndexX..<numberOfVisibleCellsInRectX where item >= 0 && item < rowsCount(in: 0) {
+    var section = startIndexY <= 0 ? 0 : startIndexY
+    numberOfVisibleCellsInRectY = numberOfVisibleCellsInRectY > sectionsCount ? sectionsCount : numberOfVisibleCellsInRectY
+    
+    var item = startIndexX <= 0 ? 0 : startIndexX
+    numberOfVisibleCellsInRectX = numberOfVisibleCellsInRectX > rowsCount(in: 0) ? rowsCount(in: 0) : numberOfVisibleCellsInRectX
+    
+    while section < numberOfVisibleCellsInRectY {
+      item = startIndexX
+      while item < numberOfVisibleCellsInRectX {
         if startIndexY >= stickySectionsCount && startIndexX >= stickyRowsCount {
           let cellIndex = IndexPath(item: item - startIndexX, section: section - startIndexY)
           if let attrs = self.layoutAttributesForItem(at: cellIndex) {
             layoutAttributes.append(attrs)
           }
         }
-        
+
         if startIndexY >= stickySectionsCount {
           let cellIndex = IndexPath(item: item, section: section - startIndexY)
           if let attrs = self.layoutAttributesForItem(at: cellIndex) {
             layoutAttributes.append(attrs)
           }
         }
-        
+
         if startIndexX >= stickyRowsCount {
           let cellIndex = IndexPath(item: item - startIndexX, section: section)
           if let attrs = self.layoutAttributesForItem(at: cellIndex) {
             layoutAttributes.append(attrs)
           }
         }
-        
+
         let cellIndex = IndexPath(item: item, section: section)
         if let attrs = self.layoutAttributesForItem(at: cellIndex) {
           layoutAttributes.append(attrs)
         }
+        
+        item += 1
       }
+      section += 1
     }
     
     return layoutAttributes
@@ -113,21 +128,24 @@ final class CalendarCollectionViewFlowLayout: UICollectionViewFlowLayout {
     let width: CGFloat
     let xPos: CGFloat
     if indexPath.row < stickyRowsCount {
-      width = stickyRowWidth
+      width = Constants.stickyRowWidth
       xPos = CGFloat(indexPath.row) * width
     } else {
       width = itemWidth
-      xPos = CGFloat(indexPath.row - stickyRowsCount) * width + CGFloat(stickyRowsCount) * stickyRowWidth
+      xPos = CGFloat(indexPath.row - stickyRowsCount) * width + CGFloat(stickyRowsCount) * Constants.stickyRowWidth
     }
     
     let height: CGFloat
     let yPos: CGFloat
-    if indexPath.section < stickySectionsCount {
-      height = stickySectionHeight
+    if indexPath.section < stickySectionsCount - 1 {
+      height = Constants.weekdayCellHeigth
       yPos = CGFloat(indexPath.section) * height
+    } else if indexPath.section < stickySectionsCount {
+      height = Constants.dayCellHeigth
+      yPos = CGFloat(indexPath.section - 1) * height + Constants.weekdayCellHeigth
     } else {
       height = itemHeight
-      yPos = CGFloat(indexPath.section - stickySectionsCount) * height + CGFloat(stickySectionsCount) * stickySectionHeight
+      yPos = CGFloat(indexPath.section - stickySectionsCount) * height + Constants.weekdayCellHeigth + Constants.dayCellHeigth
     }
     
     let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)

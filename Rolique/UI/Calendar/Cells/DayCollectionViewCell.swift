@@ -13,11 +13,14 @@ import Utils
 private struct Constants {
   static var separatorHeight: CGFloat { return 15 }
   static var separatorWidth: CGFloat { return 1.0 }
+  static var littleOffset: CGFloat { return 6.0 }
 }
 
 final class DayCollectionViewCell: UICollectionViewCell {
   private lazy var dayLabel = UILabel()
   private lazy var separator = UIView()
+  private lazy var selectView = UIView()
+  private var selectViewSizeConstraint: Constraint?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -30,6 +33,8 @@ final class DayCollectionViewCell: UICollectionViewCell {
     
     separator.backgroundColor = Colors.separatorColor
     
+    selectView.backgroundColor = Colors.Colleagues.lightBlue
+    
     configureViews()
   }
   
@@ -38,12 +43,25 @@ final class DayCollectionViewCell: UICollectionViewCell {
   }
   
   func configure(with weekday: String, isPastDay: Bool, isToday: Bool) {
+    addShadow()
+    
+    let size = frame.height > frame.width ? frame.width - Constants.littleOffset : frame.height - Constants.littleOffset
+    selectView.roundCorner(radius: size / 2)
+    selectViewSizeConstraint?.update(offset: size)
+    selectView.isHidden = !isToday
+    
     dayLabel.text = weekday
-    dayLabel.textColor = isPastDay ? Colors.secondaryTextColor : isToday ? Colors.Colleagues.lightBlue : Colors.mainTextColor
+    dayLabel.textColor = isPastDay ? Colors.secondaryTextColor : isToday ? .white : Colors.mainTextColor
   }
   
   private func configureViews() {
-    [dayLabel, separator].forEach(self.addSubviewAndDisableMaskTranslate)
+    [selectView, dayLabel, separator].forEach(self.addSubviewAndDisableMaskTranslate)
+    
+    let size = frame.height > frame.width ? frame.width - Constants.littleOffset : frame.height - Constants.littleOffset
+    selectView.snp.makeConstraints { maker in
+      maker.center.equalToSuperview()
+      selectViewSizeConstraint = maker.size.equalTo(size).constraint
+    }
     
     dayLabel.snp.makeConstraints { maker in
       maker.edges.equalToSuperview()
@@ -60,5 +78,32 @@ final class DayCollectionViewCell: UICollectionViewCell {
     super.prepareForReuse()
     
     dayLabel.text = nil
+    deleteShadow()
+  }
+  
+  private func addShadow() {
+    let shadowHeight: CGFloat = 3.0
+    let shadowRadius: CGFloat = 3.0
+    let width = frame.width
+    let height = frame.height
+    
+    let shadowPath = UIBezierPath()
+    shadowPath.move(to: CGPoint(x: 0, y: height))
+    shadowPath.addLine(to: CGPoint(x: width, y: height))
+    shadowPath.addLine(to: CGPoint(x: width, y: height + shadowHeight))
+    shadowPath.addLine(to: CGPoint(x: 0, y: height + shadowHeight))
+    
+    layer.shadowPath = shadowPath.cgPath
+    layer.shadowRadius = shadowRadius
+    layer.shadowOffset = .zero
+    layer.shadowOpacity = 0.5
+    layer.shadowColor = Colors.shadowColor
+  }
+  
+  func deleteShadow() {
+    layer.shadowPath = nil
+    layer.shadowRadius = .zero
+    layer.shadowOffset = .zero
+    layer.shadowOpacity = .zero
   }
 }

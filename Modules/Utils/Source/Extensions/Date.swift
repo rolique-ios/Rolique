@@ -25,6 +25,16 @@ public extension Date {
         return date
     }
     
+    var utc: Date {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        let components = calendar.dateComponents([.day, .month, .year], from: self)
+        let date = calendar.date(from: components)!
+
+        return date
+    }
+    
     var sundayOfWeek: Date {
         let calendar = Calendar.current
         

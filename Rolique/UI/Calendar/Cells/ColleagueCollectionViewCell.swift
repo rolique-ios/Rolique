@@ -11,9 +11,9 @@ import SnapKit
 import Utils
 
 private struct Constants {
-  static var userImageSize: CGFloat { return 56 }
-  static var littleOffset: CGFloat { return 2 }
-  static var separatorWidth: CGFloat { return 10 }
+  static var userImageSize: CGFloat { return 52.0 }
+  static var littleOffset: CGFloat { return 4.0 }
+  static var separatorWidth: CGFloat { return 10.0 }
   static var separatorHeight: CGFloat { return 1.0 }
 }
 
@@ -28,6 +28,7 @@ final class ColleagueCollectionViewCell: UICollectionViewCell {
     self.backgroundColor = Colors.secondaryBackgroundColor
     
     nameLabel.textColor = Colors.mainTextColor
+    nameLabel.font = UIFont.systemFont(ofSize: 13.0)
     nameLabel.adjustsFontSizeToFitWidth = true
     nameLabel.textAlignment = .center
     

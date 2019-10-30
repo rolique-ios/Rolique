@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TimeInterval {
+public extension TimeInterval {
     static var minute: TimeInterval {
         return 60
     }
@@ -23,6 +23,10 @@ extension TimeInterval {
     
     static var week: TimeInterval {
         return day * 7
+    }
+    
+    static var month: TimeInterval {
+        return week * 5
     }
     
     static var notLeapYear: TimeInterval {
