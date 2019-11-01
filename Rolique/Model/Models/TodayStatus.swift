@@ -10,8 +10,7 @@ import Foundation
 import UsersWidget
 import CoreData
 
-public final class TodayStatusDate: Codable {
-  
+public final class TodayStatusDate {
   public var date: Date
   public var todayStatuses: [String: String]
   
@@ -20,12 +19,11 @@ public final class TodayStatusDate: Codable {
     self.todayStatuses = todayStatuses
   }
   
-  init?(_ managedObject: ManagedTodayStatusDate, context: NSManagedObjectContext? = nil) {
+  convenience init?(_ managedObject: ManagedTodayStatusDate, context: NSManagedObjectContext? = nil) {
     guard let date = managedObject.date,
       let statuses = managedObject.statuses else { return nil }
     
-    self.date = date
-    self.todayStatuses = [:]
+    var todayStatuses = [String: String]()
     for status in statuses {
       guard let status = status as? ManagedTodayStatus,
         let userId = status.userId,
@@ -35,6 +33,8 @@ public final class TodayStatusDate: Codable {
       
       todayStatuses[userId] = todayStatus.status
     }
+    
+    self.init(date: date, todayStatuses: todayStatuses)
   }
 
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
@@ -49,8 +49,7 @@ public final class TodayStatusDate: Codable {
   }
 }
 
-public final class TodayStatus: Codable {
-  
+public final class TodayStatus {
   public var status: String
   public var userId: String
   
@@ -59,12 +58,11 @@ public final class TodayStatus: Codable {
     self.userId = userId
   }
   
-  init?(_ managedObject: ManagedTodayStatus, context: NSManagedObjectContext? = nil) {
+  convenience init?(_ managedObject: ManagedTodayStatus, context: NSManagedObjectContext? = nil) {
     guard let status = managedObject.status,
       let userId = managedObject.userId else { return nil }
 
-    self.status = status
-    self.userId = userId
+    self.init(status: status, userId: userId)
   }
 
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
@@ -80,8 +78,6 @@ public final class TodayStatus: Codable {
 }
 
 // MARK: - Managed
-
-
 extension TodayStatusDate: CoreDataCompatible {
   typealias ManagedType = ManagedTodayStatusDate
   

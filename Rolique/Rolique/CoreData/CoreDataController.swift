@@ -109,18 +109,12 @@ final class CoreDataManager<R: CoreDataCompatible> {
     _ = diff.inserted.map { $0.createOrUpdate(with: context) }
     
     context.performAndWait {
-      for object in diff.removed {
-        context.delete(object)
-      }
+      diff.removed.forEach(context.delete(_:))
     }
     
     diff.common.forEach { $0.1.createOrUpdate(with: context) }
     
-    do {
-      try self.saveToCoreData(with: context)
-    } catch {
-      print(error.localizedDescription)
-    }
+    try? self.saveToCoreData(with: context)
   }
 }
 

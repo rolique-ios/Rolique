@@ -14,6 +14,19 @@ private struct Constants {
   static var cacheCountLimit: Int { return 1000 } // arbitrary count
 }
 
+enum ImageManagerError: LocalizedError {
+  case imageNotFound
+}
+
+extension ImageManagerError {
+  var errorDescription: String? {
+    switch self {
+    case .imageNotFound:
+      return "Image not found"
+    }
+  }
+}
+
 final class ImageManager {
   private lazy var cache: NSCache<NSURL, UIImage> = {
     let cache = NSCache<NSURL, UIImage>()
@@ -42,12 +55,16 @@ final class ImageManager {
     return URL(fileURLWithPath: documentDirectoryURL.path + "/Images")
   }
   
-  func getImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
+  func getImage(with url: URL, completion: @escaping (Result<UIImage?, ImageManagerError>) -> Void) {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard let self = self else { return }
-      if let image = self.lock.do({ [weak self] in self?.dataInCache(forKey: url) }) {
+      
+      let image = self.lock
+        .do({ [weak self] in self?.dataInCache(forKey: url) })
+
+      if let unwrappedImage = image {
         DispatchQueue.main.async {
-          completion(image)
+          completion(.success(unwrappedImage))
         }
         
         return
@@ -55,11 +72,13 @@ final class ImageManager {
       
       self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
       self.fileManager
-        .contents(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url)).flatMap { [weak self] data in
+        .contents(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url))
+        .flatMap { [weak self] data in
           let image = self?.convertDataIntoImage(data: data)
-          self?.lock.do { [weak self] in self?.saveInCache(image: image, forKey: url) }
+          self?.lock
+            .do { [weak self] in self?.saveInCache(image: image, forKey: url) }
           DispatchQueue.main.async {
-            completion(image)
+            image == nil ? completion(.failure(.imageNotFound)) : completion(.success(image))
           }
       }
     }
@@ -68,12 +87,15 @@ final class ImageManager {
   func saveImage(data: Data, forURL url: URL) {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard let self = self else { return }
-      self.lock.do({ [weak self] in self?.saveInCache(image: self?.convertDataIntoImage(data: data), forKey: url) })
+      
+      self.lock
+        .do({ [weak self] in self?.saveInCache(image: self?.convertDataIntoImage(data: data), forKey: url) })
       
       self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
-      self.fileManager.createFile(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url),
-                                  contents: data,
-                                  attributes: nil)
+      self.fileManager
+        .createFile(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url),
+                    contents: data,
+                    attributes: nil)
     }
   }
   
@@ -145,30 +167,32 @@ extension UIImageView {
   }
   
   func setImage(with url: URL) {
-    ImageManager.shared.getImage(with: url) { [weak self] image in
-      if let cachedImage = image {
-        self?.image = cachedImage
-        return
-      }
-    }
-    
-    self.currentURL = url
-    
-    let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-      guard let data = data, let downloadedImage = UIImage(data: data, scale: UIScreen.main.scale) else {
-        return
-      }
+    ImageManager.shared.getImage(with: url) { [weak self] result in
+      guard let self = self else { return }
       
-      ImageManager.shared.saveImage(data: data, forURL: url)
-      
-      if url == self?.currentURL {
-        DispatchQueue.main.async {
-          self?.image = downloadedImage
+      switch result {
+      case .success(let cachedImage):
+        self.image = cachedImage
+      case .failure:
+        self.currentURL = url
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+          guard let data = data, let downloadedImage = UIImage(data: data, scale: UIScreen.main.scale) else {
+            return
+          }
+          
+          ImageManager.shared.saveImage(data: data, forURL: url)
+          
+          if url == self?.currentURL {
+            DispatchQueue.main.async {
+              self?.image = downloadedImage
+            }
+          }
         }
+        
+        self.currentTask = task
+        task.resume()
       }
     }
-    
-    self.currentTask = task
-    task.resume()
   }
 }
