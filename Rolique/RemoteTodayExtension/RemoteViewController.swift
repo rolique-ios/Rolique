@@ -11,17 +11,21 @@ import NotificationCenter
 import UsersWidget
 import Utils
 
-
-
 final class RemoteViewController: UsersViewController {
-  private let userManager: UserManager = UserManagerImpl()
+  private let remoteUserService: UserService = RemoteUserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
   
   override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
-    self.userManager.getTodayUsersForRecordType(.remote) { result in
-      guard !result.isFailure else { return }
-      (result.value?
-        .map { AnyUserable($0) })
-        .map(usersCompletion)
-    }
+    self.remoteUserService.getTodayUsersForRecordType(.remote, onLocal: { [weak self] result in
+      self?.handleResult(result: result, usersCompletion: usersCompletion)
+    }, onFetch: { [weak self] result in
+      self?.handleResult(result: result, usersCompletion: usersCompletion)
+    })
+  }
+  
+  private func handleResult(result: Result<[User], Error>, usersCompletion: @escaping (([AnyUserable]) -> Void)) {
+    guard !result.isFailure else { return }
+    (result.value?
+      .map { AnyUserable($0) })
+      .map(usersCompletion)
   }
 }

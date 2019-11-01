@@ -71,9 +71,13 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   }
   
   func sort(_ recordType: RecordType) {
-    userService.getTodayUsersForRecordType(recordType) { [weak self] result in
-      self?.handleResult(.filtered, result: result)
-    }
+    userService.getTodayUsersForRecordType(
+      recordType,
+      onLocal: { [weak self] result in
+        self?.handleResult(.filtered, result: result)
+      }, onFetch: { [weak self] result in
+        self?.handleResult(.filtered, result: result)
+    })
   }
   
   func searchUser(with text: String) {

@@ -14,10 +14,10 @@ public protocol UserService {
   func getAwayUsers(onFetch: ((Result<[User], Error>) -> Void)?)
   func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?)
   func getUserWithId(_ userId: String, onLocal: ((Result<User, Error>) -> Void)?, onFetch: ((Result<User, Error>) -> Void)?)
-  func getTodayUsersForRecordType(_ recordType: RecordType, onFetch: ((Result<[User], Error>) -> Void)?)
+  func getTodayUsersForRecordType(_ recordType: RecordType, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?)
 }
 
-final class UserServiceImpl: UserService {
+class UserServiceImpl: UserService {
   let userManager: UserManager
   let coreDataManager: CoreDataManager<User>
   init(userManager: UserManager, coreDataManager: CoreDataManager<User>) {
@@ -38,21 +38,33 @@ final class UserServiceImpl: UserService {
   
   func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
     let context = CoreDataController.shared.backgroundContext()
+    var mos = [User.ManagedType]()
     do {
-      let mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors, context: context)
+      mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors, context: context)
       let users = mos.compactMap { User($0) }
       onLocal?(.success(users))
     } catch {
       onLocal?(.failure(error))
     }
-
     
     userManager.getAllUsers { [weak self] usersResult in
       switch usersResult {
-      case .success(let array):
-        self?.coreDataManager.clearCoreData()
-        self?.coreDataManager.saveToCoreData(array, context: context)
-        onFetch?(.success(array))
+      case .success(let users):
+        DispatchQueue.global(qos: .userInteractive).async {
+          let today = Date().normalized
+          let todayStatusDate = TodayStatusDate(date: today, todayStatuses: [:]).createOrUpdate(with: context)
+          
+          for user in users {
+            guard let status = TodayStatus(status: user.todayStatus.orEmpty, userId: user.id).createOrUpdate(with: context) else {
+              continue
+            }
+            
+            todayStatusDate?.addToStatuses(status)
+          }
+          
+          self?.coreDataManager.saveToCoreDateWithoutMismatch(mos, objects: users, context: context)
+        }
+        onFetch?(.success(users))
       case .failure(let error):
         onFetch?(.failure(error))
       }
@@ -82,10 +94,28 @@ final class UserServiceImpl: UserService {
     }
   }
   
-  func getTodayUsersForRecordType(_ recordType: RecordType, onFetch: ((Result<[User], Error>) -> Void)?) {
-    userManager.getTodayUsersForRecordType(recordType) { usersResult in
+  func getTodayUsersForRecordType(_ recordType: RecordType, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
+    let context = CoreDataController.shared.backgroundContext()
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
+      
+      do {
+        let moUsers = try self.coreDataManager.getManagedObjects(context: context)
+        let filteredUsers = moUsers.compactMap { User($0) }.filter { $0.todayStatus == recordType.rawValue }
+        DispatchQueue.main.async {
+          onLocal?(.success(filteredUsers))
+        }
+      } catch {
+        DispatchQueue.main.async {
+          onLocal?(.failure(error))
+        }
+      }
+    }
+
+    userManager.getTodayUsersForRecordType(recordType) { [weak self] usersResult in
       switch usersResult {
       case .success(let array):
+        self?.coreDataManager.saveToCoreData(array, context: context)
         onFetch?(.success(array))
       case .failure(let error):
         onFetch?(.failure(error))

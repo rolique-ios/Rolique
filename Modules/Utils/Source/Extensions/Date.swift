@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Date {
+public extension Date {
     var mondayOfWeek: Date {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
