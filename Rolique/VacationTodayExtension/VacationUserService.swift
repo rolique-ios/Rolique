@@ -36,7 +36,7 @@ final class VacationUserServiceImpl: UserServiceImpl {
     let currentDate = Date()
     let lowerBound = calendar.date(bySettingHour: Constants.lowerBoundHour, minute: 00, second: 0, of: currentDate).orCurrent
     let upperBound = calendar.date(bySettingHour: Constants.upperBoundHour, minute: 00, second: 0, of: currentDate).orCurrent
-
+    
     guard currentDate > lowerBound && currentDate < upperBound else { return }
 
     userManager.getTodayUsersForRecordType(recordType) { [weak self] usersResult in
