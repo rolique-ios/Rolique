@@ -10,13 +10,13 @@ import Foundation
 import Networking
 
 public protocol AttendanceManager {
-  func getAttandancy(startDate: Date, endDate: Date, limit: Int?, offset: Int?, result: ((Result<[AttendanceRecord], Error>) -> Void)?)
+  func getAttandance(startDate: Date, endDate: Date, limit: Int?, offset: Int?, result: ((Result<[AttendanceRecord], Error>) -> Void)?)
 }
 
 public final class AttendanceManagerImpl: AttendanceManager {
   public init() {}
   
-  public func getAttandancy(startDate: Date, endDate: Date, limit: Int? = nil, offset: Int? = nil, result: ((Result<[AttendanceRecord], Error>) -> Void)?) {
+  public func getAttandance(startDate: Date, endDate: Date, limit: Int? = nil, offset: Int? = nil, result: ((Result<[AttendanceRecord], Error>) -> Void)?) {
     Net.Worker.request(GetAttendance(startDate: startDate, endDate: endDate, limit: limit, offset: offset), onSuccess: { json in
       DispatchQueue.main.async {
         let array: [AttendanceRecord]? = json.buildArray()

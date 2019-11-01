@@ -10,7 +10,6 @@ import Foundation
 
 public final class GetAttendance: Route {
   public init(startDate: Date, endDate: Date, limit: Int? = nil, offset: Int? = nil) {
-    print(startDate)
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY-MM-dd"
     let startDate = dateFormatter.string(from: startDate)

@@ -12,14 +12,20 @@ protocol CalendarViewModel: ViewModel {
   var users: [User] { get }
   var startDate: Date { get }
   var endDate: Date { get }
-  var events: [Date: [String: [RecordType]]] { get }
+  var events: [Date: [String: [SequentialRecordType]]] { get }
   var onUsersSuccess: (([User]) -> Void)? { get set }
-  var onEventsSuccess: (([Date: [String: [RecordType]]]) -> Void)? { get set }
+  var onEventsSuccess: (([Date: [String: [SequentialRecordType]]]) -> Void)? { get set }
   var onError: ((String) -> Void)? { get set }
   var onUpdateDates: ((Date, Date) -> Void)? { get set }
   
   func getUsers()
   func getMoreEvents(direction: Direction)
+}
+
+struct SequentialRecordType {
+  let current: Int
+  let type: RecordType
+  let total: Int
 }
 
 final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
@@ -28,12 +34,12 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
   
   var users: [User] = []
   var onUsersSuccess: (([User]) -> Void)?
-  var onEventsSuccess: (([Date: [String: [RecordType]]]) -> Void)?
+  var onEventsSuccess: (([Date: [String: [SequentialRecordType]]]) -> Void)?
   var onError: ((String) -> Void)?
   
   var startDate: Date
   var endDate: Date
-  var events = [Date: [String: [RecordType]]]()
+  var events = [Date: [String: [SequentialRecordType]]]()
   var onUpdateDates: ((Date, Date) -> Void)?
   
   private let threeMonth = TimeInterval.month * 3
@@ -41,9 +47,9 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
   init(userService: UserService, attendanceManager: AttendanceManager) {
     self.userService = userService
     self.attendanceManager =  attendanceManager
-    let mondayOfWeek = Date().mondayOfWeek.utc
-    startDate = Date(timeInterval: -threeMonth, since: mondayOfWeek).utc
-    endDate = Date(timeInterval: threeMonth, since: mondayOfWeek).utc
+    let mondayOfWeek = Date().mondayOfWeekUtc
+    startDate = Date(timeInterval: -threeMonth, since: mondayOfWeek)
+    endDate = Date(timeInterval: threeMonth, since: mondayOfWeek)
   }
   
   func getMoreEvents(direction: Direction) {
@@ -68,7 +74,7 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
   }
   
   private func getEvents(startDate: Date, endDate: Date) {
-    attendanceManager.getAttandancy(startDate: startDate, endDate: endDate,
+    attendanceManager.getAttandance(startDate: startDate, endDate: endDate,
                                     limit: nil, offset: nil,
                                     result: handleEventsResult(result:))
   }
@@ -90,19 +96,23 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
       DispatchQueue.global(qos: .userInteractive).async { [weak self] in
         guard let self = self else { return }
         
-        let calendar = Calendar.current
+        let calendar = Calendar.utc
         for attendance in attendanceRecords {
-          var startDate = attendance.startDate.utc
+          var startDate = attendance.startDate
+          
+          let total = Int(attendance.endDate.timeIntervalSince(attendance.startDate) / TimeInterval.day) + 1
           while startDate <= attendance.endDate {
             if let recordType = RecordType(rawValue: attendance.type) {
+              let current = Int(startDate.timeIntervalSince(attendance.startDate) / TimeInterval.day) + 1
+              let sRecordType = SequentialRecordType(current: current, type: recordType, total: total)
               if self.events[startDate] != nil {
                 if self.events[startDate]![attendance.userSlackId] != nil {
-                  self.events[startDate]![attendance.userSlackId]!.append(recordType)
+                  self.events[startDate]![attendance.userSlackId]!.append(sRecordType)
                 } else {
-                  self.events[startDate]![attendance.userSlackId] = [recordType]
+                  self.events[startDate]![attendance.userSlackId] = [sRecordType]
                 }
               } else {
-                self.events[startDate] = [attendance.userSlackId: [recordType]]
+                self.events[startDate] = [attendance.userSlackId: [sRecordType]]
               }
             }
             

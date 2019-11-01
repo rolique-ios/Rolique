@@ -25,6 +25,16 @@ public extension Date {
         return date
     }
     
+    var mondayOfWeekUtc: Date {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        components.weekday = 2
+
+        return calendar.date(from: components)!
+    }
+    
     var utc: Date {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(abbreviation: "UTC")!

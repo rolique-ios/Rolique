@@ -43,7 +43,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with recordTypes: [RecordType]?, isTop: Bool, isRight: Bool) {
+  func configure(with recordTypes: [SequentialRecordType]?, isTop: Bool, isRight: Bool) {
     for recordType in recordTypes ?? [] {
       let label = UILabel()
       label.textColor = .orange
@@ -51,7 +51,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
       label.layer.borderColor = UIColor.orange.cgColor
       label.layer.cornerRadius = 4
       
-      label.text = " " + recordType.desctiption + " "
+      label.text = recordType.total > 1 ? "\(recordType.current) / \(recordType.total)" + recordType.type.desctiption : recordType.type.desctiption
       label.textAlignment = .left
       label.numberOfLines = 0
       label.font = .systemFont(ofSize: 16.0)

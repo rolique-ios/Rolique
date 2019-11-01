@@ -31,25 +31,25 @@ final class CalendarDataSouce: NSObject, UICollectionViewDataSource, UICollectio
   private var users: [User]
   private var startDate: Date
   private var endDate: Date
-  private var events: [Date: [String: [RecordType]]]
+  private var events: [Date: [String: [SequentialRecordType]]]
   // devisible by 7 days + 1
   private var numberOfRows = 0
   private var contentOffsetX: CGFloat = 0
   private var currentIndex = 0
-  private let currentWeekMonday = Date().mondayOfWeek.utc
+  private let currentWeekMonday = Date().mondayOfWeekUtc
   private let dateFormatter = DateFormatter()
   private let today = Date().utc
   var onMonthUpdate: ((String) -> Void)?
   var getMoreEvents: ((Direction) -> Void)?
   
-  init(calendarCollectionView: UICollectionView, calendarLayout: CalendarCollectionViewFlowLayout, users: [User], startDate: Date, endDate: Date, events: [Date: [String: [RecordType]]]) {
+  init(calendarCollectionView: UICollectionView, calendarLayout: CalendarCollectionViewFlowLayout, users: [User], startDate: Date, endDate: Date, events: [Date: [String: [SequentialRecordType]]]) {
     self.calendarCollectionView = calendarCollectionView
     self.calendarLayout = calendarLayout
     self.users = users
     self.startDate = startDate
     self.endDate = endDate
     self.events = events
-    let calendar = Calendar.current
+    let calendar = Calendar.utc
     let startDate = Date(timeIntervalSince1970: 0)
     let components = calendar.dateComponents([.weekOfYear], from: startDate, to: today)
     numberOfRows = components.weekOfYear.orZero * Constants.pageItems * 2 + Constants.stickyRowsCount
@@ -83,7 +83,7 @@ final class CalendarDataSouce: NSObject, UICollectionViewDataSource, UICollectio
     self.calendarCollectionView.reloadData()
   }
   
-  func update(events: [Date: [String: [RecordType]]]) {
+  func update(events: [Date: [String: [SequentialRecordType]]]) {
     self.events = events
     self.calendarCollectionView.reloadData()
   }
@@ -137,8 +137,8 @@ final class CalendarDataSouce: NSObject, UICollectionViewDataSource, UICollectio
     let currentMondayIndex = numberOfRows / 2
     let value = (indexPath.row - 1) - currentMondayIndex
     
-    let calendar = Calendar.current
-    let date = calendar.date(byAdding: .day, value: value, to: currentWeekMonday)!.utc
+    var calendar = Calendar.utc
+    let date = calendar.date(byAdding: .day, value: value, to: currentWeekMonday)!
     let isPastDay = date < today
     let isToday = today == date
     
@@ -180,7 +180,7 @@ final class CalendarDataSouce: NSObject, UICollectionViewDataSource, UICollectio
     
     let value = Int((scrollView.contentOffset.x / itemWidth).rounded(.toNearestOrEven)) - numberOfRows / 2
     
-    let calendar = Calendar.current
+    let calendar = Calendar.utc
     let date = calendar.date(byAdding: .day, value: value, to: currentWeekMonday)!
     let components = calendar.dateComponents([.month, .year], from: date)
     let currentMondayComponents = calendar.dateComponents([.year], from: currentWeekMonday)
@@ -218,7 +218,7 @@ final class CalendarDataSouce: NSObject, UICollectionViewDataSource, UICollectio
     
     let currentMondayIndex = (numberOfRows - 1) / 2
     let value = currentIndex * Constants.pageItems - currentMondayIndex
-    let calendar = Calendar.current
+    let calendar = Calendar.utc
     let date = calendar.date(byAdding: .day, value: value, to: currentWeekMonday)!
     if contentOffsetX > offset.x {
       let bound = calendar.date(byAdding: .day, value: -Constants.pageItems, to: date)?.utc
