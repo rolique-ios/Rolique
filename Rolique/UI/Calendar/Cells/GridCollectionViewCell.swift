@@ -11,7 +11,10 @@ import SnapKit
 import Utils
 
 private struct Constants {
+  static var littleOffset: CGFloat { return 2.0 }
   static var separatorHeightWidth: CGFloat { return 1.0 }
+  static var labelInsets: UIEdgeInsets { return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) }
+  static var separatorHeightOffset: CGFloat { return 500 }
 }
 
 final class GridCollectionViewCell: UICollectionViewCell {
@@ -19,7 +22,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
   private lazy var leftSeparator = UIView()
   private lazy var rightSeparator = UIView()
   private lazy var bottomSeparator = UIView()
-  private lazy var stackView = UIStackView()
+  private lazy var statusLabel = LabelWithInsets(insets: Constants.labelInsets)
   private var leftSeparatorHeightConstraint: Constraint?
   
   override init(frame: CGRect) {
@@ -27,14 +30,15 @@ final class GridCollectionViewCell: UICollectionViewCell {
     
     self.backgroundColor = Colors.secondaryBackgroundColor
     
-    stackView.axis = .vertical
-    stackView.distribution = .equalSpacing
-    stackView.spacing = 2.0
+    statusLabel.textAlignment = .center
+    statusLabel.font = .systemFont(ofSize: 20.0)
+    statusLabel.adjustsFontSizeToFitWidth = true
+    statusLabel.textColor = .white
+    statusLabel.roundCorner(radius: 5.0)
     
-    topSeparator.backgroundColor = Colors.separatorColor
-    leftSeparator.backgroundColor = Colors.separatorColor
-    rightSeparator.backgroundColor = Colors.separatorColor
-    bottomSeparator.backgroundColor = Colors.separatorColor
+    for separator in [topSeparator, leftSeparator, rightSeparator, bottomSeparator] {
+      separator.backgroundColor = Colors.separatorColor
+    }
     
     configureViews()
   }
@@ -44,25 +48,14 @@ final class GridCollectionViewCell: UICollectionViewCell {
   }
   
   func configure(with recordTypes: [SequentialRecordType]?, isTop: Bool, isRight: Bool) {
-    for recordType in recordTypes ?? [] {
-      let label = UILabel()
-      label.textColor = .orange
-      label.layer.borderWidth = 1.0
-      label.layer.borderColor = UIColor.orange.cgColor
-      label.layer.cornerRadius = 4
-      
-      label.text = recordType.total > 1 ? "\(recordType.current) / \(recordType.total)" + recordType.type.desctiption : recordType.type.desctiption
-      label.textAlignment = .left
-      label.numberOfLines = 0
-      label.font = .systemFont(ofSize: 16.0)
-      label.adjustsFontSizeToFitWidth = true
-      label.minimumScaleFactor = 8.0 / 16.0
-      stackView.addArrangedSubview(label)
-    }
+    let text = recordTypes?.compactMap { $0.total > 1 ? "\($0.current)/\($0.total)" + " " + $0.type.abbreviation.0 : $0.type.abbreviation.0 }.joined(separator: "\n")
+    statusLabel.backgroundColor = recordTypes?.first?.type.abbreviation.1 ?? .clear
+    statusLabel.numberOfLines = recordTypes?.count ?? 0 > 1 ? recordTypes!.count : 1
+    statusLabel.text = text
     
     if isTop {
       configureTopSeparator()
-      leftSeparatorHeightConstraint?.update(offset: 400)
+      leftSeparatorHeightConstraint?.update(offset: Constants.separatorHeightOffset)
     } else {
       leftSeparatorHeightConstraint?.update(offset: 0)
     }
@@ -91,10 +84,10 @@ final class GridCollectionViewCell: UICollectionViewCell {
   }
   
   private func configureViews() {
-    [stackView, leftSeparator, bottomSeparator].forEach(self.addSubviewAndDisableMaskTranslate)
+    [leftSeparator, bottomSeparator, statusLabel].forEach(self.addSubviewAndDisableMaskTranslate)
     
-    stackView.snp.makeConstraints { maker in
-      maker.edges.equalToSuperview()
+    statusLabel.snp.makeConstraints { maker in
+      maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 2))
     }
     
     leftSeparator.snp.makeConstraints { maker in
@@ -112,7 +105,6 @@ final class GridCollectionViewCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     topSeparator.removeFromSuperview()
     rightSeparator.removeFromSuperview()
   }

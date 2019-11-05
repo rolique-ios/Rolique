@@ -43,8 +43,6 @@ final class DayCollectionViewCell: UICollectionViewCell {
   }
   
   func configure(with weekday: String, isPastDay: Bool, isToday: Bool) {
-    addShadow()
-    
     let size = frame.height > frame.width ? frame.width - Constants.littleOffset : frame.height - Constants.littleOffset
     selectView.roundCorner(radius: size / 2)
     selectViewSizeConstraint?.update(offset: size)
@@ -78,32 +76,5 @@ final class DayCollectionViewCell: UICollectionViewCell {
     super.prepareForReuse()
     
     dayLabel.text = nil
-    deleteShadow()
-  }
-  
-  private func addShadow() {
-    let shadowHeight: CGFloat = 3.0
-    let shadowRadius: CGFloat = 3.0
-    let width = frame.width
-    let height = frame.height
-    
-    let shadowPath = UIBezierPath()
-    shadowPath.move(to: CGPoint(x: 0, y: height))
-    shadowPath.addLine(to: CGPoint(x: width, y: height))
-    shadowPath.addLine(to: CGPoint(x: width, y: height + shadowHeight))
-    shadowPath.addLine(to: CGPoint(x: 0, y: height + shadowHeight))
-    
-    layer.shadowPath = shadowPath.cgPath
-    layer.shadowRadius = shadowRadius
-    layer.shadowOffset = .zero
-    layer.shadowOpacity = 0.5
-    layer.shadowColor = Colors.shadowColor
-  }
-  
-  func deleteShadow() {
-    layer.shadowPath = nil
-    layer.shadowRadius = .zero
-    layer.shadowOffset = .zero
-    layer.shadowOpacity = .zero
   }
 }
