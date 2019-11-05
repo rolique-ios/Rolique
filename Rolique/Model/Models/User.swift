@@ -53,10 +53,10 @@ public final class User: Codable {
     self.todayStatus = todayStatus
   }
   
-  init?(_ managedObject: ManagedUser) {
+  init?(_ managedObject: ManagedUser, context: NSManagedObjectContext? = nil) {
     guard let id = managedObject.id,
-    let realName = managedObject.slackProfile?.realName,
-    let slackProfile = SlackProfile.getFromCoreData(with: realName) else { return nil }
+      let realName = managedObject.slackProfile?.realName,
+      let slackProfile = SlackProfile.getFromCoreData(with: realName, context: context) else { return nil }
     
     self.id = id
     self.slackProfile = slackProfile
@@ -66,6 +66,8 @@ public final class User: Codable {
     self.emergencyDays = managedObject.emergencyDays
     self.roles = managedObject.roles ?? []
     self.vacationData = managedObject.vacationData
+    let todayStatusDate = TodayStatusDate.getFromCoreData(with: Date().normalized, context: context)
+    self.todayStatus = todayStatusDate?.todayStatuses[id]
   }
   
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
@@ -74,7 +76,7 @@ public final class User: Codable {
   }
 
   static func getFromCoreData(with id: String, context: NSManagedObjectContext? = nil) -> User? {
-    guard let managedUser = try? CoreDataManager<User>().getManagedObjects(with: NSPredicate(format: "id == %@", id)).first else { return nil }
+    guard let managedUser = try? CoreDataManager<User>().getManagedObjects(with: NSPredicate(format: "id == %@", id), context: context).first else { return nil }
 
     return User(managedUser)
   }
@@ -157,7 +159,7 @@ public final class SlackProfile: Codable {
     self.title = title
   }
   
-  init?(_ managedObject: ManagedSlackProfile) {
+  init?(_ managedObject: ManagedSlackProfile, context: NSManagedObjectContext? = nil) {
     guard let phone = managedObject.phone,
       let realName = managedObject.realName,
       let realNameNormalized = managedObject.realNameNormalized,
@@ -201,7 +203,7 @@ public final class SlackProfile: Codable {
   }
   
   static func getFromCoreData(with realName: String, context: NSManagedObjectContext? = nil) -> SlackProfile? {
-    guard let managedSlackProfile = try? CoreDataManager<SlackProfile>().getManagedObjects(with: NSPredicate(format: "realName == %@", realName)).first else { return nil }
+    guard let managedSlackProfile = try? CoreDataManager<SlackProfile>().getManagedObjects(with: NSPredicate(format: "realName == %@", realName), context: context).first else { return nil }
     
     return SlackProfile(managedSlackProfile)
   }
@@ -259,6 +261,8 @@ extension User: CoreDataCompatible {
     
     return managedUser
   }
+  
+  static var compare: (ManagedUser, User) -> Bool { return { $0.id == $1.id } }
 }
 
 extension SlackProfile: CoreDataCompatible {
@@ -303,4 +307,6 @@ extension SlackProfile: CoreDataCompatible {
     
     return managedSlackProfile
   }
+  
+  static var compare: (ManagedSlackProfile, SlackProfile) -> Bool { return { $0.realName == $1.realName } }
 }

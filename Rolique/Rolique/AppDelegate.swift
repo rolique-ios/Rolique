@@ -22,12 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics.self])
     let shortcutItems = ShortcutManager.shared.buildShortcutItems()
     application.shortcutItems = shortcutItems
-    
-//    if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
-//      let _ = ShortcutManager.shared.handle(shortcutItem: shortcutItem)
-//    }
-//    
-    
+  
     return true
   }
 

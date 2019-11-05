@@ -7,14 +7,16 @@
 //
 
 import CoreData
+import Utils
 
 protocol CoreDataCompatible {
   associatedtype ManagedType: NSManagedObject
   
-  init?(_ managedObject: ManagedType)
+  init?(_ managedObject: ManagedType, context: NSManagedObjectContext?)
   func predicateById() -> NSPredicate
   @discardableResult
   func createOrUpdate(with context: NSManagedObjectContext?) -> ManagedType?
+  static var compare: (ManagedType, Self) -> Bool { get }
 }
 
 final class CoreDataController: NSObject {
@@ -98,6 +100,21 @@ final class CoreDataManager<R: CoreDataCompatible> {
     } catch {
       print(error.localizedDescription)
     }
+  }
+  
+  func saveToCoreDateWithoutMismatch(_ mos: [R.ManagedType], objects: [R], context: NSManagedObjectContext) {
+    let compare: (R.ManagedType, R) -> Bool = R.compare
+    let diff = arrayDiff(mos, objects, with: compare)
+    
+    _ = diff.inserted.map { $0.createOrUpdate(with: context) }
+    
+    context.performAndWait {
+      diff.removed.forEach(context.delete(_:))
+    }
+    
+    diff.common.forEach { $0.1.createOrUpdate(with: context) }
+    
+    try? self.saveToCoreData(with: context)
   }
 }
 
