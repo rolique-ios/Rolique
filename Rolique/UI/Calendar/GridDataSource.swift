@@ -221,17 +221,9 @@ final class GridDataSouce: NSObject, UICollectionViewDataSource, UICollectionVie
     let value = currentIndex * Constants.pageItems - currentMondayIndex
     let calendar = Calendar.utc
     let date = calendar.date(byAdding: .day, value: value, to: currentWeekMonday)!
-    if currentContentOffsetX > offset.x {
-      let bound = calendar.date(byAdding: .day, value: -Constants.pageItems, to: date)?.utc
-      if bound == startDate {
-        getMoreEvents?(.toLeft)
-      }
-    } else {
-      let bound = calendar.date(byAdding: .day, value: Constants.pageItems, to: date)?.utc
-      if bound == endDate {
-        getMoreEvents?(.toRight)
-      }
-    }
+    let addValue = currentContentOffsetX > offset.x ? -Constants.pageItems : Constants.pageItems
+    let bound = calendar.date(byAdding: .day, value: addValue, to: date)?.utc
+    bound == startDate ? getMoreEvents?(.toLeft) : bound == endDate ? getMoreEvents?(.toRight) : nil
     
     self.currentIndex = Int(offset.x / (itemWidth * CGFloat(Constants.pageItems)))
     gridCollectionView.setContentOffset(offset, animated: true)

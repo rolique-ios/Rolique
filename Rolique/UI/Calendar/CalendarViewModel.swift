@@ -15,7 +15,6 @@ protocol CalendarViewModel: ViewModel {
   var events: [Date: [String: [SequentialRecordType]]] { get }
   var onUsersSuccess: (([User]) -> Void)? { get set }
   var onEventsSuccess: (([Date: [String: [SequentialRecordType]]]) -> Void)? { get set }
-  var onError: ((String) -> Void)? { get set }
   var onUpdateDates: ((Date, Date) -> Void)? { get set }
   
   func getUsers()
@@ -35,14 +34,13 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
   var users: [User] = []
   var onUsersSuccess: (([User]) -> Void)?
   var onEventsSuccess: (([Date: [String: [SequentialRecordType]]]) -> Void)?
-  var onError: ((String) -> Void)?
   
   var startDate: Date
   var endDate: Date
   var events = [Date: [String: [SequentialRecordType]]]()
   var onUpdateDates: ((Date, Date) -> Void)?
   
-  private let threeMonth = TimeInterval.month * 3
+  private let threeMonth = TimeInterval.week * 5 * 3
   
   init(userService: UserService, attendanceManager: AttendanceManager) {
     self.userService = userService
@@ -86,7 +84,7 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
       self.users = users
       onUsersSuccess?(users)
     case .failure(let error):
-      onError?(error.localizedDescription)
+      print(error.localizedDescription)
     }
   }
   
@@ -127,7 +125,7 @@ final class CalendarViewModelImpl: BaseViewModel, CalendarViewModel {
         }
       }
     case .failure(let error):
-      onError?(error.localizedDescription)
+      print(error.localizedDescription)
     }
   }
 }

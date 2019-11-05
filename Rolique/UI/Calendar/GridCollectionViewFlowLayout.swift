@@ -107,9 +107,8 @@ final class GridCollectionViewFlowLayout: UICollectionViewFlowLayout {
   
   private func loadCache() {
     if cachedAttributes.count == sectionsCount {
-      if !(cachedAttributes[0][0].frame.origin.x < collectionView!.contentOffset.x && cachedAttributes[0][cachedAttributes[0].count - 1].frame.origin.x - collectionView!.frame.width > collectionView!.contentOffset.x) {
-        updateCache()
-      }
+      cachedAttributes.count > 0 &&
+        !(cachedAttributes[0][0].frame.origin.x < collectionView!.contentOffset.x && cachedAttributes[0][cachedAttributes[0].count - 1].frame.origin.x - collectionView!.frame.width > collectionView!.contentOffset.x) ? updateCache() : nil
     } else {
       calculateCache()
     }

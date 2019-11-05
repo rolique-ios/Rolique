@@ -23,9 +23,9 @@ public extension UICollectionView {
     }
     
     func register(_ cells: [UICollectionViewCell.Type]) {
-        cells.forEach({
+        cells.forEach {
             let cellName = String(describing: $0)
             register($0, forCellWithReuseIdentifier: cellName)
-        })
+        }
     }
 }

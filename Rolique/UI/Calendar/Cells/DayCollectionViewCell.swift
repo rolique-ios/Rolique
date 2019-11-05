@@ -71,10 +71,4 @@ final class DayCollectionViewCell: UICollectionViewCell {
       maker.left.bottom.equalToSuperview()
     }
   }
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    
-    dayLabel.text = nil
-  }
 }

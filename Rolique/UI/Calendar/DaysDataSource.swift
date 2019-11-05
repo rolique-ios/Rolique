@@ -131,12 +131,7 @@ final class DaysDataSouce: NSObject, UICollectionViewDataSource, UICollectionVie
       offset = CGPoint(x: (rightBound), y: scrollView.contentOffset.y)
     } else {
       let middle = (rightBound - leftBound) / 2
-      
-      if abs(currentXOffset) < middle + leftBound {
-        offset = CGPoint(x: (leftBound), y: scrollView.contentOffset.y)
-      } else {
-        offset = CGPoint(x: (rightBound), y: scrollView.contentOffset.y)
-      }
+      offset = abs(currentXOffset) < middle + leftBound ? CGPoint(x: (leftBound), y: scrollView.contentOffset.y) : CGPoint(x: (rightBound), y: scrollView.contentOffset.y)
     }
     
     self.currentIndex = Int(offset.x / (itemWidth * CGFloat(Constants.pageItems)))

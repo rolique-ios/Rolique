@@ -25,10 +25,6 @@ public extension TimeInterval {
         return day * 7
     }
     
-    static var month: TimeInterval {
-        return week * 5
-    }
-    
     static var notLeapYear: TimeInterval {
         return day * 365
     }

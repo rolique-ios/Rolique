@@ -16,7 +16,6 @@ private struct Constants {
 }
 
 final class UsersDataSouce: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  
   private var usersCollectionView: UICollectionView
   private var users: [User]
   var didScroll: ((CGPoint) -> Void)?

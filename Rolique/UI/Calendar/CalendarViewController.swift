@@ -19,6 +19,8 @@ private struct Constants {
   static var stickyRowsCount: Int { return 1 }
   static var weekdayCellHeigth: CGFloat { return 20.0 }
   static var dayCellHeigth: CGFloat { return 40.0 }
+  static var shadowRadius: CGFloat { return 3.0 }
+  static var shadowHeight: CGFloat { return 3.0 }
 }
 
 final class CalendarViewController<T: CalendarViewModel>: ViewController<T> {
@@ -156,10 +158,6 @@ final class CalendarViewController<T: CalendarViewModel>: ViewController<T> {
       self.gridDataSource?.update(events: events)
     }
     
-    viewModel.onError = { error in
-      print(error)
-    }
-    
     viewModel.onUpdateDates = { [weak self] (startDate, endDate) in
       self?.gridDataSource?.update(startDate: startDate, endDate: endDate)
     }
@@ -198,9 +196,7 @@ final class CalendarViewController<T: CalendarViewModel>: ViewController<T> {
     gridDataSource?.configureCalendarLayout(with: view.safeAreaInsets, viewWidth: view.frame.width)
     daysDataSource?.configureCalendarLayout(with: view.safeAreaInsets, viewWidth: view.frame.width)
     
-    for view in [emptyView, daysCollectionViewContainer] {
-      addShadow(with: view)
-    }
+    [emptyView, daysCollectionViewContainer].forEach { $0.addShadowWithShadowPath(shadowHeight: Constants.shadowHeight, shadowRadius: Constants.shadowRadius) }
     
     scrollToToday()
   }
@@ -231,38 +227,10 @@ final class CalendarViewController<T: CalendarViewModel>: ViewController<T> {
     monthLabel.text = text
   }
   
-  private func addShadow(with view: UIView) {
-    let shadowHeight: CGFloat = 3.0
-    let shadowRadius: CGFloat = 3.0
-    let width = view.frame.width
-    let height = view.frame.height
-    
-    let shadowPath = UIBezierPath()
-    shadowPath.move(to: CGPoint(x: 0, y: height))
-    shadowPath.addLine(to: CGPoint(x: width, y: height))
-    shadowPath.addLine(to: CGPoint(x: width, y: height + shadowHeight))
-    shadowPath.addLine(to: CGPoint(x: 0, y: height + shadowHeight))
-    
-    view.clipsToBounds = false
-    view.layer.masksToBounds = false
-    view.layer.shadowPath = shadowPath.cgPath
-    view.layer.shadowRadius = shadowRadius
-    view.layer.shadowOffset = .zero
-    view.layer.shadowOpacity = 0.5
-    view.layer.shadowColor = Colors.shadowColor
-  }
-  
-  private func removeShadow(with view: UIView) {
-    view.layer.shadowPath = nil
-    view.layer.shadowRadius = .zero
-    view.layer.shadowOffset = .zero
-    view.layer.shadowOpacity = .zero
-  }
-  
   private func refreshShadows() {
     for view in [emptyView, daysCollectionViewContainer] {
-      removeShadow(with: view)
-      addShadow(with: view)
+      view.removeShadowWithShadowPath()
+      view.addShadowWithShadowPath(shadowHeight: Constants.shadowHeight, shadowRadius: Constants.shadowRadius)
     }
   }
 }
