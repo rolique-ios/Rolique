@@ -36,7 +36,6 @@ extension UIView {
     shadowPath.addLine(to: CGPoint(x: width, y: height + shadowHeight))
     shadowPath.addLine(to: CGPoint(x: 0, y: height + shadowHeight))
     
-    self.clipsToBounds = false
     self.layer.masksToBounds = false
     self.layer.shadowPath = shadowPath.cgPath
     self.layer.shadowRadius = shadowRadius
