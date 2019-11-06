@@ -19,4 +19,17 @@ final class DateFormatters {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     return dateFormatter
   }()
+  
+  static var startEndDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY-MM-dd"
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")!
+    return dateFormatter
+  }()
+  
+  static var withTDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm"
+    return dateFormatter
+  }()
 }

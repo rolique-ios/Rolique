@@ -25,6 +25,24 @@ public extension Date {
         return date
     }
     
+    var mondayOfWeekUtc: Date {
+        let calendar = Calendar.utc
+        
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        components.weekday = 2
+
+        return calendar.date(from: components)!
+    }
+    
+    var utc: Date {
+        let calendar = Calendar.utc
+        
+        let components = calendar.dateComponents([.day, .month, .year], from: self)
+        let date = calendar.date(from: components)!
+
+        return date
+    }
+    
     var sundayOfWeek: Date {
         let calendar = Calendar.current
         

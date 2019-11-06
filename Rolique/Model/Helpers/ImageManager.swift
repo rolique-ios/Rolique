@@ -60,7 +60,7 @@ final class ImageManager {
       guard let self = self else { return }
       
       let image = self.lock
-        .do({ [weak self] in self?.dataInCache(forKey: url) })
+        .do { [weak self] in self?.dataInCache(forKey: url) }
 
       if let unwrappedImage = image {
         DispatchQueue.main.async {

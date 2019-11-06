@@ -22,7 +22,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   private lazy var searchBar = UISearchBar()
   private lazy var recordTypeToast = constructRecordTypeToast()
   private lazy var recordTypeToastHeader = constructRecordTypeToastHeader()
-  private var dataSource: ColleaguesDataSource!
+  private var dataSource: ColleaguesDataSource?
   private lazy var contextMenuConfigHandler = UIContextMenuConfigurationHandler()
   
   override func viewDidLoad() {
@@ -37,10 +37,6 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       registerForPreviewing(with: self, sourceView: tableView)
     }
     self.navigationController?.addCustomTransitioning()
-  }
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -120,21 +116,21 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     tableView.backgroundColor = .clear
     tableView.keyboardDismissMode = .interactive
     dataSource = ColleaguesDataSource(tableView: tableView, data: viewModel.users, contextMenuConfigHandler: contextMenuConfigHandler)
-    dataSource.onUserTap = onUserSelect
-    dataSource.onPhoneTap = onPhoneSelect
+    dataSource?.onUserTap = onUserSelect
+    dataSource?.onPhoneTap = onPhoneSelect
   }
   
   private func configureBinding() {
     viewModel.onRefreshList = { [weak self] users in
       guard let self = self else { return }
       
-      self.dataSource.update(dataSource: users)
-      self.dataSource.hideRefreshControl()
+      self.dataSource?.update(dataSource: users)
+      self.dataSource?.hideRefreshControl()
     }
     
     viewModel.onError = { [weak self] segment in
       guard let self = self else { return }
-      self.dataSource.hideRefreshControl()
+      self.dataSource?.hideRefreshControl()
     }
     
     contextMenuConfigHandler.previewProvider = { [weak self] (indexPath, location) in
