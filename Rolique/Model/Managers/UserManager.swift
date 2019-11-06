@@ -21,6 +21,32 @@ public enum RecordType: String, CaseIterable {
   baby_birth,
   funeral,
   birthday
+  
+  var desctiption: String {
+    switch self {
+    case .vacation:
+      return "Vacation"
+    case .remote:
+      return "Remote"
+    case .sick:
+      return "Sick"
+    case .dayoff:
+      return "Day off"
+    case .business_trip:
+      return "Business trip"
+    case .marrige:
+      return "Marrige"
+    case .baby_birth:
+      return "Baby birth"
+    case .funeral:
+      return "Personal leave"
+    case .birthday:
+      return "Birthday"
+    case .all:
+      return "All"
+    case .away: return "Away"
+    }
+  }
 }
 
 public protocol  UserManager {

@@ -39,7 +39,7 @@ extension RecordType {
     case .baby_birth:
       return ("Bb", Colors.Calendar.babyBirth)
     case .funeral:
-      return ("F", Colors.Calendar.funeral)
+      return ("P", Colors.Calendar.funeral)
     case .birthday:
       return ("Bd", Colors.Calendar.babyBirth)
     default:

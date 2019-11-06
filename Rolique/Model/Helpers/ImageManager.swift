@@ -59,10 +59,10 @@ final class ImageManager {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard let self = self else { return }
       
-      let image = self.lock
+      let cachedImage = self.lock
         .do { [weak self] in self?.dataInCache(forKey: url) }
 
-      if let unwrappedImage = image {
+      if let unwrappedImage = cachedImage {
         DispatchQueue.main.async {
           completion(.success(unwrappedImage))
         }
@@ -71,15 +71,20 @@ final class ImageManager {
       }
       
       self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
-      self.fileManager
+      let data = self.fileManager
         .contents(atPath: self.imagePath(imagesDirectoryURL: self.imagesDirectoryURL, imageURL: url))
-        .flatMap { [weak self] data in
-          let image = self?.convertDataIntoImage(data: data)
-          self?.lock
-            .do { [weak self] in self?.saveInCache(image: image, forKey: url) }
-          DispatchQueue.main.async {
-            image == nil ? completion(.failure(.imageNotFound)) : completion(.success(image))
-          }
+      
+      if let data = data {
+        let image = self.convertDataIntoImage(data: data)
+        self.lock
+          .do { [weak self] in self?.saveInCache(image: image, forKey: url) }
+        DispatchQueue.main.async {
+          completion(.success(image))
+        }
+      } else {
+        DispatchQueue.main.async {
+          completion(.failure(.imageNotFound))
+        }
       }
     }
   }
@@ -89,7 +94,7 @@ final class ImageManager {
       guard let self = self else { return }
       
       self.lock
-        .do({ [weak self] in self?.saveInCache(image: self?.convertDataIntoImage(data: data), forKey: url) })
+        .do { [weak self] in self?.saveInCache(image: self?.convertDataIntoImage(data: data), forKey: url) }
       
       self.createDirectoryIfNeeded(with: self.imagesDirectoryURL)
       self.fileManager

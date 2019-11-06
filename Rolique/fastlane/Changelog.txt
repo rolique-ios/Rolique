@@ -1,3 +1,3 @@
-Fix crash related with keyboard observers
-Fix problem with setting context menu/previewing view the wrong user
-Change vacation data presention
+Improve image cacher
+Add events calendar
+Add request time limit for widgets
