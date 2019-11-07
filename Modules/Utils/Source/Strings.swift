@@ -23,6 +23,7 @@ public struct Strings {
   public struct NavigationTitle {
     public static var colleagues: String { return "Colleagues".localized }
     public static var actions: String { return "Actions".localized }
+    public static var more: String { return "More".localized }
   }
   
   public struct Collegues {
@@ -87,5 +88,9 @@ public struct Strings {
     public static var call: String { return "Call".localized }
     public static var sendEmail: String { return "Send email".localized }
     public static var openSkype: String { return "Open skype".localized }
+  }
+  
+  public struct More {
+    public static var meetingRooms: String { return "Meeting rooms".localized }
   }
 }

@@ -124,6 +124,11 @@
 		3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD3885231807B0006D5479 /* PickerTextField.swift */; };
 		3FFD388B23180D67006D5479 /* LateToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD388A23180D67006D5479 /* LateToast.swift */; };
 		3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE6C7E231D425400757738 /* ImageManager.swift */; };
+		3FFF4692237426500001793A /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4691237426500001793A /* MoreViewController.swift */; };
+		3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4693237426A00001793A /* MoreViewModel.swift */; };
+		3FFF4696237427210001793A /* MoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4695237427210001793A /* MoreDataSource.swift */; };
+		3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF469723742F3A0001793A /* MoreTableViewCell.swift */; };
+		3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF469923743A170001793A /* ProfileTableViewCell.swift */; };
 		3FFF920C23619FEF00DAFDC8 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF920B23619FEF00DAFDC8 /* GridDataSource.swift */; };
 		3FFFD87F236C3E7D00F6EFD9 /* VacationUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */; };
 		3FFFD880236C3FE000F6EFD9 /* VacationUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */; };
@@ -300,6 +305,11 @@
 		3FFD3885231807B0006D5479 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		3FFD388A23180D67006D5479 /* LateToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateToast.swift; sourceTree = "<group>"; };
 		3FFE6C7E231D425400757738 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		3FFF4691237426500001793A /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		3FFF4693237426A00001793A /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		3FFF4695237427210001793A /* MoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDataSource.swift; sourceTree = "<group>"; };
+		3FFF469723742F3A0001793A /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
+		3FFF469923743A170001793A /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		3FFF920B23619FEF00DAFDC8 /* GridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
 		3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationUserService.swift; sourceTree = "<group>"; };
 		3FFFD881236C401000F6EFD9 /* RemoteUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserService.swift; sourceTree = "<group>"; };
@@ -440,6 +450,7 @@
 				25535AFA23014D4F00833A5B /* Login */,
 				3FF9BEE923054CBB00028513 /* Colleagues */,
 				3FA3C0D22343666200165B06 /* Calendar */,
+				3FFF4690237426170001793A /* More */,
 				3FF1035023155E8700EBCE4E /* Actions */,
 				25535AFE23014D4F00833A5B /* Base */,
 			);
@@ -783,6 +794,18 @@
 				3FF45C8823326BAE00840444 /* ColleaguesList */,
 			);
 			path = Colleagues;
+			sourceTree = "<group>";
+		};
+		3FFF4690237426170001793A /* More */ = {
+			isa = PBXGroup;
+			children = (
+				3FFF4691237426500001793A /* MoreViewController.swift */,
+				3FFF4693237426A00001793A /* MoreViewModel.swift */,
+				3FFF4695237427210001793A /* MoreDataSource.swift */,
+				3FFF469723742F3A0001793A /* MoreTableViewCell.swift */,
+				3FFF469923743A170001793A /* ProfileTableViewCell.swift */,
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
@@ -1198,10 +1221,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FC996152316843700C2554C /* DopracToast.swift in Sources */,
+				3FFF4696237427210001793A /* MoreDataSource.swift in Sources */,
 				25535AE423014D2C00833A5B /* UserManager.swift in Sources */,
 				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
+				3FFF4692237426500001793A /* MoreViewController.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
 				3FA3C0D6234366FF00165B06 /* CalendarViewModel.swift in Sources */,
 				2D7628FD235F1B7300E1E846 /* WeekdayCollectionViewCell.swift in Sources */,
@@ -1225,6 +1250,7 @@
 				3FEE0E41233B8DDD004CD5C3 /* TransitionCoordinator.swift in Sources */,
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
 				2D1450762338D6CC00358BD0 /* Callable.swift in Sources */,
+				3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */,
 				3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */,
 				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,
@@ -1232,6 +1258,7 @@
 				3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */,
 				25535AEA23014D2C00833A5B /* ActionResult.swift in Sources */,
 				3FC996102316818800C2554C /* ConfirmButton.swift in Sources */,
+				3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */,
 				3FFAF0BF23716A1C00FAB98E /* DaysCollectionViewFlowLayout.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
@@ -1250,6 +1277,7 @@
 				3FEE1FDD2334C5FF0075DF32 /* TitledSectionTableViewCell.swift in Sources */,
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
+				3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */,
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,

@@ -100,6 +100,14 @@ public struct Colors {
     }
   }
   
+  public static var seconaryGroupedBackgroundColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .tertiarySystemGroupedBackground
+    } else {
+      return Colors.Colleagues.softWhite
+    }
+  }
+  
   public static var separatorColor: UIColor {
     if #available(iOS 13.0, *) {
       return .separator
