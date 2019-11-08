@@ -74,7 +74,7 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
       switch type {
       case .user:
         self.navigationController?.pushViewController(Router.getProfileDetailViewController(user: self.viewModel.user), animated: true)
-      case .meetingRooms:
+      case .meetingRoom:
         break
       }
     }

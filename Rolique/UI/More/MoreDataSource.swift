@@ -9,16 +9,6 @@
 import UIKit
 import Utils
 
-enum CellType {
-  case user
-  case meetingRooms
-}
-
-private struct TableViewIndexPaths {
-  static var user: IndexPath { return IndexPath(row: 0, section: 0) }
-  static var meetingRooms: IndexPath { return IndexPath(row: 0, section: 1) }
-}
-
 private struct CellInfo {
   let icon: UIImage
   let title: String
@@ -31,12 +21,41 @@ private struct Constants {
   static var heightForFooterInSection: CGFloat { return 0.0001 }
 }
 
+private enum Section: Int, CaseIterable {
+  case profile,
+  general
+  
+  var rows: [Row] {
+    switch self {
+    case .profile:
+      return [.user]
+    case .general:
+      return [.meetingRoom]
+    }
+  }
+}
+
+enum Row: Int, CaseIterable {
+  case user,
+  meetingRoom
+}
+
+private extension Row {
+  var data: CellInfo? {
+    switch self {
+    case .meetingRoom:
+      return CellInfo(icon: Images.More.meetingRoom, title: Strings.More.meetingRooms)
+    default:
+      return nil
+    }
+  }
+}
+
 final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
   private let user: User
-  private var data = [CellInfo(icon: Images.More.meetingRoom, title: Strings.More.meetingRooms)]
-  private let numberOfSections = 2
-  var didSelectCell: ((CellType) -> Void)?
+  private lazy var sections = Section.allCases
+  var didSelectCell: ((Row) -> Void)?
   
   init(tableView: UITableView,
        user: User) {
@@ -52,32 +71,28 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return numberOfSections
+    return sections.count
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    switch section {
-    case TableViewIndexPaths.user.section:
-      return 1
-    case TableViewIndexPaths.meetingRooms.section:
-      return data.count
-    default:
-      return 0
-    }
+    return sections[section].rows.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath {
-    case TableViewIndexPaths.user:
+    let section = sections[indexPath.section]
+    let row = section.rows[indexPath.row]
+    
+    switch (section, row) {
+    case (.profile, .user):
       let cell = ProfileTableViewCell.dequeued(by: tableView)
       cell.configure(with: user.slackProfile.realName,
                      userImage: user.biggestImage,
                      todayStatus: user.todayStatus,
                      title: user.slackProfile.title)
       return cell
-    case TableViewIndexPaths.meetingRooms:
+    case (.general, .meetingRoom):
       let cell = MoreTableViewCell.dequeued(by: tableView)
-      let cellInfo = data[indexPath.row]
+      let cellInfo = row.data!
       cell.configure(with: cellInfo.title, icon: cellInfo.icon)
       return cell
     default:
@@ -86,10 +101,13 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    switch indexPath {
-    case TableViewIndexPaths.user:
+    let section = sections[indexPath.section]
+    let row = section.rows[indexPath.row]
+    
+    switch (section, row) {
+    case (.profile, .user):
       return Constants.userCellHeight
-    case TableViewIndexPaths.meetingRooms:
+    case (.general, .meetingRoom):
       return Constants.defaultCellHeight
     default:
       return 0
@@ -97,14 +115,9 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    switch indexPath {
-    case TableViewIndexPaths.user:
-      didSelectCell?(.user)
-    case TableViewIndexPaths.meetingRooms:
-      didSelectCell?(.meetingRooms)
-    default:
-      break
-    }
+    let section = sections[indexPath.section]
+    let row = section.rows[indexPath.row]
+    didSelectCell?(row)
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
