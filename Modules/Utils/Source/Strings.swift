@@ -93,4 +93,9 @@ public struct Strings {
   public struct More {
     public static var meetingRooms: String { return "Meeting rooms".localized }
   }
+  
+  public struct MeetingRooms {
+    public static var edit: String { return "Edit".localized }
+    public static var done: String { return "Done".localized }
+  }
 }

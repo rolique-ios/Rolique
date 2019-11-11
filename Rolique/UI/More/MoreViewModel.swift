@@ -18,15 +18,18 @@ final class MoreViewModelImpl: BaseViewModel, MoreViewModel {
   private let userService: UserService
   var user: User?
   
-  init(userService: UserService) {
+  init(userService: UserService, user: User?) {
     self.userService = userService
+    self.user = user
   }
   
   var onSuccess: Completion?
   var onError: ((String) -> Void)?
   
   override func viewDidLoad() {
-    getUser()
+    if user == nil {
+      getUser()
+    }
   }
   
   func getUser() {

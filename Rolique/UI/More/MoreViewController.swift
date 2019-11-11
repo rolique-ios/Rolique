@@ -31,13 +31,16 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
   private func configureUI() {
     title = Strings.NavigationTitle.more
     view.backgroundColor = Colors.seconaryGroupedBackgroundColor
+    
+    dataSource = viewModel.user.map { MoreDataSource(tableView: tableView, user: $0) }
+    configureDataSourceBindings()
   }
   
   private func configureConstraints() {
-    [tableView].forEach(self.view.addSubviewAndDisableMaskTranslate)
+    [tableView].forEach(self.view.addSubview(_:))
     
     tableView.snp.makeConstraints { maker in
-      maker.edges.equalToSuperview()
+      maker.edges.equalTo(self.view.safeAreaLayoutGuide)
     }
   }
   
@@ -75,7 +78,7 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
       case .user:
         self.navigationController?.pushViewController(Router.getProfileDetailViewController(user: self.viewModel.user), animated: true)
       case .meetingRoom:
-        break
+        self.navigationController?.pushViewController(Router.getMeetingRoomsViewController(), animated: true)
       }
     }
   }

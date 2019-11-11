@@ -63,6 +63,10 @@ public final class Router {
   
   static func getMoreViewController() -> MoreViewController<MoreViewModelImpl> {
     let userService = UserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
-    return MoreViewController(viewModel: MoreViewModelImpl(userService: userService))
+    return MoreViewController(viewModel: MoreViewModelImpl(userService: userService, user: User.getFromCoreData(with: UserDefaultsManager.shared.userId ?? "")))
+  }
+  
+  static func getMeetingRoomsViewController() -> MeetingRoomsViewController<MeetingRoomsViewModelImpl> {
+    return MeetingRoomsViewController(viewModel: MeetingRoomsViewModelImpl())
   }
 }

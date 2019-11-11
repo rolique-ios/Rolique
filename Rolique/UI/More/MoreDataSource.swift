@@ -16,7 +16,7 @@ private struct CellInfo {
 
 private struct Constants {
   static var userCellHeight: CGFloat { return 80 }
-  static var defaultCellHeight: CGFloat { return 60 }
+  static var defaultCellHeight: CGFloat { return 50 }
   static var heightForHeaderInSection: CGFloat { return 15.0 }
   static var heightForFooterInSection: CGFloat { return 0.0001 }
 }
