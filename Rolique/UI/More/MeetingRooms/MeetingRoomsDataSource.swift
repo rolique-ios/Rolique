@@ -15,14 +15,13 @@ private struct Constants {
 
 final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
-  private let numberOfRows: Int
+  private var numberOfRows: Int = 0
+  private var startScroll = false
   var didScroll: ((CGFloat) -> Void)?
   var didSelectCell: ((Row) -> Void)?
   
-  init(tableView: UITableView,
-       numberOfRows: Int) {
+  init(tableView: UITableView) {
     self.tableView = tableView
-    self.numberOfRows = numberOfRows
     
     super.init()
     
@@ -31,6 +30,13 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
     tableView.backgroundColor = Colors.mainBackgroundColor
     tableView.setDelegateAndDataSource(self)
     tableView.register([MeetingRoomTableViewCell.self])
+  }
+  
+  func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
+    self.numberOfRows = numberOfRows
+    tableView.reloadData()
+    tableView.layoutIfNeeded()
+    tableView.setContentOffset(CGPoint(x: 0, y: contentOffsetY), animated: false)
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +49,11 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
     return cell
   }
   
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    let cellHeight = Constants.defaultCellHeight
+    return indexPath.row == numberOfRows - 1 ? cellHeight / 2 : cellHeight
+  }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellHeight = Constants.defaultCellHeight
     return indexPath.row == numberOfRows - 1 ? cellHeight / 2 : cellHeight
@@ -52,7 +63,17 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
     
   }
   
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    startScroll = true
+  }
+  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    guard startScroll else { return }
+    print("cell offset \(scrollView.contentOffset.y)")
     didScroll?(scrollView.contentOffset.y)
+  }
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    startScroll = false
   }
 }

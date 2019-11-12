@@ -34,6 +34,7 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
     
     super.init()
     
+    tableView.isScrollEnabled = false
     tableView.allowsSelection = false
     tableView.backgroundColor = Colors.mainBackgroundColor
     tableView.setDelegateAndDataSource(self)
@@ -53,14 +54,18 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
     return cell
   }
   
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    let cellHeight = Constants.defaultCellHeight
+    return indexPath.row == 0 ? cellHeight / 2 : cellHeight
+  }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.row == 0 {
-      return Constants.defaultCellHeight / 2
-    }
-    return Constants.defaultCellHeight
+    let cellHeight = Constants.defaultCellHeight
+    return indexPath.row == 0 ? cellHeight / 2 : cellHeight
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print("timeline contentOffset \(scrollView.contentOffset.y)")
     didScroll?(scrollView.contentOffset.y)
   }
 }

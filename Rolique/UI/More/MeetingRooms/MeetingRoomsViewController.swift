@@ -15,52 +15,37 @@ private struct Constants {
   static var cellHeight: CGFloat { return 30.0 }
 }
 
-final private class MeetingRoomView: UIView {
-  private lazy var label = UILabel()
-  
-  convenience init(name: String) {
-    self.init(frame: .zero)
-    label.textColor = Colors.mainTextColor
-    label.text = name
-    label.textAlignment = .center
-    label.font = .systemFont(ofSize: 20.0)
-    configureConstraints()
-  }
-  
-  func configureConstraints() {
-    addSubview(label)
-    
-    label.snp.makeConstraints { maker in
-      maker.edges.equalToSuperview()
-    }
-  }
-}
-
-final private class MeetingRoomData {
-  let tableView: UITableView
-  let meetingRoomView: MeetingRoomView
-  var dataSource: MeetingRoomsDataSource?
-  
-  init(tableView: UITableView, meetingRoomView: MeetingRoomView) {
-    self.tableView = tableView
-    self.meetingRoomView = meetingRoomView
-  }
-}
-
-final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewController<T>, UIScrollViewDelegate {
+final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewController<T>,
+  UICollectionViewDelegate,
+  UICollectionViewDelegateFlowLayout,
+  UICollectionViewDataSource,
+  UINavigationControllerDelegate {
   private lazy var scrollView = UIScrollView()
   private lazy var timeTableView = UITableView()
-  private lazy var conferenceMeetingRoomData = MeetingRoomData(tableView: UITableView(), meetingRoomView: MeetingRoomView(name: "Conf"))
-  private lazy var firstMeetingRoomData = MeetingRoomData(tableView: UITableView(), meetingRoomView: MeetingRoomView(name: "MR1"))
-  private lazy var secondMeetingRoomData = MeetingRoomData(tableView: UITableView(), meetingRoomView: MeetingRoomView(name: "MR2"))
-  private lazy var meetingRoomsData = [conferenceMeetingRoomData, firstMeetingRoomData, secondMeetingRoomData]
-  private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
+  private lazy var meetingNames = ["Conf", "MR1", "MR2"]
+  private lazy var flowLayout: UICollectionViewFlowLayout = {
+    let flowLayout = UICollectionViewFlowLayout()
+    flowLayout.scrollDirection = .horizontal
+    return flowLayout
+  }()
+  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
   private var timeDataSource: TimeDataSource?
+  private var currentDayIndex = 0
   private var currentPage = 0
-  private var selectedRow = -1
-  private var previousLocation: CGFloat = 0
-  private var direction: Direction?
-  private var numberOfRows = 0
+  private var tableViewNumberOfRows = 0
+  private let collectionViewNumberOfRows = 9999
+  private let timeDateFormatter: DateFormatter = {
+    var dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(identifier: "UTC")!
+    dateFormatter.dateFormat = "HH:mm"
+    return dateFormatter
+  }()
+  private let dateFormatter: DateFormatter = {
+    var dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(identifier: "UTC")!
+    dateFormatter.dateFormat = "YYYY-MM-dd"
+    return dateFormatter
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,7 +53,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     configureUI()
     configureConstraints()
     configureDataSources()
-    configureDataSourceBindings()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -77,58 +61,53 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     navigationController?.navigationBar.prefersLargeTitles = false
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    configureScrollView()
+  override func performOnceInViewDidAppear() {
+    let hulf = collectionViewNumberOfRows / 2
+    let middle = hulf - hulf % meetingNames.count
+    self.collectionView.scrollToItem(at: IndexPath(item: middle, section: 0), at: .centeredHorizontally, animated: false)
+    currentPage = middle
+    currentDayIndex = middle
+    navigationItem.title = Strings.Actions.today
   }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     
-    coordinator.animate(alongsideTransition: { _ in
-      self.scrollView.subviews.forEach { $0.removeFromSuperview() }
-      self.configureScrollView()
-      self.scrollView.bounds.origin.x = CGFloat(self.currentPage) * self.scrollView.frame.width
-    }, completion: nil)
+    coordinator.animate(alongsideTransition: { [weak self] _ in
+      self?.collectionView.performBatchUpdates({ [weak self] in
+        guard let self = self else { return }
+        self.collectionView.bounds.origin.x = CGFloat(self.currentPage) * self.collectionView.bounds.width
+      }, completion: nil)
+      }, completion: nil)
   }
   
   private func configureUI() {
     view.backgroundColor = Colors.mainBackgroundColor
     
-    scrollView.translatesAutoresizingMaskIntoConstraints = false
-    scrollView.isPagingEnabled = true
+    collectionView.backgroundColor = Colors.mainBackgroundColor
+    collectionView.isPagingEnabled = true
+    collectionView.setDelegateAndDatasource(self)
+    collectionView.register([MeetingRoomCollectionViewCell.self])
     
     navigationItem.rightBarButtonItem = editButton()
     
     timeTableView.showsVerticalScrollIndicator = false
     timeTableView.separatorStyle = .none
-    for data in meetingRoomsData {
-      data.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-      data.tableView.showsVerticalScrollIndicator = false
-    }
   }
   
   private func configureConstraints() {
-    [timeTableView, scrollView].forEach(self.view.addSubview(_:))
+    [timeTableView, collectionView].forEach(self.view.addSubview(_:))
     
     timeTableView.snp.makeConstraints { maker in
       maker.left.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
       maker.width.equalTo(Constants.timeTableViewWidth)
     }
     
-    scrollView.snp.makeConstraints { maker in
+    collectionView.snp.makeConstraints { maker in
       maker.top.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
       maker.left.equalTo(timeTableView.snp.right)
     }
   }
-  
-  private let dateFormatter: DateFormatter = {
-    var dateFormatter = DateFormatter()
-    dateFormatter.timeZone = TimeZone(identifier: "UTC")!
-    dateFormatter.dateFormat = "HH:mm"
-    return dateFormatter
-  }()
   
   private func configureDataSources() {
     let date = Date().utc
@@ -137,139 +116,32 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       let date = Date(timeInterval: TimeInterval(value * TimeInterval.hour), since: date)
       dataSource.append(date)
     }
-    numberOfRows = dataSource.count
+    tableViewNumberOfRows = dataSource.count
     
     timeDataSource = TimeDataSource(tableView: timeTableView, numberOfRows: dataSource.count, dataSource: dataSource)
-    conferenceMeetingRoomData.dataSource = MeetingRoomsDataSource(tableView: conferenceMeetingRoomData.tableView, numberOfRows: dataSource.count - 1)
-    firstMeetingRoomData.dataSource = MeetingRoomsDataSource(tableView: firstMeetingRoomData.tableView, numberOfRows: dataSource.count - 1)
-    secondMeetingRoomData.dataSource = MeetingRoomsDataSource(tableView: secondMeetingRoomData.tableView, numberOfRows: dataSource.count - 1)
-  }
-  
-  private func configureDataSourceBindings() {
-    timeDataSource?.didScroll = { [weak self] contentOffsetY in
-      self?.conferenceMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.firstMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.secondMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-    }
-    
-    conferenceMeetingRoomData.dataSource?.didScroll = { [weak self] contentOffsetY in
-      self?.timeTableView.bounds.origin.y = contentOffsetY
-      self?.firstMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.secondMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-    }
-    
-    firstMeetingRoomData.dataSource?.didScroll = { [weak self] contentOffsetY in
-      self?.conferenceMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.timeTableView.bounds.origin.y = contentOffsetY
-      self?.secondMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-    }
-    
-    secondMeetingRoomData.dataSource?.didScroll = { [weak self] contentOffsetY in
-      self?.conferenceMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.firstMeetingRoomData.tableView.bounds.origin.y = contentOffsetY
-      self?.timeTableView.bounds.origin.y = contentOffsetY
-    }
-  }
-  
-  private func configureScrollView() {
-    scrollView.contentSize = CGSize(
-      width: scrollView.frame.width * CGFloat(meetingRoomsData.count),
-      height: scrollView.frame.height
-    )
-    
-    for index in 0..<meetingRoomsData.count {
-      let meetingView = meetingRoomsData[index].meetingRoomView
-      
-      meetingView.frame = CGRect(
-        x: scrollView.frame.width * CGFloat(index),
-        y: 0,
-        width: scrollView.frame.width,
-        height: Constants.meetingViewHeight
-      )
-      
-      let tableView = meetingRoomsData[index].tableView
-      
-      tableView.frame = CGRect(
-        x: scrollView.frame.width * CGFloat(index),
-        y: Constants.meetingViewHeight,
-        width: scrollView.frame.width,
-        height: scrollView.frame.height - Constants.meetingViewHeight
-      )
-      
-      scrollView.addSubview(meetingView)
-      scrollView.addSubview(tableView)
-    }
-    
-    scrollView.delegate = self
   }
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let page = floor(scrollView.contentOffset.x / scrollView.frame.width)
-    let contentOffsetX = scrollView.frame.width * CGFloat(page)
     currentPage = Int(page)
-    scrollView.setContentOffset(CGPoint(x: contentOffsetX, y: scrollView.contentOffset.y), animated: true)
-  }
-  
-  @objc func didTap(gesture: UIPanGestureRecognizer) {
-    let tableView = meetingRoomsData[currentPage].tableView
-    switch gesture.state {
-    case .possible, .began, .changed:
-      let location = gesture.location(in: tableView).y
-      
-      if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height {
-        tableView.contentOffset.y += (location - tableView.frame.height) - tableView.contentOffset.y
-      }
-      
-      if location > 0 && location < tableView.contentOffset.y {
-        tableView.contentOffset.y -= abs(location - tableView.contentOffset.y)
-      }
-      
-      let row = Int(floor(location / Constants.cellHeight))
-      
-      var changeDirection: Bool
-      if location < previousLocation {
-        if direction ?? .toTop != Direction.toBottom {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
-        direction = .toBottom
-      } else {
-        if direction ?? .toBottom != Direction.toTop {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
-        direction = .toTop
-      }
-      previousLocation = location
-      
-      guard row != selectedRow || changeDirection else { return }
-      
-      let indexPath = IndexPath(row: row, section: 0)
-      if let selectedRows = tableView.indexPathsForSelectedRows, selectedRows.contains(indexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-      } else if indexPath.row != numberOfRows - 1 {
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-      }
-      selectedRow = row
-    default:
-      break
-    }
+    let calendar = Calendar.utc
+    let value = Int(currentPage / meetingNames.count - currentDayIndex / meetingNames.count)
+    let date = calendar.date(byAdding: .day, value: value, to: Date().utc)!
+    navigationItem.title = value == 0 ? Strings.Actions.today : dateFormatter.string(from: date)
   }
   
   @objc func didSelectEditButton() {
-    meetingRoomsData[currentPage].tableView.allowsMultipleSelection = true
-    meetingRoomsData[currentPage].tableView.addGestureRecognizer(panGesture)
-    navigationItem.rightBarButtonItem = doneButton()
+    if let cell = collectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+      cell.edit()
+      navigationItem.rightBarButtonItem = doneButton()
+    }
   }
   
   @objc func didSelectDoneButton() {
-    selectedRow = -1
-    previousLocation = 0
-    meetingRoomsData[currentPage].tableView.allowsMultipleSelection = false
-    meetingRoomsData[currentPage].tableView.removeGestureRecognizer(panGesture)
-    navigationItem.rightBarButtonItem = editButton()
+    if let cell = collectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+      cell.done()
+      navigationItem.rightBarButtonItem = editButton()
+    }
   }
   
   private func editButton() -> UIBarButtonItem {
@@ -278,5 +150,35 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   
   private func doneButton() -> UIBarButtonItem {
     return UIBarButtonItem(title: Strings.MeetingRooms.done, style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectDoneButton))
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return collectionViewNumberOfRows
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeue(type: MeetingRoomCollectionViewCell.self, indexPath: indexPath)
+    cell.configure(with: tableViewNumberOfRows - 1, meetingName: meetingNames[indexPath.row % meetingNames.count], contentOffsetY: timeTableView.contentOffset.y, index: indexPath.row)
+    cell.tableViewDidScroll = { [weak self] contentOffsetY in
+      self?.timeTableView.setContentOffset(CGPoint(x: 0, y: contentOffsetY), animated: false)
+    }
+    
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return collectionView.bounds.size
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return .zero
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
   }
 }

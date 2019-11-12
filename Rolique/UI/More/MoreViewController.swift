@@ -28,6 +28,11 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
     configureNavigationBar()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.navigationController?.renewCustomTransition()
+  }
+  
   private func configureUI() {
     title = Strings.NavigationTitle.more
     view.backgroundColor = Colors.seconaryGroupedBackgroundColor
@@ -78,6 +83,7 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
       case .user:
         self.navigationController?.pushViewController(Router.getProfileDetailViewController(user: self.viewModel.user), animated: true)
       case .meetingRoom:
+        self.navigationController?.removeCustomTransition()
         self.navigationController?.pushViewController(Router.getMeetingRoomsViewController(), animated: true)
       }
     }

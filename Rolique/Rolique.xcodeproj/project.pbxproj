@@ -88,6 +88,7 @@
 		3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */; };
 		3F08FA1223707AD000CDBC13 /* UsersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */; };
 		3F08FA142370863600CDBC13 /* DaysDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08FA132370863600CDBC13 /* DaysDataSource.swift */; };
+		3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3529A7237998C600905907 /* MeetingRoomView.swift */; };
 		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		3FA2DF79236C8E2D00242416 /* LabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */; };
@@ -120,6 +121,7 @@
 		3FF45C8A23326BE500840444 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */; };
 		3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */; };
 		3FF8512B237956E9005A4F2C /* MeetingRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */; };
+		3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -277,6 +279,7 @@
 		3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContextMenuConfigurationHandler.swift; sourceTree = "<group>"; };
 		3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDataSource.swift; sourceTree = "<group>"; };
 		3F08FA132370863600CDBC13 /* DaysDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysDataSource.swift; sourceTree = "<group>"; };
+		3F3529A7237998C600905907 /* MeetingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomView.swift; sourceTree = "<group>"; };
 		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
 		3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInsets.swift; sourceTree = "<group>"; };
@@ -307,6 +310,7 @@
 		3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomTableViewCell.swift; sourceTree = "<group>"; };
+		3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 				3FFD3885231807B0006D5479 /* PickerTextField.swift */,
 				B5D6C3012321449100929BFF /* InteractiveImageView.swift */,
 				3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */,
+				3F3529A7237998C600905907 /* MeetingRoomView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 		3F0217E92375C64D00E5894A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */,
 				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
 				3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */,
 			);
@@ -1299,6 +1305,7 @@
 				2D1450762338D6CC00358BD0 /* Callable.swift in Sources */,
 				3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */,
 				3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */,
+				3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */,
 				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
@@ -1308,6 +1315,7 @@
 				3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */,
 				3F0217E62375C25600E5894A /* MeetingRoomsDataSource.swift in Sources */,
 				3FFAF0BF23716A1C00FAB98E /* DaysCollectionViewFlowLayout.swift in Sources */,
+				3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
 				3FC996122316819200C2554C /* CancelButton.swift in Sources */,
