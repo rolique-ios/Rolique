@@ -34,33 +34,44 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   
   func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
     self.numberOfRows = numberOfRows
-    tableView.reloadData()
-    tableView.layoutIfNeeded()
-    tableView.setContentOffset(CGPoint(x: 0, y: contentOffsetY), animated: false)
+    self.tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
+    DispatchQueue.main.async { [weak self] in
+      print("reloading")
+      self?.tableView.reloadData()
+//      DispatchQueue.main.async { [weak self] in
+        print("settings offset to \(contentOffsetY)")
+        self?.tableView.layoutSubviews()
+//        self?.tableView.beginUpdates()
+        self?.tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
+//        self?.tableView.endUpdates()
+        print("after set \(self?.tableView.contentOffset.y ?? -1)")
+//      }
+    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    print("in number \(self.tableView.contentOffset.y)")
+
     return numberOfRows
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = MeetingRoomTableViewCell.dequeued(by: tableView)
-    cell.configure(isLast: numberOfRows - 1 == indexPath.row)
+    cell.configure(isLast: false)
     return cell
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellHeight = Constants.defaultCellHeight
-    return indexPath.row == numberOfRows - 1 ? cellHeight / 2 : cellHeight
+    return cellHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellHeight = Constants.defaultCellHeight
-    return indexPath.row == numberOfRows - 1 ? cellHeight / 2 : cellHeight
+    return cellHeight
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -68,8 +79,7 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    guard startScroll else { return }
-    print("cell offset \(scrollView.contentOffset.y)")
+    guard startScroll else { print("skipped"); return }
     didScroll?(scrollView.contentOffset.y)
   }
   

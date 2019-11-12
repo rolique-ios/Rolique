@@ -38,6 +38,12 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
     tableView.allowsSelection = false
     tableView.backgroundColor = Colors.mainBackgroundColor
     tableView.setDelegateAndDataSource(self)
+    tableView.tableHeaderView = UIView().apply { v in
+      v.frame = CGRect(origin: v.frame.origin, size: CGSize(width: v.frame.width, height: 0.5 +  Constants.defaultCellHeight / 2))
+      v.backgroundColor = .red
+      return v
+    }
+    
     tableView.register([TimeTableViewCell.self, UITableViewCell.self])
   }
   
@@ -46,26 +52,22 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.row == 0 {
-      return UITableViewCell()
-    }
     let cell = TimeTableViewCell.dequeued(by: tableView)
-    cell.configure(with: dateFormatter.string(from: dataSource[indexPath.row - 1]))
+    cell.configure(with: dateFormatter.string(from: dataSource[indexPath.row]))
     return cell
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellHeight = Constants.defaultCellHeight
-    return indexPath.row == 0 ? cellHeight / 2 : cellHeight
+    return cellHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellHeight = Constants.defaultCellHeight
-    return indexPath.row == 0 ? cellHeight / 2 : cellHeight
+    return cellHeight
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print("timeline contentOffset \(scrollView.contentOffset.y)")
     didScroll?(scrollView.contentOffset.y)
   }
 }

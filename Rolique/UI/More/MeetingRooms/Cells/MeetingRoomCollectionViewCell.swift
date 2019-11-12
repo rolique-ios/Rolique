@@ -17,7 +17,7 @@ private struct Constants {
 
 final class MeetingRoomCollectionViewCell: UICollectionViewCell {
   private lazy var meetingView = MeetingRoomView()
-  private lazy var tableView = UITableView()
+  private(set) lazy var tableView = UITableView()
   private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
   private lazy var dataSource = MeetingRoomsDataSource(tableView: tableView)
   private var selectedRow = -1
@@ -38,10 +38,7 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
   }
   
   func configure(with numberOfRows: Int, meetingName: String, contentOffsetY: CGFloat, index: Int) {
-//    dataSource = MeetingRoomsDataSource(tableView: tableView, numberOfRows: numberOfRows)
     dataSource.configure(with: numberOfRows, contentOffsetY: contentOffsetY)
-//    tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
-    print("setting offset \(contentOffsetY) actual \(tableView.bounds.origin.y)")
     dataSource.didScroll = { [weak self] contentOffsetY in
       self?.tableViewDidScroll?(contentOffsetY)
     }
@@ -82,10 +79,12 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
       
       if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height {
         tableView.contentOffset.y += (location - tableView.frame.height) - tableView.contentOffset.y
+        print("MODIF 82")
       }
       
       if location > 0 && location < tableView.contentOffset.y {
         tableView.contentOffset.y -= abs(location - tableView.contentOffset.y)
+        print("MODIF 86")
       }
       
       let row = Int(floor(location / Constants.cellHeight))

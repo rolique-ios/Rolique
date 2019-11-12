@@ -22,25 +22,25 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   UINavigationControllerDelegate {
   private lazy var scrollView = UIScrollView()
   private lazy var timeTableView = UITableView()
-  private lazy var meetingNames = ["Conf", "MR1", "MR2"]
-  private lazy var flowLayout: UICollectionViewFlowLayout = {
+  private lazy var meetingNames = ["Conf", "MR1", "MR2"] // rewrite with enumerations
+  private lazy var flowLayout: UICollectionViewFlowLayout = { // why we need this property?
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .horizontal
     return flowLayout
   }()
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-  private var timeDataSource: TimeDataSource?
+  private var timeDataSource: TimeDataSource? // remove optional
   private var currentDayIndex = 0
   private var currentPage = 0
   private var tableViewNumberOfRows = 0
   private let collectionViewNumberOfRows = 9999
-  private let timeDateFormatter: DateFormatter = {
+  private let timeDateFormatter: DateFormatter = { // move formatter to manager
     var dateFormatter = DateFormatter()
     dateFormatter.timeZone = TimeZone(identifier: "UTC")!
     dateFormatter.dateFormat = "HH:mm"
     return dateFormatter
   }()
-  private let dateFormatter: DateFormatter = {
+  private let dateFormatter: DateFormatter = { // move formatter to manager
     var dateFormatter = DateFormatter()
     dateFormatter.timeZone = TimeZone(identifier: "UTC")!
     dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -93,6 +93,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     
     timeTableView.showsVerticalScrollIndicator = false
     timeTableView.separatorStyle = .none
+    timeTableView.backgroundColor = .red
   }
   
   private func configureConstraints() {
@@ -133,7 +134,14 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   @objc func didSelectEditButton() {
     if let cell = collectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
       cell.edit()
+      print("timeline offset - \(timeTableView.contentOffset.y)")
+      print("visible cells count \(collectionView.visibleCells.count)")
+      var cells = collectionView.visibleCells.compactMap { $0 as? MeetingRoomCollectionViewCell }
+      print("cell offset - \(cells.map { $0.tableView.contentOffset.y }))")
       navigationItem.rightBarButtonItem = doneButton()
+      cells.first?.tableView.contentOffset = timeTableView.contentOffset
+      cells = collectionView.visibleCells.compactMap { $0 as? MeetingRoomCollectionViewCell }
+      print("cell offset - \(cells.map { $0.tableView.contentOffset.y }))")
     }
   }
   
