@@ -1,3 +1,2 @@
-Improve image cacher
-Add events calendar
-Add request time limit for widgets
+Add new provisioning profile
+Change view of successive events on the calendar
