@@ -35,18 +35,6 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
     self.numberOfRows = numberOfRows
     self.tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
-    DispatchQueue.main.async { [weak self] in
-      print("reloading")
-      self?.tableView.reloadData()
-//      DispatchQueue.main.async { [weak self] in
-        print("settings offset to \(contentOffsetY)")
-        self?.tableView.layoutSubviews()
-//        self?.tableView.beginUpdates()
-        self?.tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
-//        self?.tableView.endUpdates()
-        print("after set \(self?.tableView.contentOffset.y ?? -1)")
-//      }
-    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

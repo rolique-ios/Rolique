@@ -174,6 +174,10 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     return cell
   }
   
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    (cell as! MeetingRoomCollectionViewCell).configure(with: tableViewNumberOfRows - 1, meetingName: meetingNames[indexPath.row % meetingNames.count], contentOffsetY: timeTableView.contentOffset.y, index: indexPath.row)
+  }
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return collectionView.bounds.size
   }
