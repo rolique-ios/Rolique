@@ -79,12 +79,10 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
       
       if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height {
         tableView.contentOffset.y += (location - tableView.frame.height) - tableView.contentOffset.y
-        print("MODIF 82")
       }
       
       if location > 0 && location < tableView.contentOffset.y {
         tableView.contentOffset.y -= abs(location - tableView.contentOffset.y)
-        print("MODIF 86")
       }
       
       let row = Int(floor(location / Constants.cellHeight))

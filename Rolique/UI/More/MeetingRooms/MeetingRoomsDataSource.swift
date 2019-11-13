@@ -16,7 +16,6 @@ private struct Constants {
 final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
   private var numberOfRows: Int = 0
-  private var startScroll = false
   var didScroll: ((CGFloat) -> Void)?
   var didSelectCell: ((Row) -> Void)?
   
@@ -38,8 +37,6 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    print("in number \(self.tableView.contentOffset.y)")
-
     return numberOfRows
   }
   
@@ -62,16 +59,7 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   }
   
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    startScroll = true
-  }
-  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    guard startScroll else { print("skipped"); return }
     didScroll?(scrollView.contentOffset.y)
-  }
-  
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    startScroll = false
   }
 }

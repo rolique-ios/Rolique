@@ -10,7 +10,7 @@ import UIKit
 public protocol Applyable: class {}
 
 public extension Applyable {
-  func apply(_ f: (Self) -> Self) -> Self { f(self) }
+  func apply(_ f: (Self) -> Void) -> Self { f(self); return self }
 }
 
 extension NSObject: Applyable {}

@@ -70,4 +70,9 @@ public struct Images {
       return UIImage(named: "meetingRoom")!
     }
   }
+  public struct MeetingRoom {
+    public static var expand: UIImage {
+      return UIImage(named: "expand")!
+    }
+  }
 }

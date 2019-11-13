@@ -15,22 +15,11 @@ private struct Constants {
 
 final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
-  private let numberOfRows: Int
-  private let dataSource: [Date]
-  private let dateFormatter: DateFormatter = {
-    var dateFormatter = DateFormatter()
-    dateFormatter.timeZone = TimeZone(identifier: "UTC")!
-    dateFormatter.dateFormat = "HH:mm"
-    return dateFormatter
-  }()
+  private var dataSource = [Date]()
   var didScroll: ((CGFloat) -> Void)?
   
-  init(tableView: UITableView,
-       numberOfRows: Int,
-       dataSource: [Date]) {
+  init(tableView: UITableView) {
     self.tableView = tableView
-    self.numberOfRows = numberOfRows
-    self.dataSource = dataSource
     
     super.init()
     
@@ -41,10 +30,14 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
     tableView.tableHeaderView = UIView().apply { v in
       v.frame = CGRect(origin: v.frame.origin, size: CGSize(width: v.frame.width, height: 0.5 +  Constants.defaultCellHeight / 2))
       v.backgroundColor = .red
-      return v
     }
     
     tableView.register([TimeTableViewCell.self, UITableViewCell.self])
+  }
+  
+  func updateDataSource(with dates: [Date]) {
+    dataSource = dates
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,7 +46,7 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = TimeTableViewCell.dequeued(by: tableView)
-    cell.configure(with: dateFormatter.string(from: dataSource[indexPath.row]))
+    cell.configure(with: DateFormatters.timeDateFormatter.string(from: dataSource[indexPath.row]))
     return cell
   }
   

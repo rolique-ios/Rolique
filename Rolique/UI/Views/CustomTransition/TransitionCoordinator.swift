@@ -55,8 +55,9 @@ extension UINavigationController {
   func renewCustomTransition() {
     guard let transitionCoordinatorHelper = transitionCoordinatorHelper else { return }
     delegate = transitionCoordinatorHelper
-    transitionCoordinatorHelper.swipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-    view.addGestureRecognizer(transitionCoordinatorHelper.swipeGestureRecognizer!)
+    if let gesture = transitionCoordinatorHelper.swipeGestureRecognizer, !(view.gestureRecognizers?.contains(gesture) ?? true) {
+      view.addGestureRecognizer(gesture)
+    }
   }
   
   func removeCustomTransition() {
