@@ -84,7 +84,9 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
         self.navigationController?.pushViewController(Router.getProfileDetailViewController(user: self.viewModel.user), animated: true)
       case .meetingRoom:
         self.navigationController?.removeCustomTransition()
-        self.navigationController?.pushViewController(Router.getMeetingRoomsViewController(), animated: true)
+        let vc = Router.getMeetingRoomsViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
       }
     }
   }

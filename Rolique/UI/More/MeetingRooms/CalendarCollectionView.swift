@@ -20,9 +20,10 @@ final class CalendarCollectionView: UIView {
   
   private lazy var calendarView = JTAppleCalendarView()
   
-  var state: CalendarCollectionViewState = .collapsed
+  private var selectedDate = Date()
+  private var state: CalendarCollectionViewState = .collapsed
   var calendarState: CalendarState?
-  var monthName: String?
+  private var monthName: String?
   weak var delegate: CalendarCollectionViewDelegate?
   var onSelectDate: ((Date) -> Void)?
   
@@ -31,8 +32,8 @@ final class CalendarCollectionView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    configureConstraints()
     initialize()
+    configureConstraints()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -40,16 +41,11 @@ final class CalendarCollectionView: UIView {
     configureConstraints()
     initialize()
   }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    calendarView.reloadData(withanchor: calendarState?.anchor, completionHandler: { })
-  }
 
   func configure(startDate: Date, endDate: Date) {
     self.startDate = startDate
     self.endDate = endDate
-    calendarView.reloadData(withanchor: calendarState?.anchor, completionHandler: { })
+    calendarView.reloadData()
   }
 
   private func configureCalendar() {
@@ -61,6 +57,8 @@ final class CalendarCollectionView: UIView {
     calendarView.backgroundColor = Colors.mainBackgroundColor
     calendarView.scrollDirection = .horizontal
     calendarView.isPagingEnabled = true
+    calendarView.showsHorizontalScrollIndicator = false
+    calendarView.backgroundColor = Colors.mainBackgroundColor
   }
   
   private func initialize() {
@@ -77,9 +75,14 @@ final class CalendarCollectionView: UIView {
     }
   }
   
+  func reloadData() {
+    calendarView.reloadData()
+    calendarView.scrollToDate(selectedDate.mondayOfWeek)
+  }
+  
   func setState(_ state: CalendarCollectionViewState) {
     self.state = state
-    calendarView.reloadData(withanchor: calendarState?.anchor, completionHandler: { })
+    reloadData()
   }
   
   func scrollToToday() {
@@ -91,15 +94,13 @@ final class CalendarCollectionView: UIView {
   }
   
   private func scrollToToday(animated: Bool) {
-    calendarView.scrollToDate(Date().normalized, triggerScrollToDateDelegate: true, animateScroll: animated, preferredScrollPosition: UICollectionView.ScrollPosition.centeredHorizontally, extraAddedOffset: 0, completionHandler: nil)
+    calendarView.scrollToDate(Date().mondayOfWeek, triggerScrollToDateDelegate: true, animateScroll: animated, preferredScrollPosition: UICollectionView.ScrollPosition.left, extraAddedOffset: 0, completionHandler: nil)
   }
 }
 
 extension CalendarCollectionView: JTAppleCalendarViewDelegate {
   func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-    if let cell = cell as? DayCollectionCell {
-      configureCell(cell: cell, cellState: cellState, date: date)
-    }
+    (cell as? DayCollectionCell).map { configureCell(cell: $0, cellState: cellState, date: date) }
   }
   
   func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
@@ -112,13 +113,12 @@ extension CalendarCollectionView: JTAppleCalendarViewDelegate {
     let config = DayCollectionCellConfig(isToday: date.normalized == Date().normalized, isSelected: cellState.isSelected, isWeekend: cellState.day == .saturday || cellState.day == .sunday, text: cellState.text, isInCurrentMonth: cellState.dateBelongsTo == .thisMonth, cellHeight: cell.bounds.height)
     
     cell.update(config)
-
   }
   
   func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-    if let cell = cell as? DayCollectionCell {
-      configureCell(cell: cell, cellState: cellState, date: date)
-    }
+    (cell as? DayCollectionCell).map { configureCell(cell: $0, cellState: cellState, date: date) }
+    
+    selectedDate = date
     
     if cellState.dateBelongsTo == .thisMonth {
       onSelectDate?(date)
@@ -126,9 +126,7 @@ extension CalendarCollectionView: JTAppleCalendarViewDelegate {
   }
   
   func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-    if let cell = cell as? DayCollectionCell {
-      configureCell(cell: cell, cellState: cellState, date: date)
-    }
+    (cell as? DayCollectionCell).map { configureCell(cell: $0, cellState: cellState, date: date) }
   }
   
   func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {

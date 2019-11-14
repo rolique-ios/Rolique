@@ -16,7 +16,7 @@ private struct Constants {
 final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
   private var numberOfRows: Int = 0
-  var didScroll: ((CGFloat) -> Void)?
+  var didScroll: ((CGPoint) -> Void)?
   var didSelectCell: ((Row) -> Void)?
   
   init(tableView: UITableView) {
@@ -24,10 +24,15 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
     
     super.init()
     
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.defaultCellHeight / 2, right: 0)
     tableView.separatorStyle = .none
     tableView.allowsSelection = false
-    tableView.backgroundColor = Colors.mainBackgroundColor
+    tableView.backgroundColor = Colors.secondaryBackgroundColor
     tableView.setDelegateAndDataSource(self)
+    tableView.tableHeaderView = UIView().apply { v in
+      v.frame = CGRect(origin: v.frame.origin, size: CGSize(width: v.frame.width, height: Constants.defaultCellHeight / 2 - 0.5))
+      v.backgroundColor = Colors.secondaryBackgroundColor
+    }
     tableView.register([MeetingRoomTableViewCell.self])
   }
   
@@ -42,7 +47,7 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = MeetingRoomTableViewCell.dequeued(by: tableView)
-    cell.configure(isLast: false)
+    cell.configure(isLast: indexPath.row == numberOfRows - 1)
     return cell
   }
   
@@ -60,6 +65,6 @@ final class MeetingRoomsDataSource: NSObject, UITableViewDelegate, UITableViewDa
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    didScroll?(scrollView.contentOffset.y)
+    didScroll?(scrollView.contentOffset)
   }
 }

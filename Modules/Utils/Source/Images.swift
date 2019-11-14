@@ -74,5 +74,8 @@ public struct Images {
     public static var expand: UIImage {
       return UIImage(named: "expand")!
     }
+    public static var backArrow: UIImage {
+      return UIImage(named: "arrow-back")!
+    }
   }
 }

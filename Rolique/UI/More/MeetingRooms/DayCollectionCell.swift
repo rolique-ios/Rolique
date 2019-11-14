@@ -70,13 +70,11 @@ final class DayCollectionCell: JTAppleCell {
       textLabel.textColor = Colors.secondaryTextColor
       textLabel.text = config.text
       self.backView.isHidden = true
-      backView.backgroundColor = .white
-      backView.layer.borderColor = UIColor.white.cgColor
     } else {
       self.backView.isHidden = !(config.isToday || config.isSelected)
       textLabel.text = config.text
       textLabel.textColor = config.isToday ? .white : config.isWeekend ? Colors.secondaryTextColor : Colors.mainTextColor
-      backView.backgroundColor = config.isToday ? Colors.Colleagues.lightBlue : .white
+      backView.backgroundColor = config.isToday ? Colors.Colleagues.lightBlue : Colors.mainBackgroundColor
       backView.layer.borderColor = config.isSelected ? Colors.Colleagues.lightBlue.cgColor : UIColor.white.cgColor
       backView.layer.borderWidth = 1
     }

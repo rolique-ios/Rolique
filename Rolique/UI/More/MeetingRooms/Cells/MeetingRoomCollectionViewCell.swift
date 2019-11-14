@@ -16,19 +16,18 @@ private struct Constants {
 }
 
 final class MeetingRoomCollectionViewCell: UICollectionViewCell {
-  private lazy var meetingView = MeetingRoomView()
-  private(set) lazy var tableView = UITableView()
+  private lazy var tableView = UITableView()
   private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
   private lazy var dataSource = MeetingRoomsDataSource(tableView: tableView)
   private var selectedRow = -1
   private var previousLocation: CGFloat = 0
   private var direction: Direction?
-  var tableViewDidScroll: ((CGFloat) -> Void)?
+  var tableViewDidScroll: ((CGPoint) -> Void)?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.backgroundColor = Colors.mainBackgroundColor
+    self.backgroundColor = Colors.secondaryBackgroundColor
     
     configureViews()
   }
@@ -37,13 +36,11 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with numberOfRows: Int, meetingName: String, contentOffsetY: CGFloat, index: Int) {
+  func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
     dataSource.configure(with: numberOfRows, contentOffsetY: contentOffsetY)
-    dataSource.didScroll = { [weak self] contentOffsetY in
-      self?.tableViewDidScroll?(contentOffsetY)
+    dataSource.didScroll = { [weak self] contentOffset in
+      self?.tableViewDidScroll?(contentOffset)
     }
-    
-    meetingView.configure(with: meetingName)
   }
   
   func edit() {
@@ -59,16 +56,10 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
   }
   
   private func configureViews() {
-    [meetingView, tableView].forEach(self.addSubview)
-    
-    meetingView.snp.makeConstraints { maker in
-      maker.left.top.right.equalToSuperview()
-      maker.height.equalTo(Constants.meetingViewHeight)
-    }
+    [tableView].forEach(self.addSubview)
     
     tableView.snp.makeConstraints { maker in
-      maker.top.equalTo(meetingView.snp.bottom)
-      maker.left.bottom.right.equalToSuperview()
+      maker.edges.equalToSuperview()
     }
   }
   
@@ -77,7 +68,7 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     case .possible, .began, .changed:
       let location = gesture.location(in: tableView).y
       
-      if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height {
+      if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height + Constants.cellHeight / 2 {
         tableView.contentOffset.y += (location - tableView.frame.height) - tableView.contentOffset.y
       }
       
@@ -110,7 +101,7 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
       let indexPath = IndexPath(row: row, section: 0)
       if let selectedRows = tableView.indexPathsForSelectedRows, selectedRows.contains(indexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-      } else if indexPath.row != tableView.numberOfRows(inSection: 0) - 1 {
+      } else {
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
       }
       selectedRow = row

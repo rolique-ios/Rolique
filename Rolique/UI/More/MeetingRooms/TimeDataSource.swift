@@ -23,15 +23,12 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
     
     super.init()
     
+    tableView.showsVerticalScrollIndicator = false
+    tableView.separatorStyle = .none
     tableView.isScrollEnabled = false
     tableView.allowsSelection = false
-    tableView.backgroundColor = Colors.mainBackgroundColor
+    tableView.backgroundColor = Colors.secondaryBackgroundColor
     tableView.setDelegateAndDataSource(self)
-    tableView.tableHeaderView = UIView().apply { v in
-      v.frame = CGRect(origin: v.frame.origin, size: CGSize(width: v.frame.width, height: 0.5 +  Constants.defaultCellHeight / 2))
-      v.backgroundColor = .red
-    }
-    
     tableView.register([TimeTableViewCell.self, UITableViewCell.self])
   }
   

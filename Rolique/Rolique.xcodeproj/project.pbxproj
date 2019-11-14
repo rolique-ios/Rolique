@@ -701,8 +701,8 @@
 			isa = PBXGroup;
 			children = (
 				3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */,
-				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
 				3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */,
+				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

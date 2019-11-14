@@ -31,7 +31,8 @@ final class MeetingRoomView: UIView {
   }
   
   private func configureView() {
-    label.textColor = Colors.mainTextColor
+    backgroundColor = Colors.Colleagues.lightBlue
+    label.textColor = .white
     label.textAlignment = .center
     label.font = .systemFont(ofSize: 20.0)
   }

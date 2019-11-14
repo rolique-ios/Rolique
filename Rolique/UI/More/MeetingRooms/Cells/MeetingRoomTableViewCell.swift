@@ -16,13 +16,15 @@ private struct Constants {
 
 final class MeetingRoomTableViewCell: UITableViewCell {
   private lazy var topSeparator = UIView()
+  private lazy var bottomSeparator = UIView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
   
-    self.backgroundColor = Colors.mainBackgroundColor
+    self.backgroundColor = Colors.secondaryBackgroundColor
     
     topSeparator.backgroundColor = Colors.separatorColor
+    bottomSeparator.backgroundColor = Colors.separatorColor
     
     configureViews()
   }
@@ -32,7 +34,17 @@ final class MeetingRoomTableViewCell: UITableViewCell {
   }
   
   func configure(isLast: Bool) {
-    selectionStyle = isLast ? .none : .default
+    if isLast {
+      [bottomSeparator].forEach(addSubview(_:))
+      
+      bottomSeparator.snp.makeConstraints { maker in
+        maker.bottom.equalToSuperview().offset(1)
+        maker.left.right.equalToSuperview()
+        maker.height.equalTo(Constants.separatorHeight)
+      }
+    } else {
+      bottomSeparator.removeFromSuperview()
+    }
   }
   
   private func configureViews() {

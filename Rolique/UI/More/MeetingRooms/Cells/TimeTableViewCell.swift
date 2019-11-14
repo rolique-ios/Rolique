@@ -23,7 +23,7 @@ final class TimeTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
   
-    self.backgroundColor = Colors.mainBackgroundColor
+    self.backgroundColor = Colors.secondaryBackgroundColor
     self.selectionStyle = .none
     
     separator.backgroundColor = Colors.separatorColor
