@@ -122,7 +122,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     
     backButton.setTitleColor(Colors.mainTextColor, for: .normal)
     backButton.addTarget(self, action: #selector(didSelectBackButton), for: .touchUpInside)
-    let image = Images.MeetingRoom.backArrow.withRenderingMode(.alwaysTemplate)
+    let image = R.image.arrowBack()?.withRenderingMode(.alwaysTemplate)
     backButton.imageView?.tintColor = Colors.imageColor
     backButton.setImage(image, for: .normal)
     
@@ -130,7 +130,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     editButton.setTitle(Strings.MeetingRooms.edit, for: .normal)
     editButton.addTarget(self, action: #selector(didSelectEditButton), for: .touchUpInside)
     
-    expandButton.setImage(Images.MeetingRoom.expand, for: .normal)
+    expandButton.setImage(R.image.expand(), for: .normal)
     expandButton.addTarget(self, action: #selector(didSelectExpandButton), for: .touchUpInside)
     
     meetingRoomsScrollViewContainer.backgroundColor = Colors.Colleagues.lightBlue

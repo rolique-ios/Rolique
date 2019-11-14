@@ -34,9 +34,9 @@ class MoreTableViewCell: UITableViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with title: String, icon: UIImage) {
+  func configure(with title: String, icon: UIImage?) {
     titleLabel.text = title
-    iconImageView.image = icon.withRenderingMode(.alwaysTemplate)
+    iconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
     iconImageView.tintColor = Colors.imageColor
   }
   

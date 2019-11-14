@@ -10,7 +10,7 @@ import UIKit
 import Utils
 
 private struct CellInfo {
-  let icon: UIImage
+  let icon: UIImage?
   let title: String
 }
 
@@ -44,7 +44,7 @@ private extension Row {
   var data: CellInfo? {
     switch self {
     case .meetingRoom:
-      return CellInfo(icon: Images.More.meetingRoom, title: Strings.More.meetingRooms)
+      return CellInfo(icon: R.image.meetingRoom(), title: Strings.More.meetingRooms)
     default:
       return nil
     }

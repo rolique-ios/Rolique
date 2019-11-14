@@ -26,16 +26,16 @@ public final class Router {
     let tabbar = BaseTabBarController()
     
     let colleagues = UINavigationController(rootViewController: getColleaguesViewController())
-    colleagues.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.colleagues, image: Images.TabBar.stats, tag: 0)
+    colleagues.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.colleagues, image: R.image.stats(), tag: 0)
     
     let actions = UINavigationController(rootViewController: getActionsViewController())
-    actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: Images.TabBar.actions, tag: 1)
+    actions.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.actions, image: R.image.actions(), tag: 1)
     
     let calendar = UINavigationController(rootViewController: getCalendarViewController())
-    calendar.tabBarItem = UITabBarItem(title: Strings.TabBar.calendar, image: Images.TabBar.calendar, tag: 2)
+    calendar.tabBarItem = UITabBarItem(title: Strings.TabBar.calendar, image: R.image.calendar(), tag: 2)
     
     let more = UINavigationController(rootViewController: getMoreViewController())
-    more.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.more, image: Images.TabBar.more, tag: 3)
+    more.tabBarItem = UITabBarItem(title: Strings.NavigationTitle.more, image: R.image.more(), tag: 3)
     
     tabbar.viewControllers = [colleagues, actions, calendar, more]
     

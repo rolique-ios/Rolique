@@ -78,7 +78,7 @@ public final class NotificationReminderView: UIView {
     contentView.layer.shadowOffset = CGSize(width: 0, height: 4)
     contentView.isUserInteractionEnabled = true
     
-    imageView.image = Images.General.logo
+    imageView.image = R.image.logo()
     imageView.contentMode = .scaleAspectFill
     imageView.roundCorner(radius: 2)
     

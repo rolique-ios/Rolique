@@ -50,12 +50,12 @@ private extension LoginViewController {
   func configureUI() {
     view.backgroundColor = Colors.Login.backgroundColor
     
-    slackButton.setImage(Images.Login.slackButton, for: .normal)
+    slackButton.setImage(R.image.slackButton(), for: .normal)
     slackButton.imageView?.contentMode = .scaleAspectFit
     slackButton.addTarget(self, action: #selector(loginTouchUpInside(sender:)), for: .touchUpInside)
     
     logoImageView.contentMode = .scaleAspectFit
-    logoImageView.image = Images.Login.fullLogo
+    logoImageView.image = R.image.logoFull()
   }
   
   func configureBinding() {

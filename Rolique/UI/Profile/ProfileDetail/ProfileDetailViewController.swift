@@ -216,7 +216,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     blurView.clipsToBounds = true
     
     let slackButton = UIButton()
-    slackButton.setImage(Images.Profile.slackLogo, for: .normal)
+    slackButton.setImage(R.image.logoSlack(), for: .normal)
     slackButton.imageEdgeInsets = Constants.slackButtonImageInset
     slackButton.backgroundColor = .white
     slackButton.layer.cornerRadius = Constants.slackButtonSize / 2
