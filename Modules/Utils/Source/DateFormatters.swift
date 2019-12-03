@@ -39,4 +39,11 @@ final class DateFormatters {
     dateFormatter.dateFormat = "HH:mm"
     return dateFormatter
   }()
+  
+  static func withTimeZoneFormatter(timeZone: TimeZone?) -> DateFormatter {
+    let formatter = DateFormatter()
+    formatter.timeZone = timeZone
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+    return formatter
+  }
 }

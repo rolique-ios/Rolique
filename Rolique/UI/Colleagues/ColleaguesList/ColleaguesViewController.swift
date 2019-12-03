@@ -11,6 +11,10 @@ import SnapKit
 import Utils
 import IgyToast
 
+enum ColleaguesUIMode {
+  case regular, selectParticipant
+}
+
 private struct Constants {
   static var headerHeight: CGFloat { return 50.0 }
   static var delay: DispatchTime { return .now() + 0.4 }
@@ -24,6 +28,8 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   private lazy var recordTypeToastHeader = constructRecordTypeToastHeader()
   private var dataSource: ColleaguesDataSource?
   private lazy var contextMenuConfigHandler = UIContextMenuConfigurationHandler()
+  var onSelectParticipant: ((User) -> Void)?
+  var onPop: Completion?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,6 +48,14 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     configureNavigationBar()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    if self.isMovingFromParent {
+      onPop?()
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -197,9 +211,15 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   }
   
   func onUserSelect(_ user: User) {
-    Spitter.tap(.pop)
     view.endEditing(true)
-    navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
+    switch viewModel.mode {
+    case .regular:
+      Spitter.tap(.pop)
+      navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
+    case .selectParticipant:
+      onSelectParticipant?(user)
+      navigationController?.popViewController(animated: true)
+    }
   }
   
   func onPhoneSelect(_ phoneNumer: String) {

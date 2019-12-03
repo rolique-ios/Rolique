@@ -9,38 +9,34 @@
 import UIKit
 import Utils
 import SnapKit
+import IgyToast
 
 private struct Constants {
   static var timeTableViewWidth: CGFloat { return 60.0 }
   static var meetingViewHeight: CGFloat { return 30.0 }
-  static var cellHeight: CGFloat { return 30.0 }
+  static var cellHeight: CGFloat { return 40.0 }
   static var backButtonHeight: CGFloat { return 22.0 }
   static var backButtonWidth: CGFloat { return 17.0 }
   static var buttonsContainerHeight: CGFloat { return 40.0 }
   static var defaultOffset: CGFloat { return 10.0 }
   static var headerExpandedHeight: CGFloat { return 240 }
   static var headerCollapsedHeight: CGFloat { return 40 }
-}
-
-private enum MeetingRoom: String, CaseIterable {
-  case conference = "Conf"
-  case first = "MR1"
-  case second = "MR2"
+  static var meetingContainerViewHeight: CGFloat { return 30.0 }
+  static var expandButtonSize: CGFloat { return 24.0 }
 }
 
 enum CalendarCollectionViewState { case expanded, collapsed }
 
 final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewController<T>,
-  UICollectionViewDelegate,
-  UICollectionViewDelegateFlowLayout,
-  UICollectionViewDataSource,
-  UINavigationControllerDelegate,
+  UIScrollViewDelegate,
   CalendarCollectionViewDelegate {
   private lazy var timeTableView = UITableView()
   private lazy var meetingRooms = MeetingRoom.allCases
   private lazy var meetingRoomsScrollViewContainer = UIView()
   private lazy var meetingRoomsScrollView = UIScrollView()
-  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().apply({ $0.scrollDirection = .horizontal }))
+  private lazy var meetingRoomViews = [MeetingRoomView(), MeetingRoomView(), MeetingRoomView()]
+  private lazy var meetingRoomsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().apply { $0.scrollDirection = .horizontal })
+  private lazy var meetingRoomsCollectionViewDataSource = MeetingRoomsCollectionViewDataSource(collectionView: meetingRoomsCollectionView, timeTableView: timeTableView)
   private lazy var timeDataSource: TimeDataSource = TimeDataSource(tableView: timeTableView)
   private lazy var buttonsContainerView = UIView()
   private lazy var backButton = UIButton()
@@ -50,7 +46,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private lazy var calendarCollectionView = CalendarCollectionView()
   private var isEdit = false
   private var currentPage = 0
-  private var tableViewNumberOfRows = 0
   private var calendarCollectionViewHeightConstraint: Constraint?
   
   private var state: CalendarCollectionViewState = .collapsed {
@@ -65,6 +60,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     configureUI()
     configureConstraints()
     configureDataSources()
+    configureBindings()
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -102,23 +98,14 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       guard let self = self else { return }
       
       self.calendarCollectionView.reloadData()
-      self.meetingRoomsScrollView.subviews.forEach { $0.removeFromSuperview() }
-      self.configureMeetinRoomsScrollView()
+      self.updateMeetingRoomsFrame()
       self.meetingRoomsScrollView.bounds.origin.x = CGFloat(self.currentPage) * self.meetingRoomsScrollView.bounds.width
-      self.collectionView.performBatchUpdates({ [weak self] in
-        guard let self = self else { return }
-        self.collectionView.bounds.origin.x = CGFloat(self.currentPage) * self.collectionView.bounds.width
-      }, completion: nil)
+      self.meetingRoomsCollectionViewDataSource.viewWillTransition()
       }, completion: nil)
   }
   
   private func configureUI() {
     view.backgroundColor = Colors.mainBackgroundColor
-    
-    collectionView.backgroundColor = Colors.mainBackgroundColor
-    collectionView.isPagingEnabled = true
-    collectionView.setDelegateAndDatasource(self)
-    collectionView.register([MeetingRoomCollectionViewCell.self])
     
     backButton.setTitleColor(Colors.mainTextColor, for: .normal)
     backButton.addTarget(self, action: #selector(didSelectBackButton), for: .touchUpInside)
@@ -136,13 +123,10 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     meetingRoomsScrollViewContainer.backgroundColor = Colors.Colleagues.lightBlue
     meetingRoomsScrollView.isPagingEnabled = true
     meetingRoomsScrollView.showsHorizontalScrollIndicator = false
+    meetingRoomsScrollView.delegate = self
     
-    calendarCollectionView.onSelectDate = { [weak self] date in
-      guard let self = self else { return }
-      
-    }
     calendarCollectionView.delegate = self
-    let calendar = Calendar.current
+    let calendar = Calendar.utc
     let startDate = Date().previousMonth(with: calendar).startOfMonth(with: calendar)
     let endDate = Date().nextMonth(with: calendar).endOfMonth(with: calendar)
     calendarCollectionView.configure(startDate: startDate, endDate: endDate)
@@ -154,7 +138,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
      calendarCollectionView,
      meetingRoomsScrollViewContainer,
      timeTableView,
-     collectionView].forEach(self.view.addSubview(_:))
+     meetingRoomsCollectionView].forEach(self.view.addSubview(_:))
     
     buttonsContainerView.snp.makeConstraints { maker in
       maker.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
@@ -171,7 +155,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     meetingRoomsScrollViewContainer.snp.makeConstraints { maker in
       maker.top.equalTo(calendarCollectionView.snp.bottom)
       maker.left.right.equalTo(self.view.safeAreaLayoutGuide)
-      maker.height.equalTo(30)
+      maker.height.equalTo(Constants.meetingContainerViewHeight)
     }
     
     timeTableView.snp.makeConstraints { maker in
@@ -180,7 +164,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       maker.width.equalTo(Constants.timeTableViewWidth)
     }
     
-    collectionView.snp.makeConstraints { maker in
+    meetingRoomsCollectionView.snp.makeConstraints { maker in
       maker.top.equalTo(meetingRoomsScrollViewContainer.snp.bottom)
       maker.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
       maker.left.equalTo(timeTableView.snp.right)
@@ -206,7 +190,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     expandButton.snp.makeConstraints { maker in
       maker.left.equalTo(monthNameLabel.snp.right)
       maker.centerY.equalToSuperview()
-      maker.size.equalTo(24)
+      maker.size.equalTo(Constants.expandButtonSize)
     }
     
     [meetingRoomsScrollView].forEach(meetingRoomsScrollViewContainer.addSubview(_:))
@@ -223,13 +207,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       let date = Date(timeInterval: TimeInterval(value * TimeInterval.hour), since: date)
       dataSource.append(date)
     }
-    tableViewNumberOfRows = dataSource.count - 1
+    meetingRoomsCollectionViewDataSource.configure(with: dataSource.count - 1)
     timeDataSource.updateDataSource(with: dataSource)
-  }
-  
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let page = floor(scrollView.contentOffset.x / scrollView.frame.width)
-    currentPage = Int(page)
   }
   
   private func configureMeetinRoomsScrollView() {
@@ -239,8 +218,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     )
     
     for index in 0..<meetingRooms.count {
-      let meetingView = MeetingRoomView()
-      meetingView.configure(with: meetingRooms[index].rawValue)
+      let meetingView = meetingRoomViews[index]
+      meetingView.configure(with: meetingRooms[index].description)
       
       meetingView.frame = CGRect(
         x: meetingRoomsScrollView.frame.width * CGFloat(index),
@@ -253,16 +232,124 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     }
   }
   
+  private func updateMeetingRoomsFrame() {
+    meetingRoomsScrollView.contentSize = CGSize(
+      width: meetingRoomsScrollView.frame.width * CGFloat(meetingRooms.count),
+      height: meetingRoomsScrollView.frame.height
+    )
+    
+    for (index, view) in meetingRoomViews.enumerated() {
+      view.frame = CGRect(
+        x: meetingRoomsScrollView.frame.width * CGFloat(index),
+        y: 0,
+        width: meetingRoomsScrollView.frame.width,
+        height: meetingRoomsScrollView.frame.height
+      )
+    }
+  }
+  
+  private func configureBindings() {
+    viewModel.onRoomsUpdate = { [weak self] (room, rooms) in
+      self?.meetingRoomsCollectionViewDataSource.updateDataSource(with: room, rooms: rooms)
+    }
+    
+    calendarCollectionView.onSelectDate = { [weak self] date in
+      self?.viewModel.changeDate(with: date)
+    }
+    
+    meetingRoomsCollectionViewDataSource.didScroll = { [weak self] contentOffset in
+      guard let self = self else { return }
+      let offset = contentOffset.x * self.meetingRoomsScrollView.contentSize.width / self.meetingRoomsCollectionView.contentSize.width
+      self.meetingRoomsScrollView.bounds.origin.x = offset
+    }
+    
+    meetingRoomsCollectionViewDataSource.didChangeCurrentPage = { [weak self] page in
+      guard let self = self else { return }
+      self.currentPage = page
+      self.viewModel.changeRoom(with: self.meetingRooms[page])
+    }
+  }
+  
   @objc func didSelectEditButton() {
     isEdit.toggle()
+    
+    meetingRoomsCollectionView.isScrollEnabled = !isEdit
+    meetingRoomsScrollView.isScrollEnabled = !isEdit
+    calendarCollectionView.setEditing(isEdit)
     
     UIView.transition(with: editButton, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
       self?.editButton.setTitle(self?.isEdit ?? false ? Strings.MeetingRooms.done : Strings.MeetingRooms.edit, for: .normal)
     }, completion: nil)
     
-    if let cell = collectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
-      isEdit ? cell.edit() : cell.done()
+    if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+      if isEdit {
+        cell.edit()
+      } else {
+        cell.book()
+        
+        guard cell.tableViewSelectedIndexPaths.count > 0 else { return }
+        
+        var timeInterspaces = [TimeInterspace]()
+        let date = calendarCollectionView.selectedDate.utc
+        let indexPaths = cell.tableViewSelectedIndexPaths.sorted()
+        let firstIndexPath = cell.tableViewSelectedIndexPaths.first!
+        var previousRow = firstIndexPath.row
+        var timeInterspace = TimeInterspace(startTime: createDateWithRow(row: firstIndexPath.row, date: date))
+        for indexPath in indexPaths {
+          if indexPath.row - previousRow > 1 {
+            timeInterspace.endTime = createDateWithRow(row: previousRow + 1, date: date)
+            timeInterspaces.append(timeInterspace)
+            timeInterspace = TimeInterspace(startTime: createDateWithRow(row: indexPath.row, date: date))
+          }
+          
+          previousRow = indexPath.row
+        }
+        
+        timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
+        timeInterspaces.append(timeInterspace)
+//        cell.finishBooking()
+        let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
+        Toast.current.hide {
+          Toast.current.show(addMeetingRooms)
+        }
+      }
     }
+  }
+  
+  private func createDateWithRow(row: Int, date: Date) -> Date {
+    return Date(timeInterval: TimeInterval((Double(row) * 0.5 + 9) * TimeInterval.hour), since: date)
+  }
+  
+  private func createBookMeetingRoomView(timeInterspace: TimeInterspace) -> BookMeetingRoomView {
+    let v = BookMeetingRoomView()
+    v.update(timeInterspace: timeInterspace,
+             onAddUser: { [weak self] in
+              guard let self = self else { return }
+              Toast.current.hide {
+                let colleaguesVC = Router.getColleaguesViewController(with: .selectParticipant, users: self.viewModel.users)
+                colleaguesVC.onSelectParticipant = { [weak self] user in
+                  self?.viewModel.participants.insert(user)
+//                  Toast.current.show(addMeetingRooms)
+                }
+                colleaguesVC.onPop = {
+                  print("Pop")
+                }
+                self.navigationController?.pushViewController(colleaguesVC, animated: true)
+              }
+    },
+             participants: [],
+             onRemoveUser: { [weak self] user in
+              if let index = self?.viewModel.participants.firstIndex(of: user) {
+                self?.viewModel.participants.remove(at: index)
+              }
+    },
+             onBook: {
+              print("book")
+    },
+             onCancel: {
+              print("cancel")
+    })
+    return v
   }
   
   @objc func didSelectExpandButton() {
@@ -275,13 +362,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   
   private func handleStateDidChange() {
     setExpandButtonImageForState(state, animated: true)
-    monthNameLabel.text = (calendarCollectionView.calendarState?.anchor ?? Date()).monthName()
     updateHeaderHeight(state, animated: true)
     calendarCollectionView.setState(state)
-  }
-  
-  private func scrollToToday() {
-    calendarCollectionView.scrollToToday()
   }
   
   private func setExpandButtonImageForState(_ state: CalendarCollectionViewState, animated: Bool) {
@@ -316,7 +398,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       calendarCollectionViewHeightConstraint?.update(offset: Constants.headerCollapsedHeight)
     }
     
-    collectionView.collectionViewLayout.invalidateLayout()
+    meetingRoomsCollectionView.collectionViewLayout.invalidateLayout()
     if animated {
       let animator = UIViewPropertyAnimator(duration: 0.25, curve: UIView.AnimationCurve.easeInOut, animations: { [weak self] in
         self?.view.layoutIfNeeded()
@@ -327,45 +409,12 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     }
   }
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return meetingRooms.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeue(type: MeetingRoomCollectionViewCell.self, indexPath: indexPath)
-    cell.configure(with: tableViewNumberOfRows, contentOffsetY: timeTableView.contentOffset.y)
-    cell.tableViewDidScroll = { [weak self] contentOffset in
-      self?.timeTableView.setContentOffset(CGPoint(x: 0, y: contentOffset.y), animated: false)
-    }
-    
-    return cell
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    (cell as! MeetingRoomCollectionViewCell).configure(with: tableViewNumberOfRows, contentOffsetY: timeTableView.contentOffset.y)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return collectionView.bounds.size
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return .zero
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    let offset = scrollView.contentOffset.x * meetingRoomsScrollView.contentSize.width / scrollView.contentSize.width
-    self.meetingRoomsScrollView.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
+    let offset = scrollView.contentOffset.x * meetingRoomsCollectionView.contentSize.width / scrollView.contentSize.width
+    meetingRoomsCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
   }
   
+  //MARK: - CalendarCollectionViewDelegate
   func calendarCollectionView(_ calendarCollectionView: CalendarCollectionView, didScrollToMonthWithName monthName: String?) {
     monthNameLabel.text = monthName
   }

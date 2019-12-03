@@ -22,6 +22,7 @@ protocol ColleaguesViewModel: ViewModel {
   var onError: ((ListType) -> Void)? { get set }
   var listType: ListType { get set }
   var recordType: RecordType? { get set }
+  var mode: ColleaguesUIMode { get }
   
   func all()
   func away()
@@ -35,9 +36,12 @@ protocol ColleaguesViewModel: ViewModel {
 
 final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   private let userService: UserService
+  var mode: ColleaguesUIMode
   
-  init(userService: UserService) {
+  init(users: [User], mode: ColleaguesUIMode, userService: UserService) {
     self.userService = userService
+    self.users = users
+    self.mode = mode
   }
   
   var onRefreshList: (([User]) -> Void)?
@@ -51,7 +55,12 @@ final class ColleaguesViewModelImpl: BaseViewModel, ColleaguesViewModel {
   private lazy var isSearching = false
   
   override func viewDidLoad() {
-    all()
+    switch mode {
+    case .regular:
+      all()
+    default:
+      break
+    }
   }
   
   func all() {

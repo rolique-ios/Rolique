@@ -79,7 +79,7 @@
 		3F0217DA237572B000E5894A /* MeetingRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */; };
 		3F0217DC2375746C00E5894A /* MeetingRoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */; };
 		3F0217E423757EF700E5894A /* TimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E323757EF700E5894A /* TimeDataSource.swift */; };
-		3F0217E62375C25600E5894A /* MeetingRoomsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E52375C25600E5894A /* MeetingRoomsDataSource.swift */; };
+		3F0217E62375C25600E5894A /* MeetingRoomsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */; };
 		3F0217E82375C64700E5894A /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E72375C64700E5894A /* TimeTableViewCell.swift */; };
 		3F058BEA230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F058BEB230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
@@ -99,7 +99,10 @@
 		3FC996102316818800C2554C /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9960F2316818800C2554C /* ConfirmButton.swift */; };
 		3FC996122316819200C2554C /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996112316819200C2554C /* CancelButton.swift */; };
 		3FC996152316843700C2554C /* DopracToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996142316843700C2554C /* DopracToast.swift */; };
+		3FE85A5E23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */; };
 		3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */; };
+		3FEAE0B9238BDD7200281B0A /* BookMeetingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEAE0B8238BDD7200281B0A /* BookMeetingRoomView.swift */; };
+		3FEAE0BB238BE18000281B0A /* ParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */; };
 		3FEB8F74237DA66D0035E68F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB8F73237DA66D0035E68F /* R.generated.swift */; };
 		3FEB8F79237DB1E70035E68F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FEB8F7B237DB1E70035E68F /* Localizable.strings */; };
 		3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC8C5E2368748200D0754F /* AttendanceManager.swift */; };
@@ -118,12 +121,17 @@
 		3FF320A0233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */; };
 		3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */; };
 		3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */; };
+		3FF37E70238D477500FAEB04 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E6F238D477500FAEB04 /* Root.swift */; };
+		3FF37E72238D518F00FAEB04 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E71238D518F00FAEB04 /* Room.swift */; };
+		3FF37E74238D665C00FAEB04 /* MeetingRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */; };
 		3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E1236B2DA300F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E3236B347B00F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
+		3FF405A0238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */; };
 		3FF45C8A23326BE500840444 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */; };
 		3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */; };
-		3FF8512B237956E9005A4F2C /* MeetingRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */; };
+		3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */; };
+		3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */; };
 		3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
@@ -273,7 +281,7 @@
 		3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsViewController.swift; sourceTree = "<group>"; };
 		3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsViewModel.swift; sourceTree = "<group>"; };
 		3F0217E323757EF700E5894A /* TimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDataSource.swift; sourceTree = "<group>"; };
-		3F0217E52375C25600E5894A /* MeetingRoomsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsDataSource.swift; sourceTree = "<group>"; };
+		3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsTableViewDataSource.swift; sourceTree = "<group>"; };
 		3F0217E72375C64700E5894A /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		3F058BE9230BF13400869336 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContextMenuConfigurationHandler.swift; sourceTree = "<group>"; };
@@ -291,7 +299,10 @@
 		3FC9960F2316818800C2554C /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		3FC996112316819200C2554C /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		3FC996142316843700C2554C /* DopracToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DopracToast.swift; sourceTree = "<group>"; };
+		3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		3FEAE0B8238BDD7200281B0A /* BookMeetingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMeetingRoomView.swift; sourceTree = "<group>"; };
+		3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		3FEB8F73237DA66D0035E68F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = ../R.generated.swift; sourceTree = "<group>"; };
 		3FEB8F7A237DB1E70035E68F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3FEB8F85237DB2A50035E68F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -312,10 +323,15 @@
 		3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoTableViewCell.swift; sourceTree = "<group>"; };
 		3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTableViewCell.swift; sourceTree = "<group>"; };
+		3FF37E6F238D477500FAEB04 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		3FF37E71238D518F00FAEB04 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomManager.swift; sourceTree = "<group>"; };
 		3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatus.swift; sourceTree = "<group>"; };
+		3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedTimeRoomTableViewCell.swift; sourceTree = "<group>"; };
 		3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
-		3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomTableViewCell.swift; sourceTree = "<group>"; };
+		3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedTimeView.swift; sourceTree = "<group>"; };
+		3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTimeRoomTableViewCell.swift; sourceTree = "<group>"; };
 		3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
@@ -434,6 +450,7 @@
 				25535AD923014D2C00833A5B /* LoginManager.swift */,
 				25535ADA23014D2C00833A5B /* ActionManager.swift */,
 				3FEC8C5E2368748200D0754F /* AttendanceManager.swift */,
+				3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -447,6 +464,7 @@
 				B5D6C3082321905400929BFF /* Bot.swift */,
 				25535AE023014D2C00833A5B /* Actions */,
 				3FEC8C60236875A400D0754F /* AttendanceRecord.swift */,
+				3FF37E71238D518F00FAEB04 /* Room.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -550,6 +568,7 @@
 				25535B0023014D4F00833A5B /* BaseTabBarController.swift */,
 				25535B0123014D4F00833A5B /* ViewModel.swift */,
 				25535B0223014D4F00833A5B /* Router.swift */,
+				3FF37E6F238D477500FAEB04 /* Root.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -691,11 +710,11 @@
 			children = (
 				3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */,
 				3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */,
-				3F0217E52375C25600E5894A /* MeetingRoomsDataSource.swift */,
-				3F0217E323757EF700E5894A /* TimeDataSource.swift */,
+				3FE85A5F23829D9D009B9AEC /* DataSources */,
 				3F0217E92375C64D00E5894A /* Cells */,
-				3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */,
-				3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */,
+				3FEAE0B8238BDD7200281B0A /* BookMeetingRoomView.swift */,
+				3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */,
+				3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */,
 			);
 			path = MeetingRooms;
 			sourceTree = "<group>";
@@ -704,8 +723,10 @@
 			isa = PBXGroup;
 			children = (
 				3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */,
-				3FF8512A237956E9005A4F2C /* MeetingRoomTableViewCell.swift */,
+				3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */,
+				3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */,
 				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
+				3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -771,6 +792,17 @@
 				3FC996112316819200C2554C /* CancelButton.swift */,
 			);
 			path = DefaultButtons;
+			sourceTree = "<group>";
+		};
+		3FE85A5F23829D9D009B9AEC /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				3F0217E323757EF700E5894A /* TimeDataSource.swift */,
+				3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */,
+				3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */,
+				3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */,
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 		3FEE0E46233BBA9C004CD5C3 /* CustomTransition */ = {
@@ -1304,6 +1336,7 @@
 				25535AE423014D2C00833A5B /* UserManager.swift in Sources */,
 				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
+				3FF37E72238D518F00FAEB04 /* Room.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				3FFF4692237426500001793A /* MoreViewController.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
@@ -1326,7 +1359,7 @@
 				2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */,
 				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
-				3FF8512B237956E9005A4F2C /* MeetingRoomTableViewCell.swift in Sources */,
+				3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */,
 				B5D6C3092321905400929BFF /* Bot.swift in Sources */,
 				3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */,
 				25535B0323014D4F00833A5B /* ShortcutManager.swift in Sources */,
@@ -1340,12 +1373,15 @@
 				3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */,
 				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,
+				3FF37E74238D665C00FAEB04 /* MeetingRoomManager.swift in Sources */,
+				3FEAE0BB238BE18000281B0A /* ParticipantTableViewCell.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
 				3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */,
 				25535AEA23014D2C00833A5B /* ActionResult.swift in Sources */,
 				3FC996102316818800C2554C /* ConfirmButton.swift in Sources */,
 				3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */,
-				3F0217E62375C25600E5894A /* MeetingRoomsDataSource.swift in Sources */,
+				3F0217E62375C25600E5894A /* MeetingRoomsTableViewDataSource.swift in Sources */,
+				3FF37E70238D477500FAEB04 /* Root.swift in Sources */,
 				3FFAF0BF23716A1C00FAB98E /* DaysCollectionViewFlowLayout.swift in Sources */,
 				3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
@@ -1367,6 +1403,7 @@
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
 				3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */,
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
+				3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */,
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				2D762901235F1BB600E1E846 /* ColleagueCollectionViewCell.swift in Sources */,
@@ -1378,6 +1415,7 @@
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,
+				3FEAE0B9238BDD7200281B0A /* BookMeetingRoomView.swift in Sources */,
 				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
 				3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */,
 				25535B0623014D4F00833A5B /* UIResultNotifier.swift in Sources */,
@@ -1385,9 +1423,11 @@
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,
 				3FFB28142333A23C0021A4BD /* ProfileDetailDataSource.swift in Sources */,
 				2D1450722338D67F00358BD0 /* Skypable.swift in Sources */,
+				3FE85A5E23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift in Sources */,
 				3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */,
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,
 				2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */,
+				3FF405A0238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift in Sources */,
 				25535B0923014D4F00833A5B /* LoginViewController.swift in Sources */,
 				3FEC8C61236875A400D0754F /* AttendanceRecord.swift in Sources */,
 				B5D6C3022321449100929BFF /* InteractiveImageView.swift in Sources */,

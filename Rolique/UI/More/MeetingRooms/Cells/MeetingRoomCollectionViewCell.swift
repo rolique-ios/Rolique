@@ -17,11 +17,8 @@ private struct Constants {
 
 final class MeetingRoomCollectionViewCell: UICollectionViewCell {
   private lazy var tableView = UITableView()
-  private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
-  private lazy var dataSource = MeetingRoomsDataSource(tableView: tableView)
-  private var selectedRow = -1
-  private var previousLocation: CGFloat = 0
-  private var direction: Direction?
+  private lazy var dataSource = MeetingRoomsTableViewDataSource(tableView: tableView)
+  private(set) var tableViewSelectedIndexPaths = [IndexPath]()
   var tableViewDidScroll: ((CGPoint) -> Void)?
   
   override init(frame: CGRect) {
@@ -36,23 +33,30 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
-    dataSource.configure(with: numberOfRows, contentOffsetY: contentOffsetY)
+  func configure(with numberOfRows: Int, rooms: [Room], contentOffsetY: CGFloat) {
+    dataSource.configure(with: numberOfRows, rooms: rooms, contentOffsetY: contentOffsetY)
     dataSource.didScroll = { [weak self] contentOffset in
       self?.tableViewDidScroll?(contentOffset)
     }
   }
   
-  func edit() {
-    tableView.allowsMultipleSelection = true
-    tableView.addGestureRecognizer(panGesture)
+  func updateTableViewDate(with numberOfRows: Int, rooms: [Room]) {
+    dataSource.updateDataSource(with: numberOfRows, rooms: rooms)
   }
   
-  func done() {
+  func edit() {
+    tableView.allowsMultipleSelection = true
+  }
+  
+  func book() {
     tableView.allowsMultipleSelection = false
-    tableView.removeGestureRecognizer(panGesture)
-    selectedRow = -1
-    previousLocation = 0
+    tableViewSelectedIndexPaths = tableView.indexPathsForSelectedRows ?? []
+  }
+  
+  func finishBooking() {
+    for indexPath in tableView.indexPathsForSelectedRows ?? [] {
+      tableView.deselectRow(at: indexPath, animated: false)
+    }
   }
   
   private func configureViews() {
@@ -62,51 +66,13 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
       maker.edges.equalToSuperview()
     }
   }
+}
+
+struct TimeInterspace: Comparable {
+  let startTime: Date
+  var endTime = Date()
   
-  @objc func didTap(gesture: UIPanGestureRecognizer) {
-    switch gesture.state {
-    case .possible, .began, .changed:
-      let location = gesture.location(in: tableView).y
-      
-      if location - tableView.frame.height > tableView.contentOffset.y && location <= tableView.contentSize.height + Constants.cellHeight / 2 {
-        tableView.contentOffset.y += (location - tableView.frame.height) - tableView.contentOffset.y
-      }
-      
-      if location > 0 && location < tableView.contentOffset.y {
-        tableView.contentOffset.y -= abs(location - tableView.contentOffset.y)
-      }
-      
-      let row = Int(floor(location / Constants.cellHeight))
-      
-      var changeDirection: Bool
-      if location < previousLocation {
-        if direction ?? .toTop != Direction.toBottom {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
-        direction = .toBottom
-      } else {
-        if direction ?? .toBottom != Direction.toTop {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
-        direction = .toTop
-      }
-      previousLocation = location
-      
-      guard row != selectedRow || changeDirection else { return }
-      
-      let indexPath = IndexPath(row: row, section: 0)
-      if let selectedRows = tableView.indexPathsForSelectedRows, selectedRows.contains(indexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-      } else {
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-      }
-      selectedRow = row
-    default:
-      break
-    }
+  static func < (lhs: TimeInterspace, rhs: TimeInterspace) -> Bool {
+    return lhs.startTime < rhs.endTime
   }
 }

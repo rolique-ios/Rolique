@@ -1,5 +1,5 @@
 //
-//  MeetingRoomTableViewCell.swift
+//  EmptyTimeRoomTableViewCell.swift
 //  Rolique
 //
 //  Created by Maksym Ivanyk on 11/11/19.
@@ -14,7 +14,7 @@ private struct Constants {
   static var separatorHeight: CGFloat { return 1.0 }
 }
 
-final class MeetingRoomTableViewCell: UITableViewCell {
+final class EmptyTimeRoomTableViewCell: UITableViewCell {
   private lazy var topSeparator = UIView()
   private lazy var bottomSeparator = UIView()
   

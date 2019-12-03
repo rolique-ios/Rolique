@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    Root.shared.start()
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = Router.getStartViewController()
     window?.makeKeyAndVisible()

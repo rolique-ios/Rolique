@@ -10,7 +10,7 @@ import UIKit
 import Utils
 
 private struct Constants {
-  static var defaultCellHeight: CGFloat { return 30.0 }
+  static var defaultCellHeight: CGFloat { return 40.0 }
 }
 
 final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -48,13 +48,11 @@ final class TimeDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    let cellHeight = Constants.defaultCellHeight
-    return cellHeight
+    return Constants.defaultCellHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    let cellHeight = Constants.defaultCellHeight
-    return cellHeight
+    return Constants.defaultCellHeight
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {

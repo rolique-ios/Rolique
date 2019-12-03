@@ -26,13 +26,21 @@ class UserServiceImpl: UserService {
   }
   
   func getAllUsersFromLocal(usersResult: (([User]) -> Void)?) {
-    let context = CoreDataController.shared.backgroundContext()
-    do {
-      let mos = try coreDataManager.getManagedObjects(sortDescriptors:  [NSSortDescriptor(key: "slackProfile.realName", ascending: true)], context: context)
-      let users = mos.compactMap { User($0) }
-      usersResult?(users)
-    } catch {
-      usersResult?([])
+    DispatchQueue.global().async { [weak self] in
+      guard let self = self else { return }
+      
+      let context = CoreDataController.shared.backgroundContext()
+      do {
+        let mos = try self.coreDataManager.getManagedObjects(sortDescriptors:  [NSSortDescriptor(key: "slackProfile.realName", ascending: true)], context: context)
+        let users = mos.compactMap { User($0) }
+        DispatchQueue.main.async {
+          usersResult?(users)
+        }
+      } catch {
+        DispatchQueue.main.async {
+          usersResult?([])
+        }
+      }
     }
   }
   
