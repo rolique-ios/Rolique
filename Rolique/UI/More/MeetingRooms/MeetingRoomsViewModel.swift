@@ -29,6 +29,8 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   var participants = Set<User>()
   
   var onRoomsUpdate: ((MeetingRoom, [Room]) -> Void)?
+  var onChangeDate: Completion?
+  var onChangeMeetingRoom: ((MeetingRoom) -> Void)?
   
   init(userService: UserService, meetingRoomsManager: MeetingRoomManager) {
     self.userService = userService
@@ -43,11 +45,13 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   
   func changeDate(with date: Date) {
     currentDate = date
+    onChangeDate?()
     getMeetingRooms()
   }
   
   func changeRoom(with room: MeetingRoom) {
     currentRoom = room
+    onChangeMeetingRoom?(room)
     getMeetingRooms()
   }
   

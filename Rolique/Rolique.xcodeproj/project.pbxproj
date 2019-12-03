@@ -127,7 +127,6 @@
 		3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E1236B2DA300F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E3236B347B00F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
-		3FF405A0238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */; };
 		3FF45C8A23326BE500840444 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */; };
 		3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */; };
 		3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */; };
@@ -327,7 +326,6 @@
 		3FF37E71238D518F00FAEB04 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomManager.swift; sourceTree = "<group>"; };
 		3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatus.swift; sourceTree = "<group>"; };
-		3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedTimeRoomTableViewCell.swift; sourceTree = "<group>"; };
 		3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedTimeView.swift; sourceTree = "<group>"; };
@@ -724,7 +722,6 @@
 			children = (
 				3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */,
 				3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */,
-				3FF4059F238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift */,
 				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
 				3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */,
 			);
@@ -1427,7 +1424,6 @@
 				3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */,
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,
 				2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */,
-				3FF405A0238FCC7A00DD7A37 /* BookedTimeRoomTableViewCell.swift in Sources */,
 				25535B0923014D4F00833A5B /* LoginViewController.swift in Sources */,
 				3FEC8C61236875A400D0754F /* AttendanceRecord.swift in Sources */,
 				B5D6C3022321449100929BFF /* InteractiveImageView.swift in Sources */,

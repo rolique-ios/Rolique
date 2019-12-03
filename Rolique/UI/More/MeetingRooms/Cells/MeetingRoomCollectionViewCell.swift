@@ -40,8 +40,12 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  func updateTableViewDate(with numberOfRows: Int, rooms: [Room]) {
-    dataSource.updateDataSource(with: numberOfRows, rooms: rooms)
+  func clearTableViewDataSource() {
+    dataSource.clearDataSource()
+  }
+  
+  func updateTableViewDataSource(rooms: [Room]) {
+    dataSource.updateDataSource(rooms: rooms)
   }
   
   func edit() {

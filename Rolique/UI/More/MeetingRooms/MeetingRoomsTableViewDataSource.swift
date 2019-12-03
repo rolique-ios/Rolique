@@ -10,7 +10,10 @@ import UIKit
 import Utils
 
 private struct Constants {
+  static var minutesStep: Int { return 30 }
   static var defaultCellHeight: CGFloat { return 40.0 }
+  static var defaultOffset: CGFloat { return 2.0 }
+  static var edgeOffset: CGFloat { return 15.0 }
 }
 
 struct BookedCellData {
@@ -25,10 +28,9 @@ struct BookedCellData {
 
 final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   private let tableView: UITableView
-  private var bookedTimeViews = [BookedTimeView]()
   private var numberOfRows: Int = 0
   private var rooms = [Room]()
-  private var bookedCellData = [Int: [BookedCellData]]()
+  private var bookedTimeViews = [BookedTimeView]()
   var didScroll: ((CGPoint) -> Void)?
   var didSelectCell: ((Row) -> Void)?
   
@@ -46,8 +48,7 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
       v.frame = CGRect(origin: v.frame.origin, size: CGSize(width: v.frame.width, height: Constants.defaultCellHeight / 2 - 0.5))
       v.backgroundColor = Colors.secondaryBackgroundColor
     }
-    tableView.register([EmptyTimeRoomTableViewCell.self,
-                        BookedTimeRoomTableViewCell.self])
+    tableView.register([EmptyTimeRoomTableViewCell.self])
   }
   
   func configure(with numberOfRows: Int, rooms: [Room], contentOffsetY: CGFloat) {
@@ -56,42 +57,64 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
     self.tableView.contentOffset = CGPoint(x: 0, y: contentOffsetY)
   }
   
-  func updateDataSource(with numberOfRows: Int, rooms: [Room]) {
+  func clearDataSource() {
+    self.bookedTimeViews.forEach { $0.removeFromSuperview() }
+    self.bookedTimeViews.removeAll()
+  }
+  
+  func updateDataSource(rooms: [Room]) {
     self.rooms = rooms
-    self.bookedCellData.removeAll()
+    self.bookedTimeViews.forEach { $0.removeFromSuperview() }
+    self.bookedTimeViews.removeAll()
     
-    for room in rooms {
+    for (index, room) in rooms.enumerated() {
       let calendar = Calendar.utc
       let startComponents = calendar.dateComponents([.hour, .minute], from: room.start.dateTime)
       let startHour = startComponents.hour.orZero
       let startMinute = startComponents.minute.orZero
-      let startIndex = (startHour - 9) * 2 + (startMinute >= 30 ? 1 : 0)
       
       let endComponents = calendar.dateComponents([.hour, .minute], from: room.end.dateTime)
       let endHour = endComponents.hour.orZero
       let endMinute = endComponents.minute.orZero
-      let endIndex = (endHour - 9) * 2 + (endMinute > 0 ? 0 : -1)
-      let topOffset = Constants.defaultCellHeight - CGFloat(30 - startMinute) * Constants.defaultCellHeight / 30
-      let bottomOffset = Constants.defaultCellHeight - CGFloat(endMinute) * Constants.defaultCellHeight / 30
-      let bookedCellData = BookedCellData(room: room,
-                                          count: endIndex - startIndex + 1,
-                                          height: 0,
-                                          width: 0,
-                                          topOffset: topOffset == 40 ? 0 : topOffset,
-                                          bottomOffset: 0,
-                                          isIntersects: false)
-      if self.bookedCellData[startIndex] != nil {
-        self.bookedCellData[startIndex]!.append(bookedCellData)
-      } else {
-        self.bookedCellData[startIndex] = [bookedCellData]
+      let yPoint = ((CGFloat(startHour - 9)) * 2 * Constants.defaultCellHeight + CGFloat(startMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight) + Constants.defaultCellHeight / 2
+      let minutesHeight = abs((CGFloat(endMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight) - (CGFloat(startMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight))
+      let hoursHeight = CGFloat(endHour - startHour) * 2 * Constants.defaultCellHeight
+      let height = abs(hoursHeight - minutesHeight)
+      
+      let start = calendar.date(byAdding: startComponents, to: Date().utc).orCurrent
+      let end = calendar.date(byAdding: endComponents, to: Date().utc).orCurrent
+      
+      var firstIntersectedIndex: Int?
+      let instesects = rooms.enumerated().filter { (filteredIndex, filteredRoom) in
+        guard room.id != filteredRoom.id else { return false }
+        
+        let filteredRoomStartComponents = calendar.dateComponents([.hour, .minute], from: filteredRoom.start.dateTime)
+        let filteredRoomEndComponents = calendar.dateComponents([.hour, .minute], from: filteredRoom.end.dateTime)
+        let filteredRoomStart = calendar.date(byAdding: filteredRoomStartComponents, to: Date().utc).orCurrent
+        let filteredRoomEnd = calendar.date(byAdding: filteredRoomEndComponents, to: Date().utc).orCurrent
+        
+        if start >= filteredRoomStart && start < filteredRoomEnd || filteredRoomStart >= start && filteredRoomStart < end {
+          if firstIntersectedIndex == nil {
+            firstIntersectedIndex = filteredIndex
+          }
+          
+          return true
+        }
+        
+        return false
       }
+      
+      let width = instesects.isEmpty ? tableView.bounds.width : tableView.bounds.width / CGFloat(instesects.count + 1)
+      let xPoint = instesects.isEmpty ? CGFloat.zero : firstIntersectedIndex.orZero < index ? CGFloat(index - firstIntersectedIndex.orZero) * width : CGFloat.zero
+      
+      let bookedTimeView = BookedTimeView(frame: CGRect(origin: CGPoint(x: xPoint + Constants.defaultOffset, y: yPoint + Constants.defaultOffset),
+                                                        size: CGSize(width: xPoint + width == tableView.bounds.width ? width - Constants.edgeOffset : width - Constants.defaultOffset,
+                                                                     height: height - Constants.defaultOffset * 2)))
+      bookedTimeView.update(with: room.title)
+      bookedTimeViews.append(bookedTimeView)
+      tableView.addSubview(bookedTimeView)
     }
     
-    var numberOfRows = numberOfRows
-    for (_, value) in bookedCellData {
-      numberOfRows -= (value.count - 1)
-    }
-    self.numberOfRows = numberOfRows
     tableView.reloadData()
   }
   
@@ -100,31 +123,17 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let data = bookedCellData[indexPath.row] {
-      let cell = BookedTimeRoomTableViewCell.dequeued(by: tableView)
-      cell.configure(with: data, isLast: indexPath.row == numberOfRows - 1)
-      return cell
-    } else {
-      let cell = EmptyTimeRoomTableViewCell.dequeued(by: tableView)
-      cell.configure(isLast: indexPath.row == numberOfRows - 1)
-      return cell
-    }
+    let cell = EmptyTimeRoomTableViewCell.dequeued(by: tableView)
+    cell.configure(isLast: indexPath.row == numberOfRows - 1)
+    return cell
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    if let bookedRoom = bookedCellData[indexPath.row] {
-      return CGFloat(bookedRoom.count) * Constants.defaultCellHeight
-    } else {
-      return Constants.defaultCellHeight
-    }
+    return Constants.defaultCellHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if let bookedRoom = bookedCellData[indexPath.row] {
-      return CGFloat(bookedRoom.count) * Constants.defaultCellHeight
-    } else {
-      return Constants.defaultCellHeight
-    }
+    return Constants.defaultCellHeight
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -39,13 +39,28 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
     self.tableViewNumberOfRows = tableViewNumberOfRows
   }
   
+  func clearDataSource(with room: MeetingRoom) {
+    guard let index = meetingRooms.firstIndex(of: room),
+      let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? MeetingRoomCollectionViewCell else { return }
+    
+    cell.clearTableViewDataSource()
+  }
+  
+  func clearDataSource() {
+    for (index, _) in meetingRooms.enumerated() {
+      guard let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? MeetingRoomCollectionViewCell else { continue }
+      
+      cell.clearTableViewDataSource()
+    }
+  }
+  
   func updateDataSource(with room: MeetingRoom, rooms: [Room]) {
     meetingRoomsDataSource[room] = rooms
     
     guard let index = meetingRooms.firstIndex(of: room),
       let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? MeetingRoomCollectionViewCell else { return }
     
-    cell.updateTableViewDate(with: tableViewNumberOfRows, rooms: rooms)
+    cell.updateTableViewDataSource(rooms: rooms)
   }
   
   func viewWillTransition() {

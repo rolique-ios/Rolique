@@ -47,6 +47,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private var isEdit = false
   private var currentPage = 0
   private var calendarCollectionViewHeightConstraint: Constraint?
+  private var currentTimeInterspace: TimeInterspace?
   
   private var state: CalendarCollectionViewState = .collapsed {
     didSet {
@@ -253,6 +254,14 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       self?.meetingRoomsCollectionViewDataSource.updateDataSource(with: room, rooms: rooms)
     }
     
+    viewModel.onChangeDate = { [weak self] in
+      self?.meetingRoomsCollectionViewDataSource.clearDataSource()
+    }
+    
+    viewModel.onChangeMeetingRoom = { [weak self] room in
+      self?.meetingRoomsCollectionViewDataSource.clearDataSource(with: room)
+    }
+    
     calendarCollectionView.onSelectDate = { [weak self] date in
       self?.viewModel.changeDate(with: date)
     }
@@ -308,6 +317,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
         timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
         timeInterspaces.append(timeInterspace)
 //        cell.finishBooking()
+        currentTimeInterspace = timeInterspaces.first!
         let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
         Toast.current.hide {
           Toast.current.show(addMeetingRooms)
@@ -328,16 +338,18 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
               Toast.current.hide {
                 let colleaguesVC = Router.getColleaguesViewController(with: .selectParticipant, users: self.viewModel.users)
                 colleaguesVC.onSelectParticipant = { [weak self] user in
-                  self?.viewModel.participants.insert(user)
-//                  Toast.current.show(addMeetingRooms)
+                  guard let self = self, let currentTimeInterspace = self.currentTimeInterspace else { return }
+                  self.viewModel.participants.insert(user)
+                  Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
                 }
-                colleaguesVC.onPop = {
-                  print("Pop")
+                colleaguesVC.onPop = { [weak self] in
+//                  guard let self = self, let currentTimeInterspace = self.currentTimeInterspace else { return }
+//                  Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
                 }
                 self.navigationController?.pushViewController(colleaguesVC, animated: true)
               }
     },
-             participants: [],
+             participants: Array(self.viewModel.participants),
              onRemoveUser: { [weak self] user in
               if let index = self?.viewModel.participants.firstIndex(of: user) {
                 self?.viewModel.participants.remove(at: index)
