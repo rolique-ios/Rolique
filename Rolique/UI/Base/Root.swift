@@ -66,5 +66,6 @@ private extension Root {
     container.register(.unique) { user in MoreViewModelImpl(userService: self.hardResolve(), user: user) }
     container.register(.unique) { user in ProfileDetailViewModelImpl(userService: self.hardResolve(), user: user) }
     container.register(.unique) { MeetingRoomsViewModelImpl(userService: self.hardResolve(), meetingRoomsManager: self.hardResolve()) }
+    container.register(.unique) { CashTrackerViewModelImpl() as CashTrackerViewModel }
   }
 }

@@ -30,14 +30,15 @@ private enum Section: Int, CaseIterable {
     case .profile:
       return [.user]
     case .general:
-      return [.meetingRoom]
+        return [.meetingRoom, .cashTracker]
     }
   }
 }
 
 enum Row: Int, CaseIterable {
   case user,
-  meetingRoom
+  meetingRoom,
+    cashTracker
 }
 
 private extension Row {

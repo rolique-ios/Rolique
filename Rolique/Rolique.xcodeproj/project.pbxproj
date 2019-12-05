@@ -59,6 +59,8 @@
 		25AB46BF22F82859005C52AF /* Faker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BD22F82859005C52AF /* Faker.swift */; };
 		25AB46C022F82859005C52AF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BE22F82859005C52AF /* ImageCache.swift */; };
 		25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* RemoteViewController.swift */; };
+		25F508ED239954CA00D4412C /* CashTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EC239954CA00D4412C /* CashTrackerViewController.swift */; };
+		25F508EF239954D500D4412C /* CashTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EE239954D500D4412C /* CashTrackerViewModel.swift */; };
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
 		2D1450722338D67F00358BD0 /* Skypable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1450712338D67F00358BD0 /* Skypable.swift */; };
 		2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1450732338D6BA00358BD0 /* Mailable.swift */; };
@@ -261,6 +263,8 @@
 		25AB46B822F82853005C52AF /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		25AB46BD22F82859005C52AF /* Faker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faker.swift; sourceTree = "<group>"; };
 		25AB46BE22F82859005C52AF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		25F508EC239954CA00D4412C /* CashTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewController.swift; sourceTree = "<group>"; };
+		25F508EE239954D500D4412C /* CashTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewModel.swift; sourceTree = "<group>"; };
 		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
 		262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		2D1450712338D67F00358BD0 /* Skypable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skypable.swift; sourceTree = "<group>"; };
@@ -480,6 +484,8 @@
 		25535AED23014D4F00833A5B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				25535AFE23014D4F00833A5B /* Base */,
+				25F508EB2399538600D4412C /* CashTracker */,
 				3F06F9BC233E5DFF003218DA /* Helpers */,
 				25535AEE23014D4F00833A5B /* ShortcutManager */,
 				25535AF123014D4F00833A5B /* Profile */,
@@ -490,7 +496,6 @@
 				3FA3C0D22343666200165B06 /* Calendar */,
 				3FFF4690237426170001793A /* More */,
 				3FF1035023155E8700EBCE4E /* Actions */,
-				25535AFE23014D4F00833A5B /* Base */,
 			);
 			path = UI;
 			sourceTree = SOURCE_ROOT;
@@ -668,6 +673,15 @@
 				25AB46B722F82853005C52AF /* UserCollectionViewCell.swift */,
 			);
 			path = UserCell;
+			sourceTree = "<group>";
+		};
+		25F508EB2399538600D4412C /* CashTracker */ = {
+			isa = PBXGroup;
+			children = (
+				25F508EC239954CA00D4412C /* CashTrackerViewController.swift */,
+				25F508EE239954D500D4412C /* CashTrackerViewModel.swift */,
+			);
+			path = CashTracker;
 			sourceTree = "<group>";
 		};
 		2D1450702338D66400358BD0 /* Mixins */ = {
@@ -1419,6 +1433,7 @@
 				25535B0723014D4F00833A5B /* NotificationReminderView.swift in Sources */,
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */,
+				25F508ED239954CA00D4412C /* CashTrackerViewController.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,
 				3FEAE0B9238BDD7200281B0A /* BookMeetingRoomViewToast.swift in Sources */,
 				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
@@ -1427,6 +1442,7 @@
 				3FEB8F74237DA66D0035E68F /* R.generated.swift in Sources */,
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,
 				3FFB28142333A23C0021A4BD /* ProfileDetailDataSource.swift in Sources */,
+				25F508EF239954D500D4412C /* CashTrackerViewModel.swift in Sources */,
 				2D1450722338D67F00358BD0 /* Skypable.swift in Sources */,
 				3FE85A5E23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift in Sources */,
 				3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */,
