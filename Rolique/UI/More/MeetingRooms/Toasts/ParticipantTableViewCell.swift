@@ -21,14 +21,17 @@ final class ParticipantTableViewCell: UITableViewCell {
   private lazy var userNameLabel = UILabel()
   private lazy var removeButton = UIButton()
   
-  var removeButtonOnTap: ((String?) -> Void)?
+  var removeButtonOnTap: Completion?
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.backgroundColor = Colors.secondaryBackgroundColor
+    self.backgroundColor = Colors.mainBackgroundColor
     
     removeButton.setImage(R.image.removeParticipant(), for: .normal)
+    removeButton.addTarget(self, action: #selector(handleRemoveButtonOnTap(_:)), for: .touchUpInside)
+    
+    userImageView.roundCorner(radius: Constants.imageSize / 2)
     
     configureViews()
   }
@@ -37,7 +40,7 @@ final class ParticipantTableViewCell: UITableViewCell {
     super.init(coder: aDecoder)
   }
   
-  func update(fullName: String?, imageUrlString: String?, removeButtonOnTap: ((String?) -> Void)?) {
+  func update(fullName: String?, imageUrlString: String?, removeButtonOnTap: Completion?) {
     URL(string: imageUrlString.orEmpty).map(self.userImageView.setImage(with: ))
     userNameLabel.text = fullName
     self.removeButtonOnTap = removeButtonOnTap
@@ -45,7 +48,7 @@ final class ParticipantTableViewCell: UITableViewCell {
   }
   
   @objc func handleRemoveButtonOnTap(_ button: UIButton) {
-    removeButtonOnTap?(userNameLabel.text)
+    removeButtonOnTap?()
   }
   
   private func configureViews() {
@@ -66,6 +69,7 @@ final class ParticipantTableViewCell: UITableViewCell {
       maker.size.equalTo(Constants.removeButtonSize)
       maker.left.equalTo(userNameLabel.snp.right).offset(Constants.littleOffset)
       maker.right.greaterThanOrEqualToSuperview().offset(-Constants.littleOffset)
+      maker.centerY.equalToSuperview()
     }
   }
   

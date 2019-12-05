@@ -19,7 +19,7 @@ struct CalendarState { var start: Date; var anchor: Date; var end: Date; var sel
 final class CalendarCollectionView: UIView {
   
   private lazy var calendarView = JTAppleCalendarView()
-  private(set) var selectedDate = Date()
+  private(set) var selectedDate = Date().utc
   private var state: CalendarCollectionViewState = .collapsed
   private var calendarState: CalendarState?
   private var isEditing = false
@@ -45,6 +45,8 @@ final class CalendarCollectionView: UIView {
     self.startDate = startDate
     self.endDate = endDate
     calendarView.reloadData()
+    calendarView.selectDates([Date().utc])
+    scrollToToday(animated: false)
   }
 
   private func configureCalendar() {
@@ -62,9 +64,7 @@ final class CalendarCollectionView: UIView {
   
   private func initialize() {
     calendarView.register([DayCollectionCell.self])
-    calendarView.selectDates([Date().utc])
     configureCalendar()
-    scrollToToday(animated: false)
   }
   
   private func configureConstraints() {

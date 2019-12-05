@@ -18,7 +18,6 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
   private let timeTableView: UITableView
   private var currentPage = 0
   private var tableViewNumberOfRows = 0
-  private var meetingRoomsDataSource = [MeetingRoom: [Room]]()
   var didScroll: ((CGPoint) -> Void)?
   var didChangeCurrentPage: ((Int) -> Void)?
   
@@ -54,13 +53,11 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
     }
   }
   
-  func updateDataSource(with room: MeetingRoom, rooms: [Room]) {
-    meetingRoomsDataSource[room] = rooms
-    
+  func updateDataSource(with room: MeetingRoom, roomsData: [RoomData]) {
     guard let index = meetingRooms.firstIndex(of: room),
       let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? MeetingRoomCollectionViewCell else { return }
     
-    cell.updateTableViewDataSource(rooms: rooms)
+    cell.updateTableViewDataSource(roomsData: roomsData)
   }
   
   func viewWillTransition() {
@@ -77,8 +74,8 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeue(type: MeetingRoomCollectionViewCell.self, indexPath: indexPath)
-    let meetingRoom = meetingRooms[indexPath.row]
-    cell.configure(with: tableViewNumberOfRows, rooms: meetingRoomsDataSource[meetingRoom] ?? [], contentOffsetY: timeTableView.contentOffset.y)
+    
+    cell.configure(with: tableViewNumberOfRows, contentOffsetY: timeTableView.contentOffset.y)
     cell.tableViewDidScroll = { [weak self] contentOffset in
       self?.timeTableView.setContentOffset(CGPoint(x: 0, y: contentOffset.y), animated: false)
     }
@@ -88,8 +85,7 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
   
   //MARK: - UICollectionViewDelegate
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    let meetingRoom = meetingRooms[indexPath.row]
-    (cell as! MeetingRoomCollectionViewCell).configure(with: tableViewNumberOfRows, rooms: meetingRoomsDataSource[meetingRoom] ?? [], contentOffsetY: timeTableView.contentOffset.y)
+    (cell as! MeetingRoomCollectionViewCell).configure(with: tableViewNumberOfRows, contentOffsetY: timeTableView.contentOffset.y)
   }
   
   //MARK: - UIScrollViewDelegate

@@ -1,5 +1,5 @@
 //
-//  AddMeetingRoomView.swift
+//  BookMeetingRoomViewToast.swift
 //  Rolique
 //
 //  Created by Maksym Ivanyk on 11/25/19.
@@ -22,7 +22,7 @@ private struct Constants {
   static var timeInterspaceLabelInsets: UIEdgeInsets { return UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8) }
 }
 
-final class BookMeetingRoomView: UIView {
+final class BookMeetingRoomViewToast: UIView {
   private lazy var tableView = UITableView()
   private lazy var participantsLabel = UILabel()
   private lazy var addButton = UIButton()
@@ -103,7 +103,7 @@ final class BookMeetingRoomView: UIView {
     tableView.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.left.equalToSuperview()
-      maker.right.equalTo(addButton.snp.left)
+      maker.right.equalTo(addButton.snp.left).offset(-10.0)
       tableViewHeightConstraint = maker.height.equalTo(Constants.rowHeight).constraint
     }
     
@@ -152,9 +152,7 @@ final class BookMeetingRoomView: UIView {
     self.onBook = onBook
     self.onCancel = onCancel
     self.participants = participants
-    tableView.reloadData()
-    updateTableHeight()
-    tableView.isHidden = participants.count == 0
+    updateTableView()
   }
   
   @objc func addButtonOnTap(_ button: UIButton) {
@@ -169,12 +167,14 @@ final class BookMeetingRoomView: UIView {
     self.onCancel?()
   }
   
-  private func updateTableHeight() {
+  private func updateTableView() {
+    tableView.reloadData()
     tableViewHeightConstraint?.update(offset: participants.isEmpty ? Constants.rowHeight : (CGFloat(participants.count) * Constants.rowHeight))
+    tableView.isHidden = participants.count == 0
   }
 }
 
-extension BookMeetingRoomView: UITableViewDataSource {
+extension BookMeetingRoomViewToast: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return participants.count
   }
@@ -182,24 +182,26 @@ extension BookMeetingRoomView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = ParticipantTableViewCell.dequeued(by: tableView)
     let user = participants[indexPath.row]
+    cell.selectionStyle = .none
     cell.update(fullName: user.slackProfile.realName,
                 imageUrlString: user.optimalImage,
-                removeButtonOnTap: { [weak self] name in
+                removeButtonOnTap: { [weak self] in
                   guard let self = self else { return }
-                  self.participants.firstIndex(of: user).map { self.participants.remove(at: $0) }
-                  self.tableView.reloadData()
-                  self.updateTableHeight()
+                  _ = self.participants.firstIndex(of: user).map { self.participants.remove(at: $0) }
+                  self.updateTableView()
                   self.onRemoveUser?(user)
     })
     return cell
   }
 }
 
-extension BookMeetingRoomView: UITableViewDelegate {
-  
+extension BookMeetingRoomViewToast: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return Constants.rowHeight
+  }
 }
 
-extension BookMeetingRoomView: UITextFieldDelegate {
+extension BookMeetingRoomViewToast: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return true
   }

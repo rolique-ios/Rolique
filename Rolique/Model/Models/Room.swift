@@ -68,7 +68,7 @@ public final class Room: Codable {
     self.id = try values.decode(String.self, forKey: .id)
     self.title = try? values.decode(String.self, forKey: .title)
     self.creator = try values.decode(UserInfo.self, forKey: .creator)
-    self.organizer = try values.decode(UserInfo.self, forKey: .creator)
+    self.organizer = try values.decode(UserInfo.self, forKey: .organizer)
     self.start = try values.decode(BookingTime.self, forKey: .start)
     self.end = try values.decode(BookingTime.self, forKey: .end)
     self.recurrence = try? values.decode([String].self, forKey: .recurrence)

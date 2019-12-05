@@ -33,8 +33,8 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
-  func configure(with numberOfRows: Int, rooms: [Room], contentOffsetY: CGFloat) {
-    dataSource.configure(with: numberOfRows, rooms: rooms, contentOffsetY: contentOffsetY)
+  func configure(with numberOfRows: Int, contentOffsetY: CGFloat) {
+    dataSource.configure(with: numberOfRows, contentOffsetY: contentOffsetY)
     dataSource.didScroll = { [weak self] contentOffset in
       self?.tableViewDidScroll?(contentOffset)
     }
@@ -44,8 +44,8 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     dataSource.clearDataSource()
   }
   
-  func updateTableViewDataSource(rooms: [Room]) {
-    dataSource.updateDataSource(rooms: rooms)
+  func updateTableViewDataSource(roomsData: [RoomData]) {
+    dataSource.updateDataSource(roomsData: roomsData)
   }
   
   func edit() {

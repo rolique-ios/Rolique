@@ -90,6 +90,13 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   
   override func performOnceInViewDidAppear() {
     configureMeetinRoomsScrollView()
+    
+    viewModel.orientationDidChanged(UIDevice.current.orientation, collectionViewWidth: meetingRoomsCollectionView.bounds.width)
+    
+    let calendar = Calendar.utc
+    let startDate = Date().previousMonth(with: calendar).startOfMonth(with: calendar)
+    let endDate = Date().nextMonth(with: calendar).endOfMonth(with: calendar)
+    calendarCollectionView.configure(startDate: startDate, endDate: endDate)
   }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -102,6 +109,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       self.updateMeetingRoomsFrame()
       self.meetingRoomsScrollView.bounds.origin.x = CGFloat(self.currentPage) * self.meetingRoomsScrollView.bounds.width
       self.meetingRoomsCollectionViewDataSource.viewWillTransition()
+      self.viewModel.orientationDidChanged(UIDevice.current.orientation, collectionViewWidth: self.meetingRoomsCollectionView.bounds.width)
       }, completion: nil)
   }
   
@@ -127,10 +135,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     meetingRoomsScrollView.delegate = self
     
     calendarCollectionView.delegate = self
-    let calendar = Calendar.utc
-    let startDate = Date().previousMonth(with: calendar).startOfMonth(with: calendar)
-    let endDate = Date().nextMonth(with: calendar).endOfMonth(with: calendar)
-    calendarCollectionView.configure(startDate: startDate, endDate: endDate)
+    
     monthNameLabel.text = Date().monthName()
   }
   
@@ -250,8 +255,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   }
   
   private func configureBindings() {
-    viewModel.onRoomsUpdate = { [weak self] (room, rooms) in
-      self?.meetingRoomsCollectionViewDataSource.updateDataSource(with: room, rooms: rooms)
+    viewModel.onRoomsUpdate = { [weak self] (room, roomsData) in
+      self?.meetingRoomsCollectionViewDataSource.updateDataSource(with: room, roomsData: roomsData)
     }
     
     viewModel.onChangeDate = { [weak self] in
@@ -316,7 +321,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
         
         timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
         timeInterspaces.append(timeInterspace)
-//        cell.finishBooking()
         currentTimeInterspace = timeInterspaces.first!
         let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
         Toast.current.hide {
@@ -330,21 +334,17 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     return Date(timeInterval: TimeInterval((Double(row) * 0.5 + 9) * TimeInterval.hour), since: date)
   }
   
-  private func createBookMeetingRoomView(timeInterspace: TimeInterspace) -> BookMeetingRoomView {
-    let v = BookMeetingRoomView()
+  private func createBookMeetingRoomView(timeInterspace: TimeInterspace) -> BookMeetingRoomViewToast {
+    let v = BookMeetingRoomViewToast()
     v.update(timeInterspace: timeInterspace,
              onAddUser: { [weak self] in
               guard let self = self else { return }
               Toast.current.hide {
                 let colleaguesVC = Router.getColleaguesViewController(with: .selectParticipant, users: self.viewModel.users)
-                colleaguesVC.onSelectParticipant = { [weak self] user in
+                colleaguesVC.onPop = { [weak self] user in
                   guard let self = self, let currentTimeInterspace = self.currentTimeInterspace else { return }
-                  self.viewModel.participants.insert(user)
+                  _ = user.map { self.viewModel.participants.insert($0) }
                   Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
-                }
-                colleaguesVC.onPop = { [weak self] in
-//                  guard let self = self, let currentTimeInterspace = self.currentTimeInterspace else { return }
-//                  Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
                 }
                 self.navigationController?.pushViewController(colleaguesVC, animated: true)
               }
@@ -355,11 +355,23 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
                 self?.viewModel.participants.remove(at: index)
               }
     },
-             onBook: {
-              print("book")
+             onBook: { [weak self] in
+              guard let self = self else { return }
+              
+              if let cell = self.meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+                cell.finishBooking()
+              }
+              
+              Toast.current.hide()
     },
-             onCancel: {
-              print("cancel")
+             onCancel: { [weak self] in
+              guard let self = self else { return }
+              
+              if let cell = self.meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+                cell.finishBooking()
+              }
+              
+              Toast.current.hide()
     })
     return v
   }

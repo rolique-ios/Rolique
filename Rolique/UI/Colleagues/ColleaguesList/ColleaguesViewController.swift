@@ -28,8 +28,8 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
   private lazy var recordTypeToastHeader = constructRecordTypeToastHeader()
   private var dataSource: ColleaguesDataSource?
   private lazy var contextMenuConfigHandler = UIContextMenuConfigurationHandler()
-  var onSelectParticipant: ((User) -> Void)?
-  var onPop: Completion?
+  var selectedParticipant: User?
+  var onPop: ((User?) -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,7 +54,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     super.viewDidDisappear(animated)
     
     if self.isMovingFromParent {
-      onPop?()
+      onPop?(selectedParticipant)
     }
   }
   
@@ -217,7 +217,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       Spitter.tap(.pop)
       navigationController?.pushViewController(Router.getProfileDetailViewController(user: user), animated: true)
     case .selectParticipant:
-      onSelectParticipant?(user)
+      selectedParticipant = user
       navigationController?.popViewController(animated: true)
     }
   }
