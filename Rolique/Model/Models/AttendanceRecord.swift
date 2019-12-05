@@ -39,10 +39,10 @@ public final class AttendanceRecord: Codable {
   public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let startDateString = try values.decode(String.self, forKey: .startDate)
-    startDate = DateFormatters.startEndDateFormatter.date(from: startDateString).orCurrent
+    startDate = DateFormatters.dateFormatter.date(from: startDateString).orCurrent
     userSlackId = try values.decode(String.self, forKey: .userSlackId)
     let endDateString = try values.decode(String.self, forKey: .endDate)
-    self.endDate = DateFormatters.startEndDateFormatter.date(from: endDateString).orCurrent
+    self.endDate = DateFormatters.dateFormatter.date(from: endDateString).orCurrent
     self.type = try values.decode(String.self, forKey: .type)
     self.userName = try values.decode(String.self, forKey: .userName)
     let createdString = try? values.decode(String.self, forKey: .created)
@@ -57,9 +57,9 @@ public final class AttendanceRecord: Codable {
   }
   
   init(startDate: String, userSlackId: String, endDate: String, type: String, userName: String, created: String?, reviewer: String?, reviewDate: String?, editor: String?, editDate: String?, isCreatedByHr: Bool?) {
-    self.startDate = DateFormatters.startEndDateFormatter.date(from: startDate).orCurrent
+    self.startDate = DateFormatters.dateFormatter.date(from: startDate).orCurrent
     self.userSlackId = userSlackId
-    self.endDate = DateFormatters.startEndDateFormatter.date(from: endDate).orCurrent
+    self.endDate = DateFormatters.dateFormatter.date(from: endDate).orCurrent
     self.type = type
     self.userName = userName
     self.created = DateFormatters.withTDateFormatter.date(from: created.orEmpty)

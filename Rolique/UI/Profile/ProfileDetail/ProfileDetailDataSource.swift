@@ -115,7 +115,7 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
       let phone = user.slackProfile.phone.trimmingCharacters(in: .whitespacesAndNewlines)
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
       infoCell.configure(with: phone,
-                         icon: Images.Colleagues.phone,
+                         icon: R.image.phone(),
                          onLongTap: { [unowned self] in
                           self.copyString?(phone)
         }, onTap: { [unowned self] in
@@ -131,7 +131,7 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
       let email = self.user.slackProfile.email.orEmpty
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
       infoCell.configure(with: user.slackProfile.email,
-                         icon: Images.Profile.email,
+                         icon: R.image.email(),
                          onLongTap: { [unowned self] in
                           self.copyString?(email)
         }, onTap: { [unowned self] in
@@ -147,7 +147,7 @@ final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewD
       let skype = user.slackProfile.skype.orEmpty
       let infoCell = InfoTableViewCell.dequeued(by: tableView)
       infoCell.configure(with: user.slackProfile.skype,
-                         icon: Images.Profile.skype,
+                         icon: R.image.skype(),
                          onLongTap: { [unowned self] in
                           self.copyString?(skype)
         }, onTap: { [unowned self] in

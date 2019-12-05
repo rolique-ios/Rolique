@@ -84,6 +84,21 @@ public struct Colors {
     }
   }
   
+  public static var imageColor: UIColor {
+    if #available(iOS 13.0, *) {
+      let color = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        if traitCollection.userInterfaceStyle == .dark {
+          return .white
+        } else {
+          return .black
+        }
+      }
+      return color
+    } else {
+      return .black
+    }
+  }
+  
   public static var mainBackgroundColor: UIColor {
     if #available(iOS 13.0, *) {
       return .systemBackground
@@ -97,6 +112,14 @@ public struct Colors {
       return .tertiarySystemBackground
     } else {
       return .white
+    }
+  }
+  
+  public static var seconaryGroupedBackgroundColor: UIColor {
+    if #available(iOS 13.0, *) {
+      return .tertiarySystemGroupedBackground
+    } else {
+      return Colors.Colleagues.softWhite
     }
   }
   

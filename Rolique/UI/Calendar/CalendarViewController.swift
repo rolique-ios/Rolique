@@ -74,7 +74,7 @@ final class CalendarViewController<T: CalendarViewModel>: ViewController<T> {
     
     monthLabel.textColor = Colors.mainTextColor
     
-    currentDayButton.setImage(Images.Calendar.calendarToday, for: .normal)
+    currentDayButton.setImage(R.image.calendarToday(), for: .normal)
     currentDayButton.setTitleColor(Colors.mainTextColor, for: .normal)
     currentDayButton.addTarget(self, action: #selector(scrollToToday(sender:)), for: .touchUpInside)
   }

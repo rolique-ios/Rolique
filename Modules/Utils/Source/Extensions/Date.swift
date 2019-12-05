@@ -93,4 +93,29 @@ public extension Date {
         
         return dates
     }
+  
+    func monthName() -> String {
+        let dateFormatter = DateFormatter()
+        var format: String {
+            return "MMMM"
+        }
+        dateFormatter.setLocalizedDateFormatFromTemplate(format)
+        return dateFormatter.string(from: self)
+    }
+  
+    func nextMonth(with calendar: Calendar) -> Date {
+        return calendar.date(byAdding: .month, value: 1, to: self)!
+    }
+    
+    func previousMonth(with calendar: Calendar) -> Date {
+        return calendar.date(byAdding: .month, value: -1, to: self)!
+    }
+    
+    func startOfMonth(with calendar: Calendar) -> Date {
+        return calendar.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
+    }
+    
+    func endOfMonth(with calendar: Calendar) -> Date {
+        return calendar.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth(with: calendar))!
+    }
 }

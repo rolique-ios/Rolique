@@ -31,6 +31,9 @@ public struct Images {
     public static var calendar: UIImage {
       return UIImage(named: "calendar")!
     }
+    public static var more: UIImage {
+      return UIImage(named: "more")!
+    }
   }
   public struct Login {
     public static var fullLogo: UIImage {
@@ -60,6 +63,19 @@ public struct Images {
   public struct Calendar {
     public static var calendarToday: UIImage {
       return UIImage(named: "calendar-today")!
+    }
+  }
+  public struct More {
+    public static var meetingRoom: UIImage {
+      return UIImage(named: "meetingRoom")!
+    }
+  }
+  public struct MeetingRoom {
+    public static var expand: UIImage {
+      return UIImage(named: "expand")!
+    }
+    public static var backArrow: UIImage {
+      return UIImage(named: "arrow-back")!
     }
   }
 }

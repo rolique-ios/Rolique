@@ -26,10 +26,11 @@ extension UINavigationController {
     let nonatomic = objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
     objc_setAssociatedObject(self, &UINavigationController.coordinatorHelperKey, object, nonatomic)
     
-    delegate = object as? TransitionCoordinator
+    let coordinator = object as! TransitionCoordinator
+    delegate = coordinator
     
-    let swipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-    view.addGestureRecognizer(swipeGestureRecognizer)
+    coordinator.swipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+    view.addGestureRecognizer(coordinator.swipeGestureRecognizer!)
   }
   
   @objc func handleSwipe(sender: UIPanGestureRecognizer) {
@@ -50,9 +51,23 @@ extension UINavigationController {
         transitionCoordinatorHelper?.interactionController = nil
     }
   }
+  
+  func renewCustomTransition() {
+    guard let transitionCoordinatorHelper = transitionCoordinatorHelper else { return }
+    delegate = transitionCoordinatorHelper
+    if let gesture = transitionCoordinatorHelper.swipeGestureRecognizer, !(view.gestureRecognizers?.contains(gesture) ?? true) {
+      view.addGestureRecognizer(gesture)
+    }
+  }
+  
+  func removeCustomTransition() {
+    delegate = nil
+    transitionCoordinatorHelper?.swipeGestureRecognizer.map { view.removeGestureRecognizer($0) }
+  }
 }
 
 final class TransitionCoordinator: NSObject, UINavigationControllerDelegate {
+  var swipeGestureRecognizer: UIPanGestureRecognizer?
   var interactionController: UIPercentDrivenInteractiveTransition?
   
   func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {

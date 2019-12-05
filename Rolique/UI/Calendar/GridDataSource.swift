@@ -18,7 +18,7 @@ private struct Constants {
 }
 
 enum Direction {
-  case toLeft, toRight
+  case toLeft, toRight, toTop, toBottom
 }
 
 extension RecordType {

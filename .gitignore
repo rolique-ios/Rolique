@@ -74,3 +74,5 @@ fastlane/test_output
 fastlane/Matchfile
 fastlane/Matchfile.uu
 fastlane/.env.Rolique
+
+*.generated.swift

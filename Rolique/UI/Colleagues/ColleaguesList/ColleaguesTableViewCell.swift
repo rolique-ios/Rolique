@@ -82,12 +82,12 @@ final class ColleaguesTableViewCell: UITableViewCell {
       phoneImageView.isHidden = true
     } else {
       phoneImageView.isHidden = false
-      let image = Images.Colleagues.phone
+      let image = R.image.phone()
       
       let gesture = UITapGestureRecognizer(target: self, action: #selector(touchEvent))
       if !isButtonEnabled {
         phoneImageView.removeGestureRecognizer(gesture)
-        phoneImageView.image = image.withRenderingMode(.alwaysTemplate)
+        phoneImageView.image = image?.withRenderingMode(.alwaysTemplate)
         phoneImageView.tintColor = .lightGray
       } else {
         phoneImageView.addGestureRecognizer(gesture)

@@ -48,7 +48,6 @@
 		25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6194422F8780B00A85C5A /* MainInterface.storyboard */; };
 		25A6194A22F8780B00A85C5A /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25A6195422F878A500A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
-		25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6195822F878A500A85C5A /* MainInterface.storyboard */; };
 		25A6195E22F878A500A85C5A /* VacationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6195322F878A500A85C5A /* VacationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25AB46AC22F82844005C52AF /* UsersWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 25AB46AA22F82844005C52AF /* UsersWidget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25AB46AF22F82844005C52AF /* UsersWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AB46A822F82844005C52AF /* UsersWidget.framework */; };
@@ -77,12 +76,20 @@
 		2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE7FA6F23184A9B00914EE8 /* RecordTypeToast.swift */; };
 		2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE7FA7223186A9100914EE8 /* DateFormatters.swift */; };
 		2DF142FC23379D150042D3BC /* MajorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF142FB23379D150042D3BC /* MajorTableViewCell.swift */; };
+		3F0217DA237572B000E5894A /* MeetingRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */; };
+		3F0217DC2375746C00E5894A /* MeetingRoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */; };
+		3F0217E423757EF700E5894A /* TimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E323757EF700E5894A /* TimeDataSource.swift */; };
+		3F0217E62375C25600E5894A /* MeetingRoomsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */; };
+		3F0217E82375C64700E5894A /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0217E72375C64700E5894A /* TimeTableViewCell.swift */; };
 		3F058BEA230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F058BEB230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F058BEC230BF13400869336 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F058BE9230BF13400869336 /* UserService.swift */; };
 		3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */; };
+		3F06FE17237C2C9200DEE682 /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */; };
+		3F06FE19237C2E6600DEE682 /* DayCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */; };
 		3F08FA1223707AD000CDBC13 /* UsersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */; };
 		3F08FA142370863600CDBC13 /* DaysDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08FA132370863600CDBC13 /* DaysDataSource.swift */; };
+		3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3529A7237998C600905907 /* MeetingRoomView.swift */; };
 		3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */; };
 		3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83A7EE2302FF9B00EA683A /* Rolique.xcdatamodeld */; };
 		3FA2DF79236C8E2D00242416 /* LabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */; };
@@ -92,7 +99,12 @@
 		3FC996102316818800C2554C /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9960F2316818800C2554C /* ConfirmButton.swift */; };
 		3FC996122316819200C2554C /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996112316819200C2554C /* CancelButton.swift */; };
 		3FC996152316843700C2554C /* DopracToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC996142316843700C2554C /* DopracToast.swift */; };
+		3FE85A5E23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */; };
 		3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */; };
+		3FEAE0B9238BDD7200281B0A /* BookMeetingRoomViewToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEAE0B8238BDD7200281B0A /* BookMeetingRoomViewToast.swift */; };
+		3FEAE0BB238BE18000281B0A /* ParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */; };
+		3FEB8F74237DA66D0035E68F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB8F73237DA66D0035E68F /* R.generated.swift */; };
+		3FEB8F79237DB1E70035E68F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FEB8F7B237DB1E70035E68F /* Localizable.strings */; };
 		3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC8C5E2368748200D0754F /* AttendanceManager.swift */; };
 		3FEC8C61236875A400D0754F /* AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC8C60236875A400D0754F /* AttendanceRecord.swift */; };
 		3FEE0E41233B8DDD004CD5C3 /* TransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */; };
@@ -109,11 +121,17 @@
 		3FF320A0233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */; };
 		3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */; };
 		3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */; };
+		3FF37E70238D477500FAEB04 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E6F238D477500FAEB04 /* Root.swift */; };
+		3FF37E72238D518F00FAEB04 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E71238D518F00FAEB04 /* Room.swift */; };
+		3FF37E74238D665C00FAEB04 /* MeetingRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */; };
 		3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E1236B2DA300F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF3B5E3236B347B00F42C06 /* TodayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */; };
 		3FF45C8A23326BE500840444 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */; };
 		3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */; };
+		3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */; };
+		3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */; };
+		3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */; };
 		3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */; };
 		3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */; };
 		3FF9BEEF23058F3900028513 /* ColleaguesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */; };
@@ -124,6 +142,11 @@
 		3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD3885231807B0006D5479 /* PickerTextField.swift */; };
 		3FFD388B23180D67006D5479 /* LateToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD388A23180D67006D5479 /* LateToast.swift */; };
 		3FFE6C7F231D425400757738 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE6C7E231D425400757738 /* ImageManager.swift */; };
+		3FFF4692237426500001793A /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4691237426500001793A /* MoreViewController.swift */; };
+		3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4693237426A00001793A /* MoreViewModel.swift */; };
+		3FFF4696237427210001793A /* MoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4695237427210001793A /* MoreDataSource.swift */; };
+		3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF469723742F3A0001793A /* MoreTableViewCell.swift */; };
+		3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF469923743A170001793A /* ProfileTableViewCell.swift */; };
 		3FFF920C23619FEF00DAFDC8 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF920B23619FEF00DAFDC8 /* GridDataSource.swift */; };
 		3FFFD87F236C3E7D00F6EFD9 /* VacationUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */; };
 		3FFFD880236C3FE000F6EFD9 /* VacationUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */; };
@@ -219,18 +242,15 @@
 		25535B0223014D4F00833A5B /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		256A4D8022F8142A00A31427 /* Rolique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rolique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		256A4D8322F8142A00A31427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		256A4D8D22F8142B00A31427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		256A4D8F22F8142B00A31427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
 		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
 		25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RemoteTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A6193F22F8780B00A85C5A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		25A6194222F8780B00A85C5A /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
-		25A6194522F8780B00A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		25A6194722F8780B00A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25A6195322F878A500A85C5A /* VacationTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VacationTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A6195622F878A500A85C5A /* VacationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationViewController.swift; sourceTree = "<group>"; };
-		25A6195922F878A500A85C5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		25A6195B22F878A500A85C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25AB46A822F82844005C52AF /* UsersWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UsersWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AB46AA22F82844005C52AF /* UsersWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersWidget.h; sourceTree = "<group>"; };
@@ -257,10 +277,18 @@
 		2DF142FB23379D150042D3BC /* MajorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorTableViewCell.swift; sourceTree = "<group>"; };
 		3625D99FD95DD447F481B6F5 /* Pods-RoliqueTests.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoliqueTests.stagingdebug.xcconfig"; path = "Target Support Files/Pods-RoliqueTests/Pods-RoliqueTests.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		3895A80C2D9664AB869C9297 /* Pods-VacationTodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VacationTodayExtension.release.xcconfig"; path = "Target Support Files/Pods-VacationTodayExtension/Pods-VacationTodayExtension.release.xcconfig"; sourceTree = "<group>"; };
+		3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsViewController.swift; sourceTree = "<group>"; };
+		3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsViewModel.swift; sourceTree = "<group>"; };
+		3F0217E323757EF700E5894A /* TimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDataSource.swift; sourceTree = "<group>"; };
+		3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsTableViewDataSource.swift; sourceTree = "<group>"; };
+		3F0217E72375C64700E5894A /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		3F058BE9230BF13400869336 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		3F06F9BA233E4946003218DA /* UIContextMenuConfigurationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContextMenuConfigurationHandler.swift; sourceTree = "<group>"; };
+		3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
+		3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionCell.swift; sourceTree = "<group>"; };
 		3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDataSource.swift; sourceTree = "<group>"; };
 		3F08FA132370863600CDBC13 /* DaysDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysDataSource.swift; sourceTree = "<group>"; };
+		3F3529A7237998C600905907 /* MeetingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomView.swift; sourceTree = "<group>"; };
 		3F83A7CB2302FA3B00EA683A /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		3F83A7EF2302FF9B00EA683A /* Rolique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rolique.xcdatamodel; sourceTree = "<group>"; };
 		3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInsets.swift; sourceTree = "<group>"; };
@@ -270,7 +298,14 @@
 		3FC9960F2316818800C2554C /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		3FC996112316819200C2554C /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		3FC996142316843700C2554C /* DopracToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DopracToast.swift; sourceTree = "<group>"; };
+		3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		3FE9DFB3233CFF69007E0029 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		3FEAE0B8238BDD7200281B0A /* BookMeetingRoomViewToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMeetingRoomViewToast.swift; sourceTree = "<group>"; };
+		3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantTableViewCell.swift; sourceTree = "<group>"; };
+		3FEB8F73237DA66D0035E68F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = ../R.generated.swift; sourceTree = "<group>"; };
+		3FEB8F7A237DB1E70035E68F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3FEB8F85237DB2A50035E68F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3FEB8F86237DB2A50035E68F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		3FEC8C5E2368748200D0754F /* AttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceManager.swift; sourceTree = "<group>"; };
 		3FEC8C60236875A400D0754F /* AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRecord.swift; sourceTree = "<group>"; };
 		3FEE0E40233B8DDD004CD5C3 /* TransitionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCoordinator.swift; sourceTree = "<group>"; };
@@ -287,9 +322,15 @@
 		3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoTableViewCell.swift; sourceTree = "<group>"; };
 		3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTableViewCell.swift; sourceTree = "<group>"; };
+		3FF37E6F238D477500FAEB04 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		3FF37E71238D518F00FAEB04 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomManager.swift; sourceTree = "<group>"; };
 		3FF3B5DF236B1CA100F42C06 /* TodayStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatus.swift; sourceTree = "<group>"; };
 		3FF45C8923326BE500840444 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		3FF45C8B23326C0200840444 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
+		3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedTimeView.swift; sourceTree = "<group>"; };
+		3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTimeRoomTableViewCell.swift; sourceTree = "<group>"; };
+		3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF9BEEA23054DCD00028513 /* ColleaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewController.swift; sourceTree = "<group>"; };
 		3FF9BEEC23054DF100028513 /* ColleaguesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesViewModel.swift; sourceTree = "<group>"; };
 		3FF9BEEE23058F3900028513 /* ColleaguesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleaguesDataSource.swift; sourceTree = "<group>"; };
@@ -300,6 +341,11 @@
 		3FFD3885231807B0006D5479 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		3FFD388A23180D67006D5479 /* LateToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateToast.swift; sourceTree = "<group>"; };
 		3FFE6C7E231D425400757738 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		3FFF4691237426500001793A /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		3FFF4693237426A00001793A /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		3FFF4695237427210001793A /* MoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDataSource.swift; sourceTree = "<group>"; };
+		3FFF469723742F3A0001793A /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
+		3FFF469923743A170001793A /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		3FFF920B23619FEF00DAFDC8 /* GridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
 		3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationUserService.swift; sourceTree = "<group>"; };
 		3FFFD881236C401000F6EFD9 /* RemoteUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserService.swift; sourceTree = "<group>"; };
@@ -402,6 +448,7 @@
 				25535AD923014D2C00833A5B /* LoginManager.swift */,
 				25535ADA23014D2C00833A5B /* ActionManager.swift */,
 				3FEC8C5E2368748200D0754F /* AttendanceManager.swift */,
+				3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -415,6 +462,7 @@
 				B5D6C3082321905400929BFF /* Bot.swift */,
 				25535AE023014D2C00833A5B /* Actions */,
 				3FEC8C60236875A400D0754F /* AttendanceRecord.swift */,
+				3FF37E71238D518F00FAEB04 /* Room.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -440,6 +488,7 @@
 				25535AFA23014D4F00833A5B /* Login */,
 				3FF9BEE923054CBB00028513 /* Colleagues */,
 				3FA3C0D22343666200165B06 /* Calendar */,
+				3FFF4690237426170001793A /* More */,
 				3FF1035023155E8700EBCE4E /* Actions */,
 				25535AFE23014D4F00833A5B /* Base */,
 			);
@@ -488,6 +537,7 @@
 				3FFD3885231807B0006D5479 /* PickerTextField.swift */,
 				B5D6C3012321449100929BFF /* InteractiveImageView.swift */,
 				3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */,
+				3F3529A7237998C600905907 /* MeetingRoomView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -516,6 +566,7 @@
 				25535B0023014D4F00833A5B /* BaseTabBarController.swift */,
 				25535B0123014D4F00833A5B /* ViewModel.swift */,
 				25535B0223014D4F00833A5B /* Router.swift */,
+				3FF37E6F238D477500FAEB04 /* Root.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -554,7 +605,9 @@
 				25535AED23014D4F00833A5B /* UI */,
 				25535AD623014D2C00833A5B /* Model */,
 				3FF3415023044F70008EA243 /* CoreData */,
+				3FEB8F73237DA66D0035E68F /* R.generated.swift */,
 				253F187A22FC4FE0007D94B1 /* Changelog.txt */,
+				3FEB8F7B237DB1E70035E68F /* Localizable.strings */,
 				256A4D8322F8142A00A31427 /* AppDelegate.swift */,
 				3FEE1FE023351A270075DF32 /* Assets.xcassets */,
 				256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */,
@@ -578,7 +631,6 @@
 			isa = PBXGroup;
 			children = (
 				25A6195622F878A500A85C5A /* VacationViewController.swift */,
-				25A6195822F878A500A85C5A /* MainInterface.storyboard */,
 				25A6195B22F878A500A85C5A /* Info.plist */,
 				3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */,
 			);
@@ -651,6 +703,39 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		3F0217D8237571E700E5894A /* MeetingRooms */ = {
+			isa = PBXGroup;
+			children = (
+				3F0217D9237572B000E5894A /* MeetingRoomsViewController.swift */,
+				3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */,
+				3FE85A5F23829D9D009B9AEC /* DataSources */,
+				3F0217E92375C64D00E5894A /* Cells */,
+				3FFFABFB2397C24E0015A958 /* Toasts */,
+				3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */,
+			);
+			path = MeetingRooms;
+			sourceTree = "<group>";
+		};
+		3F0217E92375C64D00E5894A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3FF8512C23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift */,
+				3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */,
+				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
+				3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3F0217EA2375C65200E5894A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3FFF469723742F3A0001793A /* MoreTableViewCell.swift */,
+				3FFF469923743A170001793A /* ProfileTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		3F058BE8230BF0E400869336 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +788,17 @@
 				3FC996112316819200C2554C /* CancelButton.swift */,
 			);
 			path = DefaultButtons;
+			sourceTree = "<group>";
+		};
+		3FE85A5F23829D9D009B9AEC /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				3F0217E323757EF700E5894A /* TimeDataSource.swift */,
+				3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */,
+				3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */,
+				3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */,
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 		3FEE0E46233BBA9C004CD5C3 /* CustomTransition */ = {
@@ -783,6 +879,27 @@
 				3FF45C8823326BAE00840444 /* ColleaguesList */,
 			);
 			path = Colleagues;
+			sourceTree = "<group>";
+		};
+		3FFF4690237426170001793A /* More */ = {
+			isa = PBXGroup;
+			children = (
+				3FFF4691237426500001793A /* MoreViewController.swift */,
+				3FFF4693237426A00001793A /* MoreViewModel.swift */,
+				3FFF4695237427210001793A /* MoreDataSource.swift */,
+				3F0217EA2375C65200E5894A /* Cells */,
+				3F0217D8237571E700E5894A /* MeetingRooms */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		3FFFABFB2397C24E0015A958 /* Toasts */ = {
+			isa = PBXGroup;
+			children = (
+				3FEAE0B8238BDD7200281B0A /* BookMeetingRoomViewToast.swift */,
+				3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */,
+			);
+			path = Toasts;
 			sourceTree = "<group>";
 		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
@@ -867,6 +984,7 @@
 			buildConfigurationList = 256A4D9222F8142B00A31427 /* Build configuration list for PBXNativeTarget "Rolique" */;
 			buildPhases = (
 				87C54D6BABC93F60F216576F /* [CP] Check Pods Manifest.lock */,
+				3FEB8F72237DA5260035E68F /* Run Script R */,
 				256A4D7C22F8142A00A31427 /* Sources */,
 				256A4D7D22F8142A00A31427 /* Frameworks */,
 				256A4D7E22F8142A00A31427 /* Resources */,
@@ -1023,6 +1141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */,
+				3FEB8F79237DB1E70035E68F /* Localizable.strings in Resources */,
 				256A4D8E22F8142B00A31427 /* LaunchScreen.storyboard in Resources */,
 				2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */,
 				253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */,
@@ -1045,7 +1164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				257C79B523018638007A299D /* debug.rolque.xcconfig in Resources */,
-				25A6195A22F878A500A85C5A /* MainInterface.storyboard in Resources */,
 				257C79B323018636007A299D /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1105,6 +1223,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3FEB8F72237DA5260035E68F /* Run Script R */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = "Run Script R";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7D674C15107CDD0346C99AA9 /* [CP] Check Pods Manifest.lock */ = {
@@ -1198,18 +1337,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FC996152316843700C2554C /* DopracToast.swift in Sources */,
+				3FFF4696237427210001793A /* MoreDataSource.swift in Sources */,
 				25535AE423014D2C00833A5B /* UserManager.swift in Sources */,
 				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
+				3FF37E72238D518F00FAEB04 /* Room.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
+				3FFF4692237426500001793A /* MoreViewController.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
 				3FA3C0D6234366FF00165B06 /* CalendarViewModel.swift in Sources */,
 				2D7628FD235F1B7300E1E846 /* WeekdayCollectionViewCell.swift in Sources */,
 				2D40DF2A233959DA001D647D /* Slackable.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
 				3FFF920C23619FEF00DAFDC8 /* GridDataSource.swift in Sources */,
+				3F0217DC2375746C00E5894A /* MeetingRoomsViewModel.swift in Sources */,
+				3F06FE19237C2E6600DEE682 /* DayCollectionCell.swift in Sources */,
+				3F0217DA237572B000E5894A /* MeetingRoomsViewController.swift in Sources */,
 				3FA3C0D82343786C00165B06 /* ModalPresentationHandler.swift in Sources */,
 				256A4D8422F8142A00A31427 /* AppDelegate.swift in Sources */,
+				3F0217E82375C64700E5894A /* TimeTableViewCell.swift in Sources */,
 				3FFD388B23180D67006D5479 /* LateToast.swift in Sources */,
 				2D7628FA235F192700E1E846 /* GridCollectionViewFlowLayout.swift in Sources */,
 				3F08FA1223707AD000CDBC13 /* UsersDataSource.swift in Sources */,
@@ -1218,21 +1364,31 @@
 				2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */,
 				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
+				3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */,
 				B5D6C3092321905400929BFF /* Bot.swift in Sources */,
 				3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */,
 				25535B0323014D4F00833A5B /* ShortcutManager.swift in Sources */,
 				2D762903235F2AB800E1E846 /* GridCollectionViewCell.swift in Sources */,
 				3FEE0E41233B8DDD004CD5C3 /* TransitionCoordinator.swift in Sources */,
+				3F0217E423757EF700E5894A /* TimeDataSource.swift in Sources */,
 				25535B0823014D4F00833A5B /* LoginViewModel.swift in Sources */,
 				2D1450762338D6CC00358BD0 /* Callable.swift in Sources */,
+				3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */,
 				3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */,
+				3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */,
 				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,
+				3FF37E74238D665C00FAEB04 /* MeetingRoomManager.swift in Sources */,
+				3FEAE0BB238BE18000281B0A /* ParticipantTableViewCell.swift in Sources */,
 				3FF9BEED23054DF100028513 /* ColleaguesViewModel.swift in Sources */,
 				3F06F9BB233E4946003218DA /* UIContextMenuConfigurationHandler.swift in Sources */,
 				25535AEA23014D2C00833A5B /* ActionResult.swift in Sources */,
 				3FC996102316818800C2554C /* ConfirmButton.swift in Sources */,
+				3FFF4694237426A00001793A /* MoreViewModel.swift in Sources */,
+				3F0217E62375C25600E5894A /* MeetingRoomsTableViewDataSource.swift in Sources */,
+				3FF37E70238D477500FAEB04 /* Root.swift in Sources */,
 				3FFAF0BF23716A1C00FAB98E /* DaysCollectionViewFlowLayout.swift in Sources */,
+				3FF8512D23796B6A005A4F2C /* MeetingRoomCollectionViewCell.swift in Sources */,
 				25535AEC23014D2C00833A5B /* Actions.swift in Sources */,
 				25535B0E23014D4F00833A5B /* Router.swift in Sources */,
 				3FC996122316819200C2554C /* CancelButton.swift in Sources */,
@@ -1250,10 +1406,13 @@
 				3FEE1FDD2334C5FF0075DF32 /* TitledSectionTableViewCell.swift in Sources */,
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
+				3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */,
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
+				3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */,
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				2D762901235F1BB600E1E846 /* ColleagueCollectionViewCell.swift in Sources */,
+				3F06FE17237C2C9200DEE682 /* CalendarCollectionView.swift in Sources */,
 				25535AE523014D2C00833A5B /* LoginManager.swift in Sources */,
 				3F08FA142370863600CDBC13 /* DaysDataSource.swift in Sources */,
 				3FF2D685231E9E8B00EE324F /* ByteCountFormatters.swift in Sources */,
@@ -1261,12 +1420,15 @@
 				25535B0B23014D4F00833A5B /* ViewController.swift in Sources */,
 				3FF45C8C23326C0200840444 /* ProfileDetailViewModel.swift in Sources */,
 				3FFD38812317D284006D5479 /* RemoteToast.swift in Sources */,
+				3FEAE0B9238BDD7200281B0A /* BookMeetingRoomViewToast.swift in Sources */,
 				3FF9BEEB23054DCD00028513 /* ColleaguesViewController.swift in Sources */,
 				3FF1035A23157D7F00EBCE4E /* PochavToast.swift in Sources */,
 				25535B0623014D4F00833A5B /* UIResultNotifier.swift in Sources */,
+				3FEB8F74237DA66D0035E68F /* R.generated.swift in Sources */,
 				25535B0F23014DA600833A5B /* VacationViewController.swift in Sources */,
 				3FFB28142333A23C0021A4BD /* ProfileDetailDataSource.swift in Sources */,
 				2D1450722338D67F00358BD0 /* Skypable.swift in Sources */,
+				3FE85A5E23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift in Sources */,
 				3FF3B5E0236B1CA100F42C06 /* TodayStatus.swift in Sources */,
 				3F83A7F02302FF9B00EA683A /* Rolique.xcdatamodeld in Sources */,
 				2DE7FA7023184A9B00914EE8 /* RecordTypeToast.swift in Sources */,
@@ -1359,7 +1521,7 @@
 		256A4D8C22F8142B00A31427 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				256A4D8D22F8142B00A31427 /* Base */,
+				3FEB8F85237DB2A50035E68F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1367,17 +1529,17 @@
 		25A6194422F8780B00A85C5A /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				25A6194522F8780B00A85C5A /* Base */,
+				3FEB8F86237DB2A50035E68F /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
-		25A6195822F878A500A85C5A /* MainInterface.storyboard */ = {
+		3FEB8F7B237DB1E70035E68F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				25A6195922F878A500A85C5A /* Base */,
+				3FEB8F7A237DB1E70035E68F /* en */,
 			);
-			name = MainInterface.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1389,6 +1551,7 @@
 			buildSettings = {
 				ACTION_TEST = FALSE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1453,6 +1616,7 @@
 			buildSettings = {
 				ACTION_TEST = FALSE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1744,6 +1908,7 @@
 			buildSettings = {
 				ACTION_TEST = TRUE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1949,6 +2114,7 @@
 			buildSettings = {
 				ACTION_TEST = TRUE;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

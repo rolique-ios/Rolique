@@ -9,6 +9,8 @@ def pods
   pod 'IgyToast', '0.0.7'
   pod 'Networking', :path => '../Modules/Networking'
   pod 'Utils', :path => '../Modules/Utils'
+  pod 'JTAppleCalendar', '~> 7.1'
+  pod 'R.swift'
 end
 
 target 'Rolique' do
