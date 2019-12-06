@@ -87,6 +87,12 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
         let vc = Router.getMeetingRoomsViewController()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
+      
+      case .cashTracker:
+        self.navigationController?.removeCustomTransition()
+        let vc = Router.getCashTrackerViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
       }
     }
   }

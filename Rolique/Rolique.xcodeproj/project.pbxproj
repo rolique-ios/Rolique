@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		037DB440DF0B443D3D5C71A8 /* libPods-RemoteTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72E3668135727275F5C78B1 /* libPods-RemoteTodayExtension.a */; };
 		1F02CB875F88AE1C4EF87710 /* libPods-RoliqueTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4D18FB293E95AB5C6B1916 /* libPods-RoliqueTests.a */; };
+		2516B681239A5ADD009EC707 /* CashTrackerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B680239A5ADD009EC707 /* CashTrackerDataSource.swift */; };
+		2516B685239A6251009EC707 /* CashTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B684239A6251009EC707 /* CashTypeTableViewCell.swift */; };
 		253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253F187A22FC4FE0007D94B1 /* Changelog.txt */; };
 		25535AE423014D2C00833A5B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD823014D2C00833A5B /* UserManager.swift */; };
 		25535AE523014D2C00833A5B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD923014D2C00833A5B /* LoginManager.swift */; };
@@ -224,6 +226,8 @@
 		030C49FE321A95CF9C3FE565 /* Pods-RemoteTodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemoteTodayExtension.debug.xcconfig"; path = "Target Support Files/Pods-RemoteTodayExtension/Pods-RemoteTodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		1AA03B650303A5942ABCF252 /* Pods-UI.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.stagingrelease.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.stagingrelease.xcconfig"; sourceTree = "<group>"; };
 		22CFF320B972D1295B58F8BB /* Pods-Rolique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.debug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.debug.xcconfig"; sourceTree = "<group>"; };
+		2516B680239A5ADD009EC707 /* CashTrackerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerDataSource.swift; sourceTree = "<group>"; };
+		2516B684239A6251009EC707 /* CashTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTypeTableViewCell.swift; sourceTree = "<group>"; };
 		253F187A22FC4FE0007D94B1 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Changelog.txt; path = fastlane/Changelog.txt; sourceTree = SOURCE_ROOT; };
 		25535AD823014D2C00833A5B /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		25535AD923014D2C00833A5B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
@@ -434,6 +438,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2516B682239A621F009EC707 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				2516B680239A5ADD009EC707 /* CashTrackerDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		2516B683239A6227009EC707 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2516B684239A6251009EC707 /* CashTypeTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		25535AD623014D2C00833A5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +700,8 @@
 			children = (
 				25F508EC239954CA00D4412C /* CashTrackerViewController.swift */,
 				25F508EE239954D500D4412C /* CashTrackerViewModel.swift */,
+				2516B682239A621F009EC707 /* DataSource */,
+				2516B683239A6227009EC707 /* Cells */,
 			);
 			path = CashTracker;
 			sourceTree = "<group>";
@@ -1364,6 +1386,7 @@
 				2D40DF2A233959DA001D647D /* Slackable.swift in Sources */,
 				25535B0C23014D4F00833A5B /* BaseTabBarController.swift in Sources */,
 				3FFF920C23619FEF00DAFDC8 /* GridDataSource.swift in Sources */,
+				2516B681239A5ADD009EC707 /* CashTrackerDataSource.swift in Sources */,
 				3F0217DC2375746C00E5894A /* MeetingRoomsViewModel.swift in Sources */,
 				3F06FE19237C2E6600DEE682 /* DayCollectionCell.swift in Sources */,
 				3F0217DA237572B000E5894A /* MeetingRoomsViewController.swift in Sources */,
@@ -1379,6 +1402,7 @@
 				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
 				3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */,
+				2516B685239A6251009EC707 /* CashTypeTableViewCell.swift in Sources */,
 				B5D6C3092321905400929BFF /* Bot.swift in Sources */,
 				3FF1035423155EE300EBCE4E /* ActionsViewModel.swift in Sources */,
 				25535B0323014D4F00833A5B /* ShortcutManager.swift in Sources */,

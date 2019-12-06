@@ -13,5 +13,5 @@ protocol CashTrackerViewModel: ViewModel {
 }
 
 final class CashTrackerViewModelImpl: BaseViewModel, CashTrackerViewModel {
-    
+  
 }

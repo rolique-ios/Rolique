@@ -22,7 +22,7 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
   private var roomsData = [RoomData]()
   private var bookedTimeViews = [BookedTimeView]()
   var didScroll: ((CGPoint) -> Void)?
-  var didSelectCell: ((Row) -> Void)?
+  var didSelectCell: ((MoreTableRow) -> Void)?
   
   init(tableView: UITableView) {
     self.tableView = tableView

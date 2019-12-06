@@ -36,6 +36,8 @@ class ViewController<T: ViewModel>: UIViewController {
     super.viewDidLoad()
     
     self.view.backgroundColor = .white
+    extendedLayoutIncludesOpaqueBars = true
+    automaticallyAdjustsScrollViewInsets = false
     self.configureBinding()
     viewModel.viewDidLoad()
   }

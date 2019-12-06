@@ -18,7 +18,7 @@ private struct Constants {
   static var logOutCellHeight: CGFloat { return 60 }
 }
 
-final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+final class ProfileDetailDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
   enum Section: Int, CaseIterable {
     case title,
     phone,
