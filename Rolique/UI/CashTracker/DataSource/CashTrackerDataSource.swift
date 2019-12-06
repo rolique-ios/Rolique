@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Utils
 
 private struct Constants {
   static var rowHeight: CGFloat { 50 }
@@ -21,14 +22,24 @@ private enum Section: String, CaseIterable {
   }
 }
 
-private enum Row {
+private enum Row: String {
   case card,
   cash
+  
+  var image: UIImage {
+    switch self {
+    case .card:
+      return R.image.card()!
+    case .cash:
+      return R.image.money()!
+    }
+  }
 }
 
 final class CashTrackerDataSource: NSObject {
   private let tableView: UITableView
   private let sections = Section.allCases
+  private lazy var expandedDictionary = [IndexPath: Bool]()
   
   init(tableView: UITableView) {
     self.tableView = tableView
@@ -58,6 +69,10 @@ extension CashTrackerDataSource: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeue(type: CashTypeTableViewCell.self, indexPath: indexPath)
+    let section = sections[indexPath.section]
+    let row = section.rows[indexPath.row]
+
+    cell.configure(text: "1030 UAH", image: row.image)
     
     return cell
   }

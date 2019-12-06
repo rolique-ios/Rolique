@@ -33,7 +33,7 @@ private extension CashTrackerViewController {
   }
   
   func attachViews() {
-    [tableView].forEach(self.view.addSubview)
+    [tableView].forEach(view.addSubview)
     
     tableView.snp.makeConstraints {
       $0.edges.equalTo(self.view.safeAreaLayoutGuide)

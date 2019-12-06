@@ -11,6 +11,9 @@
 		1F02CB875F88AE1C4EF87710 /* libPods-RoliqueTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4D18FB293E95AB5C6B1916 /* libPods-RoliqueTests.a */; };
 		2516B681239A5ADD009EC707 /* CashTrackerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B680239A5ADD009EC707 /* CashTrackerDataSource.swift */; };
 		2516B685239A6251009EC707 /* CashTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B684239A6251009EC707 /* CashTypeTableViewCell.swift */; };
+		2516B689239A80BB009EC707 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B688239A80BB009EC707 /* TableViewCell.swift */; };
+		2516B68B239A80F3009EC707 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B68A239A80F3009EC707 /* CollectionViewCell.swift */; };
+		2516B68D239A8A30009EC707 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B68C239A8A30009EC707 /* ImageButton.swift */; };
 		253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253F187A22FC4FE0007D94B1 /* Changelog.txt */; };
 		25535AE423014D2C00833A5B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD823014D2C00833A5B /* UserManager.swift */; };
 		25535AE523014D2C00833A5B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD923014D2C00833A5B /* LoginManager.swift */; };
@@ -228,6 +231,9 @@
 		22CFF320B972D1295B58F8BB /* Pods-Rolique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.debug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.debug.xcconfig"; sourceTree = "<group>"; };
 		2516B680239A5ADD009EC707 /* CashTrackerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerDataSource.swift; sourceTree = "<group>"; };
 		2516B684239A6251009EC707 /* CashTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTypeTableViewCell.swift; sourceTree = "<group>"; };
+		2516B688239A80BB009EC707 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		2516B68A239A80F3009EC707 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		2516B68C239A8A30009EC707 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		253F187A22FC4FE0007D94B1 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Changelog.txt; path = fastlane/Changelog.txt; sourceTree = SOURCE_ROOT; };
 		25535AD823014D2C00833A5B /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		25535AD923014D2C00833A5B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
@@ -454,6 +460,29 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2516B686239A80A5009EC707 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				2516B688239A80BB009EC707 /* TableViewCell.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		2516B687239A80AD009EC707 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2516B68A239A80F3009EC707 /* CollectionViewCell.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		2516B68E239A9B5D009EC707 /* CashHistory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CashHistory;
+			sourceTree = "<group>";
+		};
 		25535AD623014D2C00833A5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +533,7 @@
 		25535AED23014D4F00833A5B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2516B68E239A9B5D009EC707 /* CashHistory */,
 				25535AFE23014D4F00833A5B /* Base */,
 				25F508EB2399538600D4412C /* CashTracker */,
 				3F06F9BC233E5DFF003218DA /* Helpers */,
@@ -547,6 +577,8 @@
 		25535AF623014D4F00833A5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2516B687239A80AD009EC707 /* CollectionView */,
+				2516B686239A80A5009EC707 /* TableView */,
 				25535AF723014D4F00833A5B /* Custom */,
 				3FC9960E23167BD700C2554C /* Toasts */,
 				3FEE0E47233BBAB5004CD5C3 /* Extensions */,
@@ -563,6 +595,7 @@
 				B5D6C3012321449100929BFF /* InteractiveImageView.swift */,
 				3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */,
 				3F3529A7237998C600905907 /* MeetingRoomView.swift */,
+				2516B68C239A8A30009EC707 /* ImageButton.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1381,6 +1414,8 @@
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				3FFF4692237426500001793A /* MoreViewController.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
+				2516B68D239A8A30009EC707 /* ImageButton.swift in Sources */,
+				2516B689239A80BB009EC707 /* TableViewCell.swift in Sources */,
 				3FA3C0D6234366FF00165B06 /* CalendarViewModel.swift in Sources */,
 				2D7628FD235F1B7300E1E846 /* WeekdayCollectionViewCell.swift in Sources */,
 				2D40DF2A233959DA001D647D /* Slackable.swift in Sources */,
@@ -1445,6 +1480,7 @@
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
 				3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */,
+				2516B68B239A80F3009EC707 /* CollectionViewCell.swift in Sources */,
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
 				3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */,
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,

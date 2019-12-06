@@ -38,6 +38,16 @@ public extension Optional where Wrapped == String {
     }
 }
 
+public extension Optional where Wrapped == Bool {
+  var orFalse: Bool {
+    return self ?? false
+  }
+  
+  var orTrue: Bool {
+    return self ?? true
+  }
+}
+
 public extension Optional where Wrapped == Int {
     var orZero: Int {
         return self ?? 0
