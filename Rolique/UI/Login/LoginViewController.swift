@@ -30,7 +30,6 @@ final class LoginViewController<T: LoginViewModel>: ViewController<T> {
     configureConstraints()
     configureUI()
     configureBinding()
-
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +58,12 @@ private extension LoginViewController {
   }
   
   func configureBinding() {
+    viewModel.onLogin = {
+      let window = (UIApplication.shared.delegate as? AppDelegate)?.window
+      window?.rootViewController = Router.getStartViewController()
+      window?.makeKeyAndVisible()
+    }
+    
     self.viewModel.onError = { [weak self] error in
       guard let self = self else { return }
       

@@ -12,33 +12,32 @@ import Networking
 
 protocol LoginViewModel: ViewModel {
   var onError: ((String) -> Void)? { get set }
+  var onLogin: Completion? { get set }
   
   func login()
 }
 
 final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
-  private let loginManager: LoginManager
+  private let loginService: LoginService
+  var onLogin: Completion?
   
-  init(loginManager: LoginManager) {
-    self.loginManager = loginManager
+  init(loginService: LoginService) {
+    self.loginService = loginService
   }
   
   var onError: ((String) -> Void)?
   
   func login() {
-    self.loginManager.login { [weak self] res in
+    self.loginService.login { [weak self] res in
       switch res {
-      case .success(let user):
-        print("\(user)")
-        UserDefaultsManager.shared.userId = user.id
-        self?.shouldSet?([Router.getTabBarController()], true)
+      case .success:
+        self?.onLogin?()
       case .failure(let error):
         if case Err.general(let msg)? = error as? Err {
           self?.onError?(msg)
         } else {
           self?.onError?(error.localizedDescription)
         }
-        
       }
     }
   }

@@ -20,6 +20,7 @@ private struct Constants {
   static var buttonHeight: CGFloat { return 50.0 }
   static var buttonCenterXOffset: CGFloat { return 70.0 }
   static var timeInterspaceLabelInsets: UIEdgeInsets { return UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8) }
+  static var tableViewRightOffset: CGFloat { return 10.0 }
 }
 
 final class BookMeetingRoomViewToast: UIView {
@@ -77,7 +78,7 @@ final class BookMeetingRoomViewToast: UIView {
     
     bookButton.setTitle("Book", for: .normal)
     bookButton.backgroundColor = Colors.Actions.darkGray
-    bookButton.layer.cornerRadius = 5.0
+    bookButton.roundCorner(radius: 5.0)
     bookButton.addTarget(self, action: #selector(bookButtonOnTap(_:)), for: .touchUpInside)
     
     cancelButton.addTarget(self, action: #selector(cancelButtonOnTap(_:)), for: .touchUpInside)
@@ -103,7 +104,7 @@ final class BookMeetingRoomViewToast: UIView {
     tableView.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.left.equalToSuperview()
-      maker.right.equalTo(addButton.snp.left).offset(-10.0)
+      maker.right.equalTo(addButton.snp.left).offset(-Constants.tableViewRightOffset)
       tableViewHeightConstraint = maker.height.equalTo(Constants.rowHeight).constraint
     }
     

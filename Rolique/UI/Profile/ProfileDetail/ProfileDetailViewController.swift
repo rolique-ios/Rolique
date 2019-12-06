@@ -26,7 +26,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   private lazy var tableView = UITableView()
   private lazy var headerView = configureHeaderView()
   private lazy var userImageView = UIImageView()
-  private var dataSource: ProfileDetailDataSource?
+  private lazy var dataSource = ProfileDetailDataSource(tableView: tableView, user: viewModel.user)
   weak var delegate: ProfileDetailViewControllerDelegate?
   
   override func viewDidLoad() {
@@ -52,7 +52,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    dataSource?.updateClearCacheButtonTitle()
+    dataSource.updateClearCacheButtonTitle()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -77,28 +77,28 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   
   override var previewActionItems: [UIPreviewActionItem] {
     let slackAction = UIPreviewAction(title: Strings.Profile.openSlack, style: .default, handler: { [weak self] (action, controller) in
-      guard let self = self, let id = self.viewModel.user?.id else { return }
-      self.openSlack(with: id)
+      guard let self = self else { return }
+      self.openSlack(with: self.viewModel.user.id)
     })
     var actions = [slackAction]
-    let phone = viewModel.user?.slackProfile.phone
-    if let phone = phone, !phone.isEmpty {
+    let phone = viewModel.user.slackProfile.phone
+    if !phone.isEmpty {
       let callAction = UIPreviewAction(title: Strings.Profile.call, style: .default, handler: { [weak self] (action, controller) in
         guard let self = self else { return }
         self.call(to: phone)
       })
       actions.append(callAction)
     }
-    let email = viewModel.user?.slackProfile.email.orEmpty
-    if let email = email, !email.isEmpty {
+    let email = viewModel.user.slackProfile.email.orEmpty
+    if !email.isEmpty {
       let emailAction = UIPreviewAction(title: Strings.Profile.sendEmail, style: .default, handler: { [weak self] (action, controller) in
         guard let self = self else { return }
         self.delegate?.sendEmail([email])
       })
       actions.append(emailAction)
     }
-    let skype = viewModel.user?.slackProfile.skype.orEmpty
-    if let skype = skype, !skype.isEmpty {
+    let skype = viewModel.user.slackProfile.skype.orEmpty
+    if !skype.isEmpty {
       let skypeAction = UIPreviewAction(title: Strings.Profile.openSkype, style: .default, handler: { [weak self] (action, controller) in
         guard let self = self else { return }
         self.openSkype()
@@ -124,34 +124,16 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     tableView.keyboardDismissMode = .interactive
     tableView.contentInset = Constants.tableViewContentInset
     tableView.contentOffset = Constants.tableViewContentOffset
-    
-    if let user = viewModel.user {
-      dataSource = ProfileDetailDataSource(tableView: tableView, user: user)
-      tableView.addSubview(headerView)
-    }
+    tableView.addSubview(headerView)
   }
   
   private func configureUI() {
-    navigationItem.title = viewModel.user?.name
+    navigationItem.title = viewModel.user.name
     view.backgroundColor = Colors.mainBackgroundColor
+    URL(string: viewModel.user.biggestImage.orEmpty).map(self.userImageView.setImage(with: ))
   }
   
   private func configureViewModelBindings() {
-    viewModel.onSuccess = { [weak self] in
-      guard let self = self, let user = self.viewModel.user else { return }
-      self.navigationItem.title = user.name
-      self.tableView.addSubview(self.headerView)
-      URL(string: user.biggestImage.orEmpty).map(self.userImageView.setImage(with: ))
-      self.dataSource = ProfileDetailDataSource(tableView: self.tableView, user: user)
-      self.configureDataSourceBindings()
-      self.tableView.reloadData()
-    }
-    
-    viewModel.onError = { [weak self] error in
-      guard let self = self else { return }
-      Spitter.showOkAlert(error, viewController: self)
-    }
-    
     viewModel.onLogOut = {
       let window = (UIApplication.shared.delegate as? AppDelegate)?.window
       window?.rootViewController = Router.getStartViewController()
@@ -159,30 +141,30 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     }
     
     viewModel.onClearCache = { [weak self] in
-      self?.dataSource?.updateClearCacheButtonTitle()
+      self?.dataSource.updateClearCacheButtonTitle()
     }
   }
   
   private func configureDataSourceBindings() {
-    dataSource?.onScroll = { [weak self] in
+    dataSource.onScroll = { [weak self] in
       self?.updateHeaderView()
     }
-    dataSource?.copyString = { [weak self] string in
+    dataSource.copyString = { [weak self] string in
       self?.copyString(string)
     }
-    dataSource?.call = { [weak self] string in
+    dataSource.call = { [weak self] string in
       self?.call(to: string)
     }
-    dataSource?.sendEmail = { [weak self] strings in
+    dataSource.sendEmail = { [weak self] strings in
       self?.sendEmail(to: strings)
     }
-    dataSource?.openSkype = { [weak self] in
+    dataSource.openSkype = { [weak self] in
       self?.openSkype()
     }
-    dataSource?.clearCache = { [weak self] in
+    dataSource.clearCache = { [weak self] in
       self?.viewModel.clearCache()
     }
-    dataSource?.logOut = { [weak self] in
+    dataSource.logOut = { [weak self] in
       Spitter.showConfirmation(Strings.Profile.logOutQuestion, message: Strings.Profile.logOutMessage, owner: self) { [weak self] in
         self?.viewModel.logOut()
       }
@@ -195,9 +177,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     
     userImageView.isUserInteractionEnabled = true
     userImageView.contentMode = .scaleAspectFill
-    if let user = viewModel.user {
-      URL(string: user.biggestImage.orEmpty).map(userImageView.setImage(with: ))
-    }
+    URL(string: viewModel.user.biggestImage.orEmpty).map(userImageView.setImage(with: ))
     [userImageView].forEach(view.addSubviewAndDisableMaskTranslate)
     
     let statusLabel = UILabel()
@@ -206,9 +186,9 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
     statusLabel.layer.borderWidth = 1.0
     statusLabel.layer.borderColor = UIColor.orange.cgColor
     statusLabel.layer.cornerRadius = 4
-    let statusIsEmpty = viewModel.user?.todayStatus.orEmpty.isEmpty
+    let statusIsEmpty = viewModel.user.todayStatus?.isEmpty
     statusLabel.isHidden = statusIsEmpty ?? true
-    statusLabel.text = (statusIsEmpty ?? true) ? nil : " " + (viewModel.user?.todayStatus.orEmpty ?? "") + " "
+    statusLabel.text = (statusIsEmpty ?? true) ? nil : " " + (viewModel.user.todayStatus.orEmpty) + " "
     
     let blur = UIBlurEffect(style: .extraLight)
     let blurView = UIVisualEffectView(effect: blur)
@@ -254,7 +234,7 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   }
   
   @objc func didSelectSlackButton(sender: UIButton) {
-    viewModel.user.do { self.openSlack(with: $0.id) }
+    openSlack(with: viewModel.user.id)
   }
   
   private func copyString(_ str: String) {

@@ -11,15 +11,14 @@ import Utils
 import SnapKit
 
 final class MoreViewController<T: MoreViewModel>: ViewController<T> {
-  private var tableView = UITableView(frame: .zero, style: .grouped)
-  private var dataSource: MoreDataSource?
+  private lazy var tableView = UITableView(frame: .zero, style: .grouped)
+  private lazy var dataSource = MoreDataSource(tableView: tableView, user: viewModel.user)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configureUI()
     configureConstraints()
-    configureBindings()
     self.navigationController?.addCustomTransitioning()
   }
   
@@ -37,7 +36,6 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
     title = Strings.NavigationTitle.more
     view.backgroundColor = Colors.seconaryGroupedBackgroundColor
     
-    dataSource = viewModel.user.map { MoreDataSource(tableView: tableView, user: $0) }
     configureDataSourceBindings()
   }
   
@@ -62,22 +60,8 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
     navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
   
-  private func configureBindings() {
-    viewModel.onSuccess = { [weak self] in
-      guard let self = self, let user = self.viewModel.user else { return }
-      self.dataSource = MoreDataSource(tableView: self.tableView, user: user)
-      self.configureDataSourceBindings()
-      self.tableView.reloadData()
-    }
-    
-    viewModel.onError = { [weak self] error in
-      guard let self = self else { return }
-      Spitter.showOkAlert(error, viewController: self)
-    }
-  }
-  
   private func configureDataSourceBindings() {
-    dataSource?.didSelectCell = { [weak self] type in
+    dataSource.didSelectCell = { [weak self] type in
       guard let self = self else { return }
       switch type {
       case .user:

@@ -10,6 +10,7 @@ import Networking
 import Utils
 
 public protocol UserService {
+  var currentUser: User { get }
   func getAllUsersFromLocal(usersResult: (([User]) -> Void)?)
   func getAwayUsers(onFetch: ((Result<[User], Error>) -> Void)?)
   func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?)
@@ -18,9 +19,12 @@ public protocol UserService {
 }
 
 class UserServiceImpl: UserService {
+  let currentUser: User
   let userManager: UserManager
   let coreDataManager: CoreDataManager<User>
-  init(userManager: UserManager, coreDataManager: CoreDataManager<User>) {
+  
+  init(userManager: UserManager, coreDataManager: CoreDataManager<User>, user: User) {
+    self.currentUser = user
     self.userManager = userManager
     self.coreDataManager = coreDataManager
   }

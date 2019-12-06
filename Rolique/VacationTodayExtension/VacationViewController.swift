@@ -12,7 +12,7 @@ import UsersWidget
 import Utils
 
 class VacationViewController: UsersViewController {
-  private let vacationUserService: UserService = VacationUserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
+  private let vacationUserService: UserService = VacationUserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>(), user: User.mockedUser)
   
   override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
     self.vacationUserService.getTodayUsersForRecordType(.vacation, onLocal: { [weak self] result in
