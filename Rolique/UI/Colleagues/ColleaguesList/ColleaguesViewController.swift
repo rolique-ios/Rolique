@@ -123,6 +123,8 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       backgroundview.layer.cornerRadius = 10.0
       setShadow(to: backgroundview)
     }
+    
+    Toast.current.backgroundColor = Colors.secondaryBackgroundColor
   }
   
   private func configureTableView() {

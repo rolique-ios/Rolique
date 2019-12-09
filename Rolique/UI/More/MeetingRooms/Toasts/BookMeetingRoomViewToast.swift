@@ -75,6 +75,7 @@ final class BookMeetingRoomViewToast: UIView {
     timeInterspaceLabel.layer.borderWidth = 2.0
     timeInterspaceLabel.layer.borderColor = UIColor.orange.cgColor
     timeInterspaceLabel.roundCorner(radius: 5.0)
+    timeInterspaceLabel.numberOfLines = 0
     
     bookButton.setTitle("Book", for: .normal)
     bookButton.backgroundColor = Colors.Actions.darkGray
@@ -146,8 +147,11 @@ final class BookMeetingRoomViewToast: UIView {
     }
   }
   
-  func update(timeInterspace: TimeInterspace, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: Completion?, onCancel: Completion?) {
-    timeInterspaceLabel.text = DateFormatters.timeDateFormatter.string(from: timeInterspace.startTime) + " - " + DateFormatters.timeDateFormatter.string(from: timeInterspace.endTime)
+  func update(startTime: Date, endTime: Date, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: Completion?, onCancel: Completion?) {
+    let date = DateFormatters.prettyDateFormatter.string(from: startTime)
+    let startTimeString = DateFormatters.timeDateFormatter.string(from: startTime)
+    let endTimeString = DateFormatters.timeDateFormatter.string(from: endTime)
+    timeInterspaceLabel.text = date + "\n" + startTimeString + " - " + endTimeString
     self.onAddUser = onAddUser
     self.onRemoveUser = onRemoveUser
     self.onBook = onBook

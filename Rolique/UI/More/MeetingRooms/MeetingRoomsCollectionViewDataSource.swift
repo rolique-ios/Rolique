@@ -97,7 +97,7 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
     let page = floor(scrollView.contentOffset.x / scrollView.frame.width)
     let currentPage = Int(page)
     
-    guard self.currentPage != currentPage else { return }
+    guard self.currentPage != currentPage, currentPage >= 0 && currentPage < meetingRooms.count else { return }
     self.currentPage = currentPage
     didChangeCurrentPage?(currentPage)
   }

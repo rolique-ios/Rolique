@@ -16,6 +16,7 @@ private struct Constants {
   static var defaultCellHeight: CGFloat { return 40.0 }
   static var defaultOffset: CGFloat { return 2.0 }
   static var edgeOffset: CGFloat { return 15.0 }
+  static var declined: String { return "declined" }
 }
 
 protocol MeetingRoomsViewModel {
@@ -112,8 +113,7 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
           return firstDate < secondDate
         })
         
-        let roomsData = sortedRooms.map { RoomData(room: $0) }
-        self.calculateRoomsData(roomsData: roomsData)
+        let roomsData = self.filterRooms(with: sortedRooms)
         
         if self.meetingRooms[room] != nil {
           self.meetingRooms[room]![request.startDate] = roomsData
@@ -133,20 +133,20 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   private func calculateRoomsData(roomsData: [RoomData]) {
     for (index, roomData) in roomsData.enumerated() {
       if currentOrientation == .portrait, roomData.verticalFrame == nil {
-        roomData.verticalFrame = getRect(with: index, room: roomData.room, rooms: roomsData, cvWidth: portraitOrientationCVWidth)
+        roomData.verticalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: portraitOrientationCVWidth)
       } else if roomData.horizontalFrame == nil {
-        roomData.horizontalFrame = getRect(with: index, room: roomData.room, rooms: roomsData, cvWidth: landScapeOrientationCVWidth)
+        roomData.horizontalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: landScapeOrientationCVWidth)
       }
     }
   }
   
-  private func getRect(with index: Int, room: Room, rooms: [RoomData], cvWidth: CGFloat) -> CGRect {
+  private func getRect(with index: Int, roomData: RoomData, rooms: [RoomData], cvWidth: CGFloat) -> CGRect {
     let calendar = Calendar.utc
-    let startComponents = calendar.dateComponents([.hour, .minute], from: room.start.dateTime)
+    let startComponents = calendar.dateComponents([.hour, .minute], from: roomData.room.start.dateTime)
     let startHour = startComponents.hour.orZero
     let startMinute = startComponents.minute.orZero
     
-    let endComponents = calendar.dateComponents([.hour, .minute], from: room.end.dateTime)
+    let endComponents = calendar.dateComponents([.hour, .minute], from: roomData.room.end.dateTime)
     let endHour = endComponents.hour.orZero
     let endMinute = endComponents.minute.orZero
     let yPoint = ((CGFloat(startHour - Constants.startHour)) * 2 * Constants.defaultCellHeight + CGFloat(startMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight) + Constants.defaultCellHeight / 2
@@ -158,8 +158,8 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
     let end = calendar.date(byAdding: endComponents, to: Date().utc).orCurrent
     
     var firstIntersectedIndex: Int?
-    let instesects = rooms.enumerated().filter { (filteredIndex, filteredRoomData) in
-      guard room.id != filteredRoomData.room.id else { return false }
+    let intersects = rooms.enumerated().filter { (filteredIndex, filteredRoomData) in
+      guard roomData.room.id != filteredRoomData.room.id else { return false }
       
       let filteredRoomStartComponents = calendar.dateComponents([.hour, .minute], from: filteredRoomData.room.start.dateTime)
       let filteredRoomEndComponents = calendar.dateComponents([.hour, .minute], from: filteredRoomData.room.end.dateTime)
@@ -177,12 +177,41 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
       return false
     }
     
-    let width = instesects.isEmpty ? cvWidth : cvWidth / CGFloat(instesects.count + 1)
-    let xPoint = instesects.isEmpty ? CGFloat.zero : firstIntersectedIndex.orZero < index ? CGFloat(index - firstIntersectedIndex.orZero) * width : CGFloat.zero
+    let width = intersects.isEmpty ? cvWidth : cvWidth / CGFloat(intersects.count + 1)
+    let xPoint: CGFloat
+    if intersects.isEmpty {
+      xPoint = CGFloat.zero
+    } else {
+      let firstIntersectedIndex = firstIntersectedIndex.orZero > index ? firstIntersectedIndex.orZero - 1 : firstIntersectedIndex.orZero
+      xPoint = CGFloat(index - firstIntersectedIndex) * width
+    }
     
     return CGRect(x: xPoint + Constants.defaultOffset,
                   y: yPoint + Constants.defaultOffset,
                   width: xPoint + width == cvWidth ? width - Constants.edgeOffset : width - Constants.defaultOffset * 2,
                   height: height - Constants.defaultOffset * 2)
+  }
+  
+  private func filterRooms(with rooms: [Room]) -> [RoomData] {
+    var roomsData = [RoomData]()
+    
+    for room in rooms {
+      let attendee = room.attendees.first(where: { $0.isResource })
+      if (attendee?.isResource ?? false) && attendee?.responseStatus == Constants.declined {
+        continue
+      }
+      let roomData = RoomData(room: room)
+      roomsData.append(roomData)
+    }
+    
+    for (index, roomData) in roomsData.enumerated() {
+      if currentOrientation == .portrait, roomData.verticalFrame == nil {
+        roomData.verticalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: portraitOrientationCVWidth)
+      } else if roomData.horizontalFrame == nil {
+        roomData.horizontalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: landScapeOrientationCVWidth)
+      }
+    }
+    
+    return roomsData
   }
 }

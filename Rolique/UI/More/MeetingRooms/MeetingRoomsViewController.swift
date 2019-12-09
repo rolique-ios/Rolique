@@ -23,6 +23,18 @@ private struct Constants {
   static var headerCollapsedHeight: CGFloat { return 40 }
   static var meetingContainerViewHeight: CGFloat { return 30.0 }
   static var expandButtonSize: CGFloat { return 24.0 }
+  static var startHour: Double { return 9 }
+  static var endHour: Double { return 21 }
+  static var step: Double { return 0.5 }
+}
+
+private struct TimeInterspace: Comparable {
+  let startTime: Date
+  var endTime = Date()
+  
+  static func < (lhs: TimeInterspace, rhs: TimeInterspace) -> Bool {
+    return lhs.startTime < rhs.endTime
+  }
 }
 
 enum CalendarCollectionViewState { case expanded, collapsed }
@@ -137,6 +149,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     calendarCollectionView.delegate = self
     
     monthNameLabel.text = Date().monthName()
+    
+    Toast.current.backgroundColor = Colors.mainBackgroundColor
   }
   
   private func configureConstraints() {
@@ -209,7 +223,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private func configureDataSources() {
     let date = Date().utc
     var dataSource = [Date]()
-    for value in stride(from: 9, to: 21.5, by: 0.5) {
+    for value in stride(from: Constants.startHour, through: Constants.endHour, by: Constants.step) {
       let date = Date(timeInterval: TimeInterval(value * TimeInterval.hour), since: date)
       dataSource.append(date)
     }
@@ -285,6 +299,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   }
   
   @objc func didSelectEditButton() {
+    
     isEdit.toggle()
     
     meetingRoomsCollectionView.isScrollEnabled = !isEdit
@@ -300,43 +315,53 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
         cell.edit()
       } else {
         cell.book()
-        
-        guard cell.tableViewSelectedIndexPaths.count > 0 else { return }
-        
-        var timeInterspaces = [TimeInterspace]()
-        let date = calendarCollectionView.selectedDate.utc
-        let indexPaths = cell.tableViewSelectedIndexPaths.sorted()
-        let firstIndexPath = cell.tableViewSelectedIndexPaths.first!
-        var previousRow = firstIndexPath.row
-        var timeInterspace = TimeInterspace(startTime: createDateWithRow(row: firstIndexPath.row, date: date))
-        for indexPath in indexPaths {
-          if indexPath.row - previousRow > 1 {
-            timeInterspace.endTime = createDateWithRow(row: previousRow + 1, date: date)
-            timeInterspaces.append(timeInterspace)
-            timeInterspace = TimeInterspace(startTime: createDateWithRow(row: indexPath.row, date: date))
-          }
-          
-          previousRow = indexPath.row
-        }
-        
-        timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
-        timeInterspaces.append(timeInterspace)
-        currentTimeInterspace = timeInterspaces.first!
-        let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
-        Toast.current.hide {
-          Toast.current.show(addMeetingRooms)
-        }
+        book(cell)
       }
     }
   }
   
+  private func book(_ cell: MeetingRoomCollectionViewCell) {
+    guard cell.tableViewSelectedIndexPaths.count > 0 else { return }
+    
+    var timeInterspaces = [TimeInterspace]()
+    let date = calendarCollectionView.selectedDate.utc
+    let indexPaths = cell.tableViewSelectedIndexPaths.sorted()
+    let firstIndexPath = cell.tableViewSelectedIndexPaths.first!
+    var previousRow = firstIndexPath.row
+    var timeInterspace = TimeInterspace(startTime: createDateWithRow(row: firstIndexPath.row, date: date))
+    for indexPath in indexPaths {
+      if indexPath.row - previousRow > 1 {
+        timeInterspace.endTime = createDateWithRow(row: previousRow + 1, date: date)
+        timeInterspaces.append(timeInterspace)
+        timeInterspace = TimeInterspace(startTime: createDateWithRow(row: indexPath.row, date: date))
+      }
+      
+      previousRow = indexPath.row
+    }
+    
+    timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
+    timeInterspaces.append(timeInterspace)
+    currentTimeInterspace = timeInterspaces.first!
+    
+    let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
+    Toast.current.hide {
+      Toast.current.show(addMeetingRooms)
+    }
+    
+    Toast.current.willBeClosedByUserInteraction = { [weak self] in
+      cell.finishBooking()
+      self?.currentTimeInterspace = nil
+    }
+  }
+  
   private func createDateWithRow(row: Int, date: Date) -> Date {
-    return Date(timeInterval: TimeInterval((Double(row) * 0.5 + 9) * TimeInterval.hour), since: date)
+    return Date(timeInterval: TimeInterval((Double(row) * Constants.step + Constants.startHour) * TimeInterval.hour), since: date)
   }
   
   private func createBookMeetingRoomView(timeInterspace: TimeInterspace) -> BookMeetingRoomViewToast {
     let v = BookMeetingRoomViewToast()
-    v.update(timeInterspace: timeInterspace,
+    v.update(startTime: timeInterspace.startTime,
+             endTime: timeInterspace.endTime,
              onAddUser: { [weak self] in
               guard let self = self else { return }
               Toast.current.hide {
@@ -354,26 +379,23 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
               if let index = self?.viewModel.participants.firstIndex(of: user) {
                 self?.viewModel.participants.remove(at: index)
               }
+              Toast.current.layoutVertically()
     },
              onBook: { [weak self] in
-              guard let self = self else { return }
-              
-              if let cell = self.meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
-                cell.finishBooking()
-              }
-              
-              Toast.current.hide()
+              self?.finishBooking()
     },
              onCancel: { [weak self] in
-              guard let self = self else { return }
-              
-              if let cell = self.meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
-                cell.finishBooking()
-              }
-              
-              Toast.current.hide()
+              self?.finishBooking()
     })
     return v
+  }
+  
+  private func finishBooking() {
+    if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
+      cell.finishBooking()
+    }
+    currentTimeInterspace = nil
+    Toast.current.hide()
   }
   
   @objc func didSelectExpandButton() {

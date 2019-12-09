@@ -46,4 +46,20 @@ final class DateFormatters {
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
     return formatter
   }
+  
+  static var prettyDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")!
+    dateFormatter.dateFormat = "d'th' MMM, yyyy"
+    return dateFormatter
+  }()
+  
+  static var hourDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")!
+    dateFormatter.dateFormat = "h:mma"
+    dateFormatter.amSymbol = "am"
+    dateFormatter.pmSymbol = "pm"
+    return dateFormatter
+  }()
 }

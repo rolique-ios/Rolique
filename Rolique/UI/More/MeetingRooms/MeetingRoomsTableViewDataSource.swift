@@ -30,6 +30,7 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
     super.init()
     
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.defaultCellHeight / 2, right: 0)
+    tableView.showsVerticalScrollIndicator = false
     tableView.separatorStyle = .none
     tableView.allowsSelection = false
     tableView.backgroundColor = Colors.secondaryBackgroundColor
@@ -64,7 +65,8 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
         frame = roomData.horizontalFrame ?? .zero
       }
       let bookedTimeView = BookedTimeView(frame: frame)
-      bookedTimeView.update(with: roomData.room.title)
+      let time = DateFormatters.hourDateFormatter.string(from: roomData.room.start.dateTime)
+      bookedTimeView.update(with: (roomData.room.title ?? Strings.MeetingRooms.noTitle) + ", " + time)
       bookedTimeViews.append(bookedTimeView)
       tableView.addSubview(bookedTimeView)
     }
