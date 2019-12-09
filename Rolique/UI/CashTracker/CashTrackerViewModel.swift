@@ -9,9 +9,12 @@
 import Foundation
 
 protocol CashTrackerViewModel: ViewModel {
-    
+  func select(cashOwner: CashOwner, cashType: CashType)
 }
 
 final class CashTrackerViewModelImpl: BaseViewModel, CashTrackerViewModel {
-  
+  func select(cashOwner: CashOwner, cashType: CashType) {
+    let vc = Router.getCashHistoryViewController()
+    self.shouldPush?(vc, true)
+  }
 }

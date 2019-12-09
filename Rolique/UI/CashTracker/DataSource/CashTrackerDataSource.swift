@@ -13,16 +13,16 @@ private struct Constants {
   static var rowHeight: CGFloat { 50 }
 }
 
-private enum Section: String, CaseIterable {
+public enum CashOwner: String, CaseIterable {
   case officeManager = "Office Manager",
   hrManager = "Human Resource Manager"
   
-  var rows: [Row] {
+  var rows: [CashType] {
     [.card, .cash]
   }
 }
 
-private enum Row: String {
+public enum CashType: String {
   case card,
   cash
   
@@ -38,8 +38,10 @@ private enum Row: String {
 
 final class CashTrackerDataSource: NSObject {
   private let tableView: UITableView
-  private let sections = Section.allCases
+  private let sections = CashOwner.allCases
   private lazy var expandedDictionary = [IndexPath: Bool]()
+  
+  var didSelect: ((CashOwner, CashType) -> Void)?
   
   init(tableView: UITableView) {
     self.tableView = tableView
@@ -82,6 +84,10 @@ extension CashTrackerDataSource: UITableViewDataSource {
 extension CashTrackerDataSource: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    let section = sections[indexPath.section]
+    let row = section.rows[indexPath.row]
+
+    didSelect?(section, row)
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -14,6 +14,8 @@
 		2516B689239A80BB009EC707 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B688239A80BB009EC707 /* TableViewCell.swift */; };
 		2516B68B239A80F3009EC707 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B68A239A80F3009EC707 /* CollectionViewCell.swift */; };
 		2516B68D239A8A30009EC707 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B68C239A8A30009EC707 /* ImageButton.swift */; };
+		2516B690239A9D27009EC707 /* CashHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B68F239A9D27009EC707 /* CashHistoryViewModel.swift */; };
+		2516B692239A9D2F009EC707 /* CashHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B691239A9D2F009EC707 /* CashHistoryViewController.swift */; };
 		253F187B22FC4FE0007D94B1 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253F187A22FC4FE0007D94B1 /* Changelog.txt */; };
 		25535AE423014D2C00833A5B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD823014D2C00833A5B /* UserManager.swift */; };
 		25535AE523014D2C00833A5B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25535AD923014D2C00833A5B /* LoginManager.swift */; };
@@ -63,6 +65,9 @@
 		25AB46BC22F82853005C52AF /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46B822F82853005C52AF /* UsersViewController.swift */; };
 		25AB46BF22F82859005C52AF /* Faker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BD22F82859005C52AF /* Faker.swift */; };
 		25AB46C022F82859005C52AF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB46BE22F82859005C52AF /* ImageCache.swift */; };
+		25C54E40239E4BF30023880E /* CashHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C54E3F239E4BF30023880E /* CashHistoryDataSource.swift */; };
+		25C54E42239E53A90023880E /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C54E41239E53A90023880E /* Expense.swift */; };
+		25C54E44239E5C900023880E /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */; };
 		25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* RemoteViewController.swift */; };
 		25F508ED239954CA00D4412C /* CashTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EC239954CA00D4412C /* CashTrackerViewController.swift */; };
 		25F508EF239954D500D4412C /* CashTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EE239954D500D4412C /* CashTrackerViewModel.swift */; };
@@ -234,6 +239,8 @@
 		2516B688239A80BB009EC707 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2516B68A239A80F3009EC707 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		2516B68C239A8A30009EC707 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		2516B68F239A9D27009EC707 /* CashHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashHistoryViewModel.swift; sourceTree = "<group>"; };
+		2516B691239A9D2F009EC707 /* CashHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashHistoryViewController.swift; sourceTree = "<group>"; };
 		253F187A22FC4FE0007D94B1 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Changelog.txt; path = fastlane/Changelog.txt; sourceTree = SOURCE_ROOT; };
 		25535AD823014D2C00833A5B /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		25535AD923014D2C00833A5B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
@@ -273,6 +280,9 @@
 		25AB46B822F82853005C52AF /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		25AB46BD22F82859005C52AF /* Faker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faker.swift; sourceTree = "<group>"; };
 		25AB46BE22F82859005C52AF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		25C54E3F239E4BF30023880E /* CashHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashHistoryDataSource.swift; sourceTree = "<group>"; };
+		25C54E41239E53A90023880E /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		25F508EC239954CA00D4412C /* CashTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewController.swift; sourceTree = "<group>"; };
 		25F508EE239954D500D4412C /* CashTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewModel.swift; sourceTree = "<group>"; };
 		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
@@ -479,6 +489,10 @@
 		2516B68E239A9B5D009EC707 /* CashHistory */ = {
 			isa = PBXGroup;
 			children = (
+				25C54E3E239E4BE60023880E /* Cells */,
+				25C54E3D239E4BDD0023880E /* DataSource */,
+				2516B68F239A9D27009EC707 /* CashHistoryViewModel.swift */,
+				2516B691239A9D2F009EC707 /* CashHistoryViewController.swift */,
 			);
 			path = CashHistory;
 			sourceTree = "<group>";
@@ -516,6 +530,7 @@
 				25535AE023014D2C00833A5B /* Actions */,
 				3FEC8C60236875A400D0754F /* AttendanceRecord.swift */,
 				3FF37E71238D518F00FAEB04 /* Room.swift */,
+				25C54E41239E53A90023880E /* Expense.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -533,8 +548,8 @@
 		25535AED23014D4F00833A5B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				2516B68E239A9B5D009EC707 /* CashHistory */,
 				25535AFE23014D4F00833A5B /* Base */,
+				2516B68E239A9B5D009EC707 /* CashHistory */,
 				25F508EB2399538600D4412C /* CashTracker */,
 				3F06F9BC233E5DFF003218DA /* Helpers */,
 				25535AEE23014D4F00833A5B /* ShortcutManager */,
@@ -726,6 +741,22 @@
 				25AB46B722F82853005C52AF /* UserCollectionViewCell.swift */,
 			);
 			path = UserCell;
+			sourceTree = "<group>";
+		};
+		25C54E3D239E4BDD0023880E /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				25C54E3F239E4BF30023880E /* CashHistoryDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		25C54E3E239E4BE60023880E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		25F508EB2399538600D4412C /* CashTracker */ = {
@@ -1411,6 +1442,7 @@
 				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
 				3FF37E72238D518F00FAEB04 /* Room.swift in Sources */,
+				25C54E44239E5C900023880E /* ExpenseTableViewCell.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
 				3FFF4692237426500001793A /* MoreViewController.swift in Sources */,
 				2DE7FA7323186A9100914EE8 /* DateFormatters.swift in Sources */,
@@ -1423,6 +1455,7 @@
 				3FFF920C23619FEF00DAFDC8 /* GridDataSource.swift in Sources */,
 				2516B681239A5ADD009EC707 /* CashTrackerDataSource.swift in Sources */,
 				3F0217DC2375746C00E5894A /* MeetingRoomsViewModel.swift in Sources */,
+				25C54E40239E4BF30023880E /* CashHistoryDataSource.swift in Sources */,
 				3F06FE19237C2E6600DEE682 /* DayCollectionCell.swift in Sources */,
 				3F0217DA237572B000E5894A /* MeetingRoomsViewController.swift in Sources */,
 				3FA3C0D82343786C00165B06 /* ModalPresentationHandler.swift in Sources */,
@@ -1435,7 +1468,9 @@
 				3FF320A0233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift in Sources */,
 				2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */,
 				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
+				2516B690239A9D27009EC707 /* CashHistoryViewModel.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
+				2516B692239A9D2F009EC707 /* CashHistoryViewController.swift in Sources */,
 				3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */,
 				2516B685239A6251009EC707 /* CashTypeTableViewCell.swift in Sources */,
 				B5D6C3092321905400929BFF /* Bot.swift in Sources */,
@@ -1480,6 +1515,7 @@
 				25535AE823014D2C00833A5B /* Model.swift in Sources */,
 				3F83A7CC2302FA3B00EA683A /* CoreDataController.swift in Sources */,
 				3FFF469A23743A170001793A /* ProfileTableViewCell.swift in Sources */,
+				25C54E42239E53A90023880E /* Expense.swift in Sources */,
 				2516B68B239A80F3009EC707 /* CollectionViewCell.swift in Sources */,
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
 				3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */,

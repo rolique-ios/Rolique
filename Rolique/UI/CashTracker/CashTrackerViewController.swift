@@ -18,6 +18,7 @@ final class CashTrackerViewController<T: CashTrackerViewModel>: ViewController<T
     
     attachViews()
     configureUI()
+    configureBinding()
   }
   
   override func performOnceInViewDidAppear() {
@@ -30,6 +31,7 @@ private extension CashTrackerViewController {
   func configureUI() {
     navigationController?.navigationBar.prefersLargeTitles = false
     navigationItem.title = Strings.More.cashTracker
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
   
   func attachViews() {
@@ -37,6 +39,12 @@ private extension CashTrackerViewController {
     
     tableView.snp.makeConstraints {
       $0.edges.equalTo(self.view.safeAreaLayoutGuide)
+    }
+  }
+  
+  func configureBinding() {
+    dataSource.didSelect = { [weak self] cashOwner, cashType in
+      self?.viewModel.select(cashOwner: cashOwner, cashType: cashType)
     }
   }
 }
