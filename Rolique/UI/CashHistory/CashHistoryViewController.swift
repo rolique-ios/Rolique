@@ -38,6 +38,14 @@ private extension CashHistoryViewController {
     dataSource.expensesForSection = { [weak self] section in
       return self?.viewModel.getExpenses(for: section) ?? []
     }
+    dataSource.didScrolledToBottom = { [weak self] in
+      self?.viewModel.scrolledToBottom()
+    }
+    
+    viewModel.shouldChangeLoadingVisibility = { [weak self] in
+      self?.dataSource.setIsLoadingNextPage(self?.viewModel.isLoadingNextPage ?? false)
+    }
+    
     dataSource.update(with: viewModel.dates)
   }
 }

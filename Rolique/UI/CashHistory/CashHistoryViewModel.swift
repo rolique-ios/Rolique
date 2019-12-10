@@ -10,16 +10,37 @@ import UIKit
 
 protocol CashHistoryViewModel: ViewModel {
   var dates: [Date] { get }
+  var isLoadingNextPage: Bool { get }
+  var shouldChangeLoadingVisibility: Completion? { get set }
 
   func getExpenses(for section: Int) -> [Expense]
+  func scrolledToBottom()
 }
 
 final class CashHistoryViewModelImpl: BaseViewModel, CashHistoryViewModel {
   private(set) var dates: [Date] = ExpenseDummer.getDates()
   private lazy var datesExpenses: [Date: [Expense]] = ExpenseDummer.getDatesExpenses()
+  private(set) lazy var isLoadingNextPage = false
+  var shouldChangeLoadingVisibility: Completion?
 
   func getExpenses(for section: Int) -> [Expense] {
     datesExpenses[dates[section]] ?? []
+  }
+  
+  func scrolledToBottom() {
+    if isLoadingNextPage {
+      return
+    }
+    
+    isLoadingNextPage = true
+    shouldChangeLoadingVisibility?()
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+      guard let self = self else { return }
+      self.isLoadingNextPage = false
+      self.shouldChangeLoadingVisibility?()
+
+    }
   }
 }
 

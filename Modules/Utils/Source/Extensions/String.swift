@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension String {
+public extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "localized version of \(self)")
     }
@@ -30,37 +30,37 @@ extension String {
         return ranges
     }
     
-    func width(for font: UIFont) -> CGFloat {
+    public func width(for font: UIFont) -> CGFloat {
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         
         return size.width
     }
     
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    public func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return boundingBox.height
     }
     
-    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+    public func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return boundingBox.width
     }
     
-    var withoutSpacesAndNewLines: String {
+    public var withoutSpacesAndNewLines: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    func toPasteboard() {
+    public func toPasteboard() {
         let pasteBoard = UIPasteboard.general
         pasteBoard.string = self
     }
     
-    func capitalizingFirstLetter() -> String {
+    public func capitalizingFirstLetter() -> String {
         return prefix(1).uppercased() + self.lowercased().dropFirst()
     }
 }

@@ -69,6 +69,7 @@
 		25C54E42239E53A90023880E /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C54E41239E53A90023880E /* Expense.swift */; };
 		25C54E44239E5C900023880E /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */; };
 		25C6ED6122F96C5400647AE2 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6194222F8780B00A85C5A /* RemoteViewController.swift */; };
+		25F08D62239FB02A000E19CE /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F08D61239FB02A000E19CE /* LoadingTableViewCell.swift */; };
 		25F508ED239954CA00D4412C /* CashTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EC239954CA00D4412C /* CashTrackerViewController.swift */; };
 		25F508EF239954D500D4412C /* CashTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EE239954D500D4412C /* CashTrackerViewModel.swift */; };
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
@@ -283,6 +284,7 @@
 		25C54E3F239E4BF30023880E /* CashHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashHistoryDataSource.swift; sourceTree = "<group>"; };
 		25C54E41239E53A90023880E /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
+		25F08D61239FB02A000E19CE /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		25F508EC239954CA00D4412C /* CashTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewController.swift; sourceTree = "<group>"; };
 		25F508EE239954D500D4412C /* CashTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewModel.swift; sourceTree = "<group>"; };
 		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				25C54E43239E5C900023880E /* ExpenseTableViewCell.swift */,
+				25F08D61239FB02A000E19CE /* LoadingTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1441,6 +1444,7 @@
 				25535AE423014D2C00833A5B /* UserManager.swift in Sources */,
 				3FF103562315735900EBCE4E /* ActionsDataSource.swift in Sources */,
 				3FE9DFB4233CFF69007E0029 /* UINavigationControllerExtension.swift in Sources */,
+				25F08D62239FB02A000E19CE /* LoadingTableViewCell.swift in Sources */,
 				3FF37E72238D518F00FAEB04 /* Room.swift in Sources */,
 				25C54E44239E5C900023880E /* ExpenseTableViewCell.swift in Sources */,
 				25535AEB23014D2C00833A5B /* Action.swift in Sources */,
