@@ -20,8 +20,12 @@ final class ExpenseTableViewCell: TableViewCell {
   }
   
   func configure(description: String, value: Double, dateString: String) {
+    let color = value > 0 ? UIColor.systemGreen : UIColor.systemRed
+    let attributedString = NSMutableAttributedString(string: "\(value) uah", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
+    attributedString.addAttributes([NSAttributedString.Key.foregroundColor: color], range: NSRange(location: 0, length: "\(value)".count))
+    
     descriptionLabel.text = description
-    expenseValueLabel.text = "\(value) uah"
+    expenseValueLabel.attributedText = attributedString
     dateLabel.text = dateString
   }
 }

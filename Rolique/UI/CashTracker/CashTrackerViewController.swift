@@ -38,7 +38,8 @@ private extension CashTrackerViewController {
     [tableView].forEach(view.addSubview)
     
     tableView.snp.makeConstraints {
-      $0.edges.equalTo(self.view.safeAreaLayoutGuide)
+      $0.top.equalTo(self.view.safeAreaLayoutGuide)
+      $0.left.right.bottom.equalToSuperview()
     }
   }
   

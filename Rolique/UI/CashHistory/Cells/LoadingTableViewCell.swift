@@ -9,7 +9,13 @@
 import UIKit
 
 final class LoadingTableViewCell: TableViewCell {
-  private lazy var activityIndicator = UIActivityIndicatorView(style: .gray)
+  private lazy var activityIndicator: UIActivityIndicatorView = {
+    if #available(iOS 12.0, *) {
+      return self.traitCollection.userInterfaceStyle == .dark ? UIActivityIndicatorView(style: .white) : UIActivityIndicatorView(style: .gray)
+    }
+    
+    return UIActivityIndicatorView(style: .gray)
+  }()
   
   override func configure() {
     attachViews()
@@ -17,6 +23,12 @@ final class LoadingTableViewCell: TableViewCell {
   
   func startAnimating() {
     activityIndicator.startAnimating()
+  }
+  
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    if #available(iOS 12.0, *) {
+      activityIndicator.style = self.traitCollection.userInterfaceStyle == .dark ? .white : .gray
+    }
   }
 }
 
