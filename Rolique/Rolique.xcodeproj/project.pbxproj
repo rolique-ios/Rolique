@@ -51,6 +51,8 @@
 		257C79B623018EF7007A299D /* VacationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6195622F878A500A85C5A /* VacationViewController.swift */; };
 		2581C8B622F8AD0400ACC3C7 /* debug.rolque.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */; };
 		2581C8B722F8AD0400ACC3C7 /* release.rolique.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */; };
+		25863C0623A297D5005A5F2E /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25863C0523A297D5005A5F2E /* Balance.swift */; };
+		25863C0823A2A357005A5F2E /* CashOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25863C0723A2A357005A5F2E /* CashOwner.swift */; };
 		25A6194022F8780B00A85C5A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A6193F22F8780B00A85C5A /* NotificationCenter.framework */; };
 		25A6194622F8780B00A85C5A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A6194422F8780B00A85C5A /* MainInterface.storyboard */; };
 		25A6194A22F8780B00A85C5A /* RemoteTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -265,6 +267,8 @@
 		256A4D8F22F8142B00A31427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2581C8B422F8AD0400ACC3C7 /* debug.rolque.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.rolque.xcconfig; sourceTree = "<group>"; };
 		2581C8B522F8AD0400ACC3C7 /* release.rolique.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.rolique.xcconfig; sourceTree = "<group>"; };
+		25863C0523A297D5005A5F2E /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		25863C0723A2A357005A5F2E /* CashOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashOwner.swift; sourceTree = "<group>"; };
 		25A6193E22F8780B00A85C5A /* RemoteTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RemoteTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A6193F22F8780B00A85C5A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		25A6194222F8780B00A85C5A /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
@@ -533,6 +537,8 @@
 				3FEC8C60236875A400D0754F /* AttendanceRecord.swift */,
 				3FF37E71238D518F00FAEB04 /* Room.swift */,
 				25C54E41239E53A90023880E /* Expense.swift */,
+				25863C0523A297D5005A5F2E /* Balance.swift */,
+				25863C0723A2A357005A5F2E /* CashOwner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1473,6 +1479,7 @@
 				2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */,
 				3FA3C0D4234366E900165B06 /* CalendarViewController.swift in Sources */,
 				2516B690239A9D27009EC707 /* CashHistoryViewModel.swift in Sources */,
+				25863C0623A297D5005A5F2E /* Balance.swift in Sources */,
 				3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */,
 				2516B692239A9D2F009EC707 /* CashHistoryViewController.swift in Sources */,
 				3FF8512B237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift in Sources */,
@@ -1487,6 +1494,7 @@
 				2D1450762338D6CC00358BD0 /* Callable.swift in Sources */,
 				3FFF469823742F3A0001793A /* MoreTableViewCell.swift in Sources */,
 				3FEE1FDF2334C7480075DF32 /* InfoTableViewCell.swift in Sources */,
+				25863C0823A2A357005A5F2E /* CashOwner.swift in Sources */,
 				3F3529A8237998C600905907 /* MeetingRoomView.swift in Sources */,
 				3FEC8C5F2368748200D0754F /* AttendanceManager.swift in Sources */,
 				3FFD3886231807B0006D5479 /* PickerTextField.swift in Sources */,

@@ -49,32 +49,32 @@ private final class ExpenseDummer {
     return [Date().normalized, Date(timeInterval: -TimeInterval.day, since: Date()).normalized, Date(timeInterval: -TimeInterval.day * 2, since: Date()).normalized, Date(timeInterval: -TimeInterval.day * 3, since: Date()).normalized]
   }
   static func getDatesExpenses() -> [Date: [Expense]] {
-    return [Date().normalized: [Expense(value: -140, date: Date(), description: "Chipsi lays"),
+    return [Date().normalized: [Expense(value: -140, date: Date(), description: "Soohariki"),
                      Expense(value: -33.434, date: Date(), description: "Tapochki"),
                      Expense(value: 33.434, date: Date(), description: "Trip to Egypt"),
-                     Expense(value: 1403823.22, date: Date(), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines")],
+                     Expense(value: 1403823.22, date: Date(), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline")],
             
-            Date(timeInterval: -TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Chipsi lays"),
+            Date(timeInterval: -TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Soohariki"),
                                                                    Expense(value: -33.434, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Tapochki"),
                                                                    Expense(value: 33.434, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Trip to Egypt"),
-                                                                   Expense(value: 1403823.22, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines")],
+                                                                   Expense(value: 1403823.22, date: Date(timeInterval: -TimeInterval.day, since: Date()), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline")],
             
-            Date(timeInterval: -2 * TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Chipsi lays"),
+            Date(timeInterval: -2 * TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Soohariki"),
                                                                        Expense(value: -33.434, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Tapochki"),
                                                                        Expense(value: 33.434, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Trip to Egypt"),
-                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines"),
-                                                                       Expense(value: -140, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Chipsi lays"),
+                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline"),
+                                                                       Expense(value: -140, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Soohariki"),
                                                                        Expense(value: -33.434, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Tapochki"),
                                                                        Expense(value: 33.434, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Trip to Egypt"),
-                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines")],
+                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -2 * TimeInterval.day, since: Date()), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline")],
     
-            Date(timeInterval: -3 * TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Chipsi lays"),
+            Date(timeInterval: -3 * TimeInterval.day, since: Date()).normalized: [Expense(value: -140, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Soohariki"),
                                                                        Expense(value: -33.434, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Tapochki"),
                                                                        Expense(value: 33.434, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Trip to Egypt"),
-                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines"),
-                                                                       Expense(value: -140, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Chipsi lays"),
+                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline"),
+                                                                       Expense(value: -140, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Soohariki"),
                                                                        Expense(value: -33.434, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Tapochki"),
                                                                        Expense(value: 33.434, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Trip to Egypt"),
-                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Very long text just two test two lines, Very long text just two test two lines, Very long text just two test two lines")]]
+                                                                       Expense(value: 1403823.22, date: Date(timeInterval: -3 * TimeInterval.day, since: Date()), description: "Testing multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multilineTesting multiline")]]
   }
 }

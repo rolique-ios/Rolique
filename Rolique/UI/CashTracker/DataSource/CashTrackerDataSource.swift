@@ -13,33 +13,13 @@ private struct Constants {
   static var rowHeight: CGFloat { 50 }
 }
 
-public enum CashOwner: String, CaseIterable {
-  case officeManager = "Office Manager",
-  hrManager = "Human Resource Manager"
-  
-  var rows: [CashType] {
-    [.card, .cash]
-  }
-}
-
-public enum CashType: String {
-  case card,
-  cash
-  
-  var image: UIImage {
-    switch self {
-    case .card:
-      return R.image.card()!
-    case .cash:
-      return R.image.money()!
-    }
-  }
-}
 
 final class CashTrackerDataSource: NSObject {
   private let tableView: UITableView
   private let sections = CashOwner.allCases
   private lazy var expandedDictionary = [IndexPath: Bool]()
+  private var hrBalance: Balance?
+  private var omBalance: Balance?
   
   var didSelect: ((CashOwner, CashType) -> Void)?
   
@@ -49,6 +29,12 @@ final class CashTrackerDataSource: NSObject {
     super.init()
     
     configure()
+  }
+  
+  func update(hrBalance: Balance?, omBalance: Balance?) {
+    self.hrBalance = hrBalance
+    self.omBalance = omBalance
+    reload()
   }
   
   func reload() {
@@ -64,7 +50,7 @@ extension CashTrackerDataSource: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let section = sections[section]
-    let rows = section.rows.count
+    let rows = section.types.count
     
     return rows
   }
@@ -72,9 +58,17 @@ extension CashTrackerDataSource: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeue(type: CashTypeTableViewCell.self, indexPath: indexPath)
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.types[indexPath.row]
+    
+    switch section {
+    case .hrManager:
+      cell.configure(text: "\(row == .card ? hrBalance?.card ?? 0 : hrBalance?.cash ?? 0) UAH", image: row.image)
 
-    cell.configure(text: "1030 UAH", image: row.image)
+    case .officeManager:
+      cell.configure(text: "\(row == .card ? omBalance?.card ?? 0 : omBalance?.cash ?? 0) UAH", image: row.image)
+
+    }
+    
     
     return cell
   }
@@ -85,7 +79,7 @@ extension CashTrackerDataSource: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.types[indexPath.row]
 
     didSelect?(section, row)
   }

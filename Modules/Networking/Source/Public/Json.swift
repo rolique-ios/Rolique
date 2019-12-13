@@ -18,14 +18,13 @@ public struct Json: Codable {
 public extension Json { 
   
   func build<M: Codable>() -> M? {
-    guard let body = self.json("body") else {
-      print("failed to build body")
-      return nil }
+    let body = self.json("body") ?? self
     guard let data = body.stringValue.data(using: .utf8) else {
       print("failed to build data")
       return nil }
+    
     do {
-    return try JSONDecoder().decode(M.self, from: data)
+      return try JSONDecoder().decode(M.self, from: data)
     } catch let err {
       print(err)
       return nil

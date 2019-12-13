@@ -25,12 +25,14 @@ private enum Section: Int, CaseIterable {
   case profile,
   general
   
-  var rows: [MoreTableRow] {
+  func rows(for user: User) -> [MoreTableRow] {
     switch self {
     case .profile:
       return [.user]
     case .general:
-        return [.meetingRoom, .cashTracker]
+      return user.roles.contains("hr") || user.roles.contains("om")  || user.roles.contains("admin") || user.roles.contains("accountant")
+        ? [.meetingRoom, .cashTracker]
+        : [.meetingRoom]
     }
   }
 }
@@ -78,12 +80,12 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return sections[section].rows.count
+    return sections[section].rows(for: user).count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.rows(for: user)[indexPath.row]
     
     switch row {
     case .user:
@@ -110,8 +112,8 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
-    
+    let row = section.rows(for: user)[indexPath.row]
+
     switch row {
     case .user:
       return Constants.userCellHeight
@@ -124,7 +126,7 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.rows(for: user)[indexPath.row]
     didSelectCell?(row)
   }
   

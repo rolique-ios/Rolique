@@ -35,6 +35,7 @@ public class Route {
   
   private func makeURL() -> URL? {
     let urlString = "https://" + Env.apiUrl + endpoint
+    print("url \(urlString)")
     let url = URL(string: urlString)
     return url
   }

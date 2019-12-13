@@ -83,10 +83,11 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
       case .user:
         self.navigationController?.pushViewController(Router.getProfileDetailViewController(user: self.viewModel.user), animated: true)
       case .meetingRoom:
-        self.navigationController?.removeCustomTransition()
-        let vc = Router.getMeetingRoomsViewController()
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        break
+//        self.navigationController?.removeCustomTransition()
+//        let vc = Router.getMeetingRoomsViewController()
+//        vc.hidesBottomBarWhenPushed = true
+//        self.navigationController?.pushViewController(vc, animated: true)
       
       case .cashTracker:
         self.navigationController?.removeCustomTransition()
