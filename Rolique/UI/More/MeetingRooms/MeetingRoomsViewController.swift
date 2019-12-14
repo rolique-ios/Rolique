@@ -28,15 +28,6 @@ private struct Constants {
   static var step: Double { return 0.5 }
 }
 
-private struct TimeInterspace: Comparable {
-  let startTime: Date
-  var endTime = Date()
-  
-  static func < (lhs: TimeInterspace, rhs: TimeInterspace) -> Bool {
-    return lhs.startTime < rhs.endTime
-  }
-}
-
 enum CalendarCollectionViewState { case expanded, collapsed }
 
 final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewController<T>,
@@ -59,7 +50,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private var isEdit = false
   private var currentPage = 0
   private var calendarCollectionViewHeightConstraint: Constraint?
-  private var currentTimeInterspace: TimeInterspace?
   
   private var state: CalendarCollectionViewState = .collapsed {
     didSet {
@@ -324,7 +314,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     guard cell.tableViewSelectedIndexPaths.count > 0 else { return }
     
     var timeInterspaces = [TimeInterspace]()
-    let date = calendarCollectionView.selectedDate.utc
+    let date = calendarCollectionView.selectedDate
     let indexPaths = cell.tableViewSelectedIndexPaths.sorted()
     let firstIndexPath = cell.tableViewSelectedIndexPaths.first!
     var previousRow = firstIndexPath.row
@@ -341,7 +331,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     
     timeInterspace.endTime = createDateWithRow(row: indexPaths.last!.row + 1, date: date)
     timeInterspaces.append(timeInterspace)
-    currentTimeInterspace = timeInterspaces.first!
+    viewModel.setCurrentTimeInterspace(timeInterspaces.first!)
     
     let addMeetingRooms = createBookMeetingRoomView(timeInterspace: timeInterspaces.first!)
     Toast.current.hide {
@@ -350,7 +340,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     
     Toast.current.willBeClosedByUserInteraction = { [weak self] in
       cell.finishBooking()
-      self?.currentTimeInterspace = nil
+      self?.viewModel.invalidateCurrentTimeInterspace()
     }
   }
   
@@ -367,7 +357,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
               Toast.current.hide {
                 let colleaguesVC = Router.getColleaguesViewController(with: .selectParticipant, users: self.viewModel.users)
                 colleaguesVC.onPop = { [weak self] user in
-                  guard let self = self, let currentTimeInterspace = self.currentTimeInterspace else { return }
+                  guard let self = self, let currentTimeInterspace = self.viewModel.currentTimeInterspace else { return }
                   _ = user.map { self.viewModel.participants.insert($0) }
                   Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
                 }
@@ -381,8 +371,9 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
               }
               Toast.current.layoutVertically()
     },
-             onBook: { [weak self] in
-              self?.finishBooking()
+             onBook: { [weak self] title in
+              self?.viewModel.bookMeetingRoom(with: title)
+//              self?.finishBooking()
     },
              onCancel: { [weak self] in
               self?.finishBooking()
@@ -394,7 +385,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
       cell.finishBooking()
     }
-    currentTimeInterspace = nil
+    viewModel.invalidateCurrentTimeInterspace()
     Toast.current.hide()
   }
   

@@ -22,10 +22,10 @@ public class Route {
   public let method: Route.Method
   public let headers: Route.Headers?
   public let urlParams: Route.Params
-  public let body: Route.Params
+  public let body: [String: Any]?
   public var customUrl: URL?
   
-  init (endpoint: String, method: Route.Method, headers: Route.Headers? = nil, urlParams: Route.Params = [:], body: Route.Params = [:]) {
+  init (endpoint: String, method: Route.Method, headers: Route.Headers? = nil, urlParams: Route.Params = [:], body: [String: Any]? = nil) {
     self.endpoint = endpoint
     self.method = method
     self.headers = headers
@@ -56,6 +56,9 @@ public class Route {
                              timeoutInterval: 30)
     request.allHTTPHeaderFields = headers ?? makeAuthHeaders()
     request.httpMethod = method.value
+    if let body = body {
+      request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
+    }
     
     return request
   }

@@ -19,13 +19,27 @@ private struct Constants {
   static var declined: String { return "declined" }
 }
 
+struct TimeInterspace: Comparable {
+  let startTime: Date
+  var endTime = Date()
+  
+  static func < (lhs: TimeInterspace, rhs: TimeInterspace) -> Bool {
+    return lhs.startTime < rhs.endTime
+  }
+}
+
 protocol MeetingRoomsViewModel {
   var users: [User] { get }
   var participants: Set<User> { get set }
   var meetingRooms: [MeetingRoom: [Date: [RoomData]]] { get }
+  var currentTimeInterspace: TimeInterspace? { get }
   
   func changeDate(with date: Date)
   func changeRoom(with room: MeetingRoom)
+  
+  func bookMeetingRoom(with title: String?)
+  func setCurrentTimeInterspace(_ timeInterspace: TimeInterspace)
+  func invalidateCurrentTimeInterspace()
 }
 
 final class RoomData {
@@ -48,6 +62,7 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   private var portraitOrientationCVWidth = CGFloat.zero
   private var landScapeOrientationCVWidth = CGFloat.zero
   private var currentOrientation = UIDeviceOrientation.portrait
+  private(set) var currentTimeInterspace: TimeInterspace?
   var participants = Set<User>()
   
   var onRoomsUpdate: ((MeetingRoom, [RoomData]) -> Void)?
@@ -87,6 +102,42 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
     let roomsData = meetingRooms[currentRoom]?[currentDate] ?? []
     calculateRoomsData(roomsData: roomsData)
     onRoomsUpdate?(currentRoom, roomsData)
+  }
+  
+  func setCurrentTimeInterspace(_ timeInterspace: TimeInterspace) {
+    self.currentTimeInterspace = timeInterspace
+  }
+  
+  func invalidateCurrentTimeInterspace() {
+    self.currentTimeInterspace = nil
+  }
+  
+  func bookMeetingRoom(with title: String?) {
+    guard let timeInterspace = currentTimeInterspace else { return }
+    
+    var participants = self.participants.map { (email: $0.slackProfile.email, displayName: $0.slackProfile.realName) }
+    participants.append((email: userService.currentUser.slackProfile.email, displayName: userService.currentUser.slackProfile.realName))
+    
+    let calendar = Calendar.current
+    let startDate = calendar.date(byAdding: .second, value: -TimeZone.current.secondsFromGMT(), to: timeInterspace.startTime).orCurrent
+    let startTime = DateFormatters.withCurrentTimeZoneFormatter().string(from: startDate)
+    
+    let endDate = calendar.date(byAdding: .second, value: -TimeZone.current.secondsFromGMT(), to: timeInterspace.endTime).orCurrent
+    let endTime = DateFormatters.withCurrentTimeZoneFormatter().string(from: endDate)
+    
+    meetingRoomsManager.bookMeetingRoom(meetingRoom: currentRoom,
+                                        startTime: startTime,
+                                        endTime: endTime,
+                                        timeZone: TimeZone.current.identifier,
+                                        summary: title,
+                                        participants: participants) { result in
+      switch result {
+      case .success(let value):
+        print(value)
+      case .failure(let error):
+        print(error)
+      }
+    }
   }
   
   private func getMeetingRooms() {
@@ -183,7 +234,8 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
       xPoint = CGFloat.zero
     } else {
       let firstIntersectedIndex = firstIntersectedIndex.orZero > index ? firstIntersectedIndex.orZero - 1 : firstIntersectedIndex.orZero
-      xPoint = CGFloat(index - firstIntersectedIndex) * width
+      let x = CGFloat(index - firstIntersectedIndex) * width
+      xPoint = x >= cvWidth ? cvWidth / 2 : x
     }
     
     return CGRect(x: xPoint + Constants.defaultOffset,

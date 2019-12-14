@@ -11,6 +11,7 @@ import Networking
 
 public protocol MeetingRoomManager {
   func getMeetingRooms(meetingRoom: MeetingRoom, startDate: Date, endDate: Date, result: ((Result<(RoomRequest, [Room]), Error>) -> Void)?)
+  func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Bool, Error>) -> Void)?)
 }
 
 public final class MeetingRoomManagerImpl: MeetingRoomManager {
@@ -29,6 +30,18 @@ public final class MeetingRoomManagerImpl: MeetingRoomManager {
         } else {
           result?(.failure(Err.general(msg: "failed to build attendance records")))
         }
+      }
+    }, onError: { error in
+      DispatchQueue.main.async {
+        result?(.failure(error))
+      }
+    })
+  }
+  
+  public func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Bool, Error>) -> Void)?) {
+    Net.Worker.request(PostMeetingRoom(meetingRoom: meetingRoom.rawValue, startTime: startTime, endTime: endTime, timeZone: timeZone, summary: summary, participants: participants ), onSuccess: { json in
+      DispatchQueue.main.async {
+        result?(.success(json.error == nil))
       }
     }, onError: { error in
       DispatchQueue.main.async {

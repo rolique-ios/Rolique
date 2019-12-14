@@ -37,7 +37,7 @@ final class BookMeetingRoomViewToast: UIView {
   
   private var onAddUser: Completion?
   private var onRemoveUser: ((User) -> Void)?
-  private var onBook: Completion?
+  private var onBook: ((String?) -> Void)?
   private var onCancel: Completion?
   
   override init(frame: CGRect) {
@@ -147,7 +147,7 @@ final class BookMeetingRoomViewToast: UIView {
     }
   }
   
-  func update(startTime: Date, endTime: Date, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: Completion?, onCancel: Completion?) {
+  func update(startTime: Date, endTime: Date, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: ((String?) -> Void)?, onCancel: Completion?) {
     let date = DateFormatters.prettyDateFormatter.string(from: startTime)
     let startTimeString = DateFormatters.timeDateFormatter.string(from: startTime)
     let endTimeString = DateFormatters.timeDateFormatter.string(from: endTime)
@@ -165,7 +165,7 @@ final class BookMeetingRoomViewToast: UIView {
   }
   
   @objc func bookButtonOnTap(_ button: UIButton) {
-    self.onBook?()
+    self.onBook?(titleTextField.text)
   }
   
   @objc func cancelButtonOnTap(_ button: UIButton) {
