@@ -1,2 +1,1 @@
-Add new provisioning profile
-Change view of successive events on the calendar
+Added possibility to check cash and card balance for hr & om.
