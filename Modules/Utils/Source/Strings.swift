@@ -92,6 +92,7 @@ public struct Strings {
   
   public struct More {
     public static var meetingRooms: String { return "Meeting rooms".localized }
+    public static var cashTracker: String { return "Cash Tracker".localized }
   }
   
   public struct MeetingRooms {

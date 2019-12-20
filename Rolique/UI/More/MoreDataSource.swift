@@ -25,27 +25,32 @@ private enum Section: Int, CaseIterable {
   case profile,
   general
   
-  var rows: [Row] {
+  func rows(for user: User) -> [MoreTableRow] {
     switch self {
     case .profile:
       return [.user]
     case .general:
-      return [.meetingRoom]
+      return user.roles.contains("hr") || user.roles.contains("om")  || user.roles.contains("admin") || user.roles.contains("accountant")
+        ? [.meetingRoom, .cashTracker]
+        : [.meetingRoom]
     }
   }
 }
 
-enum Row: Int, CaseIterable {
+enum MoreTableRow: Int, CaseIterable {
   case user,
-  meetingRoom
+  meetingRoom,
+  cashTracker
 }
 
-private extension Row {
+private extension MoreTableRow {
   var data: CellInfo? {
     switch self {
     case .meetingRoom:
       return CellInfo(icon: R.image.meetingRoom(), title: Strings.More.meetingRooms)
-    default:
+    case .cashTracker:
+      return CellInfo(icon: R.image.wallet(), title: Strings.More.cashTracker)
+    case .user:
       return nil
     }
   }
@@ -55,7 +60,7 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   private let tableView: UITableView
   private let user: User
   private lazy var sections = Section.allCases
-  var didSelectCell: ((Row) -> Void)?
+  var didSelectCell: ((MoreTableRow) -> Void)?
   
   init(tableView: UITableView,
        user: User) {
@@ -75,48 +80,53 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return sections[section].rows.count
+    return sections[section].rows(for: user).count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.rows(for: user)[indexPath.row]
     
-    switch (section, row) {
-    case (.profile, .user):
+    switch row {
+    case .user:
       let cell = ProfileTableViewCell.dequeued(by: tableView)
       cell.configure(with: user.slackProfile.realName,
                      userImage: user.biggestImage,
                      todayStatus: user.todayStatus,
                      title: user.slackProfile.title)
       return cell
-    case (.general, .meetingRoom):
+    case .meetingRoom:
       let cell = MoreTableViewCell.dequeued(by: tableView)
-      let cellInfo = row.data!
-      cell.configure(with: cellInfo.title, icon: cellInfo.icon)
+      row.data.map {
+        cell.configure(with: $0.title, icon: $0.icon)
+      }
       return cell
-    default:
-      return UITableViewCell()
+    case .cashTracker:
+      let cell = MoreTableViewCell.dequeued(by: tableView)
+      row.data.map {
+        cell.configure(with: $0.title, icon: $0.icon)
+      }
+      return cell
     }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
-    
-    switch (section, row) {
-    case (.profile, .user):
+    let row = section.rows(for: user)[indexPath.row]
+
+    switch row {
+    case .user:
       return Constants.userCellHeight
-    case (.general, .meetingRoom):
+    case .meetingRoom:
       return Constants.defaultCellHeight
-    default:
-      return 0
+    case .cashTracker:
+      return Constants.defaultCellHeight
     }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let section = sections[indexPath.section]
-    let row = section.rows[indexPath.row]
+    let row = section.rows(for: user)[indexPath.row]
     didSelectCell?(row)
   }
   
@@ -135,5 +145,4 @@ final class MoreDataSource: NSObject, UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return Constants.heightForFooterInSection
   }
-  
 }

@@ -59,7 +59,9 @@ extension Transport {
           UIApplication.shared.endBackgroundTask(backgroundTaskID)
           backgroundTaskID = .invalid
           print("\nresponse -> \(code) \(jsonString)")
-          onSuccess?(Json(stringValue: jsonString))
+          let json = Json(stringValue: jsonString)
+          print("json \(json)")
+          onSuccess?(json)
         }).resume()
       }
     }

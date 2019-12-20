@@ -39,6 +39,18 @@ final class DateFormatters {
     dateFormatter.dateFormat = "HH:mm"
     return dateFormatter
   }()
+    
+  static var expenseDateFormatter: DateFormatter = {
+    var dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMM d yyyy, h:mm a"
+    return dateFormatter
+  }()
+  
+  static var groupedExpenseDateFormatter: DateFormatter = {
+    var dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMM d yyyy"
+    return dateFormatter
+  }()
   
   static func withCurrentTimeZoneFormatter() -> DateFormatter {
     let formatter = DateFormatter()

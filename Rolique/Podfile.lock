@@ -24,16 +24,15 @@ DEPENDENCIES:
   - Utils (from `../Modules/Utils`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Crashlytics
     - Dip
     - Fabric
+    - IgyToast
     - JTAppleCalendar
     - R.swift
     - R.swift.Library
     - SnapKit
-  trunk:
-    - IgyToast
 
 EXTERNAL SOURCES:
   Networking:

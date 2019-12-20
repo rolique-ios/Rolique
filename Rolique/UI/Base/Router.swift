@@ -77,4 +77,13 @@ public final class Router {
     let vm: ColleaguesViewModelImpl = Root.shared.resolveRuntime(arg1: users, arg2: mode)
     return ColleaguesViewController(viewModel: vm)
   }
+    
+  static func getCashTrackerViewController() -> CashTrackerViewController<CashTrackerViewModelImpl> {
+    let vm: CashTrackerViewModelImpl = Root.shared.hardResolve()
+    return CashTrackerViewController(viewModel: vm)
+  }
+    
+  static func getCashHistoryViewController() -> CashHistoryViewController<CashHistoryViewModelImpl> {
+    return CashHistoryViewController<CashHistoryViewModelImpl>(viewModel: Root.shared.hardResolve())
+  }
 }
