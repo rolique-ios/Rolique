@@ -33,7 +33,7 @@ final class BookedTimeView: UIView {
   
   private func initialize() {
     backgroundColor = Colors.Colleagues.lightBlue
-    self.roundCorner(radius: 5.0)
+    addBorder(width: 1.0, color: .white, cornerRadius: 6.0)
     
     titleLabel.textColor = .white
     titleLabel.font = .systemFont(ofSize: 14.0)

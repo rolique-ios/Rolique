@@ -30,16 +30,26 @@ struct TimeInterspace: Comparable {
 
 protocol MeetingRoomsViewModel {
   var users: [User] { get }
-  var participants: Set<User> { get set }
+  var participants: Set<User> { get }
+  var title: String? { get }
   var meetingRooms: [MeetingRoom: [Date: [RoomData]]] { get }
   var currentTimeInterspace: TimeInterspace? { get }
+  
+  var onRoomsUpdate: ((MeetingRoom, [RoomData]) -> Void)? { get set }
+  var onChangeDate: Completion? { get set }
+  var onChangeMeetingRoom: ((MeetingRoom) -> Void)? { get set }
+  var onFinishBooking: Completion? { get set }
+  var onError: ((String) -> Void)? { get set }
   
   func changeDate(with date: Date)
   func changeRoom(with room: MeetingRoom)
   
   func bookMeetingRoom(with title: String?)
   func setCurrentTimeInterspace(_ timeInterspace: TimeInterspace)
-  func invalidateCurrentTimeInterspace()
+  func finishBooking()
+  func addParticipant(_ participant: User)
+  func removeParticipant(_ participant: User)
+  func changeTitle(_ title: String?)
 }
 
 final class RoomData {
@@ -63,11 +73,14 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   private var landScapeOrientationCVWidth = CGFloat.zero
   private var currentOrientation = UIDeviceOrientation.portrait
   private(set) var currentTimeInterspace: TimeInterspace?
-  var participants = Set<User>()
+  private(set) var participants = Set<User>()
+  private(set) var title: String?
   
   var onRoomsUpdate: ((MeetingRoom, [RoomData]) -> Void)?
   var onChangeDate: Completion?
   var onChangeMeetingRoom: ((MeetingRoom) -> Void)?
+  var onFinishBooking: Completion?
+  var onError: ((String) -> Void)?
   
   init(userService: UserService, meetingRoomsManager: MeetingRoomManager) {
     self.userService = userService
@@ -94,9 +107,10 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   
   func orientationDidChanged(_ orientation: UIDeviceOrientation, collectionViewWidth: CGFloat) {
     currentOrientation = orientation
-    if orientation == .portrait {
+    switch orientation {
+    case .portrait, .portraitUpsideDown, .faceUp, .faceDown:
       portraitOrientationCVWidth = collectionViewWidth
-    } else {
+    default:
       landScapeOrientationCVWidth = collectionViewWidth
     }
     let roomsData = meetingRooms[currentRoom]?[currentDate] ?? []
@@ -108,8 +122,22 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
     self.currentTimeInterspace = timeInterspace
   }
   
-  func invalidateCurrentTimeInterspace() {
+  func finishBooking() {
     self.currentTimeInterspace = nil
+    self.title = nil
+    self.participants.removeAll()
+  }
+  
+  func addParticipant(_ participant: User) {
+    self.participants.insert(participant)
+  }
+  
+  func removeParticipant(_ participant: User) {
+    self.participants.remove(participant)
+  }
+  
+  func changeTitle(_ title: String?) {
+    self.title = title
   }
   
   func bookMeetingRoom(with title: String?) {
@@ -130,13 +158,28 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
                                         endTime: endTime,
                                         timeZone: TimeZone.current.identifier,
                                         summary: title,
-                                        participants: participants) { result in
-      switch result {
-      case .success(let value):
-        print(value)
-      case .failure(let error):
-        print(error)
-      }
+                                        participants: participants) { [weak self] result in
+                                          guard let self = self else { return }
+                                          
+                                          switch result {
+                                          case .success(let room):
+                                            let sortedRooms: [RoomData]
+                                            if self.meetingRooms[self.currentRoom]?[self.currentDate] != nil {
+                                              self.meetingRooms[self.currentRoom]![self.currentDate]!.append(RoomData(room: room))
+                                              sortedRooms = self.sortRoomsAndInvalidateFrame(rooms: self.meetingRooms[self.currentRoom]![self.currentDate]!)
+                                              self.calculateRoomsData(roomsData: sortedRooms)
+                                            } else {
+                                              let rooms = [RoomData(room: room)]
+                                              self.meetingRooms[self.currentRoom] = [self.currentDate: rooms]
+                                              sortedRooms = rooms
+                                              self.calculateRoomsData(roomsData: sortedRooms)
+                                            }
+                                            self.onRoomsUpdate?(self.currentRoom, sortedRooms)
+                                            self.onFinishBooking?()
+                                          case .failure(let error):
+                                            self.onFinishBooking?()
+                                            self.onError?(error.localizedDescription)
+                                          }
     }
   }
   
@@ -183,9 +226,10 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
   
   private func calculateRoomsData(roomsData: [RoomData]) {
     for (index, roomData) in roomsData.enumerated() {
-      if currentOrientation == .portrait, roomData.verticalFrame == nil {
+      switch currentOrientation {
+      case .portrait, .portraitUpsideDown, .faceUp, .faceDown:
         roomData.verticalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: portraitOrientationCVWidth)
-      } else if roomData.horizontalFrame == nil {
+      default:
         roomData.horizontalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: landScapeOrientationCVWidth)
       }
     }
@@ -238,10 +282,11 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
       xPoint = x >= cvWidth ? cvWidth / 2 : x
     }
     
-    return CGRect(x: xPoint + Constants.defaultOffset,
-                  y: yPoint + Constants.defaultOffset,
-                  width: xPoint + width == cvWidth ? width - Constants.edgeOffset : width - Constants.defaultOffset * 2,
-                  height: height - Constants.defaultOffset * 2)
+    let frame = CGRect(x: xPoint + Constants.defaultOffset,
+                       y: yPoint + Constants.defaultOffset,
+                       width: xPoint + width == cvWidth ? width - Constants.edgeOffset : width - Constants.defaultOffset * 2,
+                       height: height - Constants.defaultOffset * 2)
+    return frame
   }
   
   private func filterRooms(with rooms: [Room]) -> [RoomData] {
@@ -252,18 +297,27 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
       if (attendee?.isResource ?? false) && attendee?.responseStatus == Constants.declined {
         continue
       }
-      let roomData = RoomData(room: room)
-      roomsData.append(roomData)
+      
+      roomsData.append(RoomData(room: room))
     }
     
-    for (index, roomData) in roomsData.enumerated() {
-      if currentOrientation == .portrait, roomData.verticalFrame == nil {
-        roomData.verticalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: portraitOrientationCVWidth)
-      } else if roomData.horizontalFrame == nil {
-        roomData.horizontalFrame = getRect(with: index, roomData: roomData, rooms: roomsData, cvWidth: landScapeOrientationCVWidth)
-      }
-    }
+    calculateRoomsData(roomsData: roomsData)
     
     return roomsData
+  }
+  
+  private func sortRoomsAndInvalidateFrame(rooms: [RoomData]) -> [RoomData] {
+    let calendar = Calendar.utc
+    return rooms.sorted(by: {
+      $0.verticalFrame = nil
+      $0.horizontalFrame = nil
+
+      let firstDateComponents = calendar.dateComponents([.hour, .minute], from: $0.room.start.dateTime)
+      let firstDate = calendar.date(byAdding: firstDateComponents, to: Date().utc).orCurrent
+      
+      let secondDateComponents = calendar.dateComponents([.hour, .minute], from: $1.room.start.dateTime)
+      let secondDate = calendar.date(byAdding: secondDateComponents, to: Date().utc).orCurrent
+      return firstDate < secondDate
+    })
   }
 }

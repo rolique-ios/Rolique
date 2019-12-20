@@ -41,9 +41,9 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private lazy var meetingRoomsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().apply { $0.scrollDirection = .horizontal })
   private lazy var meetingRoomsCollectionViewDataSource = MeetingRoomsCollectionViewDataSource(collectionView: meetingRoomsCollectionView, timeTableView: timeTableView)
   private lazy var timeDataSource: TimeDataSource = TimeDataSource(tableView: timeTableView)
-  private lazy var buttonsContainerView = UIView()
-  private lazy var backButton = UIButton()
-  private lazy var editButton = UIButton()
+  private lazy var editButton = UIBarButtonItem(title: Strings.MeetingRooms.edit, style: .done, target: self, action: #selector(didSelectEditButton(sender:)))
+  private lazy var doneButton = UIBarButtonItem(title: Strings.MeetingRooms.done, style: .done, target: self, action: #selector(didSelectEditButton(sender:)))
+  private lazy var monthViewContainer = UIView()
   private lazy var monthNameLabel = UILabel()
   private lazy var expandButton = UIButton()
   private lazy var calendarCollectionView = CalendarCollectionView()
@@ -66,28 +66,10 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     configureBindings()
   }
   
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    if #available(iOS 13.0, *) {
-      if self.traitCollection.userInterfaceStyle == .dark {
-        return .lightContent
-      } else {
-        return .darkContent
-      }
-    } else {
-      return .default
-    }
-  }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    navigationController?.setNavigationBarHidden(true, animated: true)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    
-    navigationController?.setNavigationBarHidden(false, animated: true)
+    navigationController?.navigationBar.prefersLargeTitles = false
   }
   
   override func performOnceInViewDidAppear() {
@@ -116,19 +98,15 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   }
   
   private func configureUI() {
+    setEmptyTitleBackButton()
+    navigationItem.titleView = monthViewContainer
+    navigationItem.rightBarButtonItem = editButton
+    
     view.backgroundColor = Colors.mainBackgroundColor
     
-    backButton.setTitleColor(Colors.mainTextColor, for: .normal)
-    backButton.addTarget(self, action: #selector(didSelectBackButton), for: .touchUpInside)
-    let image = R.image.arrowBack()?.withRenderingMode(.alwaysTemplate)
-    backButton.imageView?.tintColor = Colors.imageColor
-    backButton.setImage(image, for: .normal)
-    
-    editButton.setTitleColor(Colors.mainTextColor, for: .normal)
-    editButton.setTitle(Strings.MeetingRooms.edit, for: .normal)
-    editButton.addTarget(self, action: #selector(didSelectEditButton), for: .touchUpInside)
-    
-    expandButton.setImage(R.image.expand(), for: .normal)
+    let image = R.image.expand()?.withRenderingMode(.alwaysTemplate)
+    expandButton.tintColor = .systemOrange
+    expandButton.setImage(image, for: .normal)
     expandButton.addTarget(self, action: #selector(didSelectExpandButton), for: .touchUpInside)
     
     meetingRoomsScrollViewContainer.backgroundColor = Colors.Colleagues.lightBlue
@@ -139,24 +117,31 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     calendarCollectionView.delegate = self
     
     monthNameLabel.text = Date().monthName()
+    monthNameLabel.textColor = .white
     
     Toast.current.backgroundColor = Colors.mainBackgroundColor
   }
   
   private func configureConstraints() {
-    [buttonsContainerView,
-     calendarCollectionView,
+    [monthNameLabel, expandButton].forEach(monthViewContainer.addSubview)
+    
+    monthNameLabel.snp.makeConstraints { maker in
+      maker.top.left.bottom.equalToSuperview()
+    }
+    
+    expandButton.snp.makeConstraints { maker in
+      maker.left.equalTo(monthNameLabel.snp.right)
+      maker.centerY.right.equalToSuperview()
+      maker.size.equalTo(Constants.expandButtonSize)
+    }
+    
+    [calendarCollectionView,
      meetingRoomsScrollViewContainer,
      timeTableView,
      meetingRoomsCollectionView].forEach(self.view.addSubview(_:))
     
-    buttonsContainerView.snp.makeConstraints { maker in
-      maker.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
-      maker.height.equalTo(Constants.buttonsContainerHeight)
-    }
-    
     calendarCollectionView.snp.makeConstraints { maker in
-      maker.top.equalTo(buttonsContainerView.snp.bottom)
+      maker.top.equalTo(self.view.safeAreaLayoutGuide)
       maker.left.equalTo(self.view.safeAreaLayoutGuide)
       calendarCollectionViewHeightConstraint = maker.height.equalTo(Constants.headerCollapsedHeight).constraint
       maker.right.equalTo(self.view.safeAreaLayoutGuide)
@@ -178,29 +163,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       maker.top.equalTo(meetingRoomsScrollViewContainer.snp.bottom)
       maker.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
       maker.left.equalTo(timeTableView.snp.right)
-    }
-    
-    [backButton, editButton, monthNameLabel, expandButton].forEach(buttonsContainerView.addSubview(_:))
-    backButton.snp.makeConstraints { maker in
-      maker.left.equalToSuperview().offset(Constants.defaultOffset)
-      maker.centerY.equalToSuperview()
-      maker.height.equalTo(Constants.backButtonHeight)
-      maker.width.equalTo(Constants.backButtonWidth)
-    }
-    
-    editButton.snp.makeConstraints { maker in
-      maker.right.equalToSuperview().offset(-Constants.defaultOffset)
-      maker.top.bottom.equalToSuperview()
-    }
-    
-    monthNameLabel.snp.makeConstraints { maker in
-      maker.center.equalToSuperview()
-    }
-    
-    expandButton.snp.makeConstraints { maker in
-      maker.left.equalTo(monthNameLabel.snp.right)
-      maker.centerY.equalToSuperview()
-      maker.size.equalTo(Constants.expandButtonSize)
     }
     
     [meetingRoomsScrollView].forEach(meetingRoomsScrollViewContainer.addSubview(_:))
@@ -271,6 +233,11 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       self?.meetingRoomsCollectionViewDataSource.clearDataSource(with: room)
     }
     
+    viewModel.onFinishBooking = { [weak self] in
+      self?.finishBooking()
+      self?.hideSpinner()
+    }
+    
     calendarCollectionView.onSelectDate = { [weak self] date in
       self?.viewModel.changeDate(with: date)
     }
@@ -288,17 +255,14 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     }
   }
   
-  @objc func didSelectEditButton() {
-    
+  @objc func didSelectEditButton(sender: UIBarButtonItem) {
     isEdit.toggle()
     
     meetingRoomsCollectionView.isScrollEnabled = !isEdit
     meetingRoomsScrollView.isScrollEnabled = !isEdit
     calendarCollectionView.setEditing(isEdit)
     
-    UIView.transition(with: editButton, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
-      self?.editButton.setTitle(self?.isEdit ?? false ? Strings.MeetingRooms.done : Strings.MeetingRooms.edit, for: .normal)
-    }, completion: nil)
+    navigationItem.rightBarButtonItem = isEdit ? doneButton : editButton
     
     if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
       if isEdit {
@@ -340,7 +304,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     
     Toast.current.willBeClosedByUserInteraction = { [weak self] in
       cell.finishBooking()
-      self?.viewModel.invalidateCurrentTimeInterspace()
+      self?.viewModel.finishBooking()
     }
   }
   
@@ -352,31 +316,36 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     let v = BookMeetingRoomViewToast()
     v.update(startTime: timeInterspace.startTime,
              endTime: timeInterspace.endTime,
-             onAddUser: { [weak self] in
+             onAddUser: { [weak self] title in
               guard let self = self else { return }
+              
+              self.viewModel.changeTitle(title)
+              
               Toast.current.hide {
                 let colleaguesVC = Router.getColleaguesViewController(with: .selectParticipant, users: self.viewModel.users)
                 colleaguesVC.onPop = { [weak self] user in
                   guard let self = self, let currentTimeInterspace = self.viewModel.currentTimeInterspace else { return }
-                  _ = user.map { self.viewModel.participants.insert($0) }
+                  _ = user.map { self.viewModel.addParticipant($0) }
                   Toast.current.show(self.createBookMeetingRoomView(timeInterspace: currentTimeInterspace))
                 }
                 self.navigationController?.pushViewController(colleaguesVC, animated: true)
               }
     },
              participants: Array(self.viewModel.participants),
+             title: viewModel.title,
              onRemoveUser: { [weak self] user in
-              if let index = self?.viewModel.participants.firstIndex(of: user) {
-                self?.viewModel.participants.remove(at: index)
-              }
+              self?.viewModel.removeParticipant(user)
               Toast.current.layoutVertically()
     },
              onBook: { [weak self] title in
               self?.viewModel.bookMeetingRoom(with: title)
-//              self?.finishBooking()
+              Toast.current.hide { [weak self] in
+                self?.showSpinner(shouldBlockUI: true)
+              }
     },
              onCancel: { [weak self] in
               self?.finishBooking()
+              Toast.current.hide()
     })
     return v
   }
@@ -385,8 +354,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: self.currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
       cell.finishBooking()
     }
-    viewModel.invalidateCurrentTimeInterspace()
-    Toast.current.hide()
+    viewModel.finishBooking()
   }
   
   @objc func didSelectExpandButton() {

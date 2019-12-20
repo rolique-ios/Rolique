@@ -54,9 +54,7 @@ final class MoreViewController<T: MoreViewModel>: ViewController<T> {
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = .white
-    let barButton = UIBarButtonItem()
-    barButton.title = ""
-    navigationItem.backBarButtonItem = barButton
+    setEmptyTitleBackButton()
     navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
   

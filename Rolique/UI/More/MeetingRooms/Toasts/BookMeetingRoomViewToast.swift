@@ -35,7 +35,7 @@ final class BookMeetingRoomViewToast: UIView {
   private var participants = [User]()
   private var tableViewHeightConstraint: Constraint?
   
-  private var onAddUser: Completion?
+  private var onAddUser: ((String?) -> Void)?
   private var onRemoveUser: ((User) -> Void)?
   private var onBook: ((String?) -> Void)?
   private var onCancel: Completion?
@@ -147,7 +147,7 @@ final class BookMeetingRoomViewToast: UIView {
     }
   }
   
-  func update(startTime: Date, endTime: Date, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: ((String?) -> Void)?, onCancel: Completion?) {
+  func update(startTime: Date, endTime: Date, onAddUser: ((String?) -> Void)?, participants: [User], title: String?, onRemoveUser: ((User) -> Void)?, onBook: ((String?) -> Void)?, onCancel: Completion?) {
     let date = DateFormatters.prettyDateFormatter.string(from: startTime)
     let startTimeString = DateFormatters.timeDateFormatter.string(from: startTime)
     let endTimeString = DateFormatters.timeDateFormatter.string(from: endTime)
@@ -157,11 +157,12 @@ final class BookMeetingRoomViewToast: UIView {
     self.onBook = onBook
     self.onCancel = onCancel
     self.participants = participants
+    self.titleTextField.text = title
     updateTableView()
   }
   
   @objc func addButtonOnTap(_ button: UIButton) {
-    self.onAddUser?()
+    self.onAddUser?(titleTextField.text)
   }
   
   @objc func bookButtonOnTap(_ button: UIButton) {

@@ -11,7 +11,7 @@ import Networking
 
 public protocol MeetingRoomManager {
   func getMeetingRooms(meetingRoom: MeetingRoom, startDate: Date, endDate: Date, result: ((Result<(RoomRequest, [Room]), Error>) -> Void)?)
-  func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Bool, Error>) -> Void)?)
+  func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Room, Error>) -> Void)?)
 }
 
 public final class MeetingRoomManagerImpl: MeetingRoomManager {
@@ -38,10 +38,15 @@ public final class MeetingRoomManagerImpl: MeetingRoomManager {
     })
   }
   
-  public func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Bool, Error>) -> Void)?) {
+  public func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Room, Error>) -> Void)?) {
     Net.Worker.request(PostMeetingRoom(meetingRoom: meetingRoom.rawValue, startTime: startTime, endTime: endTime, timeZone: timeZone, summary: summary, participants: participants ), onSuccess: { json in
       DispatchQueue.main.async {
-        result?(.success(json.error == nil))
+        let room: Room? = json.build()
+        if let room = room {
+          result?(.success(room))
+        } else {
+          result?(.failure(Err.general(msg: "failed to build room")))
+        }
       }
     }, onError: { error in
       DispatchQueue.main.async {

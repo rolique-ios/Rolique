@@ -59,11 +59,13 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
     
     for roomData in roomsData {
       let frame: CGRect
-      if UIDevice.current.orientation == .portrait {
+      switch UIDevice.current.orientation {
+      case .portrait, .portraitUpsideDown, .faceUp, .faceDown:
         frame = roomData.verticalFrame ?? .zero
-      } else {
+      default:
         frame = roomData.horizontalFrame ?? .zero
       }
+      
       let bookedTimeView = BookedTimeView(frame: frame)
       let time = DateFormatters.hourDateFormatter.string(from: roomData.room.start.dateTime)
       bookedTimeView.update(with: (roomData.room.title ?? Strings.MeetingRooms.noTitle) + ", " + time)
