@@ -62,7 +62,7 @@ final class BookMeetingRoomViewToast: UIView {
     participantsLabel.textColor = Colors.mainTextColor
     
     addButton.setImage(R.image.addParticipant(), for: .normal)
-    addButton.addTarget(self, action: #selector(addButtonOnTap(_:)), for: .touchUpInside)
+    addButton.addTarget(self, action: #selector(didTapOnAddButton(_:)), for: .touchUpInside)
     
     participantSeparator.backgroundColor = Colors.separatorColor
     
@@ -80,9 +80,9 @@ final class BookMeetingRoomViewToast: UIView {
     bookButton.setTitle("Book", for: .normal)
     bookButton.backgroundColor = Colors.Actions.darkGray
     bookButton.roundCorner(radius: 5.0)
-    bookButton.addTarget(self, action: #selector(bookButtonOnTap(_:)), for: .touchUpInside)
+    bookButton.addTarget(self, action: #selector(didTapOnBookButton(_:)), for: .touchUpInside)
     
-    cancelButton.addTarget(self, action: #selector(cancelButtonOnTap(_:)), for: .touchUpInside)
+    cancelButton.addTarget(self, action: #selector(didTapOnCancelButton(_:)), for: .touchUpInside)
     
     configureConstraints()
   }
@@ -161,15 +161,15 @@ final class BookMeetingRoomViewToast: UIView {
     updateTableView()
   }
   
-  @objc func addButtonOnTap(_ button: UIButton) {
+  @objc func didTapOnAddButton(_ button: UIButton) {
     self.onAddUser?(titleTextField.text)
   }
   
-  @objc func bookButtonOnTap(_ button: UIButton) {
+  @objc func didTapOnBookButton(_ button: UIButton) {
     self.onBook?(titleTextField.text)
   }
   
-  @objc func cancelButtonOnTap(_ button: UIButton) {
+  @objc func didTapOnCancelButton(_ button: UIButton) {
     self.onCancel?()
   }
   

@@ -41,8 +41,8 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private lazy var meetingRoomsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().apply { $0.scrollDirection = .horizontal })
   private lazy var meetingRoomsCollectionViewDataSource = MeetingRoomsCollectionViewDataSource(collectionView: meetingRoomsCollectionView, timeTableView: timeTableView)
   private lazy var timeDataSource: TimeDataSource = TimeDataSource(tableView: timeTableView)
-  private lazy var editButton = UIBarButtonItem(title: Strings.MeetingRooms.edit, style: .done, target: self, action: #selector(didSelectEditButton(sender:)))
-  private lazy var doneButton = UIBarButtonItem(title: Strings.MeetingRooms.done, style: .done, target: self, action: #selector(didSelectEditButton(sender:)))
+  private lazy var editButton = UIBarButtonItem(title: Strings.MeetingRooms.edit, style: .done, target: self, action: #selector(didTapOnEditButton(sender:)))
+  private lazy var doneButton = UIBarButtonItem(title: Strings.MeetingRooms.done, style: .done, target: self, action: #selector(didTapOnEditButton(sender:)))
   private lazy var monthViewContainer = UIView()
   private lazy var monthNameLabel = UILabel()
   private lazy var expandButton = UIButton()
@@ -107,7 +107,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     let image = R.image.expand()?.withRenderingMode(.alwaysTemplate)
     expandButton.tintColor = .systemOrange
     expandButton.setImage(image, for: .normal)
-    expandButton.addTarget(self, action: #selector(didSelectExpandButton), for: .touchUpInside)
+    expandButton.addTarget(self, action: #selector(didTapOnExpandButton), for: .touchUpInside)
     
     meetingRoomsScrollViewContainer.backgroundColor = Colors.Colleagues.lightBlue
     meetingRoomsScrollView.isPagingEnabled = true
@@ -255,7 +255,7 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     }
   }
   
-  @objc func didSelectEditButton(sender: UIBarButtonItem) {
+  @objc func didTapOnEditButton(sender: UIBarButtonItem) {
     isEdit.toggle()
     
     meetingRoomsCollectionView.isScrollEnabled = !isEdit
@@ -357,11 +357,11 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
     viewModel.finishBooking()
   }
   
-  @objc func didSelectExpandButton() {
+  @objc func didTapOnExpandButton() {
     toggleState()
   }
   
-  @objc func didSelectBackButton() {
+  @objc func didTapOnBackButton() {
     navigationController?.popViewController(animated: true)
   }
   

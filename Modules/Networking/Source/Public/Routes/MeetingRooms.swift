@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct Settings {
-  static let isTest = "true"
-}
-
 public final class GetMeetingRooms: Route {
   public init(meetingRoom: String, startDate: String, endDate: String) {
     let params = ["room": meetingRoom,
@@ -23,8 +19,8 @@ public final class GetMeetingRooms: Route {
 }
 
 public final class PostMeetingRoom: Route {
-  public init(meetingRoom: String, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)]) {
-    let params: [String: String] = ["room": meetingRoom, "test": Settings.isTest]
+  public init(meetingRoom: String, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], isTest: String) {
+    let params = ["room": meetingRoom, "test": isTest]
     
     var eventParams = [String: Any]()
     

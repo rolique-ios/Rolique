@@ -27,15 +27,6 @@ public extension UIViewController {
     self.present(playerController, animated: true, completion: completion ?? { player.play() })
   }
   
-  func close(animated: Bool = true, completion: (() -> Void)? = nil) {
-    if (navigationController?.viewControllers.count ?? 0) > 1 {
-      navigationController?.popViewController(animated: animated)
-      completion?()
-    } else if presentingViewController != nil {
-      dismiss(animated: animated, completion: completion)
-    }
-  }
-  
   func showSpinner(shouldBlockUI: Bool) {
     let spinnerView = UIView(frame: .zero)
     spinnerView.backgroundColor = .black

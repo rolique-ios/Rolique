@@ -58,12 +58,6 @@ private extension LoginViewController {
   }
   
   func configureBinding() {
-    viewModel.onLogin = {
-      let window = (UIApplication.shared.delegate as? AppDelegate)?.window
-      window?.rootViewController = Router.getStartViewController()
-      window?.makeKeyAndVisible()
-    }
-    
     self.viewModel.onError = { [weak self] error in
       guard let self = self else { return }
       

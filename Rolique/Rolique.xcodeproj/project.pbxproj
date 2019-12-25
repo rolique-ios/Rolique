@@ -75,6 +75,7 @@
 		25F508ED239954CA00D4412C /* CashTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EC239954CA00D4412C /* CashTrackerViewController.swift */; };
 		25F508EF239954D500D4412C /* CashTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F508EE239954D500D4412C /* CashTrackerViewModel.swift */; };
 		25FCC61922FB08D00094E0DA /* UsersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCC61822FB08D00094E0DA /* UsersStorage.swift */; };
+		2D006C9123B26D50009EC64D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D006C8F23B26D50009EC64D /* MainInterface.storyboard */; };
 		2D1450722338D67F00358BD0 /* Skypable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1450712338D67F00358BD0 /* Skypable.swift */; };
 		2D1450742338D6BA00358BD0 /* Mailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1450732338D6BA00358BD0 /* Mailable.swift */; };
 		2D1450762338D6CC00358BD0 /* Callable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1450752338D6CC00358BD0 /* Callable.swift */; };
@@ -136,6 +137,7 @@
 		3FF320A0233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */; };
 		3FF320A2233A4EE4002E3226 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */; };
 		3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */; };
+		3FF3391B23B3635C00F1E495 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3391A23B3635C00F1E495 /* Settings.swift */; };
 		3FF37E70238D477500FAEB04 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E6F238D477500FAEB04 /* Root.swift */; };
 		3FF37E72238D518F00FAEB04 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E71238D518F00FAEB04 /* Room.swift */; };
 		3FF37E74238D665C00FAEB04 /* MeetingRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */; };
@@ -294,6 +296,7 @@
 		25F508EE239954D500D4412C /* CashTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTrackerViewModel.swift; sourceTree = "<group>"; };
 		25FCC61822FB08D00094E0DA /* UsersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStorage.swift; sourceTree = "<group>"; };
 		262283D9060EB48360D83FE0 /* Pods-Rolique.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rolique.stagingdebug.xcconfig"; path = "Target Support Files/Pods-Rolique/Pods-Rolique.stagingdebug.xcconfig"; sourceTree = "<group>"; };
+		2D006C9023B26D50009EC64D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		2D1450712338D67F00358BD0 /* Skypable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skypable.swift; sourceTree = "<group>"; };
 		2D1450732338D6BA00358BD0 /* Mailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mailable.swift; sourceTree = "<group>"; };
 		2D1450752338D6CC00358BD0 /* Callable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callable.swift; sourceTree = "<group>"; };
@@ -353,6 +356,7 @@
 		3FF3209F233A2CE0002E3226 /* AdditionalInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoTableViewCell.swift; sourceTree = "<group>"; };
 		3FF320A1233A4EE4002E3226 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTableViewCell.swift; sourceTree = "<group>"; };
+		3FF3391A23B3635C00F1E495 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3FF37E6F238D477500FAEB04 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		3FF37E71238D518F00FAEB04 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		3FF37E73238D665C00FAEB04 /* MeetingRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomManager.swift; sourceTree = "<group>"; };
@@ -541,6 +545,7 @@
 				25C54E41239E53A90023880E /* Expense.swift */,
 				25863C0523A297D5005A5F2E /* Balance.swift */,
 				25863C0723A2A357005A5F2E /* CashOwner.swift */,
+				3FF3391A23B3635C00F1E495 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -621,6 +626,8 @@
 				3FA2DF78236C8E2D00242416 /* LabelWithInsets.swift */,
 				3F3529A7237998C600905907 /* MeetingRoomView.swift */,
 				2516B68C239A8A30009EC707 /* ImageButton.swift */,
+				3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */,
+				3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -714,6 +721,7 @@
 			isa = PBXGroup;
 			children = (
 				25A6195622F878A500A85C5A /* VacationViewController.swift */,
+				2D006C8F23B26D50009EC64D /* MainInterface.storyboard */,
 				25A6195B22F878A500A85C5A /* Info.plist */,
 				3FFFD87E236C3E7D00F6EFD9 /* VacationUserService.swift */,
 			);
@@ -821,8 +829,6 @@
 				3F0217DB2375746C00E5894A /* MeetingRoomsViewModel.swift */,
 				3FE85A5F23829D9D009B9AEC /* DataSources */,
 				3F0217E92375C64D00E5894A /* Cells */,
-				3FFFABFB2397C24E0015A958 /* Toasts */,
-				3FF5F8E22396619D00D3F09C /* BookedTimeView.swift */,
 			);
 			path = MeetingRooms;
 			sourceTree = "<group>";
@@ -834,6 +840,7 @@
 				3FF8512A237956E9005A4F2C /* EmptyTimeRoomTableViewCell.swift */,
 				3F0217E72375C64700E5894A /* TimeTableViewCell.swift */,
 				3F06FE18237C2E6600DEE682 /* DayCollectionCell.swift */,
+				3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -883,12 +890,10 @@
 		3FC9960E23167BD700C2554C /* Toasts */ = {
 			isa = PBXGroup;
 			children = (
+				3FF3391C23B363C900F1E495 /* ActionToasts */,
 				3FC99613231683B800C2554C /* DefaultButtons */,
-				3FF1035923157D7F00EBCE4E /* PochavToast.swift */,
-				3FC996142316843700C2554C /* DopracToast.swift */,
-				3FFD38802317D284006D5479 /* RemoteToast.swift */,
-				3FFD388A23180D67006D5479 /* LateToast.swift */,
 				2DE7FA6F23184A9B00914EE8 /* RecordTypeToast.swift */,
+				3FEAE0B8238BDD7200281B0A /* BookMeetingRoomViewToast.swift */,
 			);
 			path = Toasts;
 			sourceTree = "<group>";
@@ -908,7 +913,6 @@
 				3F0217E323757EF700E5894A /* TimeDataSource.swift */,
 				3F0217E52375C25600E5894A /* MeetingRoomsTableViewDataSource.swift */,
 				3FE85A5D23829D0F009B9AEC /* MeetingRoomsCollectionViewDataSource.swift */,
-				3F06FE16237C2C9200DEE682 /* CalendarCollectionView.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -952,6 +956,17 @@
 				3FF320A3233A5254002E3226 /* InteractiveTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		3FF3391C23B363C900F1E495 /* ActionToasts */ = {
+			isa = PBXGroup;
+			children = (
+				3FF1035923157D7F00EBCE4E /* PochavToast.swift */,
+				3FC996142316843700C2554C /* DopracToast.swift */,
+				3FFD38802317D284006D5479 /* RemoteToast.swift */,
+				3FFD388A23180D67006D5479 /* LateToast.swift */,
+			);
+			path = ActionToasts;
 			sourceTree = "<group>";
 		};
 		3FF3415023044F70008EA243 /* CoreData */ = {
@@ -1003,15 +1018,6 @@
 				3F0217D8237571E700E5894A /* MeetingRooms */,
 			);
 			path = More;
-			sourceTree = "<group>";
-		};
-		3FFFABFB2397C24E0015A958 /* Toasts */ = {
-			isa = PBXGroup;
-			children = (
-				3FEAE0B8238BDD7200281B0A /* BookMeetingRoomViewToast.swift */,
-				3FEAE0BA238BE18000281B0A /* ParticipantTableViewCell.swift */,
-			);
-			path = Toasts;
 			sourceTree = "<group>";
 		};
 		AEA991AD53F5E3CD1C599A90 /* Pods */ = {
@@ -1276,6 +1282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				257C79B523018638007A299D /* debug.rolque.xcconfig in Resources */,
+				2D006C9123B26D50009EC64D /* MainInterface.storyboard in Resources */,
 				257C79B323018636007A299D /* release.rolique.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1536,6 +1543,7 @@
 				3FF320A4233A5254002E3226 /* InteractiveTableViewCell.swift in Sources */,
 				3FF5F8E32396619D00D3F09C /* BookedTimeView.swift in Sources */,
 				3FF1035223155EA100EBCE4E /* ActionsViewController.swift in Sources */,
+				3FF3391B23B3635C00F1E495 /* Settings.swift in Sources */,
 				25535B1023014DC000833A5B /* RemoteViewController.swift in Sources */,
 				2D762901235F1BB600E1E846 /* ColleagueCollectionViewCell.swift in Sources */,
 				3F06FE17237C2C9200DEE682 /* CalendarCollectionView.swift in Sources */,
@@ -1658,6 +1666,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3FEB8F86237DB2A50035E68F /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		2D006C8F23B26D50009EC64D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2D006C9023B26D50009EC64D /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -1791,6 +1807,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -2289,6 +2306,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.rolique.Rolique;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;

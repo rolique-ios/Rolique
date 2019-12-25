@@ -44,12 +44,14 @@ public final class Router {
   }
   
   public static func getStartViewController() -> UIViewController {
+    let vc: UIViewController
     if let user = User.getFromCoreData(with: UserDefaultsManager.shared.userId ?? "") {
       Root.shared.registerUserService(with: user)
-      return getTabBarController()
+      vc = getTabBarController()
     } else {
-      return getLoginController()
+      vc = getLoginController()
     }
+    return vc
   }
   
   static func getProfileDetailViewController(user: User) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {

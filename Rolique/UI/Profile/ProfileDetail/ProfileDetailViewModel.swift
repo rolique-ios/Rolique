@@ -11,7 +11,6 @@ import Utils
 
 protocol ProfileDetailViewModel: ViewModel {
   var user: User { get }
-  var onLogOut: Completion? { get set }
   var onClearCache: Completion? { get set }
   
   func logOut()
@@ -36,7 +35,9 @@ final class ProfileDetailViewModelImpl: BaseViewModel, ProfileDetailViewModel {
     UserDefaultsManager.shared.userId = nil
     coreDataMananger.clearCoreData()
     ImageManager.shared.clearImagesFolder()
-    onLogOut?()
+    let window = (UIApplication.shared.delegate as? AppDelegate)?.window
+    let nc = window?.rootViewController as? UINavigationController
+    nc?.setViewControllers([Router.getStartViewController()], animated: true)
   }
   
   func clearCache() {

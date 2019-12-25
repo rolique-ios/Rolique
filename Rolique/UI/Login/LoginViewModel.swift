@@ -31,7 +31,7 @@ final class LoginViewModelImpl: BaseViewModel, LoginViewModel {
     self.loginService.login { [weak self] res in
       switch res {
       case .success:
-        self?.onLogin?()
+        self?.shouldSet?([Router.getStartViewController()], true)
       case .failure(let error):
         if case Err.general(let msg)? = error as? Err {
           self?.onError?(msg)

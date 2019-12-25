@@ -39,7 +39,7 @@ public final class MeetingRoomManagerImpl: MeetingRoomManager {
   }
   
   public func bookMeetingRoom(meetingRoom: MeetingRoom, startTime: String, endTime: String, timeZone: String, summary: String?, participants: [(email: String?, displayName: String?)], result: ((Result<Room, Error>) -> Void)?) {
-    Net.Worker.request(PostMeetingRoom(meetingRoom: meetingRoom.rawValue, startTime: startTime, endTime: endTime, timeZone: timeZone, summary: summary, participants: participants ), onSuccess: { json in
+    Net.Worker.request(PostMeetingRoom(meetingRoom: meetingRoom.rawValue, startTime: startTime, endTime: endTime, timeZone: timeZone, summary: summary, participants: participants, isTest: Settings.isTest), onSuccess: { json in
       DispatchQueue.main.async {
         let room: Room? = json.build()
         if let room = room {

@@ -130,16 +130,10 @@ final class ProfileDetailViewController<T: ProfileDetailViewModel>: ViewControll
   private func configureUI() {
     navigationItem.title = viewModel.user.name
     view.backgroundColor = Colors.mainBackgroundColor
-    URL(string: viewModel.user.biggestImage.orEmpty).map(self.userImageView.setImage(with: ))
+    URL(string: viewModel.user.biggestImage.orEmpty).map(self.userImageView.setImage)
   }
   
-  private func configureViewModelBindings() {
-    viewModel.onLogOut = {
-      let window = (UIApplication.shared.delegate as? AppDelegate)?.window
-      window?.rootViewController = Router.getStartViewController()
-      window?.makeKeyAndVisible()
-    }
-    
+  private func configureViewModelBindings() {    
     viewModel.onClearCache = { [weak self] in
       self?.dataSource.updateClearCacheButtonTitle()
     }
