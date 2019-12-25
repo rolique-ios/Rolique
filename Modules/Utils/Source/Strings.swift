@@ -98,5 +98,6 @@ public struct Strings {
   public struct MeetingRooms {
     public static var edit: String { return "Edit".localized }
     public static var done: String { return "Done".localized }
+    public static var noTitle: String { return "No title".localized }
   }
 }

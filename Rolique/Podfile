@@ -10,7 +10,7 @@ def pods
   pod 'Networking', :path => '../Modules/Networking'
   pod 'Utils', :path => '../Modules/Utils'
   pod 'JTAppleCalendar', '~> 7.1'
-  pod 'R.swift', '5.0.0'
+  pod 'R.swift', '~> 5.0.0'
 end
 
 target 'Rolique' do

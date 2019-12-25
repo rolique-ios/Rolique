@@ -12,7 +12,7 @@ import UsersWidget
 import Utils
 
 final class RemoteViewController: UsersViewController {
-  private let remoteUserService: UserService = RemoteUserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>())
+  private let remoteUserService: UserService = RemoteUserServiceImpl(userManager: UserManagerImpl(), coreDataManager: CoreDataManager<User>(), user: User.mockedUser)
   
   override func loadData(usersCompletion: @escaping (([AnyUserable]) -> Void)) {
     self.remoteUserService.getTodayUsersForRecordType(.remote, onLocal: { [weak self] result in

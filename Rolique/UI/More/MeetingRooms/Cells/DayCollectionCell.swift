@@ -10,6 +10,10 @@ import UIKit
 import JTAppleCalendar
 import Utils
 
+private struct Constants {
+  static var heightMultiplier: CGFloat { return 0.8 }
+}
+
 struct DayCollectionCellConfig {
   var isToday: Bool
   var isSelected: Bool
@@ -56,7 +60,7 @@ final class DayCollectionCell: JTAppleCell {
     
     backView.snp.makeConstraints { maker in
       maker.center.equalToSuperview()
-      maker.height.equalToSuperview().multipliedBy(0.8)
+      maker.height.equalToSuperview().multipliedBy(Constants.heightMultiplier)
       maker.width.equalTo(backView.snp.height)
     }
   }
@@ -64,7 +68,7 @@ final class DayCollectionCell: JTAppleCell {
   func update(_ config: DayCollectionCellConfig) {
     self.config = config
     
-    backView.roundCorner(radius: config.cellHeight * 0.8 / 2)
+    backView.roundCorner(radius: config.cellHeight * Constants.heightMultiplier / 2)
     
     if !config.isInCurrentMonth {
       textLabel.textColor = Colors.secondaryTextColor

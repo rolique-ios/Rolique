@@ -20,7 +20,7 @@ final class CalendarCollectionView: UIView {
   
   private lazy var calendarView = JTAppleCalendarView()
   private(set) var selectedDate = Date().utc
-  private var state: CalendarCollectionViewState = .collapsed
+  private var state = CalendarCollectionViewState.collapsed
   private var calendarState: CalendarState?
   private var isEditing = false
   weak var delegate: CalendarCollectionViewDelegate?

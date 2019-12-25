@@ -81,10 +81,6 @@ public enum LateType {
   }
 }
 
-struct Settings {
-  static let isTest = "false"
-}
-
 public final class ActionLate: Action {
   public init(sender: String, from: String, value: String) {
     super.init(type: "late", sender: sender, test: Settings.isTest, props: ["from": from, "value": value])

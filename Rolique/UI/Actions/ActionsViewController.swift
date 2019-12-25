@@ -68,6 +68,7 @@ final class ActionsViewController<T: ActionsViewModel>: ViewController<T>, Actio
     view.backgroundColor = Colors.mainBackgroundColor
     tableView.backgroundColor = .clear
     tableView.separatorStyle = .none
+    Toast.current.backgroundColor = Colors.secondaryBackgroundColor
   }
   
   private func configureBinding() {

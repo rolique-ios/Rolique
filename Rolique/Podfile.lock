@@ -6,7 +6,7 @@ PODS:
   - IgyToast (0.0.8)
   - JTAppleCalendar (7.1.8)
   - Networking (0.0.1)
-  - R.swift (5.0.0):
+  - R.swift (5.0.3):
     - R.swift.Library (~> 5.0.0)
   - R.swift.Library (5.0.1)
   - SnapKit (5.0.1)
@@ -19,7 +19,7 @@ DEPENDENCIES:
   - IgyToast (= 0.0.8)
   - JTAppleCalendar (~> 7.1)
   - Networking (from `../Modules/Networking`)
-  - R.swift (= 5.0.0)
+  - R.swift (~> 5.0.0)
   - SnapKit
   - Utils (from `../Modules/Utils`)
 
@@ -47,11 +47,11 @@ SPEC CHECKSUMS:
   IgyToast: f5e455ab2a77a7c859ccd0373d38c5505e96ad0f
   JTAppleCalendar: b7fb40852f5f319fe55c8ec3861f1de0edc99cc8
   Networking: 1dac206e706490d10433a5e49142d9d44cfeb036
-  R.swift: f88c7d7d48a2be4dffa132dde1b3d389620310eb
+  R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
   R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Utils: 5a6aaee90430e79edcc51e7723a27a20a992b4cf
 
-PODFILE CHECKSUM: cf43577722c4df5dfa7bcfae6f0bd41d2e3eebc6
+PODFILE CHECKSUM: c7162d19f9d9ee197806bd07f2282ff8a2dda754
 
 COCOAPODS: 1.8.4

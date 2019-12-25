@@ -41,6 +41,10 @@ final class Root {
   func resolveRuntime<T, Z, H, G>(arg1: Z, arg2: H, arg3: G) -> T {
     return try! self.container.resolve(arguments: arg1, arg2, arg3)
   }
+  
+  func registerUserService(with user: User) {
+    container.register(.singleton) { UserServiceImpl(userManager: self.hardResolve(), coreDataManager: self.hardResolve(), user: user) as UserService }
+  }
 }
 
 private extension Root {
@@ -55,16 +59,16 @@ private extension Root {
   }
   
   func registerServices() {
-    container.register(.singleton) { UserServiceImpl(userManager: self.hardResolve(), coreDataManager: self.hardResolve()) as UserService }
+    container.register(.singleton) { LoginServiceImpl(loginManager: self.hardResolve(), coreDataManager: self.hardResolve()) as LoginService }
   }
   
   func registerViewModels() {
-    container.register(.unique) { LoginViewModelImpl(loginManager: self.hardResolve()) }
+    container.register(.unique) { LoginViewModelImpl(loginService: self.hardResolve()) }
     container.register(.unique) { users, mode in ColleaguesViewModelImpl(users: users, mode: mode, userService: self.hardResolve()) }
     container.register(.unique) { ActionsViewModelImpl(actionManager: self.hardResolve()) }
     container.register(.unique) { CalendarViewModelImpl(userService: self.hardResolve(), attendanceManager: self.hardResolve()) }
     container.register(.unique) { user in MoreViewModelImpl(userService: self.hardResolve(), user: user) }
-    container.register(.unique) { user in ProfileDetailViewModelImpl(userService: self.hardResolve(), user: user) }
+    container.register(.unique) { user in ProfileDetailViewModelImpl(userService: self.hardResolve(), coreDataMananger: self.hardResolve(), user: user) }
     container.register(.unique) { MeetingRoomsViewModelImpl(userService: self.hardResolve(), meetingRoomsManager: self.hardResolve()) }
     container.register(.unique) { CashTrackerViewModelImpl() }
     container.register(.unique) { CashHistoryViewModelImpl() }

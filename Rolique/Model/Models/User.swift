@@ -70,11 +70,15 @@ public final class User: Codable {
     self.todayStatus = todayStatusDate?.todayStatuses[id]
   }
   
+  static var mockedUser: User {
+    return User(id: "", slackProfile: SlackProfile.mockedSlackProfile, birthday: nil, dateOfJoining: nil, eduPoints: 0, emergencyDays: nil, roles: [], vacationData: nil, todayStatus: nil)
+  }
+  
   func saveToCoreData(context: NSManagedObjectContext? = nil) {
     let context = context ?? CoreDataController.shared.mainContext()
     CoreDataManager<User>().saveToCoreData([self], context: context)
   }
-
+  
   static func getFromCoreData(with id: String, context: NSManagedObjectContext? = nil) -> User? {
     guard let managedUser = try? CoreDataManager<User>().getManagedObjects(with: NSPredicate(format: "id == %@", id), context: context).first else { return nil }
 
@@ -195,6 +199,10 @@ public final class SlackProfile: Codable {
     self.statusTextCanonical = statusTextCanonical
     self.team = team
     self.title = title
+  }
+  
+  static var mockedSlackProfile: SlackProfile {
+    return SlackProfile(avatarHash: "", displayName: "", displayNameNormalized: "", email: "", firstName: nil, image1024: nil, image192: "", image24: "", image32: "", image48: "", image512: "", image72: "", imageOriginal: nil, isCustomImage: nil, lastName: nil, phone: "", realName: "", realNameNormalized: "", skype: "", statusEmoji: "", statusExpiration: 0, statusText: "", statusTextCanonical: "", team: "", title: "")
   }
   
   func saveToCoreData(context: NSManagedObjectContext? = nil) {

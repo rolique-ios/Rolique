@@ -30,7 +30,6 @@ final class LoginViewController<T: LoginViewModel>: ViewController<T> {
     configureConstraints()
     configureUI()
     configureBinding()
-
   }
   
   override func viewWillAppear(_ animated: Bool) {

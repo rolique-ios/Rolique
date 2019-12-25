@@ -40,14 +40,21 @@ public final class Router {
   }
   
   static func getLoginController() -> UIViewController {
-    return UINavigationController(rootViewController: Router.getLoginViewController())
+    return Router.getLoginViewController()
   }
   
   public static func getStartViewController() -> UIViewController {
-    return UserDefaultsManager.shared.userId == nil ? getLoginController() : getTabBarController()
+    let vc: UIViewController
+    if let user = User.getFromCoreData(with: UserDefaultsManager.shared.userId ?? "") {
+      Root.shared.registerUserService(with: user)
+      vc = getTabBarController()
+    } else {
+      vc = getLoginController()
+    }
+    return vc
   }
   
-  static func getProfileDetailViewController(user: User?) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {
+  static func getProfileDetailViewController(user: User) -> ProfileDetailViewController<ProfileDetailViewModelImpl> {
     let vm: ProfileDetailViewModelImpl = Root.shared.resolveRuntime(arg1: user)
     return ProfileDetailViewController(viewModel: vm)
   }
@@ -58,8 +65,8 @@ public final class Router {
   }
   
   static func getMoreViewController() -> MoreViewController<MoreViewModelImpl> {
-    let user = User.getFromCoreData(with: UserDefaultsManager.shared.userId ?? "")
-    let vm: MoreViewModelImpl = Root.shared.resolveRuntime(arg1: user)
+    let userService: UserService = Root.shared.hardResolve()
+    let vm: MoreViewModelImpl = Root.shared.resolveRuntime(arg1: userService.currentUser)
     return MoreViewController(viewModel: vm)
   }
   

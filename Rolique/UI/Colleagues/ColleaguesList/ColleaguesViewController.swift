@@ -79,9 +79,7 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
     navigationController?.navigationBar.largeTitleTextAttributes = attributes
     navigationController?.navigationBar.barTintColor = Colors.Login.backgroundColor
     navigationController?.navigationBar.tintColor = .white
-    let barButton = UIBarButtonItem()
-    barButton.title = ""
-    navigationItem.backBarButtonItem = barButton
+    setEmptyTitleBackButton()
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🌀", style: UIBarButtonItem.Style.done, target: self, action: #selector(didSelectSortButton))
     navigationController?.setAppearance(with: attributes, backgroundColor: Colors.Login.backgroundColor)
   }
@@ -123,6 +121,8 @@ final class ColleaguesViewController<T: ColleaguesViewModel>: ViewController<T>,
       backgroundview.layer.cornerRadius = 10.0
       setShadow(to: backgroundview)
     }
+    
+    Toast.current.backgroundColor = Colors.secondaryBackgroundColor
   }
   
   private func configureTableView() {

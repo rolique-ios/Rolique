@@ -10,56 +10,34 @@ import Foundation
 import Utils
 
 protocol ProfileDetailViewModel: ViewModel {
-  var user: User? { get }
-  var onSuccess: Completion? { get set }
-  var onError: ((String) -> Void)? { get set }
-  var onLogOut: Completion? { get set }
+  var user: User { get }
   var onClearCache: Completion? { get set }
   
-  func getUser()
   func logOut()
   func clearCache()
 }
 
 final class ProfileDetailViewModelImpl: BaseViewModel, ProfileDetailViewModel {
   private let userService: UserService
-  var user: User?
+  private let coreDataMananger: CoreDataManager<User>
+  var user: User
   
-  init(userService: UserService, user: User?) {
-    self.user = user
+  init(userService: UserService, coreDataMananger: CoreDataManager<User>, user: User) {
     self.userService = userService
+    self.coreDataMananger = coreDataMananger
+    self.user = user
   }
   
-  var onSuccess: Completion?
-  var onError: ((String) -> Void)?
   var onLogOut: Completion?
   var onClearCache: Completion?
   
-  override func viewDidLoad() {
-    if user == nil {
-      getUser()
-    }
-  }
-  
-  func getUser() {
-    userService.getUserWithId(UserDefaultsManager.shared.userId ?? "",
-                              onLocal: handleUserResponse(result:),
-                              onFetch: handleUserResponse(result:))
-  }
-  
-  private func handleUserResponse(result: Result<User, Error>) {
-    switch result {
-    case .success(let user):
-      self.user = user
-      onSuccess?()
-    case .failure(let error):
-      onError?(error.localizedDescription)
-    }
-  }
-  
   func logOut() {
     UserDefaultsManager.shared.userId = nil
-    onLogOut?()
+    coreDataMananger.clearCoreData()
+    ImageManager.shared.clearImagesFolder()
+    let window = (UIApplication.shared.delegate as? AppDelegate)?.window
+    let nc = window?.rootViewController as? UINavigationController
+    nc?.setViewControllers([Router.getStartViewController()], animated: true)
   }
   
   func clearCache() {

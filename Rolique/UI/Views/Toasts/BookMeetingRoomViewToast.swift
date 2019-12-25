@@ -20,6 +20,7 @@ private struct Constants {
   static var buttonHeight: CGFloat { return 50.0 }
   static var buttonCenterXOffset: CGFloat { return 70.0 }
   static var timeInterspaceLabelInsets: UIEdgeInsets { return UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8) }
+  static var tableViewRightOffset: CGFloat { return 10.0 }
 }
 
 final class BookMeetingRoomViewToast: UIView {
@@ -34,9 +35,9 @@ final class BookMeetingRoomViewToast: UIView {
   private var participants = [User]()
   private var tableViewHeightConstraint: Constraint?
   
-  private var onAddUser: Completion?
+  private var onAddUser: ((String?) -> Void)?
   private var onRemoveUser: ((User) -> Void)?
-  private var onBook: Completion?
+  private var onBook: ((String?) -> Void)?
   private var onCancel: Completion?
   
   override init(frame: CGRect) {
@@ -61,7 +62,7 @@ final class BookMeetingRoomViewToast: UIView {
     participantsLabel.textColor = Colors.mainTextColor
     
     addButton.setImage(R.image.addParticipant(), for: .normal)
-    addButton.addTarget(self, action: #selector(addButtonOnTap(_:)), for: .touchUpInside)
+    addButton.addTarget(self, action: #selector(didTapOnAddButton(_:)), for: .touchUpInside)
     
     participantSeparator.backgroundColor = Colors.separatorColor
     
@@ -74,13 +75,14 @@ final class BookMeetingRoomViewToast: UIView {
     timeInterspaceLabel.layer.borderWidth = 2.0
     timeInterspaceLabel.layer.borderColor = UIColor.orange.cgColor
     timeInterspaceLabel.roundCorner(radius: 5.0)
+    timeInterspaceLabel.numberOfLines = 0
     
     bookButton.setTitle("Book", for: .normal)
     bookButton.backgroundColor = Colors.Actions.darkGray
-    bookButton.layer.cornerRadius = 5.0
-    bookButton.addTarget(self, action: #selector(bookButtonOnTap(_:)), for: .touchUpInside)
+    bookButton.roundCorner(radius: 5.0)
+    bookButton.addTarget(self, action: #selector(didTapOnBookButton(_:)), for: .touchUpInside)
     
-    cancelButton.addTarget(self, action: #selector(cancelButtonOnTap(_:)), for: .touchUpInside)
+    cancelButton.addTarget(self, action: #selector(didTapOnCancelButton(_:)), for: .touchUpInside)
     
     configureConstraints()
   }
@@ -103,7 +105,7 @@ final class BookMeetingRoomViewToast: UIView {
     tableView.snp.makeConstraints { maker in
       maker.top.equalToSuperview().offset(Constants.defaultOffset)
       maker.left.equalToSuperview()
-      maker.right.equalTo(addButton.snp.left).offset(-10.0)
+      maker.right.equalTo(addButton.snp.left).offset(-Constants.tableViewRightOffset)
       tableViewHeightConstraint = maker.height.equalTo(Constants.rowHeight).constraint
     }
     
@@ -145,25 +147,29 @@ final class BookMeetingRoomViewToast: UIView {
     }
   }
   
-  func update(timeInterspace: TimeInterspace, onAddUser: Completion?, participants: [User], onRemoveUser: ((User) -> Void)?, onBook: Completion?, onCancel: Completion?) {
-    timeInterspaceLabel.text = DateFormatters.timeDateFormatter.string(from: timeInterspace.startTime) + " - " + DateFormatters.timeDateFormatter.string(from: timeInterspace.endTime)
+  func update(startTime: Date, endTime: Date, onAddUser: ((String?) -> Void)?, participants: [User], title: String?, onRemoveUser: ((User) -> Void)?, onBook: ((String?) -> Void)?, onCancel: Completion?) {
+    let date = DateFormatters.prettyDateFormatter.string(from: startTime)
+    let startTimeString = DateFormatters.timeDateFormatter.string(from: startTime)
+    let endTimeString = DateFormatters.timeDateFormatter.string(from: endTime)
+    timeInterspaceLabel.text = date + "\n" + startTimeString + " - " + endTimeString
     self.onAddUser = onAddUser
     self.onRemoveUser = onRemoveUser
     self.onBook = onBook
     self.onCancel = onCancel
     self.participants = participants
+    self.titleTextField.text = title
     updateTableView()
   }
   
-  @objc func addButtonOnTap(_ button: UIButton) {
-    self.onAddUser?()
+  @objc func didTapOnAddButton(_ button: UIButton) {
+    self.onAddUser?(titleTextField.text)
   }
   
-  @objc func bookButtonOnTap(_ button: UIButton) {
-    self.onBook?()
+  @objc func didTapOnBookButton(_ button: UIButton) {
+    self.onBook?(titleTextField.text)
   }
   
-  @objc func cancelButtonOnTap(_ button: UIButton) {
+  @objc func didTapOnCancelButton(_ button: UIButton) {
     self.onCancel?()
   }
   

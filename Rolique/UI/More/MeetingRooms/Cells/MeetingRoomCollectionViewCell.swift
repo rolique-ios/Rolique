@@ -71,12 +71,3 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     }
   }
 }
-
-struct TimeInterspace: Comparable {
-  let startTime: Date
-  var endTime = Date()
-  
-  static func < (lhs: TimeInterspace, rhs: TimeInterspace) -> Bool {
-    return lhs.startTime < rhs.endTime
-  }
-}
