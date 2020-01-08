@@ -1,1 +1,1 @@
-Added possibility to check cash and card balance for hr & om.
+Added possibility to book meeting rooms
