@@ -44,7 +44,8 @@ final class CashTrackerViewModelImpl: BaseViewModel, CashTrackerViewModel {
   }
   
   func select(cashOwner: CashOwner, cashType: CashType) {
-    let vc = Router.getCashHistoryViewController()
+    let balance = (cashOwner == .hrManager ? hrBalance : omBalance) ?? Balance(cash: 0, card: 0)
+    let vc = Router.getCashHistoryViewController(balance: balance, cashOwner: cashOwner)
     self.shouldPush?(vc, true)
   }
   

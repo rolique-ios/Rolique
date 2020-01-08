@@ -121,7 +121,7 @@ extension CashHistoryDataSource: UITableViewDataSource {
     
     let cell = tableView.dequeue(type: ExpenseTableViewCell.self, indexPath: indexPath)
     let expense = expensesForSection?(indexPath.section)[indexPath.row]
-    cell.configure(description: expense?.description ?? "", value: expense?.value ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
+    cell.configure(description: expense?.description ?? "", value: expense?.total ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
 
     return cell
   }

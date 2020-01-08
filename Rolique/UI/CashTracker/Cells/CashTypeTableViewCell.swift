@@ -14,31 +14,13 @@ private struct Constants {
 }
 
 final class CashTypeTableViewCell: TableViewCell {
-  private lazy var typeImageView = UIImageView()
-  private lazy var totalLabel = UILabel()
+  private(set) lazy var cashTypeView = CashTypeView()
   
   override func configure() {
-    [typeImageView, totalLabel].forEach(contentView.addSubview)
-    
-    typeImageView.snp.makeConstraints {
-      $0.size.equalTo(Constants.size)
-      $0.left.equalToSuperview().inset(16)
-      $0.centerY.equalToSuperview()
-    }
-    
-    totalLabel.snp.makeConstraints {
-      $0.left.equalTo(typeImageView.snp.right).offset(16)
-      $0.right.equalToSuperview().inset(16)
-      $0.centerY.equalToSuperview()
-    }
+    [cashTypeView].forEach(contentView.addSubview)
 
-    typeImageView.contentMode = .scaleAspectFit
-    typeImageView.tintColor = Colors.imageColor
-    totalLabel.textAlignment = .left
-  }
-  
-  func configure(text: String, image: UIImage) {
-    typeImageView.image = image.withRenderingMode(.alwaysTemplate)
-    totalLabel.text = text
+    cashTypeView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
   }
 }

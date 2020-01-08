@@ -54,7 +54,7 @@ private extension CashTrackerViewController {
   
   func configureBinding() {
     dataSource.didSelect = { [weak self] cashOwner, cashType in
-//      self?.viewModel.select(cashOwner: cashOwner, cashType: cashType)
+        self?.viewModel.select(cashOwner: cashOwner, cashType: cashType)
     }
     
     viewModel.onError = { [weak self] error in

@@ -14,6 +14,7 @@ typealias Completion = () -> Void
 class ViewController<T: ViewModel>: UIViewController {
   private lazy var viewWillAppearWasCalled = false
   private lazy var viewDidAppearWasCalled = false
+  private lazy var viewDidLayoutSubviewsWasCalled = false
   
   var viewModel: T
   
@@ -85,10 +86,18 @@ class ViewController<T: ViewModel>: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     viewModel.viewDidLayoutSubviews()
+    
+    defer {
+      self.viewDidLayoutSubviewsWasCalled = true
+    }
+    
+    if !self.viewDidLayoutSubviewsWasCalled {
+      self.performOnceInViewDidLayoutSubviews()
+    }
   }
   
   func performOnceInViewWillAppear() {}
-  
+  func performOnceInViewDidLayoutSubviews() {}
   func performOnceInViewDidAppear() {}
   
   deinit {

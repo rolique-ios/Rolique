@@ -62,11 +62,10 @@ extension CashTrackerDataSource: UITableViewDataSource {
     
     switch section {
     case .hrManager:
-      cell.configure(text: "\(row == .card ? hrBalance?.card ?? 0 : hrBalance?.cash ?? 0) UAH", image: row.image)
+      cell.cashTypeView.configure(text: "\(row == .card ? hrBalance?.card ?? 0 : hrBalance?.cash ?? 0) UAH", image: row.image)
 
     case .officeManager:
-      cell.configure(text: "\(row == .card ? omBalance?.card ?? 0 : omBalance?.cash ?? 0) UAH", image: row.image)
-
+      cell.cashTypeView.configure(text: "\(row == .card ? omBalance?.card ?? 0 : omBalance?.cash ?? 0) UAH", image: row.image)
     }
     
     

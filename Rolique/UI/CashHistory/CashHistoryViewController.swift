@@ -8,9 +8,14 @@
 
 import UIKit
 
+private struct Constants {
+  static var headerHeight: CGFloat { 130 }
+}
+
 final class CashHistoryViewController<T: CashHistoryViewModel>: ViewController<T> {
   private lazy var tableView = UITableView(frame: .zero, style: .grouped)
   private lazy var dataSource = CashHistoryDataSource(tableView: self.tableView)
+  private lazy var infoHeaderView = CashTrackerInfoView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -18,6 +23,13 @@ final class CashHistoryViewController<T: CashHistoryViewModel>: ViewController<T
     attachViews()
     configureUI()
     configureBinding()
+  }
+  
+  override func performOnceInViewDidLayoutSubviews() {
+    view.setNeedsDisplay()
+    DispatchQueue.main.async {
+      self.tableView.tableHeaderView?.frame = CGRect(origin: .zero, size: .init(width: self.tableView.frame.size.width, height: Constants.headerHeight))
+    }
   }
 }
 
@@ -32,6 +44,8 @@ private extension CashHistoryViewController {
     tableView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
+    
+    tableView.tableHeaderView = infoHeaderView
   }
   
   func configureBinding() {
@@ -47,6 +61,7 @@ private extension CashHistoryViewController {
     }
     
     dataSource.update(with: viewModel.dates)
+    infoHeaderView.configure(title: viewModel.cashOwner.rawValue, cash: viewModel.balance.cash, card: viewModel.balance.card)
   }
 }
 
