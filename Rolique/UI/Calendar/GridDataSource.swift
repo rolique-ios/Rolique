@@ -103,6 +103,7 @@ final class GridDataSouce: NSObject, UICollectionViewDataSource, UICollectionVie
     self.users = users
     self.gridCollectionView.reloadData()
     self.gridLayout.reloadCache()
+    scrollToToday(animated: false)
   }
   
   func update(events: [Date: [String: [SequentialRecordType]]]) {
