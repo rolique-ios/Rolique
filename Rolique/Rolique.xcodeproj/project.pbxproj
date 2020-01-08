@@ -879,9 +879,9 @@
 				3FA3C0D5234366FF00165B06 /* CalendarViewModel.swift */,
 				3FFF920B23619FEF00DAFDC8 /* GridDataSource.swift */,
 				2D7628F9235F192700E1E846 /* GridCollectionViewFlowLayout.swift */,
-				3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */,
 				3F08FA132370863600CDBC13 /* DaysDataSource.swift */,
 				3FFAF0BE23716A1C00FAB98E /* DaysCollectionViewFlowLayout.swift */,
+				3F08FA1123707AD000CDBC13 /* UsersDataSource.swift */,
 				2D7628FB235F19C400E1E846 /* Cells */,
 			);
 			path = Calendar;

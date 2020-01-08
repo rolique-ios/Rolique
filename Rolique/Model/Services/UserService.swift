@@ -51,12 +51,19 @@ class UserServiceImpl: UserService {
   func getAllUsers(sortDecrciptors: [NSSortDescriptor]?, onLocal: ((Result<[User], Error>) -> Void)?, onFetch: ((Result<[User], Error>) -> Void)?) {
     let context = CoreDataController.shared.backgroundContext()
     var mos = [User.ManagedType]()
-    do {
-      mos = try coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors, context: context)
-      let users = mos.compactMap { User($0) }
-      onLocal?(.success(users))
-    } catch {
-      onLocal?(.failure(error))
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
+      do {
+        mos = try self.coreDataManager.getManagedObjects(sortDescriptors: sortDecrciptors, context: context)
+        let users = mos.compactMap { User($0) }
+        DispatchQueue.main.async {
+          onLocal?(.success(users))
+        }
+      } catch {
+        DispatchQueue.main.async {
+          onLocal?(.failure(error))
+        }
+      }
     }
     
     userManager.getAllUsers { [weak self] usersResult in

@@ -206,7 +206,8 @@ final class GridCollectionViewFlowLayout: UICollectionViewFlowLayout {
     return collectionView!.numberOfSections
   }
 
-  private func rowsCount(in row: Int) -> Int {
-    return collectionView!.numberOfItems(inSection: row)
+  private func rowsCount(in section: Int) -> Int {
+    guard collectionView!.numberOfSections > section else { return 0 }
+    return collectionView!.numberOfItems(inSection: section)
   }
 }
