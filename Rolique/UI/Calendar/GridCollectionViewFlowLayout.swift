@@ -115,13 +115,10 @@ final class GridCollectionViewFlowLayout: UICollectionViewFlowLayout {
   }
   
   private func calculateCache() {
-    let leftBoundX = collectionView!.contentOffset.x - sixMonthOffset
-    let rightBoundX = collectionView!.contentOffset.x + sixMonthOffset
+    let boundIndexes = calculateCurrentLeftAndRightBoundIndexX(with: collectionView!.contentOffset.x)
     
-    var leftBoundIndexX = Int(leftBoundX / itemWidth)
-    leftBoundIndexX = leftBoundIndexX < 0 ? 0 : leftBoundIndexX
-    var rightBoundIndexX = Int(rightBoundX / itemWidth)
-    rightBoundIndexX = rightBoundIndexX > rowsCount(in: 0) ? rowsCount(in: 0) : rightBoundIndexX
+    let leftBoundIndexX = boundIndexes.left
+    let rightBoundIndexX = boundIndexes.right
     
     guard previousLeftBoundX != leftBoundIndexX && previousRightBoundX != rightBoundIndexX else { return }
     
@@ -148,15 +145,12 @@ final class GridCollectionViewFlowLayout: UICollectionViewFlowLayout {
   }
   
   private func updateCache() {
-    let leftBoundX = collectionView!.contentOffset.x - sixMonthOffset
-    let rightBoundX = collectionView!.contentOffset.x + sixMonthOffset
+    let boundIndexes = calculateCurrentLeftAndRightBoundIndexX(with: collectionView!.contentOffset.x)
     
-    var leftBoundIndexX = Int(leftBoundX / itemWidth)
-    leftBoundIndexX = leftBoundIndexX < 0 ? 0 : leftBoundIndexX
-    var rightBoundIndexX = Int(rightBoundX / itemWidth)
-    rightBoundIndexX = rightBoundIndexX > rowsCount(in: 0) ? rowsCount(in: 0) : rightBoundIndexX
+    let leftBoundIndexX = boundIndexes.left
+    let rightBoundIndexX = boundIndexes.right
     
-    guard previousLeftBoundX != leftBoundIndexX && previousRightBoundX != rightBoundIndexX else { return }
+    guard previousLeftBoundX != boundIndexes.left && previousRightBoundX != boundIndexes.right else { return }
     
     let removeRange = cachedAttributes[0].count / 2
     
@@ -200,13 +194,26 @@ final class GridCollectionViewFlowLayout: UICollectionViewFlowLayout {
     previousRightBoundX = rightBoundIndexX
   }
   
+  private func calculateCurrentLeftAndRightBoundIndexX(with offset: CGFloat) -> (left: Int, right: Int) {
+    let leftBoundX = offset - sixMonthOffset
+    let rightBoundX = offset + sixMonthOffset
+    
+    var leftBoundIndexX = Int(leftBoundX / itemWidth)
+    leftBoundIndexX = leftBoundIndexX < 0 ? 0 : leftBoundIndexX
+    var rightBoundIndexX = Int(rightBoundX / itemWidth)
+    rightBoundIndexX = rightBoundIndexX > rowsCount(in: 0) ? rowsCount(in: 0) : rightBoundIndexX
+    
+    return (leftBoundIndexX, rightBoundIndexX)
+  }
+  
   // MARK: - Sizing
 
   private var sectionsCount: Int {
     return collectionView!.numberOfSections
   }
 
-  private func rowsCount(in row: Int) -> Int {
-    return collectionView!.numberOfItems(inSection: row)
+  private func rowsCount(in section: Int) -> Int {
+    guard collectionView!.numberOfSections > section else { return 0 }
+    return collectionView!.numberOfItems(inSection: section)
   }
 }
