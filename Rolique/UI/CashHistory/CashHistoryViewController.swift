@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Utils
 
 private struct Constants {
   static var headerHeight: CGFloat { 130 }
@@ -58,6 +59,15 @@ private extension CashHistoryViewController {
     
     viewModel.shouldChangeLoadingVisibility = { [weak self] in
       self?.dataSource.setIsLoadingNextPage(self?.viewModel.isLoadingNextPage ?? false)
+    }
+    
+    viewModel.shouldReloadData = { [weak self] in
+      self?.dataSource.update(with: self?.viewModel.dates ?? [])
+    }
+    
+    viewModel.onError = { [weak self] error in
+      guard let self = self else { return }
+      Spitter.showOkAlert(error, viewController: self)
     }
     
     dataSource.update(with: viewModel.dates)

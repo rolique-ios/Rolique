@@ -40,18 +40,22 @@ final class CashHistoryDataSource: NSObject {
   
   func setIsLoadingNextPage(_ value: Bool) {
     isLoadingNextPage = value
-    let expenses = expensesForSection?(dates.count - 1) ?? []
-    let indexPath = IndexPath(row: expenses.count, section: dates.count - 1)
-
-    DispatchQueue.main.async { [weak self] in
-      self?.tableView.beginUpdates()
-      if value {
-        self?.tableView.insertRows(at: [indexPath], with: .automatic)
-      } else {
-        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-      }
-      self?.tableView.endUpdates()
-    }
+    tableView.reloadData()
+//
+//    if dates.isEmpty { return }
+//
+//    let expenses = expensesForSection?(dates.count - 1) ?? []
+//    let indexPath = IndexPath(row: expenses.count, section: dates.count - 1)
+//
+//    DispatchQueue.main.async { [weak self] in
+//      self?.tableView.beginUpdates()
+//      if value {
+//        self?.tableView.insertRows(at: [indexPath], with: .automatic)
+//      } else {
+//        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+//      }
+//      self?.tableView.endUpdates()
+//    }
   }
 }
 
@@ -121,7 +125,7 @@ extension CashHistoryDataSource: UITableViewDataSource {
     
     let cell = tableView.dequeue(type: ExpenseTableViewCell.self, indexPath: indexPath)
     let expense = expensesForSection?(indexPath.section)[indexPath.row]
-    cell.configure(description: expense?.description ?? "", value: expense?.total ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
+    cell.configure(description: expense?.description ?? "No description", value: expense?.total ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
 
     return cell
   }

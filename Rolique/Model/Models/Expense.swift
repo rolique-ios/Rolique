@@ -27,7 +27,7 @@ final class Expense: Codable {
   let paymentMode: String?
   let type: String?
   let currencyCode: String?
-  private let formatter = DateFormatters.dateFormatter
+  private let formatter = DateFormatters.withCurrentTimeZoneFormatter()
   
   init(category: String?, description: String?, total: Double, dateString: String?, paymentMode: String?, type: String?, currencyCode: String?) {
     self.category = category
