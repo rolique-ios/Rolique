@@ -23,6 +23,7 @@ final class Expense: Codable {
   let description: String?
   let total: Double
   let date: Date?
+  let paymentMethodType: PaymentMethodType?
   let dateString: String?
   let paymentMode: String?
   let type: String?
@@ -38,6 +39,7 @@ final class Expense: Codable {
     self.type = type
     self.currencyCode = currencyCode
     self.date = self.formatter.date(from: dateString.orEmpty)
+    self.paymentMethodType = PaymentMethodType(apiName: paymentMode.orEmpty)
   }
   
   public convenience init(from decoder: Decoder) throws {

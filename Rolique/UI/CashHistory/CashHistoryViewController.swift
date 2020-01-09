@@ -10,7 +10,7 @@ import UIKit
 import Utils
 
 private struct Constants {
-  static var headerHeight: CGFloat { 130 }
+  static var headerHeight: CGFloat { 70 }
 }
 
 final class CashHistoryViewController<T: CashHistoryViewModel>: ViewController<T> {
@@ -71,7 +71,10 @@ private extension CashHistoryViewController {
     }
     
     dataSource.update(with: viewModel.dates)
-    infoHeaderView.configure(title: viewModel.cashOwner.rawValue, cash: viewModel.balance.cash, card: viewModel.balance.card)
+    infoHeaderView.configure(title: viewModel.cashOwner.rawValue,
+                             description: viewModel.paymentMethodType.rawValue,
+                             value: viewModel.paymentMethodType == .cash ? viewModel.balance.cash : viewModel.balance.card,
+                             image: viewModel.paymentMethodType.image)
   }
 }
 

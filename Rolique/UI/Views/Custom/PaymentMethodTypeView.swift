@@ -10,15 +10,16 @@ import UIKit
 import Utils
 
 private struct Constants {
-  static var size: CGSize { CGSize(width: 30, height: 30) }
+  static var size: CGSize { CGSize(width: 30, height: 22) }
 }
 
-final class CashTypeView: View {
+final class PaymentMethodTypeView: View {
   private lazy var typeImageView = UIImageView()
   private lazy var totalLabel = UILabel()
+  private lazy var descriptionLabel = UILabel()
   
   override func configure() {
-    [typeImageView, totalLabel].forEach(addSubview)
+    [typeImageView, totalLabel, descriptionLabel].forEach(addSubview)
     
     typeImageView.snp.makeConstraints {
       $0.size.equalTo(Constants.size)
@@ -31,14 +32,23 @@ final class CashTypeView: View {
       $0.right.equalToSuperview().inset(16)
       $0.centerY.equalToSuperview()
     }
+    
+    descriptionLabel.snp.makeConstraints {
+      $0.top.equalTo(typeImageView.snp.bottom)
+      $0.left.equalToSuperview().inset(16)
+    }
 
     typeImageView.contentMode = .scaleAspectFit
     typeImageView.tintColor = Colors.imageColor
     totalLabel.textAlignment = .left
+    descriptionLabel.textAlignment = .left
+    descriptionLabel.textColor = .lightGray
+    descriptionLabel.font = .systemFont(ofSize: 11)
   }
   
-  func configure(text: String, image: UIImage) {
+  func configure(text: String, description: String, image: UIImage) {
     typeImageView.image = image.withRenderingMode(.alwaysTemplate)
     totalLabel.text = text
+    descriptionLabel.text = description.capitalizingFirstLetter()
   }
 }

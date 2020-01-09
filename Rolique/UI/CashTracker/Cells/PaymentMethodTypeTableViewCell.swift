@@ -13,13 +13,13 @@ private struct Constants {
   static var size: CGSize { CGSize(width: 30, height: 30) }
 }
 
-final class CashTypeTableViewCell: TableViewCell {
-  private(set) lazy var cashTypeView = CashTypeView()
+final class PaymentMethodTypeTableViewCell: TableViewCell {
+  private(set) lazy var paymentMethodType = PaymentMethodTypeView()
   
   override func configure() {
-    [cashTypeView].forEach(contentView.addSubview)
+    [paymentMethodType].forEach(contentView.addSubview)
 
-    cashTypeView.snp.makeConstraints {
+    paymentMethodType.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
   }

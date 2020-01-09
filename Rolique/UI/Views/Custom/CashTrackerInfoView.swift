@@ -11,35 +11,25 @@ import UIKit
 
 final class CashTrackerInfoView: View {
   private lazy var titleLabel = configuredTitleLabel()
-  private lazy var cashView = configuredCashView()
-  private lazy var cardView = configuredCardView()
+  private lazy var paymentMethodView = configuredPaymentMethodView()
   
   override func configure() {
     attachTitleLabel()
-    attachCardView()
-    attachCashView()
+    attachPaymentMethodView()
   }
   
-  func configure(title: String, cash: Double, card: Double) {
+  func configure(title: String, description: String, value: Double, image: UIImage) {
     titleLabel.text = title
-    cashView.configure(text: "\(cash) UAH", image: CashType.cash.image)
-    cardView.configure(text: "\(card) UAH", image: CashType.card.image)
+    paymentMethodView.configure(text: "\(value) UAH", description: description, image: image)
   }
 }
 
 // MARK: - Private
 private extension CashTrackerInfoView {
-  func configuredCashView() -> CashTypeView {
-    let view = CashTypeView()
-    view.configure(text: "0 UAH", image: CashType.cash.image)
+  func configuredPaymentMethodView() -> PaymentMethodTypeView {
+    let view = PaymentMethodTypeView()
+    view.configure(text: "0 UAH", description: "", image: PaymentMethodType.cash.image)
     
-    return view
-  }
-  
-  func configuredCardView() -> CashTypeView {
-    let view = CashTypeView()
-    view.configure(text: "0 UAH", image: CashType.card.image)
-
     return view
   }
   
@@ -48,20 +38,10 @@ private extension CashTrackerInfoView {
     return label
   }
   
-  func attachCashView() {
-    addSubview(cashView)
+  func attachPaymentMethodView() {
+    addSubview(paymentMethodView)
     
-    cashView.snp.makeConstraints {
-      $0.top.equalTo(cardView.snp.bottom)
-      $0.left.right.equalToSuperview()
-      $0.height.equalTo(50)
-    }
-  }
-  
-  func attachCardView() {
-    addSubview(cardView)
-    
-    cardView.snp.makeConstraints {
+    paymentMethodView.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom)
       $0.left.right.equalToSuperview()
       $0.height.equalTo(50)

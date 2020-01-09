@@ -18,7 +18,7 @@ protocol CashTrackerViewModel: ViewModel {
   var didGetAllBalances: Completion? { get set }
   var onError: ((String) -> Void)? { get set }
   
-  func select(cashOwner: CashOwner, cashType: CashType)
+  func select(cashOwner: CashOwner, paymentMethodType: PaymentMethodType)
   func getBalances()
 }
 
@@ -43,9 +43,9 @@ final class CashTrackerViewModelImpl: BaseViewModel, CashTrackerViewModel {
     getBalances()
   }
   
-  func select(cashOwner: CashOwner, cashType: CashType) {
+  func select(cashOwner: CashOwner, paymentMethodType: PaymentMethodType) {
     let balance = (cashOwner == .hrManager ? hrBalance : omBalance) ?? Balance(cash: 0, card: 0)
-    let vc = Router.getCashHistoryViewController(balance: balance, cashOwner: cashOwner)
+    let vc = Router.getCashHistoryViewController(balance: balance, cashOwner: cashOwner, paymentMethodType: paymentMethodType)
     self.shouldPush?(vc, true)
   }
   

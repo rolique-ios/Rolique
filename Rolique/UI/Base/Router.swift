@@ -85,7 +85,7 @@ public final class Router {
     return CashTrackerViewController(viewModel: vm)
   }
     
-  static func getCashHistoryViewController(balance: Balance, cashOwner: CashOwner) -> CashHistoryViewController<CashHistoryViewModelImpl> {
-    return CashHistoryViewController<CashHistoryViewModelImpl>(viewModel: Root.shared.resolveRuntime(arg1: balance, arg2: cashOwner))
+  static func getCashHistoryViewController(balance: Balance, cashOwner: CashOwner, paymentMethodType: PaymentMethodType) -> CashHistoryViewController<CashHistoryViewModelImpl> {
+    return CashHistoryViewController<CashHistoryViewModelImpl>(viewModel: Root.shared.resolveRuntime(arg1: balance, arg2: cashOwner, arg3: paymentMethodType))
   }
 }

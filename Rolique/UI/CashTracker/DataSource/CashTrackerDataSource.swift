@@ -21,7 +21,7 @@ final class CashTrackerDataSource: NSObject {
   private var hrBalance: Balance?
   private var omBalance: Balance?
   
-  var didSelect: ((CashOwner, CashType) -> Void)?
+  var didSelect: ((CashOwner, PaymentMethodType) -> Void)?
   
   init(tableView: UITableView) {
     self.tableView = tableView
@@ -56,16 +56,16 @@ extension CashTrackerDataSource: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeue(type: CashTypeTableViewCell.self, indexPath: indexPath)
+    let cell = tableView.dequeue(type: PaymentMethodTypeTableViewCell.self, indexPath: indexPath)
     let section = sections[indexPath.section]
     let row = section.types[indexPath.row]
     
     switch section {
     case .hrManager:
-      cell.cashTypeView.configure(text: "\(row == .card ? hrBalance?.card ?? 0 : hrBalance?.cash ?? 0) UAH", image: row.image)
+      cell.paymentMethodType.configure(text: "\(row == .card ? hrBalance?.card ?? 0 : hrBalance?.cash ?? 0) UAH", description: row.rawValue, image: row.image)
 
     case .officeManager:
-      cell.cashTypeView.configure(text: "\(row == .card ? omBalance?.card ?? 0 : omBalance?.cash ?? 0) UAH", image: row.image)
+      cell.paymentMethodType.configure(text: "\(row == .card ? omBalance?.card ?? 0 : omBalance?.cash ?? 0) UAH", description: row.rawValue, image: row.image)
     }
     
     
@@ -101,7 +101,7 @@ private extension CashTrackerDataSource {
     
     tableView.contentInset = .zero
     tableView.setDelegateAndDataSource(self)
-    tableView.register([CashTypeTableViewCell.self])
+    tableView.register([PaymentMethodTypeTableViewCell.self])
     tableView.reloadData()
   }
 }

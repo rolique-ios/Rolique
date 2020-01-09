@@ -22,11 +22,11 @@ public enum CashOwner: String, CaseIterable {
   }
   
   
-  var types: [CashType] { CashType.allCases }
+  var types: [PaymentMethodType] { PaymentMethodType.allCases }
 }
 
 
-public enum CashType: String, CaseIterable {
+public enum PaymentMethodType: String, CaseIterable {
   case card,
   cash
   
@@ -36,6 +36,17 @@ public enum CashType: String, CaseIterable {
       return R.image.card()!
     case .cash:
       return R.image.money()!
+    }
+  }
+  
+  init?(apiName: String) {
+    switch apiName {
+    case "Cash":
+      self = .cash
+    case "Credit card":
+      self = .card
+    default:
+      return nil
     }
   }
 }
