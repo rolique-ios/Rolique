@@ -247,7 +247,7 @@ final class MeetingRoomsViewModelImpl: BaseViewModel, MeetingRoomsViewModel {
     let yPoint = ((CGFloat(startHour - Constants.startHour)) * 2 * Constants.defaultCellHeight + CGFloat(startMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight) + Constants.defaultCellHeight / 2
     let minutesHeight = abs((CGFloat(endMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight) - (CGFloat(startMinute) / CGFloat(Constants.minutesStep) * Constants.defaultCellHeight))
     let hoursHeight = CGFloat(endHour - startHour) * 2 * Constants.defaultCellHeight
-    let height = abs(hoursHeight - minutesHeight)
+    let height = endMinute == 0 ? abs(hoursHeight - minutesHeight) : hoursHeight + minutesHeight
     
     let start = calendar.date(byAdding: startComponents, to: Date().utc).orCurrent
     let end = calendar.date(byAdding: endComponents, to: Date().utc).orCurrent

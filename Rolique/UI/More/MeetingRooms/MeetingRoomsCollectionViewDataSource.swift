@@ -20,6 +20,7 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
   private var tableViewNumberOfRows = 0
   var didScroll: ((CGPoint) -> Void)?
   var didChangeCurrentPage: ((Int) -> Void)?
+  var didChangedEditMode: Completion?
   
   init(collectionView: UICollectionView,
        timeTableView: UITableView) {
@@ -79,7 +80,10 @@ final class MeetingRoomsCollectionViewDataSource: NSObject,
     cell.tableViewDidScroll = { [weak self] contentOffset in
       self?.timeTableView.setContentOffset(CGPoint(x: 0, y: contentOffset.y), animated: false)
     }
-
+    cell.didChangedEditMode = { [weak self] in
+      self?.didChangedEditMode?()
+    }
+    
     return cell
   }
   
