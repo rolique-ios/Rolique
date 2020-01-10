@@ -9,6 +9,22 @@
 import Foundation
 
 final class Expense: Codable {
+  // wanted to name just type but it is already reseved
+  enum Direction {
+    case `in`, out
+    
+    init?(apiName: String) {
+      switch apiName {
+      case "OUT":
+        self = .out
+      case "IN":
+        self = .in
+        
+      default:
+        return nil
+      }
+    }
+  }
   enum CodingKeys: String, CodingKey, CaseIterable {
     case category,
     description,
@@ -21,9 +37,10 @@ final class Expense: Codable {
   
   let category: String?
   let description: String?
-  let total: Double
+  private(set) var total: Double
   let date: Date?
   let paymentMethodType: PaymentMethodType?
+  let direction: Direction?
   let dateString: String?
   let paymentMode: String?
   let type: String?
@@ -40,6 +57,9 @@ final class Expense: Codable {
     self.currencyCode = currencyCode
     self.date = self.formatter.date(from: dateString.orEmpty)
     self.paymentMethodType = PaymentMethodType(apiName: paymentMode.orEmpty)
+    self.direction = Direction(apiName: self.type.orEmpty)
+    
+    self.total = abs(total) * (self.direction == .in ? 1 : -1)
   }
   
   public convenience init(from decoder: Decoder) throws {

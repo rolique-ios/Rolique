@@ -58,8 +58,8 @@ private extension ExpenseTableViewCell {
     
     dateLabel.snp.makeConstraints {
       $0.top.equalTo(expenseValueLabel.snp.bottom).offset(4)
-      $0.left.equalTo(descriptionLabel.snp.right).offset(4)
-      $0.right.equalToSuperview().inset(4)
+      $0.left.equalTo(descriptionLabel.snp.right).offset(2)
+      $0.right.equalToSuperview().inset(2)
     }
     
   }
