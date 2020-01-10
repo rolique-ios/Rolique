@@ -30,7 +30,7 @@ private enum Section: Int, CaseIterable {
     case .profile:
       return [.user]
     case .general:
-      return user.roles.contains("hr") || user.roles.contains("om")  || user.roles.contains("admin") || user.roles.contains("accountant") || true
+      return user.roles.contains("hr") || user.roles.contains("om")  || user.roles.contains("admin") || user.roles.contains("accountant")
         ? [.meetingRoom, .cashTracker]
         : [.meetingRoom]
     }

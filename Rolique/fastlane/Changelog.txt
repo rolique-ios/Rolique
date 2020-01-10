@@ -1,1 +1,3 @@
-Added cash history
+Changed booking process.
+Fixed sorting on "CashHistory".
+Changed total field calculation, now it's based on in/out parameter.
