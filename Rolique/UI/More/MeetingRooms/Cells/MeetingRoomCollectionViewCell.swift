@@ -20,6 +20,7 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
   private lazy var dataSource = MeetingRoomsTableViewDataSource(tableView: tableView)
   private(set) var tableViewSelectedIndexPaths = [IndexPath]()
   var tableViewDidScroll: ((CGPoint) -> Void)?
+  var didChangedEditMode: Completion?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -37,6 +38,9 @@ final class MeetingRoomCollectionViewCell: UICollectionViewCell {
     dataSource.configure(with: numberOfRows, contentOffsetY: contentOffsetY)
     dataSource.didScroll = { [weak self] contentOffset in
       self?.tableViewDidScroll?(contentOffset)
+    }
+    dataSource.didChangedEditMode = { [weak self] in
+      self?.didChangedEditMode?()
     }
   }
   

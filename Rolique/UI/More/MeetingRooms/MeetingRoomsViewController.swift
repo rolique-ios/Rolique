@@ -41,8 +41,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private lazy var meetingRoomsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().apply { $0.scrollDirection = .horizontal })
   private lazy var meetingRoomsCollectionViewDataSource = MeetingRoomsCollectionViewDataSource(collectionView: meetingRoomsCollectionView, timeTableView: timeTableView)
   private lazy var timeDataSource: TimeDataSource = TimeDataSource(tableView: timeTableView)
-  private lazy var editButton = UIBarButtonItem(title: Strings.MeetingRooms.edit, style: .done, target: self, action: #selector(didTapOnEditButton(sender:)))
-  private lazy var doneButton = UIBarButtonItem(title: Strings.MeetingRooms.done, style: .done, target: self, action: #selector(didTapOnEditButton(sender:)))
   private lazy var monthViewContainer = UIView()
   private lazy var monthNameLabel = UILabel()
   private lazy var expandButton = UIButton()
@@ -100,7 +98,6 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
   private func configureUI() {
     setEmptyTitleBackButton()
     navigationItem.titleView = monthViewContainer
-    navigationItem.rightBarButtonItem = editButton
     
     view.backgroundColor = Colors.mainBackgroundColor
     
@@ -253,16 +250,17 @@ final class MeetingRoomsViewController<T: MeetingRoomsViewModelImpl>: ViewContro
       self.currentPage = page
       self.viewModel.changeRoom(with: self.meetingRooms[page])
     }
+    
+    meetingRoomsCollectionViewDataSource.didChangedEditMode = { [weak self] in
+      self?.toggleEditMode()
+    }
   }
   
-  @objc func didTapOnEditButton(sender: UIBarButtonItem) {
+  private func toggleEditMode() {
     isEdit.toggle()
     
-    meetingRoomsCollectionView.isScrollEnabled = !isEdit
     meetingRoomsScrollView.isScrollEnabled = !isEdit
     calendarCollectionView.setEditing(isEdit)
-    
-    navigationItem.rightBarButtonItem = isEdit ? doneButton : editButton
     
     if let cell = meetingRoomsCollectionView.cellForItem(at: IndexPath(item: currentPage, section: 0)) as? MeetingRoomCollectionViewCell {
       if isEdit {
