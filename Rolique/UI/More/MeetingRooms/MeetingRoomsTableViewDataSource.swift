@@ -110,18 +110,10 @@ final class MeetingRoomsTableViewDataSource: NSObject, UITableViewDelegate, UITa
       var changeDirection: Bool
       switch location {
       case let(location) where location < previousLocation:
-        if direction ?? .toBottom != Direction.toBottom {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
+        changeDirection = direction ?? .toBottom != Direction.toBottom
         direction = .toBottom
       case let(location) where location > previousLocation:
-        if direction ?? .toTop != Direction.toTop {
-          changeDirection = true
-        } else {
-          changeDirection = false
-        }
+        changeDirection = direction ?? .toTop != Direction.toTop
         direction = .toTop
       default:
         changeDirection = false
