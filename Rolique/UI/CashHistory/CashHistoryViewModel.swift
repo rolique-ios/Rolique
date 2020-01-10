@@ -30,7 +30,9 @@ protocol CashHistoryViewModel: ViewModel {
 
 final class CashHistoryViewModelImpl: BaseViewModel, CashHistoryViewModel {
   var dates: [Date] {
-    return Array(filteredExpenses.keys)
+    return Array(filteredExpenses.keys
+        .filter { !(filteredExpenses[$0] ?? []).isEmpty }
+        .sorted { $0 > $1 })
   }
   private var datesExpenses: [Date: [Expense]] = [:] {
     didSet {
@@ -67,7 +69,8 @@ final class CashHistoryViewModelImpl: BaseViewModel, CashHistoryViewModel {
   }
 
   func getExpenses(for section: Int) -> [Expense] {
-    filteredExpenses[dates[section]] ?? []
+    (filteredExpenses[dates[section]] ?? [])
+        .sorted { $0.date.orCurrent > $1.date.orCurrent }
   }
   
   func scrolledToBottom() {
