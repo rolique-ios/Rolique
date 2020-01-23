@@ -46,6 +46,8 @@ final class Expense: Codable {
   let type: String?
   let currencyCode: String?
   private let formatter = DateFormatters.withCurrentTimeZoneFormatter()
+    
+    var detailedDescription: String { category == nil ? description ?? "No description" : "\(category!): \(description ?? "No description")"}
   
   init(category: String?, description: String?, total: Double, dateString: String?, paymentMode: String?, type: String?, currencyCode: String?) {
     self.category = category
@@ -59,7 +61,7 @@ final class Expense: Codable {
     self.paymentMethodType = PaymentMethodType(apiName: paymentMode.orEmpty)
     self.direction = Direction(apiName: self.type.orEmpty)
     
-    self.total = abs(total) * (self.direction == .in ? 1 : -1)
+    self.total = total * (self.direction == .in ? 1 : -1)
   }
   
   public convenience init(from decoder: Decoder) throws {

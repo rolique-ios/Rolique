@@ -84,7 +84,7 @@ extension CashHistoryDataSource: UITableViewDelegate {
     }
     
     let expense = expensesForSection?(indexPath.section)[indexPath.row]
-    return ExpenseTableViewCell.height(for: expense?.description ?? "", width: tableView.bounds.width)
+    return ExpenseTableViewCell.height(for: expense?.detailedDescription ?? "No description", width: tableView.bounds.width)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -125,7 +125,7 @@ extension CashHistoryDataSource: UITableViewDataSource {
     
     let cell = tableView.dequeue(type: ExpenseTableViewCell.self, indexPath: indexPath)
     let expense = expensesForSection?(indexPath.section)[indexPath.row]
-    cell.configure(description: expense?.description ?? "No description", value: expense?.total ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
+    cell.configure(description: expense?.detailedDescription ?? "No description", value: expense?.total ?? 0, dateString: expenseDateFormatter.string(from: (expense?.date).orCurrent))
 
     return cell
   }
