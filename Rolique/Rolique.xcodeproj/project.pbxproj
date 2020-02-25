@@ -1843,7 +1843,7 @@
 				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1875,7 +1875,7 @@
 				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2141,7 +2141,7 @@
 				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2342,7 +2342,7 @@
 				BUNDLE_ID = io.rolique.Rolique;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = ZL58JZZ8KD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
